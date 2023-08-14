@@ -1,18 +1,36 @@
 import { defineStore } from 'pinia';
 
-interface RootState {
-  counter: number;
-}
+import { getCurrEnv } from '@/utils/localStorage';
 
 export const useAppStore = defineStore('app', {
-  state: (): RootState => {
+  state: () => {
     return {
-      counter: 1,
+      loading: false,
+      collapsed: false,
+      env: getCurrEnv(),
+      path: null,
+      routes: [],
+      tabList: {},
     };
   },
   actions: {
-    setCounter(res: RootState['counter']) {
-      this.counter = res;
+    setLoading(res) {
+      this.loading = res;
+    },
+    setCollapsed(res) {
+      this.collapsed = res;
+    },
+    setEnv(res) {
+      this.env = res;
+    },
+    setPath(res) {
+      this.path = res;
+    },
+    setRoutes(res) {
+      this.routes = res;
+    },
+    setTabList(res) {
+      this.tabList = res;
     },
   },
 });

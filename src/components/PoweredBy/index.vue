@@ -5,8 +5,9 @@
       <a
         :href="GITHUB_REPO"
         target="_blank"
-        >galaxy-s10</a
       >
+        billd-live-admin
+      </a>
     </span>
   </div>
 </template>

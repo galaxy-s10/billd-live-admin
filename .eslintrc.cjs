@@ -8,7 +8,15 @@ console.log(
 module.exports = {
   root: true,
   settings: {
-    // 'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        project: './tsconfig.json',
+      },
+    },
   },
   env: {
     browser: true,
@@ -18,12 +26,19 @@ module.exports = {
     // 'airbnb-base', // airbnb的eslint规范，它会对import和require进行排序，挺好的。如果不用它的话，需要在env添加node:true
     'eslint:recommended',
     'plugin:import/recommended',
-    'plugin:vue/vue3-recommended',
-    '@vue/eslint-config-typescript',
+    'plugin:vue/vue3-essential', // plugin:vue/vue3-essential或plugin:vue/vue3-strongly-recommended或plugin:vue/vue3-recommended'
+    '@vue/eslint-config-typescript', // 启用这个规则后，vscode保存文件时格式化很慢
+    // '@vue/eslint-config-typescript/recommended', // 启用这个规则后，vscode保存文件时格式化很慢
     '@vue/eslint-config-prettier',
   ],
+  // https://eslint.vuejs.org/user-guide/
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    ecmaVersion: 2020,
+    parser: '@typescript-eslint/parser',
+    ecmaVersion: 'latest',
+    ecmaFeatures: {
+      jsx: true,
+    },
     tsconfigRootDir: __dirname, // https://typescript-eslint.io/docs/linting/typed-linting
     project: ['./tsconfig.json'], // https://typescript-eslint.io/docs/linting/typed-linting
   },
@@ -37,10 +52,12 @@ module.exports = {
      * 1 => warn
      * 2 => error
      */
+    'no-unused-vars': 0, // 禁止出现未使用过的变量
     'no-shadow': 0, // 禁止变量声明与外层作用域的变量同名
     'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
     'no-console': 0, // 此规则不允许调用console对象的方法。
     'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }], // 该规则强制注释中 // 或 /* 后空格的一致性
+    eqeqeq: 2, // 要求使用===和!==
     'no-var': 2, // 要求let或const代替var
     camelcase: [
       'error',
@@ -50,26 +67,25 @@ module.exports = {
     'no-param-reassign': 2, // 禁止对 function 的参数进行重新赋值
     'no-nested-ternary': 2, // 禁止嵌套三元
     'no-plusplus': 2, // 禁用一元操作符 ++ 和 --
-    'no-unused-vars': 0, // 禁止出现未使用过的变量
     'vars-on-top': 2, // 要求所有的 var 声明出现在它们所在的作用域顶部
     'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
     'prefer-template': 2, // 要求使用模板字符串代替字符串连接
-    'new-cap': 2, // 要求构造函数名称以大写字母开头
+    'new-cap': ['error', { capIsNew: false }], // 要求构造函数名称以大写字母开头
     'no-restricted-syntax': [
       // 禁用一些语法
       'error',
       // 'ForInStatement',
       // 'ForOfStatement',
-      {
-        selector: 'ForInStatement',
-        /**
-         * 用 map() / every() / filter() / find() / findIndex() / reduce() / some() / ... 遍历数组，
-         * 和使用 Object.keys() / Object.values() / Object.entries() 迭代你的对象生成数组。
-         * 拥有返回值得纯函数比这个更容易解释
-         */
-        message:
-          'for in会迭代遍历原型链(__proto__)，建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
-      },
+      // {
+      //   selector: 'ForInStatement',
+      //   /**
+      //    * 用 map() / every() / filter() / find() / findIndex() / reduce() / some() / ... 遍历数组，
+      //    * 和使用 Object.keys() / Object.values() / Object.entries() 迭代你的对象生成数组。
+      //    * 拥有返回值得纯函数比这个更容易解释
+      //    */
+      //   message:
+      //     'for in会迭代遍历原型链(__proto__)，建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
+      // },
       {
         selector: 'ForOfStatement',
         message:
@@ -79,7 +95,7 @@ module.exports = {
     'no-iterator': 2, // 禁止使用__iterator__迭代器
     'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
     'no-empty': 2, // 禁止空块语句
-    'guard-for-in': 2, // 要求for-in循环包含if语句
+    // 'guard-for-in': 2, // 要求for-in循环包含if语句
     'global-require': 2, // 此规则要求所有调用require()都在模块的顶层，此规则在 ESLint v7.0.0中已弃用。请使用 中的相应规则eslint-plugin-node：https://github.com/mysticatea/eslint-plugin-node
     'no-unused-expressions': [
       2,
@@ -158,9 +174,14 @@ module.exports = {
     'import/no-named-as-default': 0, // https://github.com/import-js/eslint-plugin-import/blob/v2.26.0/docs/rules/no-named-as-default.md
 
     // @typescript-eslint插件
-    '@typescript-eslint/restrict-template-expressions': 2, // 强制模板文字表达式为string类型。即const a = {};console.log(`${a}`);会报错
-    '@typescript-eslint/no-unused-vars': 2,
-    '@typescript-eslint/no-floating-promises': 0, // 要求适当处理类似 Promise 的语句。即将await或者return Promise，或者对promise进行.then或者.catch
+    // '@typescript-eslint/no-floating-promises': 2, // 要求适当处理类似 Promise 的语句。即将await或者return Promise，或者对promise进行.then或者.catch
+    '@typescript-eslint/restrict-template-expressions': [
+      'error',
+      {
+        allowBoolean: true,
+        allowNumber: true,
+      },
+    ], // 强制模板文字表达式为string类型。即const a = {};console.log(`${a}`);会报错
     '@typescript-eslint/no-explicit-any': 0, // 不允许定义any类型。即let a: any;会报错
     '@typescript-eslint/no-non-null-assertion': 0, // 禁止使用非空断言（后缀运算符!）。即const el = document.querySelector('.app');console.log(el!.tagName);会报错
     '@typescript-eslint/ban-ts-comment': 0, // 禁止使用@ts-<directive>注释
@@ -171,6 +192,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-call': 0, // 不允许调用any类型的值
     '@typescript-eslint/no-var-requires': 0, // 即不允许var foo = require('foo');。但是允许import foo = require('foo');
     '@typescript-eslint/restrict-plus-operands': 0, // 要求加法的两个操作数是相同的类型并且是bigint, number, 或string。即const a = '1';console.log(a + 1);会报错
+    '@typescript-eslint/no-unused-vars': 'error', // https://typescript-eslint.io/rules/no-unused-vars/
 
     // vueeslint插件
     'vue/multi-word-component-names': 0,

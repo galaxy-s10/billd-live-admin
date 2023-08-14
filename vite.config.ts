@@ -1,4 +1,6 @@
 import vue from '@vitejs/plugin-vue';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 const outputStaticUrl = 'dist';
 
@@ -17,12 +19,19 @@ export default defineConfig(({ command, mode }) => {
        */
       // extensions: ['.js', '.ts', '.jsx', '.tsx', '.vue'],
     },
+    build: {
+      outDir: 'dist',
+      // outDir: 'billd-live-admin',
+    },
     plugins: [
       vue(),
       eslint({
         failOnError: false,
         failOnWarning: false,
         cache: false,
+      }),
+      Components({
+        resolvers: [NaiveUiResolver()],
       }),
     ],
     define: {

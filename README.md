@@ -17,3 +17,23 @@
 </p>
 
 ## 简介
+
+# 本地启动
+
+## 安装依赖
+
+```bash
+pnpm install
+```
+
+更新 billd 依赖：
+
+```bash
+pnpm i billd-utils@latest billd-scss@latest billd-html-webpack-plugin@latest
+```
+
+启动：
+
+```bash
+pnpm run dev
+```

@@ -3,15 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
+    "build-old": "vue-tsc && vite build",
+    "copy": "node ./handleGiteeJenkins.js",
     "dev": "vite",
     "preview": "vite preview"
   },
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",
     "axios": "^1.4.0",
-    "billd-deploy": "^1.0.16",
-    "billd-html-webpack-plugin": "^1.0.1",
+    "billd-html-webpack-plugin": "^1.0.2",
     "billd-scss": "^0.0.7",
     "billd-utils": "^0.0.12",
     "js-cookie": "^3.0.5",
@@ -22,17 +23,20 @@
   },
   "devDependencies": {
     "@types/node": "^20.4.1",
+    "@typescript-eslint/parser": "^6.3.0",
     "@vitejs/plugin-vue": "^4.2.3",
-    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
-    "eslint": "^8.44.0",
-    "eslint-plugin-import": "^2.27.5",
+    "eslint": "^8.47.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-vue": "^9.15.1",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.1",
     "sass": "^1.63.6",
-    "typescript": "^5.0.2",
+    "typescript": "^5.1.6",
+    "unplugin-vue-components": "^0.25.1",
     "vite": "^4.4.0",
     "vite-plugin-eslint": "^1.8.1",
-    "vue-tsc": "^1.8.3"
+    "vue-tsc": "^1.8.8"
   }
 }

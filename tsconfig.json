@@ -5,6 +5,7 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "noImplicitAny": false,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -31,7 +32,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "config/**/*.ts"
+    "config/**/*.ts",
+    "components.d.ts"
   ], // 仅仅匹配这些文件，除了src以外的文件都不会被匹配
   "references": [{ "path": "./tsconfig.node.json" }]
 }
