@@ -53,7 +53,7 @@ import HModal from '@/components/Base/Modal';
 import { envList } from '@/constant';
 import { useAppStore } from '@/store/app';
 import { useUserStore } from '@/store/user';
-import { setCurrEnv, getCurrEnv } from '@/utils/localStorage';
+import { getCurrEnv, setCurrEnv } from '@/utils/localStorage';
 
 const router = useRouter();
 const userStore = useUserStore();

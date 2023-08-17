@@ -22,6 +22,7 @@ module.exports = {
     browser: true,
     node: true,
   },
+
   extends: [
     // 'airbnb-base', // airbnb的eslint规范，它会对import和require进行排序，挺好的。如果不用它的话，需要在env添加node:true
     'eslint:recommended',
@@ -31,7 +32,6 @@ module.exports = {
     // '@vue/eslint-config-typescript/recommended', // 启用这个规则后，vscode保存文件时格式化很慢
     '@vue/eslint-config-prettier',
   ],
-  // https://eslint.vuejs.org/user-guide/
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -57,7 +57,6 @@ module.exports = {
     'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
     'no-console': 0, // 此规则不允许调用console对象的方法。
     'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }], // 该规则强制注释中 // 或 /* 后空格的一致性
-    eqeqeq: 2, // 要求使用===和!==
     'no-var': 2, // 要求let或const代替var
     camelcase: [
       'error',
@@ -70,22 +69,22 @@ module.exports = {
     'vars-on-top': 2, // 要求所有的 var 声明出现在它们所在的作用域顶部
     'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
     'prefer-template': 2, // 要求使用模板字符串代替字符串连接
-    'new-cap': ['error', { capIsNew: false }], // 要求构造函数名称以大写字母开头
+    'new-cap': 2, // 要求构造函数名称以大写字母开头
     'no-restricted-syntax': [
       // 禁用一些语法
       'error',
       // 'ForInStatement',
       // 'ForOfStatement',
-      // {
-      //   selector: 'ForInStatement',
-      //   /**
-      //    * 用 map() / every() / filter() / find() / findIndex() / reduce() / some() / ... 遍历数组，
-      //    * 和使用 Object.keys() / Object.values() / Object.entries() 迭代你的对象生成数组。
-      //    * 拥有返回值得纯函数比这个更容易解释
-      //    */
-      //   message:
-      //     'for in会迭代遍历原型链(__proto__)，建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
-      // },
+      {
+        selector: 'ForInStatement',
+        /**
+         * 用 map() / every() / filter() / find() / findIndex() / reduce() / some() / ... 遍历数组，
+         * 和使用 Object.keys() / Object.values() / Object.entries() 迭代你的对象生成数组。
+         * 拥有返回值得纯函数比这个更容易解释
+         */
+        message:
+          'for in会迭代遍历原型链(__proto__)，建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
+      },
       {
         selector: 'ForOfStatement',
         message:
@@ -95,7 +94,7 @@ module.exports = {
     'no-iterator': 2, // 禁止使用__iterator__迭代器
     'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
     'no-empty': 2, // 禁止空块语句
-    // 'guard-for-in': 2, // 要求for-in循环包含if语句
+    'guard-for-in': 2, // 要求for-in循环包含if语句
     'global-require': 2, // 此规则要求所有调用require()都在模块的顶层，此规则在 ESLint v7.0.0中已弃用。请使用 中的相应规则eslint-plugin-node：https://github.com/mysticatea/eslint-plugin-node
     'no-unused-expressions': [
       2,
@@ -141,13 +140,7 @@ module.exports = {
     ],
     'import/newline-after-import': 2, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
     'import/no-extraneous-dependencies': 2, // 禁止导入未在package.json中声明的外部模块。
-    /**
-     * import/named
-     * 在import { version } from 'vuex';的时候会验证vuex有没有具名导出version，
-     * 但是在vue3的时候，import { defineComponent } from 'vue';会报错defineComponent not found in 'vue'
-     * 因此vue3项目关闭该规则
-     */
-    'import/named': 0,
+
     /**
      * a.js
      * export const version = '1.0.0';
@@ -158,9 +151,18 @@ module.exports = {
      * console.log(bar.version); // 检测到你使用的version有具名导出，import/no-named-as-default-member就会提示`import {version} from './a'`
      */
     'import/no-named-as-default-member': 1, // https://github.com/import-js/eslint-plugin-import/blob/v2.26.0/docs/rules/no-named-as-default-member.md
-    'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
-    'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀（比如.css和.jpg），因此关掉
-    'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
+
+    /**
+     * import/named
+     * 在import { version } from 'vuex';的时候会验证vuex有没有具名导出version，
+     * 但是在vue3的时候，import { defineComponent } from 'vue';会报错defineComponent not found in 'vue'
+     * 因此vue3项目关闭该规则
+     */
+    // 'import/named': 0,
+    // 'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
+    // 'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀（比如.css和.jpg），因此关掉
+    // 'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
+
     /**
      * a.js
      * export const bar = 'bar';
@@ -174,7 +176,8 @@ module.exports = {
     'import/no-named-as-default': 0, // https://github.com/import-js/eslint-plugin-import/blob/v2.26.0/docs/rules/no-named-as-default.md
 
     // @typescript-eslint插件
-    // '@typescript-eslint/no-floating-promises': 2, // 要求适当处理类似 Promise 的语句。即将await或者return Promise，或者对promise进行.then或者.catch
+    '@typescript-eslint/no-unused-vars': 2,
+
     '@typescript-eslint/restrict-template-expressions': [
       'error',
       {
@@ -182,6 +185,7 @@ module.exports = {
         allowNumber: true,
       },
     ], // 强制模板文字表达式为string类型。即const a = {};console.log(`${a}`);会报错
+    '@typescript-eslint/no-floating-promises': 0, // 要求适当处理类似 Promise 的语句。即将await或者return Promise，或者对promise进行.then或者.catch
     '@typescript-eslint/no-explicit-any': 0, // 不允许定义any类型。即let a: any;会报错
     '@typescript-eslint/no-non-null-assertion': 0, // 禁止使用非空断言（后缀运算符!）。即const el = document.querySelector('.app');console.log(el!.tagName);会报错
     '@typescript-eslint/ban-ts-comment': 0, // 禁止使用@ts-<directive>注释
@@ -192,7 +196,6 @@ module.exports = {
     '@typescript-eslint/no-unsafe-call': 0, // 不允许调用any类型的值
     '@typescript-eslint/no-var-requires': 0, // 即不允许var foo = require('foo');。但是允许import foo = require('foo');
     '@typescript-eslint/restrict-plus-operands': 0, // 要求加法的两个操作数是相同的类型并且是bigint, number, 或string。即const a = '1';console.log(a + 1);会报错
-    '@typescript-eslint/no-unused-vars': 'error', // https://typescript-eslint.io/rules/no-unused-vars/
 
     // vueeslint插件
     'vue/multi-word-component-names': 0,
