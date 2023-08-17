@@ -2,7 +2,7 @@
   <div class="login-warp">
     <div class="content">
       <img
-        class="top"
+        class="logo"
         src="@/assets/img/billd-admin-logo.png"
         alt=""
       />
@@ -129,6 +129,7 @@
         </n-tabs>
       </n-card>
     </div>
+    <SwitchEnv></SwitchEnv>
     <PoweredByCpt></PoweredByCpt>
   </div>
 </template>
@@ -144,7 +145,6 @@ import { useRoute, useRouter } from 'vue-router';
 
 import { fetchSendLoginCode, fetchSendRegisterCode } from '@/api/emailUser';
 import PoweredByCpt from '@/components/PoweredBy/index.vue';
-import { useAppStore } from '@/store/app';
 import { useUserStore } from '@/store/user';
 
 const loginRules = {
@@ -159,7 +159,6 @@ const registerRules = {
 const router = useRouter();
 const route = useRoute();
 const userStore = useUserStore();
-const appStore = useAppStore();
 
 const loginForm = ref({
   id: '',
@@ -273,21 +272,12 @@ const onBlur = () => {
     left: 50%;
     min-width: 350px;
     border-radius: 5px;
-    background-color: #fff;
     transform: translate(-50%, -50%);
 
-    .top {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      z-index: 100;
+    .logo {
+      display: block;
+      margin: 0 auto 10px;
       width: 300px;
-      transform: translate(-50%, -100%);
-    }
-
-    .title {
-      margin: 10px 0;
-      text-align: center;
     }
 
     .other-login {

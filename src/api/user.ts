@@ -37,7 +37,7 @@ export function fetchUserPwd() {
 
 export function fetchUpdateUser({ id, username, status, avatar, desc }: IUser) {
   return request({
-    url: `/user/update/${id}`,
+    url: `/user/update/${id!}`,
     method: 'put',
     data: {
       username,
@@ -59,11 +59,13 @@ export function fetchUpdatePwd({ oldpwd, newpwd }) {
   });
 }
 
+// eslint-disable-next-line
 export function fetchUpdateUserRole({ id, user_roles }: IUser) {
   return request({
-    url: `/user/update_user_role/${id}`,
+    url: `/user/update_user_role/${id!}`,
     method: 'put',
     data: {
+      // eslint-disable-next-line
       user_roles,
     },
   });

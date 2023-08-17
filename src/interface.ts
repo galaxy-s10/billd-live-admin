@@ -246,22 +246,109 @@ export interface IGithubUser {
   updated_at?: string;
   deleted_at?: any;
 }
+
+export interface IWallet {
+  id?: number;
+  user_id?: number;
+  balance?: string;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
 export interface IUser {
   id?: number;
   username?: string;
   password?: string;
+  email?: string;
   status?: number;
   avatar?: string;
   desc?: string;
   token?: string;
+
+  wallet?: IWallet;
+  live_room?: ILiveRoom;
+
   user_roles?: number[];
+
+  qq_users?: IQqUser[];
+  live_rooms?: ILiveRoom[];
+
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
-  github_users?: IGithubUser[];
-  qq_users?: IQqUser[];
-  email_users?: IEmailUser[];
 }
+
+export interface IAreaLiveRoom {
+  id?: number;
+  area_id?: number;
+  live_room_id?: number;
+  /** 分区信息 */
+  area?: IUser;
+  /** 直播间信息 */
+  live_room?: ILiveRoom;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export interface IArea {
+  id?: number;
+  name?: string;
+  remark?: string;
+  /** 权重 */
+  weight?: number;
+  area_live_rooms?: IAreaLiveRoom[];
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export interface ILive {
+  id?: number;
+  /** 用户信息 */
+  user?: IUser;
+  /** 直播间信息 */
+  live_room?: ILiveRoom;
+  socket_id?: string;
+  user_id?: number;
+  live_room_id?: number;
+  /** 1开启;2关闭 */
+  track_video?: number;
+  /** 1开启;2关闭 */
+  track_audio?: number;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export interface ILiveRoom {
+  id?: number;
+  /** 用户信息 */
+  user?: IUser;
+  /** 用户信息 */
+  users?: IUser[];
+  /** 分区信息 */
+  area?: IArea;
+  /** 直播信息 */
+  live?: ILive;
+  user_live_room?: IUserLiveRoom & { user: IUser };
+  name?: string;
+  /** 1:使用cdn;2:不使用cdn */
+  cdn?: number;
+  /** 权重 */
+  weight?: number;
+  key?: string;
+  type?: LiveRoomTypeEnum;
+  cover_img?: string;
+  rtmp_url?: string;
+  flv_url?: string;
+  hls_url?: string;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
 export interface IQqUser {
   id?: number;
   client_id?: number;

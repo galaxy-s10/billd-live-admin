@@ -24,18 +24,18 @@ service.interceptors.request.use(
   (cfg) => {
     switch (getCurrEnv()) {
       case 'prod':
-        cfg.baseURL = 'https://api.hsslive.cn/prodapi/admin/';
+        cfg.baseURL = 'https://api.hsslive.cn/prodapi/';
         break;
       case 'beta':
-        cfg.baseURL = 'https://api.hsslive.cn/betaapi/admin/';
+        cfg.baseURL = 'https://api.hsslive.cn/betaapi/';
         break;
       case 'development':
-        cfg.baseURL = '/api/';
+        cfg.baseURL = '/devapi/';
         break;
     }
     const token = cache.getStorageExp('token');
     if (token) {
-      // @ts-ignore
+      // eslint-disable-next-line
       cfg.headers.Authorization = `Bearer ${token}`;
     }
     return cfg;
