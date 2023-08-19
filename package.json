@@ -10,14 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.17",
     "@vicons/ionicons5": "^0.12.0",
     "axios": "^1.4.0",
     "billd-html-webpack-plugin": "^1.0.2",
     "billd-scss": "^0.0.7",
     "billd-utils": "^0.0.12",
+    "highlight.js": "^11.8.0",
     "js-cookie": "^3.0.5",
     "naive-ui": "^2.34.4",
     "pinia": "^2.1.6",
+    "spark-md5": "^3.0.2",
     "vconsole": "^3.15.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"

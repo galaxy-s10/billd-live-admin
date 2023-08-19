@@ -7,7 +7,7 @@ export const useOrder = (columnsConfig) => {
     type: FormTypeEnum.select,
     label: '排序字段',
     placeholder: '请选择排序字段',
-    options: columnsConfig().map((v: any) => {
+    options: columnsConfig.map((v: any) => {
       return {
         label: v.title,
         value: v.key,

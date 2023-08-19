@@ -12,10 +12,6 @@
     </div>
     <div>简介: {{ userInfo?.title }}</div>
     <div>角色: {{ userInfo?.roles.map((v) => v.role_name) }}</div>
-    <div>累计发出点赞: {{ userInfo?.send_stars_total }}</div>
-    <div>累计收到点赞: {{ userInfo?.receive_stars_total }}</div>
-    <div>累计发出评论: {{ userInfo?.send_comments_total }}</div>
-    <div>累计收到回复: {{ userInfo?.receive_comments_total }}</div>
   </div>
 </template>
 

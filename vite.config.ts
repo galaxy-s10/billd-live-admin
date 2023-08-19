@@ -4,7 +4,6 @@ import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 const outputStaticUrl = 'dist';
 
-import eslint from 'vite-plugin-eslint';
 const path = require('path');
 
 // https://vitejs.dev/config/
@@ -32,11 +31,11 @@ export default defineConfig(({ command, mode }) => {
     },
     plugins: [
       vue(),
-      eslint({
-        failOnError: false,
-        failOnWarning: false,
-        cache: false,
-      }),
+      // eslint({
+      //   failOnError: false,
+      //   failOnWarning: false,
+      //   cache: false,
+      // }),
       Components({
         resolvers: [NaiveUiResolver()],
       }),

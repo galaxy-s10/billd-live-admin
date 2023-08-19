@@ -93,6 +93,7 @@ export const ROUTE_SORT = {
 
   setting: 180,
   schedule: 180,
+  live: 180,
 
   user: 120,
   auth: 110,

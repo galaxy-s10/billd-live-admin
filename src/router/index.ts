@@ -1,4 +1,4 @@
-import { SpeedometerOutline } from '@vicons/ionicons5';
+import { BulbOutline, SpeedometerOutline } from '@vicons/ionicons5';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import { ROUTE_SORT } from '@/constant';
@@ -30,8 +30,39 @@ export const defaultRoutes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/live',
+    component: Layout,
+    meta: {
+      sort: ROUTE_SORT.live,
+      title: '直播管理',
+      icon: renderIcon(BulbOutline),
+    },
+    children: [
+      {
+        name: 'stream',
+        path: '/live/stream',
+        component: () => import('@/views/live/stream/list/index.vue'),
+        meta: {
+          title: '在线stream',
+        },
+      },
+      {
+        name: 'client',
+        path: '/live/client',
+        component: () => import('@/views/live/client/list/index.vue'),
+        meta: {
+          title: '在线client',
+        },
+      },
+    ],
+  },
+  {
     name: 'login',
     path: '/login',
+    meta: {
+      title: '登录',
+      hidden: true,
+    },
     component: () => import('@/views/login/index.vue'),
   },
 ];
