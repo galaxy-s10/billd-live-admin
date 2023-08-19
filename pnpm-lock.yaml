@@ -15,14 +15,14 @@ dependencies:
     specifier: ^1.4.0
     version: 1.4.0
   billd-html-webpack-plugin:
-    specifier: ^1.0.2
-    version: 1.0.2(@types/node@20.4.1)(esbuild@0.15.18)(sass@1.63.6)
+    specifier: ^1.0.4
+    version: 1.0.4(@types/node@20.4.1)(esbuild@0.15.18)(sass@1.63.6)
   billd-scss:
     specifier: ^0.0.7
     version: 0.0.7
   billd-utils:
-    specifier: ^0.0.12
-    version: 0.0.12(typescript@5.1.6)
+    specifier: ^0.0.14
+    version: 0.0.14(typescript@5.1.6)
   highlight.js:
     specifier: ^11.8.0
     version: 11.8.0
@@ -232,7 +232,7 @@ packages:
       '@babel/helper-plugin-utils': 7.22.5
       debug: 4.3.4
       lodash.debounce: 4.0.8
-      resolve: 1.22.2
+      resolve: 1.22.4
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1770,7 +1770,7 @@ packages:
       glob: 7.2.3
       is-reference: 1.2.1
       magic-string: 0.25.9
-      resolve: 1.22.2
+      resolve: 1.22.4
       rollup: 2.79.1
     dev: false
 
@@ -1794,7 +1794,7 @@ packages:
       deepmerge: 4.3.1
       is-builtin-module: 3.2.1
       is-module: 1.0.0
-      resolve: 1.22.2
+      resolve: 1.22.4
       rollup: 2.79.1
     dev: false
 
@@ -1810,7 +1810,7 @@ packages:
         optional: true
     dependencies:
       '@rollup/pluginutils': 3.1.0(rollup@2.79.1)
-      resolve: 1.22.2
+      resolve: 1.22.4
       rollup: 2.79.1
       typescript: 5.1.6
     dev: false
@@ -2689,8 +2689,8 @@ packages:
     engines: {node: '>=0.6'}
     dev: true
 
-  /billd-html-webpack-plugin@1.0.2(@types/node@20.4.1)(esbuild@0.15.18)(sass@1.63.6):
-    resolution: {integrity: sha512-IW7fsZhJYIQZw3bVofH2pHe1REe2fSV/SBiThIsdEeZg+dOc5JxSzTNtUwOFeEl+pp47PCEAGjQKfR+qU2fwSg==}
+  /billd-html-webpack-plugin@1.0.4(@types/node@20.4.1)(esbuild@0.15.18)(sass@1.63.6):
+    resolution: {integrity: sha512-AMfNC14Ynu7Cs4+xsRFAROkHqDlhKD23KBdMSxueCAmW8/GxBOqUPrjO9r7nBhbL0MUP2lB0nOT5tPDHuUlSeQ==}
     requiresBuild: true
     dependencies:
       vite: 4.4.0(@types/node@20.4.1)(sass@1.63.6)
@@ -2714,8 +2714,8 @@ packages:
     requiresBuild: true
     dev: false
 
-  /billd-utils@0.0.12(typescript@5.1.6):
-    resolution: {integrity: sha512-bHB/gZk6I9fGKHQiu+QXpqBiCXF72kYi4/xDI8RZwdVsjFd6QqsItlx1MpX4j25GJnhsG2vbrg0tLQ48zXHQoQ==}
+  /billd-utils@0.0.14(typescript@5.1.6):
+    resolution: {integrity: sha512-ySmfxTG3xJP6ZCpPiEV58zqqhbSvZTtoSGL2pNgXy/IeUacqW5osttB8wLeLAOvs5PFtfLmSP5jtBmgkrxHIEg==}
     requiresBuild: true
     dependencies:
       '@babel/core': 7.22.8
@@ -4977,12 +4977,12 @@ packages:
     resolution: {integrity: sha512-Q4ZuBAe2FUsKtyQJoQHlvP8OvBERxO3jEmy1I7hcRXcJBGGHFh/aJBswbXuS9sgrDH2QUO8ilkwNPHvHMd8clg==}
     dependencies:
       has: 1.0.3
+    dev: true
 
   /is-core-module@2.13.0:
     resolution: {integrity: sha512-Z7dk6Qo8pOCp3l4tsX2C5ZVas4V+UxwQodwZhLopL91TX8UyyHEXafPcyoeeWuLrwzHcr3igO78wNLwHJHsMCQ==}
     dependencies:
       has: 1.0.3
-    dev: true
 
   /is-data-descriptor@0.1.4:
     resolution: {integrity: sha512-+w9D5ulSoBNlmw9OHn3U2v51SyoCd0he+bB3xMl62oijhrspxowjU+AIcDY0N3iEJbUEkB15IlMASQsxYigvXg==}
@@ -6118,6 +6118,7 @@ packages:
       is-core-module: 2.12.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
+    dev: true
 
   /resolve@1.22.4:
     resolution: {integrity: sha512-PXNdCiPqDqeUou+w1C2eTQbNfxKSuMxqTCuvlmmMsk1NWHL5fRrhY6Pl0qEYYc6+QqGClco1Qj8XnjPego4wfg==}
@@ -6126,7 +6127,6 @@ packages:
       is-core-module: 2.13.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
-    dev: true
 
   /ret@0.1.15:
     resolution: {integrity: sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==}
@@ -6203,7 +6203,7 @@ packages:
       '@rollup/pluginutils': 4.2.1
       find-cache-dir: 3.3.2
       fs-extra: 10.1.0
-      resolve: 1.22.2
+      resolve: 1.22.4
       rollup: 2.79.1
       tslib: 2.6.0
       typescript: 5.1.6

@@ -1,7 +1,9 @@
 import vue from '@vitejs/plugin-vue';
+import BilldHtmlWebpackPlugin from 'billd-html-webpack-plugin';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
+
 const outputStaticUrl = 'dist';
 
 const path = require('path');
@@ -39,6 +41,7 @@ export default defineConfig(({ command, mode }) => {
       Components({
         resolvers: [NaiveUiResolver()],
       }),
+      new BilldHtmlWebpackPlugin({ env: 'vite4' }).config,
     ],
     define: {
       ['process.env']: {
