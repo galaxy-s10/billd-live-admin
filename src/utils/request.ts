@@ -24,10 +24,10 @@ service.interceptors.request.use(
   (cfg) => {
     switch (getCurrEnv()) {
       case 'prod':
-        cfg.baseURL = 'https://api.hsslive.cn/prodapi/';
+        cfg.baseURL = 'https://live-api.hsslive.cn/';
         break;
       case 'beta':
-        cfg.baseURL = 'https://api.hsslive.cn/betaapi/';
+        cfg.baseURL = 'https://live-api.hsslive.cn/';
         break;
       case 'development':
         cfg.baseURL = '/devapi/';
