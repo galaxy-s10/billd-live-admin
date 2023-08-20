@@ -55,12 +55,8 @@ const router = useRouter();
 
 const options = ref([
   {
-    label: '博客前台',
+    label: '直播前台',
     key: '1',
-  },
-  {
-    label: '账号设置',
-    key: '2',
   },
   {
     label: '退出登录',
