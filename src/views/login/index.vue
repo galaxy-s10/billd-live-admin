@@ -268,7 +268,7 @@ const onBlur = () => {
   background-color: #f5f7f9;
   .content {
     position: absolute;
-    top: 50%;
+    top: calc(50% - 60px);
     left: 50%;
     min-width: 350px;
     border-radius: 5px;

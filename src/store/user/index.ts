@@ -2,29 +2,11 @@ import { defineStore } from 'pinia';
 
 import { fetchEmailCodeLogin, fetchRegister } from '@/api/emailUser';
 import { fetchLogin, fetchUserInfo } from '@/api/user';
-import { IRole } from '@/interface';
+import { IRole, IUser } from '@/interface';
 import cache from '@/utils/cache';
 
 type RootState = {
-  userInfo: {
-    id: number;
-    username: string;
-    status: number;
-    avatar: string;
-    title: string;
-    created_at: string;
-    updated_at: string;
-    deleted_at: any;
-    send_comments_total: number;
-    receive_comments_total: number;
-    send_stars_total: number;
-    receive_stars_total: number;
-    articles_total: number;
-    qq_users: any[];
-    github_users: any[];
-    email_users: any[];
-    roles: IRole[];
-  } | null;
+  userInfo?: IUser;
   token: string | null;
   roles: IRole[] | null;
 };
@@ -32,7 +14,6 @@ type RootState = {
 export const useUserStore = defineStore('user', {
   state: () => {
     return {
-      userInfo: null,
       token: null,
       roles: null,
     } as RootState;

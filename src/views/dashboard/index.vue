@@ -10,7 +10,7 @@
         alt=""
       />
     </div>
-    <div>简介: {{ userInfo?.title }}</div>
+    <div>简介: {{ userInfo?.desc }}</div>
     <div>角色: {{ userInfo?.roles.map((v) => v.role_name) }}</div>
   </div>
 </template>

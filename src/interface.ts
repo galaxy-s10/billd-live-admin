@@ -336,6 +336,7 @@ export interface IUser {
   wallet?: IWallet;
   live_room?: ILiveRoom;
 
+  roles?: number[];
   user_roles?: number[];
 
   qq_users?: IQqUser[];

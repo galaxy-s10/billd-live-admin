@@ -5,6 +5,34 @@
       :init-value="reqParams"
       @click-search="ajaxFetchList(reqParams)"
     ></HSearch> -->
+    <div>
+      <div>
+        <span> 服务器带宽：30Mbps，理论速率：</span>
+        <span class="red">3.75MB/s</span>，即3750KB/s
+      </div>
+      <div class="red">
+        <b>
+          <span>
+            后端对用户推流码率有限制（3200kbps，即{{
+              (3200 / 8 / 1000).toFixed(2)
+            }}MB/s）
+          </span>
+          <span>如果超过，则会被自动踢掉！</span>
+        </b>
+      </div>
+      <div>当前页的推流占用带宽：{{ bandwidth.push }}MB/s</div>
+      <div>当前页的拉流占用带宽：{{ bandwidth.pull }}MB/s</div>
+      <div>
+        当前页的推流+拉流占用带宽：
+        <span class="red">{{ bandwidth.all }}MB/s</span>
+      </div>
+      <div>
+        剩余可用带宽：
+        <span class="red">
+          {{ (3.75 - Number(bandwidth.all)).toFixed(2) }}MB/s
+        </span>
+      </div>
+    </div>
     <div class="page-wrap">
       <div>分页大小：</div>
       <div class="sel">
@@ -15,6 +43,8 @@
       </div>
 
       <div>当前页数：{{ reqParams.start / reqParams.count + 1 }}</div>
+
+      <div>当前页有几条记录：{{ tableList.length }}</div>
 
       <n-space>
         <n-button
@@ -28,11 +58,16 @@
           @click="reqParams.start += reqParams.count"
         >
           下一页
-        </n-button></n-space
-      >
+        </n-button>
+        <n-button
+          type="success"
+          @click="ajaxFetchList(reqParams)"
+        >
+          刷新
+        </n-button>
+      </n-space>
     </div>
     <n-data-table
-      remote
       :loading="starListLoading"
       :columns="columns()"
       :data="tableList"
@@ -44,14 +79,19 @@
 <script lang="ts" setup>
 import { NButton, NPopconfirm, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
-import { computed, h, onMounted, ref, watch } from 'vue';
+import { computed, h, onMounted, reactive, ref, watch } from 'vue';
 
 import { fetchDeleteApiV1Clients, fetchGetApiV1Clients } from '@/api/srs';
 import { IApiV1Clients } from '@/interface';
 
 import { columnsConfig } from './config/columns.config';
 
-const tableList = ref([]);
+const bandwidth = reactive({
+  push: '0',
+  pull: '0',
+  all: '0',
+});
+const tableList = ref<IApiV1Clients['clients']>([]);
 const options = ref([
   {
     label: '10',
@@ -106,9 +146,16 @@ const columns = () => {
               {
                 'positive-text': '确定',
                 'negative-text': '取消',
-                'on-positive-click': () => {
-                  window.$message.info('敬请期待!');
-                  fetchDeleteApiV1Clients(row.id);
+                'on-positive-click': async () => {
+                  const res = await fetchDeleteApiV1Clients(row.id);
+                  if (res.data.code === 0) {
+                    reqParams.value.start = 0;
+                    window.$message.success('踢掉成功！');
+                  } else {
+                    window.$message.error(
+                      `踢掉失败,${JSON.stringify(res.data)}`
+                    );
+                  }
                 },
                 'on-negative-click': () => {
                   window.$message.info('已取消!');
@@ -134,13 +181,35 @@ const columns = () => {
   ];
   return [...columnsConfig, ...action];
 };
-
 watch(
-  () => reqParams.value,
+  () => tableList.value,
   (newVal) => {
-    ajaxFetchList(newVal);
+    let push = 0;
+    let pull = 0;
+    newVal.forEach((item) => {
+      push += item.kbps.recv_30s;
+      pull += item.kbps.send_30s;
+    });
+    bandwidth.push = `${(push / 8 / 1000).toFixed(2)}`;
+    bandwidth.pull = `${(pull / 8 / 1000).toFixed(2)}`;
+    bandwidth.all = `${(push / 8 / 1000 + pull / 8 / 1000).toFixed(2)}`;
   },
   { deep: true }
+);
+
+watch(
+  () => reqParams.value.count,
+  () => {
+    reqParams.value.start = 0;
+    ajaxFetchList(reqParams.value);
+  }
+);
+
+watch(
+  () => reqParams.value.start,
+  () => {
+    ajaxFetchList(reqParams.value);
+  }
 );
 
 const ajaxFetchList = async (params: { start: number; count: number }) => {
@@ -170,6 +239,9 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .live-stream-wrap {
+  .red {
+    color: red;
+  }
   .page-wrap {
     display: flex;
     align-items: center;
