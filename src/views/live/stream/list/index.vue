@@ -1,18 +1,42 @@
 <template>
-  <div>
-    <HSearch
+  <div class="live-stream-wrap">
+    <!-- <HSearch
       :search-form-config="searchFormConfig"
-      :init-value="params"
-      @click-search="handleSearch"
-    ></HSearch>
+      :init-value="reqParams"
+      @click-search="ajaxFetchList(reqParams)"
+    ></HSearch> -->
+    <div class="page-wrap">
+      <div>分页大小：</div>
+      <div class="sel">
+        <n-select
+          v-model:value="reqParams.count"
+          :options="options"
+        />
+      </div>
+
+      <div>当前页数：{{ reqParams.start / reqParams.count + 1 }}</div>
+
+      <n-space>
+        <n-button
+          :disabled="preBtnDisabled"
+          @click="reqParams.start -= reqParams.count"
+        >
+          上一页
+        </n-button>
+        <n-button
+          :disabled="nextBtnDisabled"
+          @click="reqParams.start += reqParams.count"
+        >
+          下一页
+        </n-button></n-space
+      >
+    </div>
     <n-data-table
       remote
       :loading="starListLoading"
       :columns="columns()"
       :data="tableList"
-      :pagination="pagination"
       :bordered="false"
-      @update:page="handlePageChange"
     />
   </div>
 </template>
@@ -20,29 +44,46 @@
 <script lang="ts" setup>
 import { NButton, NPopconfirm, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
-import { h, onMounted, ref } from 'vue';
+import { computed, h, onMounted, ref, watch } from 'vue';
 
 import { fetchDeleteApiV1Clients, fetchGetApiV1Streams } from '@/api/srs';
-import HSearch from '@/components/Base/Search';
-import { usePage } from '@/hooks/use-page';
-import { IApiV1Streams, IList } from '@/interface';
+import { IApiV1Streams } from '@/interface';
 
 import { columnsConfig } from './config/columns.config';
-import { searchFormConfig } from './config/search.config';
-
-interface ISearch extends IApiV1Streams, IList {}
 
 const tableList = ref([]);
-const total = ref(0);
-const pagination = usePage();
+const options = ref([
+  {
+    label: '10',
+    value: 10,
+  },
+  {
+    label: '20',
+    value: 20,
+  },
+  {
+    label: '30',
+    value: 30,
+  },
+  {
+    label: '50',
+    value: 50,
+  },
+  {
+    label: '100',
+    value: 100,
+  },
+]);
+
+const preBtnDisabled = computed(() => reqParams.value.start <= 0);
+
+const nextBtnDisabled = ref(false);
 
 const starListLoading = ref(false);
-// @ts-ignore
-const params = ref<ISearch>({
-  nowPage: 1,
-  pageSize: 10,
-  orderName: 'id',
-  orderBy: 'desc',
+
+const reqParams = ref({
+  start: 0, // 开始的索引，默认0。
+  count: 20, // 返回的总数目，默认为10。
 });
 
 const columns = () => {
@@ -95,17 +136,26 @@ const columns = () => {
   return [...columnsConfig, ...action];
 };
 
-const ajaxFetchList = async (args) => {
+watch(
+  () => reqParams.value,
+  (newVal) => {
+    ajaxFetchList(newVal);
+  },
+  { deep: true }
+);
+
+const ajaxFetchList = async (params: { start: number; count: number }) => {
   try {
     starListLoading.value = true;
-    const res: any = await fetchGetApiV1Streams(args);
+    const res: any = await fetchGetApiV1Streams(params);
     if (res.code === 200) {
       starListLoading.value = false;
       tableList.value = res.data.streams;
-      total.value = res.data.total;
-      pagination.page = args.nowPage;
-      pagination.itemCount = res.data.total;
-      pagination.pageSize = args.pageSize;
+      if (res.data.streams.length < reqParams.value.count) {
+        nextBtnDisabled.value = true;
+      } else {
+        nextBtnDisabled.value = false;
+      }
     } else {
       Promise.reject(res);
     }
@@ -115,26 +165,23 @@ const ajaxFetchList = async (args) => {
 };
 
 onMounted(async () => {
-  await ajaxFetchList(params);
+  await ajaxFetchList(reqParams.value);
 });
-
-const handlePageChange = async (currentPage) => {
-  params.value.nowPage = currentPage;
-  await ajaxFetchList({ ...params, nowPage: currentPage });
-};
-
-const handleSearch = (v) => {
-  params.value = {
-    ...params.value,
-    ...v,
-    nowPage: 1,
-    pageSize: params.value.pageSize,
-    rangTimeType: v.rangTimeType ? 'created_at' : undefined,
-    rangTimeStart: v.rangTimeType ? v.rangTimeType[0] : undefined,
-    rangTimeEnd: v.rangTimeType ? v.rangTimeType[1] : undefined,
-  };
-  handlePageChange(1);
-};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.live-stream-wrap {
+  .page-wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: flex-end;
+    .sel {
+      width: 70px;
+    }
+    > div {
+      margin-right: 10px;
+    }
+  }
+}
+</style>

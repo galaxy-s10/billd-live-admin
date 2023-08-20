@@ -1,7 +1,7 @@
 import { BulbOutline, SpeedometerOutline } from '@vicons/ionicons5';
 import { createRouter, createWebHistory } from 'vue-router';
 
-import { ROUTE_SORT } from '@/constant';
+import { ROUTE_ROLES, ROUTE_SORT } from '@/constant';
 import Layout from '@/layout/index.vue';
 
 import { renderIcon } from './utils';
@@ -36,6 +36,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
       sort: ROUTE_SORT.live,
       title: '直播管理',
       icon: renderIcon(BulbOutline),
+      roles: [ROUTE_ROLES.SUPER_ADMIN],
     },
     children: [
       {

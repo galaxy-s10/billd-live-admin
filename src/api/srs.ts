@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 
-export function fetchGetApiV1Streams(params) {
+export function fetchGetApiV1Streams(params: { start: number; count: number }) {
   return request({
     url: '/srs/apiV1Streams',
     method: 'get',
@@ -8,10 +8,11 @@ export function fetchGetApiV1Streams(params) {
   });
 }
 
-export function fetchGetApiV1Clients() {
+export function fetchGetApiV1Clients(params: { start: number; count: number }) {
   return request({
     url: `/srs/apiV1Clients`,
     method: 'get',
+    params,
   });
 }
 

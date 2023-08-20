@@ -31,6 +31,7 @@ service.interceptors.request.use(
         break;
       case 'development':
         cfg.baseURL = '/devapi/';
+        // cfg.baseURL = 'https://live-api.hsslive.cn/';
         break;
     }
     const token = cache.getStorageExp('token');

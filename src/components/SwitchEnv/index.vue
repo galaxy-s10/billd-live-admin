@@ -80,13 +80,13 @@ watch(
 );
 
 function handleVConsole() {
-  if (['development', 'beta'].includes(currEnv.value)) {
-    // eslint-disable-next-line
-    import('vconsole').then((vConsole) => {
-      // eslint-disable-next-line
-      new vConsole.default();
-    });
-  }
+  // if (['development', 'beta'].includes(currEnv.value)) {
+  //   // eslint-disable-next-line
+  //   import('vconsole').then((vConsole) => {
+  //     // eslint-disable-next-line
+  //     new vConsole.default();
+  //   });
+  // }
 }
 
 if (hasEnv) {

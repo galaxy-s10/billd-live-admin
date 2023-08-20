@@ -44,6 +44,7 @@
       </n-layout>
     </n-layout>
     <PoweredByCpt></PoweredByCpt>
+    <SwitchEnv></SwitchEnv>
   </n-space>
 </template>
 
