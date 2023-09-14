@@ -7,7 +7,7 @@ import router from './router';
 // 白名单，不需要登录即可跳转，如登录页
 const whiteList = ['/login', '/oauth/qq_login', '/oauth/github_login'];
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, _from, next) => {
   const userStore = useUserStore();
   const appStore = useAppStore();
   const { roles } = userStore;

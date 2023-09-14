@@ -5,18 +5,19 @@ import { fetchLogin, fetchUserInfo } from '@/api/user';
 import { IRole, IUser } from '@/interface';
 import cache from '@/utils/cache';
 
-type RootState = {
-  userInfo?: IUser;
+type UserRootState = {
+  userInfo: IUser | null;
   token: string | null;
   roles: IRole[] | null;
 };
 
 export const useUserStore = defineStore('user', {
-  state: () => {
+  state: (): UserRootState => {
     return {
       token: null,
       roles: null,
-    } as RootState;
+      userInfo: null,
+    };
   },
   actions: {
     setUserInfo(res) {

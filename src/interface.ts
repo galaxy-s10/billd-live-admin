@@ -336,7 +336,7 @@ export interface IUser {
   wallet?: IWallet;
   live_room?: ILiveRoom;
 
-  roles?: number[];
+  roles?: IRole[];
   user_roles?: number[];
 
   qq_users?: IQqUser[];
@@ -388,6 +388,26 @@ export interface ILive {
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
+}
+export interface IUserLiveRoom {
+  id?: number;
+  user_id?: number;
+  live_room_id?: number;
+  /** 用户信息 */
+  user?: IUser;
+  /** 直播间信息 */
+  live_room?: ILiveRoom;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+/** 直播间类型 */
+export enum LiveRoomTypeEnum {
+  system, // 系统直播
+  user_wertc, // 主播使用webrtc直播
+  user_srs, // 主播使用srs直播
+  user_obs, // 主播使用obs/ffmpeg直播
 }
 
 export interface ILiveRoom {

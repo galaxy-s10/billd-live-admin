@@ -27,7 +27,7 @@
               <n-form-item path="id">
                 <n-input
                   v-model:value="loginForm.id"
-                  type="number"
+                  type="text"
                   placeholder="请输入账号"
                 >
                   <template #prefix>

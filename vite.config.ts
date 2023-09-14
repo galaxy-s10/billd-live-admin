@@ -3,6 +3,7 @@ import BilldHtmlWebpackPlugin from 'billd-html-webpack-plugin';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
+import checker from 'vite-plugin-checker';
 
 const outputStaticUrl = 'dist';
 
@@ -33,6 +34,13 @@ export default defineConfig(({ command, mode }) => {
     },
     plugins: [
       vue(),
+      checker({
+        // typescript: true,
+        vueTsc: true,
+        eslint: {
+          lintCommand: 'eslint "./src/**/*.{ts,tsx}"', // for example, lint .ts & .tsx
+        },
+      }),
       // eslint({
       //   failOnError: false,
       //   failOnWarning: false,
@@ -57,6 +65,7 @@ export default defineConfig(({ command, mode }) => {
     },
 
     server: {
+      host: '0.0.0.0',
       proxy: {
         '/devapi': {
           target: 'http://localhost:4300',

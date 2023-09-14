@@ -5,7 +5,7 @@ import { LOCALSTORAGE_KEY } from '@/constant';
 const cache = new CacheModel();
 
 export const getCurrEnv = () => {
-  return cache.getStorageExp(LOCALSTORAGE_KEY.currEnv);
+  return cache.getStorageExp<string>(LOCALSTORAGE_KEY.currEnv);
 };
 
 export const setCurrEnv = (val) => {

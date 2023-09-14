@@ -63,7 +63,7 @@ export default defineComponent({
       emit('update:value', str);
     };
 
-    const handleUploadImage = async (event, insertImage, files) => {
+    const handleUploadImage = async (_event, insertImage, files) => {
       try {
         const res: any = await useUpload({
           prefix: QINIU_BLOG.prefix['image/'],
