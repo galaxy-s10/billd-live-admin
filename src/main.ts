@@ -4,7 +4,7 @@ import { createApp } from 'vue';
 
 import Message from '@/components/Message/index.vue';
 import router from '@/router/index';
-import store from '@/store/index';
+import store from '@/stores/index';
 
 import App from './App.vue';
 

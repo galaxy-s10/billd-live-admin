@@ -18,11 +18,11 @@ dependencies:
     specifier: ^1.0.5
     version: 1.0.5(@types/node@20.4.1)(esbuild@0.15.18)(sass@1.63.6)
   billd-scss:
-    specifier: ^0.0.7
-    version: 0.0.7
+    specifier: ^0.0.8
+    version: 0.0.8
   billd-utils:
-    specifier: ^0.0.15
-    version: 0.0.15(typescript@5.1.6)
+    specifier: ^0.0.19
+    version: 0.0.19(typescript@5.1.6)
   highlight.js:
     specifier: ^11.8.0
     version: 11.8.0
@@ -2717,13 +2717,13 @@ packages:
       - webpack-cli
     dev: false
 
-  /billd-scss@0.0.7:
-    resolution: {integrity: sha512-tB2z5TqDe0VObIU0MkbzicSh8tkfhrO3eN5lu6nWBcRljPyJsgjvoxhuYfXEBsnlYS8UWqQK/aYrc35IXZtUDA==}
+  /billd-scss@0.0.8:
+    resolution: {integrity: sha512-42gyDYnmRICjqrzk3qbqVygpvjpMu/2rMk41x8HyWLOf457EkXyCiAAFrFR2XM3/c6PHWbtD+IhP8MHUV6JeyA==}
     requiresBuild: true
     dev: false
 
-  /billd-utils@0.0.15(typescript@5.1.6):
-    resolution: {integrity: sha512-IkazhLt62GRKANDf9ZRzdMWhKxC6qoL6O+SYdpoF/ul6NW46yaLTnOjEGUsrycXyJvcaL+U+7YinKhnuL8skAQ==}
+  /billd-utils@0.0.19(typescript@5.1.6):
+    resolution: {integrity: sha512-sap3/whp9sAnFqgpCormuPA911hexCzCzuMNMrQCVarEgTXkTQ7vOW4saZxLw5/HauajsXHEBGd4ZNmvQ0hZGw==}
     requiresBuild: true
     dependencies:
       '@babel/core': 7.22.8

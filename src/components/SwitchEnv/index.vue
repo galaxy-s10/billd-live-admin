@@ -51,8 +51,8 @@ import { useRouter } from 'vue-router';
 
 import HModal from '@/components/Base/Modal';
 import { envList } from '@/constant';
-import { useAppStore } from '@/store/app';
-import { useUserStore } from '@/store/user';
+import { useAppStore } from '@/stores/app';
+import { useUserStore } from '@/stores/user';
 import { getCurrEnv, setCurrEnv } from '@/utils/localStorage';
 
 const router = useRouter();
@@ -79,6 +79,14 @@ watch(
   }
 );
 
+if (hasEnv) {
+  appStore.setEnv(hasEnv);
+} else {
+  appStore.setEnv('prod');
+  setCurrEnv('prod');
+}
+handleVConsole();
+
 function handleVConsole() {
   // if (['development', 'beta'].includes(currEnv.value)) {
   //   // eslint-disable-next-line
@@ -88,14 +96,6 @@ function handleVConsole() {
   //   });
   // }
 }
-
-if (hasEnv) {
-  appStore.setEnv(hasEnv);
-} else {
-  appStore.setEnv('prod');
-  setCurrEnv('prod');
-}
-handleVConsole();
 
 const modalConfirm = () => {
   appStore.setEnv(currEnv.value);

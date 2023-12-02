@@ -1,8 +1,5 @@
-import { CacheModel } from 'billd-utils';
-
 import { LOCALSTORAGE_KEY } from '@/constant';
-
-const cache = new CacheModel();
+import cache from '@/utils/cache';
 
 export const getCurrEnv = () => {
   return cache.getStorageExp<string>(LOCALSTORAGE_KEY.currEnv);

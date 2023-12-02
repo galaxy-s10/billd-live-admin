@@ -335,12 +335,14 @@ export interface IUser {
 
   wallet?: IWallet;
   live_room?: ILiveRoom;
+  live_rooms?: ILiveRoom[];
 
   roles?: IRole[];
   user_roles?: number[];
 
   qq_users?: IQqUser[];
-  live_rooms?: ILiveRoom[];
+  github_users?: IGithubUser[];
+  email_users?: IEmailUser[];
 
   created_at?: string;
   updated_at?: string;

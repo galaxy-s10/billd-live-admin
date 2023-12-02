@@ -42,18 +42,21 @@
 
 <script lang="ts" setup>
 import { ChevronDownOutline, CloseOutline } from '@vicons/ionicons5';
-import { onMounted, ref, toRefs, watch } from 'vue';
+import { ref, toRefs, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import router from '@/router';
-import { useAppStore } from '@/store/app';
+import { useAppStore } from '@/stores/app';
 
 const appStore = useAppStore();
 const route = useRoute();
 const { tabList, path } = toRefs(appStore);
 const list: any = ref([]);
 const listRef = ref<HTMLElement>();
-
+const res: { key: string; value: string }[] = [];
+Object.keys(tabList.value).forEach((v) => {
+  res.push({ key: v, value: tabList.value[v] });
+});
 const options = [
   {
     label: '关闭左侧标签',
@@ -68,12 +71,7 @@ const options = [
     key: '3',
   },
 ];
-
-onMounted(() => {
-  Object.keys(tabList.value).forEach((v) => {
-    list.value.push({ key: v, value: tabList.value[v] });
-  });
-});
+list.value = res;
 
 watch(
   () => tabList.value,
@@ -85,7 +83,6 @@ watch(
     list.value = val;
   }
 );
-
 watch(
   () => route.path,
   () => {
@@ -109,10 +106,9 @@ watch(
     });
   }
 );
-
 const close = (item) => {
-  const tmpTabList = { ...tabList.value };
-  if (Object.keys(tmpTabList).length <= 1) {
+  const list: any = { ...tabList.value };
+  if (Object.keys(list).length <= 1) {
     window.$message.warning('不能删了');
     return;
   }
@@ -123,6 +119,7 @@ const close = (item) => {
     }
   });
   if (item.key === route.path) {
+    // eslint-disable-next-line
     router.push({
       path: list.value[
         index + 1 >= list.value.length ? list.value.length - 2 : index + 1
@@ -130,18 +127,19 @@ const close = (item) => {
     });
   }
 
-  delete tmpTabList[item.key];
-  appStore.setTabList(tmpTabList);
+  delete list[item.key];
+  appStore.setTabList(list);
 };
-
 const pushPath = (item) => {
   router.push(item.key);
 };
-
-const closeTag = () => {};
+const closeTag = () => {
+  window.$message.info('敬请期待！');
+};
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/css/constant.scss';
 .tagbar-wrap {
   padding: 6px;
   border-bottom: 1px solid #eee;
@@ -149,10 +147,11 @@ const closeTag = () => {};
   display: flex;
   justify-content: space-between;
   .list-wrap {
+    /* width: 300px; */
     flex: 1;
     display: flex;
     overflow-x: scroll;
-    @extend %hideScrollbar;
+    @extend .hideScrollbar;
     .tag {
       display: inline-flex;
       flex-shrink: 0;

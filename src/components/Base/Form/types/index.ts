@@ -1,10 +1,10 @@
+import { FormItemRule } from 'naive-ui';
+import { LabelPlacement } from 'naive-ui/es/form/src/interface';
+import { StyleValue } from 'vue';
+
 import { FormTypeEnum } from '@/interface';
 
-import type { FormItemRule } from 'naive-ui';
-import type { StyleValue } from 'vue';
-
-export interface IFormItem<T> {
-  field: T extends String ? string : keyof T;
+export interface IFormItemBase {
   type: FormTypeEnum;
   label: string;
   gridSpan?: number;
@@ -33,11 +33,19 @@ export interface IFormItem<T> {
   style?: StyleValue;
 }
 
+export interface IFormItem<T> extends IFormItemBase {
+  field: keyof T;
+}
+
+export interface IFormItemFieldString extends IFormItemBase {
+  field: string;
+}
+
 export interface IForm<T> {
-  formItems: IFormItem<T>[];
-  gridSpan?: Number;
+  formItems: Array<IFormItemBase & { field: keyof T }>;
+  gridSpan?: number;
   formStyle?: StyleValue;
-  showAction?: Boolean;
-  confirmLoading?: Boolean;
-  labelPlacement?: 'top' | 'left';
+  showAction?: boolean;
+  confirmLoading?: boolean;
+  labelPlacement?: LabelPlacement;
 }

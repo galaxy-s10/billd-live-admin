@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 import router from '@/router';
-import { useUserStore } from '@/store/user';
+import { useUserStore } from '@/stores/user';
 import cache from '@/utils/cache';
 
 import { getCurrEnv } from './localStorage';

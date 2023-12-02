@@ -1,28 +1,19 @@
 <template>
   <div class="fixed-powered">
-    <span class="txt">Powered by</span>
+    <span>Powered by</span>
     <span class="author">
       <a
         :href="GITHUB_REPO"
         target="_blank"
       >
-        billd-live-admin
+        galaxy-s10
       </a>
     </span>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
 import { GITHUB_REPO } from '@/constant';
-
-export default defineComponent({
-  components: {},
-  setup() {
-    return { GITHUB_REPO };
-  },
-});
 </script>
 
 <style lang="scss" scoped>
@@ -38,8 +29,6 @@ export default defineComponent({
   line-height: 40px;
 
   user-select: none;
-  .txt {
-  }
   .author {
     margin-left: 10px;
     font-weight: bold;

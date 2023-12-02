@@ -46,8 +46,8 @@ import { useRouter } from 'vue-router';
 
 import BreadcrumbCpt from '@/components/Breadcrumb/index.vue';
 import { BLOG_CLIENT_URL } from '@/constant';
-import { useAppStore } from '@/store/app';
-import { useUserStore } from '@/store/user';
+import { useAppStore } from '@/stores/app';
+import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
 const appStore = useAppStore();
@@ -55,8 +55,12 @@ const router = useRouter();
 
 const options = ref([
   {
-    label: '直播前台',
+    label: '博客前台',
     key: '1',
+  },
+  {
+    label: '账号设置',
+    key: '2',
   },
   {
     label: '退出登录',
@@ -87,7 +91,7 @@ const handleSelect = (v) => {
 };
 
 function handleClick() {
-  window.$message.info('敬请期待!');
+  window.$message.info('敬请期待！');
 }
 const userInfo = userStore.userInfo;
 </script>

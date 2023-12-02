@@ -1,7 +1,7 @@
 <template>
   <div class="search-wrap">
     <HForm
-      ref="formRef"
+      ref="hFormRef"
       v-bind="searchFormConfig"
       v-model="formData"
     ></HForm>
@@ -22,52 +22,39 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
 import HForm from '@/components/Base/Form';
 
-export default defineComponent({
-  components: { HForm },
-  props: {
-    searchFormConfig: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
-    initValue: {
-      type: Object,
-      default: () => {
-        return {}; // 不能写成普通函数，不然会报类型错误。
-      },
-    },
-  },
-  emits: ['clickReset', 'clickSearch'],
-  setup(props, { emit }) {
-    const formData = ref({ ...props.initValue });
-    const formRef = ref<any>(null);
-    const handleReset = () => {
-      formRef.value.handleReset();
-      emit('clickReset');
-    };
+const props = withDefaults(
+  defineProps<{
+    searchFormConfig?: any;
+    initValue?: any;
+  }>(),
+  {
+    searchFormConfig: {},
+    initValue: {},
+  }
+);
+const emits = defineEmits(['clickReset', 'clickSearch']);
 
-    const handleSearch = async () => {
-      try {
-        const res = await formRef.value.handleValidate();
-        emit('clickSearch', res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    return {
-      formData,
-      formRef,
-      handleReset,
-      handleSearch,
-    };
-  },
-});
+const formData = ref({ ...props.initValue });
+const hFormRef = ref<InstanceType<typeof HForm>>();
+
+const handleReset = () => {
+  hFormRef.value?.handleReset();
+  emits('clickReset');
+};
+
+const handleSearch = async () => {
+  try {
+    const res = await hFormRef.value?.handleValidate();
+    emits('clickSearch', res);
+  } catch (error) {
+    console.log(error);
+  }
+};
 </script>
 
 <style lang="scss" scoped>

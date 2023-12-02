@@ -145,7 +145,7 @@ import { useRoute, useRouter } from 'vue-router';
 
 import { fetchSendLoginCode, fetchSendRegisterCode } from '@/api/emailUser';
 import PoweredByCpt from '@/components/PoweredBy/index.vue';
-import { useUserStore } from '@/store/user';
+import { useUserStore } from '@/stores/user';
 
 const loginRules = {
   id: { required: true, message: '请输入账号', trigger: 'blur' },

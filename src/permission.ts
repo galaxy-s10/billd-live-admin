@@ -1,5 +1,5 @@
-import { useAppStore } from '@/store/app';
-import { useUserStore } from '@/store/user';
+import { useAppStore } from '@/stores/app';
+import { useUserStore } from '@/stores/user';
 import cache from '@/utils/cache';
 
 import router from './router';

@@ -43,119 +43,109 @@
         </div>
       </n-layout>
     </n-layout>
-    <PoweredByCpt></PoweredByCpt>
     <SwitchEnv></SwitchEnv>
+    <PoweredByCpt></PoweredByCpt>
   </n-space>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CaretDownOutline } from '@vicons/ionicons5';
 import { NIcon } from 'naive-ui';
-import { defineComponent, h, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { MenuMixedOption } from 'naive-ui/es/menu/src/interface';
+import { h, ref, watch } from 'vue';
+import { RouteRecordRaw, useRoute, useRouter } from 'vue-router';
 
 import PoweredByCpt from '@/components/PoweredBy/index.vue';
 import { defaultRoutes } from '@/router/index';
-import { useAppStore } from '@/store/app';
+import { useAppStore } from '@/stores/app';
 
 import HeaderCpt from './header/header.vue';
 import openTabCpt from './openTab/openTab.vue';
 
-import type { RouteRecordRaw } from 'vue-router';
+// import { deepCloneExclude } from '@/utils';
 
-export default defineComponent({
-  components: {
-    HeaderCpt,
-    openTabCpt,
-    PoweredByCpt,
-  },
-  setup() {
-    const router = useRouter();
-    const route = useRoute();
-    const appStore = useAppStore();
-    const handleRoutes = (routes: RouteRecordRaw[]) => {
-      routes.forEach((v) => {
-        if (v.children && v.children.length === 1) {
-          v.meta = {
-            title: v.children[0].meta?.title,
-            icon: v.children[0].meta?.icon,
-            hidden: v.children[0].meta?.hidden,
-            sort: v.meta?.sort,
-          };
-          // @ts-ignore
-          v.label = v.meta.title;
-          // @ts-ignore
-          v.key = v.children[0].path;
-          // @ts-ignore
-          v.show = !v.meta.hidden;
-          delete v.children;
-        } else if (v.children && v.children.length > 1) {
-          // @ts-ignore
-          v.label = v.meta && v.meta.title;
-          // @ts-ignore
-          v.key = v.path;
-          handleRoutes(v.children);
-        } else if (!v.children) {
-          if (v.meta) {
-            // @ts-ignore
-            v.label = v.meta && v.meta.title;
-            // @ts-ignore
-            v.key = v.path;
-            // @ts-ignore
-            v.show = !v.meta.hidden;
-          }
-        }
-      });
-      return routes;
-    };
-
-    function sortRoute(a, b) {
-      return (b.meta?.sort || 0) - (a.meta?.sort || 0);
+const router = useRouter();
+const route = useRoute();
+const appStore = useAppStore();
+// const copyOriginDefaultRoutes = deepCloneExclude(
+//   defaultRoutes,
+//   'component'
+// );
+const handleRoutes = (routes: RouteRecordRaw[]) => {
+  routes.forEach((v) => {
+    if (v.children && v.children.length === 1) {
+      v.meta = {
+        title: v.children[0].meta?.title,
+        icon: v.children[0].meta?.icon,
+        hidden: v.children[0].meta?.hidden,
+        sort: v.meta?.sort,
+      };
+      // @ts-ignore
+      v.label = v.meta.title;
+      // @ts-ignore
+      v.key = v.children[0].path;
+      // @ts-ignore
+      v.show = !v.meta.hidden;
+      delete v.children;
+    } else if (v.children && v.children.length > 1) {
+      // @ts-ignore
+      v.label = v.meta && v.meta.title;
+      // @ts-ignore
+      v.key = v.path;
+      handleRoutes(v.children);
+    } else if (!v.children) {
+      if (v.meta) {
+        // @ts-ignore
+        v.label = v.meta && v.meta.title;
+        // @ts-ignore
+        v.key = v.path;
+        // @ts-ignore
+        v.show = !v.meta.hidden;
+      }
     }
+  });
+  return routes;
+};
 
-    const menuOptions = ref(
-      handleRoutes([...defaultRoutes, ...appStore.routes]).sort(sortRoute)
-    );
-    const handleUpdateValue = (key: string, item) => {
-      path.value = key;
-      if (!appStore.tabList[key]) {
-        appStore.setTabList({
-          ...appStore.tabList,
-          [key]: item.meta.title,
-        });
-      }
-      router.push(key);
-    };
-    const path = ref(route.path);
-    watch(
-      () => route.path,
-      () => {
-        appStore.setPath(route.path);
-        path.value = route.path;
-      }
-    );
-    appStore.setRoutes(menuOptions);
+function sortRoute(a, b) {
+  return (b.meta?.sort || 0) - (a.meta?.sort || 0);
+}
+
+const menuOptions = ref<MenuMixedOption[]>(
+  // @ts-ignore
+  handleRoutes([...defaultRoutes, ...appStore.routes]).sort(sortRoute)
+);
+const handleUpdateValue = (key: string, item) => {
+  currentPath.value = key;
+  if (!appStore.tabList[key]) {
+    appStore.setTabList({
+      ...appStore.tabList,
+      [key]: item.meta.title,
+    });
+  }
+  router.push(key);
+};
+const currentPath = ref(route.path);
+watch(
+  () => route.path,
+  () => {
     appStore.setPath(route.path);
-    appStore.setTabList({ [route.path]: route.meta.title });
-
-    return {
-      appStore,
-      menuOptions,
-      currentPath: path,
-      handleUpdateValue,
-      renderMenuLabel(option) {
-        return option.label;
-      },
-      renderMenuIcon(option) {
-        const vn = option.meta && option.meta.icon;
-        return vn ? h(vn) : false;
-      },
-      expandIcon() {
-        return h(NIcon, null, { default: () => h(CaretDownOutline) });
-      },
-    };
-  },
-});
+    currentPath.value = route.path;
+  }
+);
+appStore.setRoutes(menuOptions);
+appStore.setPath(route.path);
+appStore.setTabList({ [route.path]: route.meta.title });
+function renderMenuLabel(option) {
+  return option.label;
+}
+function renderMenuIcon(option) {
+  const vn = option.meta && option.meta.icon;
+  return vn ? h(vn) : false;
+}
+function expandIcon() {
+  return h(NIcon, null, { default: () => h(CaretDownOutline) });
+}
 </script>
 
 <style lang="scss" scoped>

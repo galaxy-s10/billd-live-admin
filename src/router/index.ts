@@ -1,4 +1,10 @@
-import { BulbOutline, SpeedometerOutline } from '@vicons/ionicons5';
+import {
+  BulbOutline,
+  LockClosedOutline,
+  PersonOutline,
+  ShieldOutline,
+  SpeedometerOutline,
+} from '@vicons/ionicons5';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import { ROUTE_ROLES, ROUTE_SORT } from '@/constant';
@@ -40,7 +46,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        name: 'stream',
+        name: 'liveStream',
         path: '/live/stream',
         component: () => import('@/views/live/stream/list/index.vue'),
         meta: {
@@ -48,11 +54,114 @@ export const defaultRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        name: 'client',
+        name: 'liveClient',
         path: '/live/client',
         component: () => import('@/views/live/client/list/index.vue'),
         meta: {
           title: '在线client',
+        },
+      },
+    ],
+  },
+  {
+    name: 'user',
+    path: '/user',
+    component: Layout,
+    meta: {
+      title: '用户管理',
+      icon: renderIcon(PersonOutline),
+      sort: ROUTE_SORT.user,
+    },
+    children: [
+      {
+        name: 'userList',
+        path: '/user/list',
+        component: () => import('@/views/user/list/index.vue'),
+        meta: {
+          title: '用户列表',
+        },
+      },
+      {
+        name: 'userAdd',
+        path: '/user/add',
+        component: () => import('@/views/user/add/index.vue'),
+        meta: {
+          title: '新增用户',
+          roles: [ROUTE_ROLES.SUPER_ADMIN],
+        },
+      },
+    ],
+  },
+  {
+    path: '/role',
+    component: Layout,
+    meta: {
+      sort: ROUTE_SORT.role,
+      title: '角色管理',
+      icon: renderIcon(LockClosedOutline),
+      roles: [ROUTE_ROLES.SUPER_ADMIN],
+    },
+    children: [
+      {
+        name: 'roleList',
+        path: '/role/list',
+        component: () => import('@/views/role/list/index.vue'),
+        meta: {
+          title: '角色列表',
+        },
+      },
+      {
+        name: 'roleTree',
+        path: '/role/tree',
+        component: () => import('@/views/role/tree/index.vue'),
+        meta: {
+          title: '角色树',
+        },
+      },
+      {
+        name: 'addRole',
+        path: '/role/add',
+        component: () => import('@/views/role/add/index.vue'),
+        meta: {
+          title: '添加角色',
+          roles: [ROUTE_ROLES.SUPER_ADMIN],
+        },
+      },
+    ],
+  },
+  {
+    name: 'auth',
+    path: '/auth',
+    component: Layout,
+    meta: {
+      title: '权限管理',
+      icon: renderIcon(ShieldOutline),
+      sort: ROUTE_SORT.auth,
+    },
+    children: [
+      {
+        name: 'authList',
+        path: '/auth/list',
+        component: () => import('@/views/auth/list/index.vue'),
+        meta: {
+          title: '权限列表',
+        },
+      },
+      {
+        name: 'authTree',
+        path: '/auth/tree',
+        component: () => import('@/views/auth/tree/index.vue'),
+        meta: {
+          title: '权限树',
+        },
+      },
+      {
+        name: 'addAuth',
+        path: '/auth/add',
+        component: () => import('@/views/auth/add/index.vue'),
+        meta: {
+          title: '添加权限',
+          roles: [ROUTE_ROLES.SUPER_ADMIN],
         },
       },
     ],

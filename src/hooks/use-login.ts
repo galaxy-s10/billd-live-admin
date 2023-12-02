@@ -11,8 +11,8 @@ import {
   REDIRECT_URI,
 } from '@/constant';
 import router from '@/router';
-import { useAppStore } from '@/store/app';
-import { useUserStore } from '@/store/user';
+import { useAppStore } from '@/stores/app';
+import { useUserStore } from '@/stores/user';
 import { clearLoginEnv, setLoginEnv } from '@/utils/cookie';
 
 export const handleLogin = async (e) => {
