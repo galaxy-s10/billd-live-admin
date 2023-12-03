@@ -1,8 +1,9 @@
+/* eslint-disable camelcase */
 import { IUser } from '@/interface';
-import request, { IResponse } from '@/utils/request';
+import request from '@/utils/request';
 
 export function fetchLogin({ id, password }) {
-  return request({
+  return request.instance({
     url: '/user/login',
     method: 'post',
     data: { id, password },
@@ -10,33 +11,30 @@ export function fetchLogin({ id, password }) {
 }
 
 export function fetchUserInfo() {
-  return request({
-    url: '/user/get_user_info',
-    method: 'get',
-  });
+  return request.get('/user/get_user_info');
 }
 
 export function fetchUserList(params) {
-  return request({
+  return request.instance({
     url: '/user/list',
     method: 'get',
     params,
   });
 }
 
-export function fetchUserDetail(id: number): Promise<IResponse<IUser>> {
-  return request.get(`/user/find/${id}`);
+export function fetchUserDetail(id: number) {
+  return request.get<IUser>(`/user/find/${id}`);
 }
 
 export function fetchUserPwd() {
-  return request({
+  return request.instance({
     url: `/user/get_pwd`,
     method: 'get',
   });
 }
 
 export function fetchUpdateUser({ id, username, status, avatar, desc }: IUser) {
-  return request({
+  return request.instance({
     url: `/user/update/${id!}`,
     method: 'put',
     data: {
@@ -49,7 +47,7 @@ export function fetchUpdateUser({ id, username, status, avatar, desc }: IUser) {
 }
 
 export function fetchUpdatePwd({ oldpwd, newpwd }) {
-  return request({
+  return request.instance({
     url: `/user/update_pwd`,
     method: 'put',
     data: {
@@ -59,13 +57,11 @@ export function fetchUpdatePwd({ oldpwd, newpwd }) {
   });
 }
 
-// eslint-disable-next-line
 export function fetchUpdateUserRole({ id, user_roles }: IUser) {
-  return request({
+  return request.instance({
     url: `/user/update_user_role/${id!}`,
     method: 'put',
     data: {
-      // eslint-disable-next-line
       user_roles,
     },
   });

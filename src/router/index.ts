@@ -46,6 +46,30 @@ export const defaultRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
+        name: 'liveRoom',
+        path: '/live/room',
+        component: () => import('@/views/live/room/list/index.vue'),
+        meta: {
+          title: '直播间列表',
+        },
+      },
+      {
+        name: 'liveAnchor',
+        path: '/live/anchor',
+        component: () => import('@/views/live/anchor/list/index.vue'),
+        meta: {
+          title: '在线主播',
+        },
+      },
+      {
+        name: 'liveAudience',
+        path: '/live/audience',
+        component: () => import('@/views/live/audience/list/index.vue'),
+        meta: {
+          title: '在线观众',
+        },
+      },
+      {
         name: 'liveStream',
         path: '/live/stream',
         component: () => import('@/views/live/stream/list/index.vue'),

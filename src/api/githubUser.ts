@@ -2,7 +2,7 @@ import request from '@/utils/request';
 
 // github列表
 export function fetchGithubUserList(params) {
-  return request({
+  return request.instance({
     url: '/github_user/list',
     method: 'get',
     params,
@@ -11,7 +11,7 @@ export function fetchGithubUserList(params) {
 
 // github登录
 export function fetchGithubLogin(code: any) {
-  return request({
+  return request.instance({
     url: `/github_user/login`,
     method: 'post',
     data: { code },
@@ -20,7 +20,7 @@ export function fetchGithubLogin(code: any) {
 
 // 绑定github
 export function fetchBindGithub(code: any) {
-  return request({
+  return request.instance({
     url: `/github_user/bind_github`,
     method: 'post',
     data: { code },
@@ -29,7 +29,7 @@ export function fetchBindGithub(code: any) {
 
 // 取消绑定github
 export function fetchCancelBindGithub() {
-  return request({
+  return request.instance({
     url: `/github_user/cancel_bind_github`,
     method: 'post',
   });

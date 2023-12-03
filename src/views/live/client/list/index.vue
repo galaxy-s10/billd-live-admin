@@ -149,8 +149,9 @@ const columns = () => {
                 'on-positive-click': async () => {
                   const res = await fetchDeleteApiV1Clients(row.id);
                   if (res.data.code === 0) {
-                    reqParams.value.start = 0;
                     window.$message.success('踢掉成功！');
+                    reqParams.value.start = 0;
+                    ajaxFetchList(reqParams.value);
                   } else {
                     window.$message.error(
                       `踢掉失败,${JSON.stringify(res.data)}`

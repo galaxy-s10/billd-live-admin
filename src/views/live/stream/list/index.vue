@@ -68,7 +68,6 @@
       </n-space>
     </div>
     <n-data-table
-      v-if="tableList.length"
       :loading="starListLoading"
       :columns="columns()"
       :data="tableList"

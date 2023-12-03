@@ -374,12 +374,29 @@ export interface IArea {
   deleted_at?: string;
 }
 
-export interface ILive {
+export interface ISrsPublishStream {
+  /** 客户端在获取信息时，必须检查ServerID是否改变，改变时就是服务器重启，之前所有的数据都应该作废了。 */
+  srs_server_id?: string;
+  srs_service_id?: string;
+  srs_action?: string;
+  srs_client_id?: string;
+  srs_ip?: string;
+  srs_vhost?: string;
+  srs_app?: string;
+  srs_tcUrl?: string;
+  srs_stream?: string;
+  srs_param?: string;
+  srs_stream_url?: string;
+  srs_stream_id?: string;
+}
+
+export interface ILive extends ISrsPublishStream {
   id?: number;
   /** 用户信息 */
   user?: IUser;
   /** 直播间信息 */
   live_room?: ILiveRoom;
+
   socket_id?: string;
   user_id?: number;
   live_room_id?: number;
@@ -387,10 +404,28 @@ export interface ILive {
   track_video?: number;
   /** 1开启;2关闭 */
   track_audio?: number;
+
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
 }
+
+export interface ILivePlay extends ISrsPublishStream {
+  id?: number;
+  /** 用户信息 */
+  user?: IUser;
+  /** 直播间信息 */
+  live_room?: ILiveRoom;
+
+  random_id?: string;
+  user_id?: number;
+  live_room_id?: number;
+
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
 export interface IUserLiveRoom {
   id?: number;
   user_id?: number;
@@ -412,6 +447,14 @@ export enum LiveRoomTypeEnum {
   user_obs, // 主播使用obs/ffmpeg直播
 }
 
+/** 拉流是否需要鉴权 */
+export enum LiveRoomPullIsShouldAuthEnum {
+  /** 需要鉴权 */
+  yes,
+  /** 不需要鉴权 */
+  no,
+}
+
 export interface ILiveRoom {
   id?: number;
   /** 用户信息 */
@@ -428,8 +471,12 @@ export interface ILiveRoom {
   cdn?: number;
   /** 权重 */
   weight?: number;
+  /** 推流秘钥 */
   key?: string;
+  /** 直播间类型 */
   type?: LiveRoomTypeEnum;
+  /** 拉流是否需要鉴权 */
+  pull_is_should_auth?: LiveRoomPullIsShouldAuthEnum;
   cover_img?: string;
   rtmp_url?: string;
   flv_url?: string;
@@ -483,6 +530,15 @@ export interface IMusic {
   updated_at?: string;
   deleted_at?: any;
 }
+
+export interface IPaging<T> {
+  nowPage: number;
+  pageSize: number;
+  hasMore: boolean;
+  total: number;
+  rows: T[];
+}
+
 export interface IList {
   nowPage?: number;
   pageSize?: number;

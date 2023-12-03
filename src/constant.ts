@@ -1,3 +1,5 @@
+import { LiveRoomTypeEnum } from './interface';
+
 export const GITHUB_REPO = 'https://github.com/galaxy-s10/billd-live-admin';
 export const REDIRECT_URI = 'https://admin.hsslive.cn/oauth/';
 
@@ -38,9 +40,17 @@ export const QINIU_BACKUP = {
   },
 };
 
+export const liveRoomTypeMap = {
+  [LiveRoomTypeEnum.system]: '系统直播',
+  [LiveRoomTypeEnum.user_obs]: 'obs直播',
+  [LiveRoomTypeEnum.user_srs]: 'srs直播',
+  [LiveRoomTypeEnum.user_wertc]: 'webrtc会议',
+};
+
 // 全局的localStorage的key
 export const LOCALSTORAGE_KEY = {
   currEnv: 'currEnv',
+  token: 'token',
 };
 
 // 全局的cookie的key
