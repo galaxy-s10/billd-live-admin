@@ -57,6 +57,8 @@ const params = ref<{
   nowPage?: number;
   pageSize?: number;
 }>({
+  nowPage: 1,
+  pageSize: 20,
   orderBy: 'desc',
   orderName: 'created_at',
 });
