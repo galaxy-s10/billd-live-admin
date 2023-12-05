@@ -115,7 +115,6 @@ const menuOptions = ref<MenuMixedOption[]>(
 );
 const handleUpdateValue = (key: string, item) => {
   currentPath.value = key;
-  console.log('handleUpdateValue', key, item);
   if (!appStore.tabList[key]) {
     appStore.setTabList({
       ...appStore.tabList,

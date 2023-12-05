@@ -17,6 +17,12 @@ export const columnsConfig: TableColumns<IApiV1Clients['clients'][0]> = [
     width: 200,
   },
   {
+    title: 'ip',
+    key: 'ip',
+    align: 'center',
+    width: 200,
+  },
+  {
     title: 'recv_30s（推流码率）',
     key: 'kbps.recv_30s',
     align: 'center',
@@ -72,12 +78,6 @@ export const columnsConfig: TableColumns<IApiV1Clients['clients'][0]> = [
     width: 200,
   },
   {
-    title: 'ip',
-    key: 'ip',
-    align: 'center',
-    width: 200,
-  },
-  {
     title: 'pageUrl',
     key: 'pageUrl',
     align: 'center',
@@ -86,12 +86,6 @@ export const columnsConfig: TableColumns<IApiV1Clients['clients'][0]> = [
   {
     title: 'swfUrl',
     key: 'swfUrl',
-    align: 'center',
-    width: 200,
-  },
-  {
-    title: 'type',
-    key: 'type',
     align: 'center',
     width: 200,
   },
@@ -118,5 +112,12 @@ export const columnsConfig: TableColumns<IApiV1Clients['clients'][0]> = [
     key: 'recv_bytes',
     align: 'center',
     width: 200,
+  },
+  {
+    title: 'type',
+    key: 'type',
+    align: 'center',
+    width: 200,
+    fixed: 'right',
   },
 ];

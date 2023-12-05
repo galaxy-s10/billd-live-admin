@@ -46,7 +46,6 @@ const cptList = {
 };
 
 const changeCpt = () => {
-  console.log(ResetPwdCpt);
   currCpt.value = ResetPwdCpt.name;
 };
 

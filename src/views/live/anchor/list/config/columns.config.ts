@@ -23,6 +23,12 @@ export const columnsConfig: TableColumns<ILive> = [
     width: 120,
   },
   {
+    title: 'srs_ip',
+    key: 'srs_ip',
+    align: 'center',
+    width: 200,
+  },
+  {
     title: 'srs_stream',
     key: 'srs_stream',
     align: 'center',
@@ -45,6 +51,13 @@ export const columnsConfig: TableColumns<ILive> = [
     key: 'srs_stream_id',
     align: 'center',
     width: 200,
+  },
+  {
+    title: 'srs_action',
+    key: 'srs_action',
+    align: 'center',
+    width: 150,
+    fixed: 'right',
   },
   {
     title: 'srs_client_id',

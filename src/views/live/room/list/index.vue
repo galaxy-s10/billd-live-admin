@@ -6,11 +6,13 @@
       @click-search="handleSearch"
     ></HSearch>
     <n-data-table
+      remote
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
       :bordered="false"
       :pagination="pagination"
+      @update:page="handlePageChange"
     />
     <HModal
       v-model:show="modalVisiable"

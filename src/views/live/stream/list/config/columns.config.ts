@@ -77,12 +77,6 @@ export const columnsConfig: TableColumns<IApiV1Streams['streams'][0]> = [
     width: 200,
   },
   {
-    title: 'clients',
-    key: 'clients',
-    align: 'center',
-    width: 200,
-  },
-  {
     title: 'frames',
     key: 'frames',
     align: 'center',
@@ -101,16 +95,6 @@ export const columnsConfig: TableColumns<IApiV1Streams['streams'][0]> = [
     width: 200,
   },
   {
-    title: 'publish',
-    key: 'publish',
-    align: 'center',
-    width: 200,
-    render(row) {
-      return JSON.stringify(row.publish);
-    },
-    fixed: 'right',
-  },
-  {
     title: 'video',
     key: 'video',
     align: 'center',
@@ -127,5 +111,22 @@ export const columnsConfig: TableColumns<IApiV1Streams['streams'][0]> = [
     render(row) {
       return JSON.stringify(row.audio);
     },
+  },
+  {
+    title: 'publish',
+    key: 'publish',
+    align: 'center',
+    width: 200,
+    render(row) {
+      return JSON.stringify(row.publish);
+    },
+    fixed: 'right',
+  },
+  {
+    title: 'clients',
+    key: 'clients',
+    align: 'center',
+    width: 150,
+    fixed: 'right',
   },
 ];
