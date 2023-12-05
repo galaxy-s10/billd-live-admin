@@ -7,9 +7,10 @@
     ></HSearch>
     <n-data-table
       :loading="tableListLoading"
-      :columns="columns()"
+      :columns="columns"
       :data="tableListData"
       :bordered="false"
+      :pagination="pagination"
     />
     <HModal
       v-model:show="modalVisiable"
@@ -37,6 +38,7 @@ import { fetchUpdateAuth } from '@/api/auth';
 import { fetchLiveRoomList } from '@/api/liveRoom';
 import HModal from '@/components/Base/Modal';
 import HSearch from '@/components/Base/Search';
+import { usePage } from '@/hooks/use-page';
 import { IApiV1Streams, ILive } from '@/interface';
 
 import AddLiveRoomCpt from '../add/index.vue';
@@ -45,12 +47,15 @@ import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
 const tableListData = ref<ILive[]>([]);
+const total = ref(0);
+const pagination = usePage();
 const modalConfirmLoading = ref(false);
 const modalVisiable = ref(false);
 const modalTitle = ref('编辑直播间');
 const tableListLoading = ref(false);
 const currRow = ref({});
 const addLiveRoomRef = ref<any>(null);
+
 const params = ref<{
   orderName: string;
   orderBy: string;
@@ -63,7 +68,7 @@ const params = ref<{
   orderName: 'created_at',
 });
 
-const columns = () => {
+const createColumns = () => {
   const action: TableColumns<IApiV1Streams['streams'][0]> = [
     {
       title: '操作',
@@ -98,6 +103,8 @@ const columns = () => {
   return [...columnsConfig, ...action];
 };
 
+const columns = createColumns();
+
 onMounted(async () => {
   await ajaxFetchList(params.value);
 });
@@ -120,13 +127,17 @@ const handleSearch = (v) => {
   handlePageChange(1);
 };
 
-const ajaxFetchList = async (params) => {
+const ajaxFetchList = async (args) => {
   try {
     tableListLoading.value = true;
-    const res = await fetchLiveRoomList(params);
+    const res = await fetchLiveRoomList(args);
     if (res.code === 200) {
       tableListLoading.value = false;
       tableListData.value = res.data.rows;
+      total.value = res.data.total;
+      pagination.page = args.nowPage;
+      pagination.itemCount = res.data.total;
+      pagination.pageSize = args.pageSize;
     } else {
       Promise.reject(res);
     }
