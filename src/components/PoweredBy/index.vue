@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-powered">
+  <div class="powered-by">
     <span>Powered by</span>
     <span class="author">
       <a
@@ -17,14 +17,15 @@ import { GITHUB_REPO } from '@/constant';
 </script>
 
 <style lang="scss" scoped>
-.fixed-powered {
-  position: fixed;
+.powered-by {
+  position: absolute;
+  right: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
   height: 40px;
-  border-radius: 10px;
-  background-color: rgba(147, 115, 238, 0.04);
-  color: #9373ee;
+  background-color: rgba($color: $theme-color-gold, $alpha: 0.1);
+  color: $theme-color-gold;
   text-align: center;
   line-height: 40px;
 

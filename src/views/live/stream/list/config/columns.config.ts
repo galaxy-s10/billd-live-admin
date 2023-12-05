@@ -108,6 +108,7 @@ export const columnsConfig: TableColumns<IApiV1Streams['streams'][0]> = [
     render(row) {
       return JSON.stringify(row.publish);
     },
+    fixed: 'right',
   },
   {
     title: 'video',

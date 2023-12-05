@@ -41,10 +41,9 @@
         <div class="main-wrap">
           <router-view></router-view>
         </div>
+        <PoweredBy></PoweredBy>
       </n-layout>
     </n-layout>
-    <SwitchEnv></SwitchEnv>
-    <PoweredByCpt></PoweredByCpt>
   </n-space>
 </template>
 
@@ -55,7 +54,6 @@ import { MenuMixedOption } from 'naive-ui/es/menu/src/interface';
 import { h, ref, watch } from 'vue';
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router';
 
-import PoweredByCpt from '@/components/PoweredBy/index.vue';
 import { defaultRoutes } from '@/router/index';
 import { useAppStore } from '@/stores/app';
 
@@ -117,6 +115,7 @@ const menuOptions = ref<MenuMixedOption[]>(
 );
 const handleUpdateValue = (key: string, item) => {
   currentPath.value = key;
+  console.log('handleUpdateValue', key, item);
   if (!appStore.tabList[key]) {
     appStore.setTabList({
       ...appStore.tabList,

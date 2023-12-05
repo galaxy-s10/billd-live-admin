@@ -338,6 +338,7 @@ export interface IUser {
   live_rooms?: ILiveRoom[];
 
   roles?: IRole[];
+  auths?: IAuth[];
   user_roles?: number[];
 
   qq_users?: IQqUser[];

@@ -12,7 +12,7 @@ export const GITHUB_OAUTH_URL = 'https://github.com/login/oauth/authorize?';
 
 export const QINIU_CDN_URL = 'https://resource.hsslive.cn/';
 
-export const BLOG_CLIENT_URL = 'https://live.hsslive.cn';
+export const LIVE_CLIENT_URL = 'https://live.hsslive.cn';
 
 export const POSTMESSAGE_TYPE = ['qq_login', 'github_login', 'login_expired'];
 
@@ -49,7 +49,7 @@ export const liveRoomTypeMap = {
 
 // 全局的localStorage的key
 export const LOCALSTORAGE_KEY = {
-  currEnv: 'currEnv',
+  env: 'env',
   token: 'token',
 };
 
@@ -57,21 +57,6 @@ export const LOCALSTORAGE_KEY = {
 export const COOKIE_KEY = {
   loginEnv: 'loginEnv',
 };
-
-export const envList = [
-  {
-    value: 'beta',
-    label: '测试环境',
-  },
-  {
-    value: 'prod',
-    label: '正式环境',
-  },
-  {
-    value: 'development',
-    label: '本地开发环境',
-  },
-];
 
 export const MONIT_TYPE_MAP = {
   1: '服务器内存日志',
@@ -84,9 +69,42 @@ export const MONIT_TYPE_MAP = {
   8: '备份数据库失败',
 };
 
-export const ROUTE_ROLES = { SUPER_ADMIN: 'SUPER_ADMIN' };
+export const DEFAULT_ROLE_INFO = {
+  ALL_ROLE: {
+    id: 1,
+    role_value: 'ALL_ROLE',
+  },
+  ADMIN: {
+    id: 2,
+    role_value: 'ADMIN',
+  },
+  SUPER_ADMIN: {
+    id: 3,
+    role_value: 'SUPER_ADMIN',
+  },
+  LIVE_ADMIN: {
+    id: 4,
+    role_value: 'LIVE_ADMIN',
+  },
+  USER: {
+    id: 5,
+    role_value: 'USER',
+  },
+  VIP_USER: {
+    id: 6,
+    role_value: 'VIP_USER',
+  },
+  SVIP_USER: {
+    id: 7,
+    role_value: 'SVIP_USER',
+  },
+  TOURIST_USER: {
+    id: 8,
+    role_value: 'TOURIST_USER',
+  },
+};
 
-export const USER_ROLE = { SUPER_ADMIN: 'SUPER_ADMIN' };
+export const ROUTE_ROLES = { SUPER_ADMIN: 'SUPER_ADMIN' };
 
 // 路由sort，值越大越往上
 export const ROUTE_SORT = {

@@ -6,7 +6,7 @@
     >
       <div
         v-for="item in list"
-        :key="item.path"
+        :key="item.key"
         class="tag"
         @click="pushPath(item)"
       >
@@ -42,7 +42,7 @@
 
 <script lang="ts" setup>
 import { ChevronDownOutline, CloseOutline } from '@vicons/ionicons5';
-import { ref, toRefs, watch } from 'vue';
+import { nextTick, ref, toRefs, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import router from '@/router';
@@ -51,7 +51,7 @@ import { useAppStore } from '@/stores/app';
 const appStore = useAppStore();
 const route = useRoute();
 const { tabList, path } = toRefs(appStore);
-const list: any = ref([]);
+const list = ref<{ key: string; value: string }[]>([]);
 const listRef = ref<HTMLElement>();
 const res: { key: string; value: string }[] = [];
 Object.keys(tabList.value).forEach((v) => {
@@ -83,32 +83,42 @@ watch(
     list.value = val;
   }
 );
+
 watch(
   () => route.path,
   () => {
-    const dom = listRef.value!;
-    const halfOfWindowWidth = Math.ceil(dom.clientWidth / 2); // 父容器宽度的一半（即父容器的居中位置）
-    list.value.forEach((v, i) => {
-      if (v.key === route.path) {
-        const parentEle = dom;
-        const currentEle = dom.children[i];
-        // @ts-ignore
-        const currentEleOffsetLeft = dom.children[i].offsetLeft;
-        parentEle.scrollTo({
-          left:
-            currentEleOffsetLeft -
-            halfOfWindowWidth +
-            // @ts-ignore
-            currentEle.offsetWidth / 2,
-          behavior: 'smooth',
-        });
-      }
+    if (!list.value.find((v) => v.key === route.path)) {
+      list.value.push({
+        key: route.path,
+        value: (route.meta?.title as string) || '',
+      });
+    }
+    nextTick(() => {
+      const dom = listRef.value!;
+      const halfOfWindowWidth = Math.ceil(dom.clientWidth / 2); // 父容器宽度的一半（即父容器的居中位置）
+      list.value.forEach((v, i) => {
+        if (v.key === route.path) {
+          const parentEle = dom;
+          const currentEle = dom.children[i];
+          // @ts-ignore
+          const currentEleOffsetLeft = dom.children[i].offsetLeft;
+          parentEle.scrollTo({
+            left:
+              currentEleOffsetLeft -
+              halfOfWindowWidth +
+              // @ts-ignore
+              currentEle.offsetWidth / 2,
+            behavior: 'smooth',
+          });
+        }
+      });
     });
   }
 );
+
 const close = (item) => {
-  const list: any = { ...tabList.value };
-  if (Object.keys(list).length <= 1) {
+  const oldTab: any = { ...tabList.value };
+  if (Object.keys(oldTab).length <= 1) {
     window.$message.warning('不能删了');
     return;
   }
@@ -119,20 +129,20 @@ const close = (item) => {
     }
   });
   if (item.key === route.path) {
-    // eslint-disable-next-line
     router.push({
       path: list.value[
         index + 1 >= list.value.length ? list.value.length - 2 : index + 1
       ].key,
     });
   }
-
-  delete list[item.key];
-  appStore.setTabList(list);
+  delete oldTab[item.key];
+  appStore.setTabList(oldTab);
 };
+
 const pushPath = (item) => {
   router.push(item.key);
 };
+
 const closeTag = () => {
   window.$message.info('敬请期待！');
 };
@@ -151,7 +161,7 @@ const closeTag = () => {
     flex: 1;
     display: flex;
     overflow-x: scroll;
-    @extend .hideScrollbar;
+    @extend %hideScrollbar;
     .tag {
       display: inline-flex;
       flex-shrink: 0;

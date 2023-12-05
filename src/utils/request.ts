@@ -37,6 +37,7 @@ class MyAxios {
             break;
           case 'development':
             cfg.baseURL = '/devapi/';
+            // cfg.baseURL = 'https://live-api.hsslive.cn/';
             break;
           default:
             cfg.baseURL = '/devapi/';
@@ -68,47 +69,36 @@ class MyAxios {
           console.error(error.message);
           window.$message.error('请求超时，请重试');
         }
-        const statusCode = error.response.status as number;
         const errorResponse = error.response;
-        const errorResponseData = errorResponse.data;
-        const whiteList = ['400', '401', '403', '404', '500'];
+        const errorMessage = error.message;
         if (error.response) {
-          if (!whiteList.includes(`${statusCode}`)) {
+          const whiteList = [400, 401, 403, 404, 500];
+          const rspStatusCode = errorResponse.status as number;
+          const rspData = errorResponse.data;
+          if (!whiteList.includes(rspStatusCode)) {
+            console.log('其他状态码');
             window.$message.error(error.message);
             return Promise.reject(error.message);
           }
-          if (statusCode === 400) {
-            console.error(errorResponseData.message);
-            window.$message.error(errorResponseData.message);
-            return Promise.reject(errorResponseData);
-          }
-          if (statusCode === 401) {
-            console.error(errorResponseData.message);
-            window.$message.error(errorResponseData.message);
+          if (rspStatusCode === 401) {
             const userStore = useUserStore();
             userStore.logout();
-            return Promise.reject(errorResponseData);
           }
-          if (statusCode === 403) {
-            console.error(errorResponseData.message);
-            window.$message.error(errorResponseData.message);
-            return Promise.reject(errorResponseData);
+          if (rspStatusCode === 500) {
+            window.$message.error(errorMessage);
           }
-          if (statusCode === 404) {
-            console.error(errorResponseData.message);
-            window.$message.error(errorResponseData.message);
-            return Promise.reject(errorResponseData);
-          }
-          if (statusCode === 500) {
-            console.error(errorResponseData.error);
-            window.$message.error(errorResponseData.error);
-            return Promise.reject(errorResponseData);
+          if ([400, 401, 403, 404, 500].includes(rspStatusCode)) {
+            if (rspData.message) {
+              console.error(rspData.message);
+              window.$message.error(rspData.message);
+            }
+            return Promise.reject(rspData);
           }
         } else {
           // 请求超时没有response
-          console.error(error.message);
-          window.$message.error(error.message);
-          return Promise.reject(error.message);
+          console.error(errorMessage);
+          window.$message.error(errorMessage);
+          return Promise.reject(errorMessage);
         }
       }
     );
@@ -127,6 +117,18 @@ class MyAxios {
     config?: AxiosRequestConfig
   ): MyAxiosPromise<T> {
     return this.instance.post(url, data, config);
+  }
+
+  put<T = any>(
+    url: string,
+    data?: {} | undefined,
+    config?: AxiosRequestConfig
+  ): MyAxiosPromise<T> {
+    return this.instance.put(url, data, config);
+  }
+
+  delete<T = any>(url: string, config?: AxiosRequestConfig): MyAxiosPromise<T> {
+    return this.instance.delete(url, config);
   }
 }
 

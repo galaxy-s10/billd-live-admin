@@ -22,12 +22,14 @@ export const formConfig = (): IForm<ILiveRoom> => {
       },
       {
         field: 'pull_is_should_auth',
-        type: FormTypeEnum.radio,
+        type: FormTypeEnum.switch,
         label: '拉流鉴权',
-        options: [
-          { label: '需要', value: LiveRoomPullIsShouldAuthEnum.yes },
-          { label: '不需要', value: LiveRoomPullIsShouldAuthEnum.no },
-        ],
+        switchConfig: {
+          checkedValue: LiveRoomPullIsShouldAuthEnum.yes,
+          unCheckedValue: LiveRoomPullIsShouldAuthEnum.no,
+          checkedText: '开启',
+          unCheckedText: '关闭',
+        },
         rule: { required: true, trigger: 'blur' },
       },
       {

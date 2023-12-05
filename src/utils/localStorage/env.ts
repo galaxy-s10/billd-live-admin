@@ -2,13 +2,13 @@ import { LOCALSTORAGE_KEY } from '@/constant';
 import cache from '@/utils/cache';
 
 export const getCurrEnv = () => {
-  return cache.getStorageExp<string>(LOCALSTORAGE_KEY.currEnv);
+  return cache.getStorage<string>(LOCALSTORAGE_KEY.env);
 };
 
-export const setCurrEnv = (val) => {
-  return cache.setStorageExp(LOCALSTORAGE_KEY.currEnv, val, 24);
+export const setCurrEnv = (val: string) => {
+  return cache.setStorage(LOCALSTORAGE_KEY.env, val);
 };
 
 export const clearCurrEnv = () => {
-  return cache.clearStorage(LOCALSTORAGE_KEY.currEnv);
+  return cache.clearStorage(LOCALSTORAGE_KEY.env);
 };

@@ -10,6 +10,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     key: 'id',
     align: 'center',
     width: 150,
+    fixed: 'left',
   },
   {
     title: 'name',
@@ -42,14 +43,14 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     },
   },
   {
-    title: 'pull_is_should_auth',
+    title: '拉流鉴权',
     key: 'pull_is_should_auth',
     align: 'center',
     width: 200,
     render(row) {
       return row.pull_is_should_auth === LiveRoomPullIsShouldAuthEnum.yes
-        ? '需要拉流鉴权'
-        : '不需要拉流鉴权';
+        ? '开启'
+        : '关闭';
     },
   },
   {
@@ -91,11 +92,13 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     key: 'created_at',
     align: 'center',
     width: 200,
+    fixed: 'right',
   },
   {
     title: '最后更新',
     key: 'updated_at',
     align: 'center',
     width: 200,
+    fixed: 'right',
   },
 ];

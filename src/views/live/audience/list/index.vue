@@ -23,7 +23,7 @@ import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref } from 'vue';
 
 import { fetchLivePlayList } from '@/api/livePlay';
-import { fetchDeleteApiV1Clients } from '@/api/srs';
+import { fetchDeleteAudience } from '@/api/srs';
 import HSearch from '@/components/Base/Search';
 import { usePage } from '@/hooks/use-page';
 import { ILivePlay } from '@/interface';
@@ -69,15 +69,15 @@ const createColumns = () => {
                 'negative-text': '取消',
                 'on-positive-click': async () => {
                   // 流信息中的stream.publish.cid就是推流的客户端id：
-                  const res = await fetchDeleteApiV1Clients(row.srs_client_id!);
+                  const res = await fetchDeleteAudience(row.id!);
                   if (res.data.code === 0) {
                     window.$message.success('踢掉成功！');
-                    handlePageChange(1);
                   } else {
                     window.$message.error(
                       `踢掉失败,${JSON.stringify(res.data)}`
                     );
                   }
+                  handlePageChange(1);
                 },
                 'on-negative-click': () => {
                   window.$message.info('已取消!');

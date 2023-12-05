@@ -45,7 +45,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import BreadcrumbCpt from '@/components/Breadcrumb/index.vue';
-import { BLOG_CLIENT_URL } from '@/constant';
+import { LIVE_CLIENT_URL } from '@/constant';
 import { useAppStore } from '@/stores/app';
 import { useUserStore } from '@/stores/user';
 
@@ -55,7 +55,7 @@ const router = useRouter();
 
 const options = ref([
   {
-    label: '博客前台',
+    label: '直播前台',
     key: '1',
   },
   {
@@ -70,7 +70,7 @@ const options = ref([
 
 const handleSelect = (v) => {
   if (v === '1') {
-    window.open(BLOG_CLIENT_URL);
+    window.open(LIVE_CLIENT_URL);
   } else if (v === '2') {
     router.push('/setting/account').then(
       () => {},

@@ -1,22 +1,25 @@
+import { arrayUnique, windowReload } from 'billd-utils';
 import { defineStore } from 'pinia';
 
 import { fetchEmailCodeLogin, fetchRegister } from '@/api/emailUser';
 import { fetchLogin, fetchUserInfo } from '@/api/user';
 import { IRole, IUser } from '@/interface';
-import cache from '@/utils/cache';
+import router from '@/router';
+import { asyncRoutes } from '@/router/asyncRoute';
+import { clearToken, setToken } from '@/utils/localStorage';
 
 type UserRootState = {
-  userInfo: IUser | null;
-  token: string | null;
-  roles: IRole[] | null;
+  userInfo?: IUser;
+  token?: string;
+  roles?: IRole[];
 };
 
 export const useUserStore = defineStore('user', {
   state: (): UserRootState => {
     return {
-      token: null,
-      roles: null,
-      userInfo: null,
+      userInfo: undefined,
+      token: undefined,
+      roles: undefined,
     };
   },
   actions: {
@@ -24,17 +27,22 @@ export const useUserStore = defineStore('user', {
       this.userInfo = res;
     },
     setToken(res) {
-      cache.setStorageExp('token', res, 24);
+      setToken(res);
       this.token = res;
     },
     setRoles(res) {
       this.roles = res;
     },
     logout() {
-      cache.clearStorage('token');
-      this.token = null;
-      this.userInfo = null;
-      this.roles = null;
+      clearToken();
+      this.token = undefined;
+      this.userInfo = undefined;
+      this.roles = undefined;
+      router.push('/login').then(() =>
+        setTimeout(() => {
+          windowReload();
+        }, 300)
+      );
     },
     async pwdLogin({ id, password }) {
       try {
@@ -85,6 +93,36 @@ export const useUserStore = defineStore('user', {
       } catch (error) {
         return error;
       }
+    },
+    generateAsyncRoutes(roles) {
+      // 比较两数组是否有交集(返回true代表有交集)
+      const hasMixin = (a, b) => {
+        return a.length + b.length !== new Set([...a, ...b]).size;
+      };
+      const myRole = roles.map((v) => v.role_value);
+      const handleAsyncRoutes = (roleRoutes) => {
+        const deepFind = (route) => {
+          const res: any[] = [];
+          route.forEach((v) => {
+            const t = { ...v };
+            if (t.meta && t.meta.roles) {
+              // 有meta数据，且meta有roles数据，开始判断权限，有权限才允许访问
+              const hasRole = hasMixin(arrayUnique(t.meta.roles), myRole);
+              hasRole && res.push(t);
+            } else {
+              // 没有meta信息，允许访问
+              res.push(t);
+            }
+            if (t.children) {
+              t.children = deepFind(t.children);
+            }
+          });
+          return res;
+        };
+        const res = deepFind(roleRoutes);
+        return res;
+      };
+      return handleAsyncRoutes(asyncRoutes);
     },
   },
 });

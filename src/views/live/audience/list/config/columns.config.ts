@@ -2,12 +2,13 @@ import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 
 import { ILivePlay } from '@/interface';
 
-export const columnsConfig: TableColumns<ILivePlay[]> = [
+export const columnsConfig: TableColumns<ILivePlay> = [
   {
     title: 'id',
     key: 'id',
     align: 'center',
     width: 100,
+    fixed: 'left',
   },
   {
     title: '直播间id',
@@ -49,18 +50,27 @@ export const columnsConfig: TableColumns<ILivePlay[]> = [
     title: 'srs_stream_id',
     key: 'srs_stream_id',
     align: 'center',
-    width: 200,
+    width: 150,
+  },
+  {
+    title: 'srs_client_id',
+    key: 'srs_client_id',
+    align: 'center',
+    width: 150,
+    fixed: 'right',
   },
   {
     title: '创建时间',
     key: 'created_at',
     align: 'center',
     width: 200,
+    fixed: 'right',
   },
-  {
-    title: '最后更新',
-    key: 'updated_at',
-    align: 'center',
-    width: 200,
-  },
+  // {
+  //   title: '最后更新',
+  //   key: 'updated_at',
+  //   align: 'center',
+  //   width: 200,
+  //   fixed: 'right',
+  // },
 ];

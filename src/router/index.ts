@@ -1,13 +1,7 @@
-import {
-  BulbOutline,
-  LockClosedOutline,
-  PersonOutline,
-  ShieldOutline,
-  SpeedometerOutline,
-} from '@vicons/ionicons5';
+import { KeyOutline, SpeedometerOutline } from '@vicons/ionicons5';
 import { createRouter, createWebHistory } from 'vue-router';
 
-import { ROUTE_ROLES, ROUTE_SORT } from '@/constant';
+import { ROUTE_SORT } from '@/constant';
 import Layout from '@/layout/index.vue';
 
 import { renderIcon } from './utils';
@@ -36,161 +30,6 @@ export const defaultRoutes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: '/live',
-    component: Layout,
-    meta: {
-      sort: ROUTE_SORT.live,
-      title: '直播管理',
-      icon: renderIcon(BulbOutline),
-      roles: [ROUTE_ROLES.SUPER_ADMIN],
-    },
-    children: [
-      {
-        name: 'liveRoom',
-        path: '/live/room',
-        component: () => import('@/views/live/room/list/index.vue'),
-        meta: {
-          title: '直播间列表',
-        },
-      },
-      {
-        name: 'liveAnchor',
-        path: '/live/anchor',
-        component: () => import('@/views/live/anchor/list/index.vue'),
-        meta: {
-          title: '在线主播',
-        },
-      },
-      {
-        name: 'liveAudience',
-        path: '/live/audience',
-        component: () => import('@/views/live/audience/list/index.vue'),
-        meta: {
-          title: '在线观众',
-        },
-      },
-      {
-        name: 'liveStream',
-        path: '/live/stream',
-        component: () => import('@/views/live/stream/list/index.vue'),
-        meta: {
-          title: '在线stream',
-        },
-      },
-      {
-        name: 'liveClient',
-        path: '/live/client',
-        component: () => import('@/views/live/client/list/index.vue'),
-        meta: {
-          title: '在线client',
-        },
-      },
-    ],
-  },
-  {
-    name: 'user',
-    path: '/user',
-    component: Layout,
-    meta: {
-      title: '用户管理',
-      icon: renderIcon(PersonOutline),
-      sort: ROUTE_SORT.user,
-    },
-    children: [
-      {
-        name: 'userList',
-        path: '/user/list',
-        component: () => import('@/views/user/list/index.vue'),
-        meta: {
-          title: '用户列表',
-        },
-      },
-      {
-        name: 'userAdd',
-        path: '/user/add',
-        component: () => import('@/views/user/add/index.vue'),
-        meta: {
-          title: '新增用户',
-          roles: [ROUTE_ROLES.SUPER_ADMIN],
-        },
-      },
-    ],
-  },
-  {
-    path: '/role',
-    component: Layout,
-    meta: {
-      sort: ROUTE_SORT.role,
-      title: '角色管理',
-      icon: renderIcon(LockClosedOutline),
-      roles: [ROUTE_ROLES.SUPER_ADMIN],
-    },
-    children: [
-      {
-        name: 'roleList',
-        path: '/role/list',
-        component: () => import('@/views/role/list/index.vue'),
-        meta: {
-          title: '角色列表',
-        },
-      },
-      {
-        name: 'roleTree',
-        path: '/role/tree',
-        component: () => import('@/views/role/tree/index.vue'),
-        meta: {
-          title: '角色树',
-        },
-      },
-      {
-        name: 'addRole',
-        path: '/role/add',
-        component: () => import('@/views/role/add/index.vue'),
-        meta: {
-          title: '添加角色',
-          roles: [ROUTE_ROLES.SUPER_ADMIN],
-        },
-      },
-    ],
-  },
-  {
-    name: 'auth',
-    path: '/auth',
-    component: Layout,
-    meta: {
-      title: '权限管理',
-      icon: renderIcon(ShieldOutline),
-      sort: ROUTE_SORT.auth,
-    },
-    children: [
-      {
-        name: 'authList',
-        path: '/auth/list',
-        component: () => import('@/views/auth/list/index.vue'),
-        meta: {
-          title: '权限列表',
-        },
-      },
-      {
-        name: 'authTree',
-        path: '/auth/tree',
-        component: () => import('@/views/auth/tree/index.vue'),
-        meta: {
-          title: '权限树',
-        },
-      },
-      {
-        name: 'addAuth',
-        path: '/auth/add',
-        component: () => import('@/views/auth/add/index.vue'),
-        meta: {
-          title: '添加权限',
-          roles: [ROUTE_ROLES.SUPER_ADMIN],
-        },
-      },
-    ],
-  },
-  {
     name: 'login',
     path: '/login',
     meta: {
@@ -199,7 +38,42 @@ export const defaultRoutes: RouteRecordRaw[] = [
     },
     component: () => import('@/views/login/index.vue'),
   },
+  {
+    name: 'settingAccountRoot',
+    path: '/setting/accountRoot',
+    component: Layout,
+    children: [
+      {
+        name: 'settingAccount',
+        path: '/setting/account',
+        component: () => import('@/views/setting/account/index.vue'),
+        meta: {
+          title: '账号设置',
+          icon: renderIcon(KeyOutline),
+        },
+      },
+    ],
+  },
+  {
+    name: 'authError',
+    path: '/error/401',
+    component: () => import('@/views/errorPage/401/index.vue'),
+    meta: {
+      title: '401页面',
+      hidden: true,
+    },
+  },
+  {
+    name: 'notFound',
+    path: '/error/404',
+    component: () => import('@/views/errorPage/404/index.vue'),
+    meta: {
+      title: '404页面',
+      hidden: true,
+    },
+  },
 ];
+
 const router = createRouter({
   routes: defaultRoutes,
   history: createWebHistory(),

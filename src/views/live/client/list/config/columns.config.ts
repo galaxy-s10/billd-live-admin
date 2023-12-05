@@ -7,7 +7,8 @@ export const columnsConfig: TableColumns<IApiV1Clients['clients'][0]> = [
     title: 'id',
     key: 'id',
     align: 'center',
-    width: 200,
+    width: 150,
+    fixed: 'left',
   },
   {
     title: 'name',
