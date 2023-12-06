@@ -1,10 +1,10 @@
 import { IForm } from '@/components/Base/Form';
 import { useOrder } from '@/hooks/use-order';
-import { FormTypeEnum, ILivePlay, ISearch } from '@/interface';
+import { FormTypeEnum, ILive, ISearch } from '@/interface';
 
 import { columnsConfig } from './columns.config';
 
-export const searchFormConfig: IForm<ISearch<ILivePlay>> = {
+export const searchFormConfig: IForm<ISearch<ILive>> = {
   gridSpan: 8,
   labelPlacement: 'left',
   formStyle: {
@@ -26,14 +26,14 @@ export const searchFormConfig: IForm<ISearch<ILivePlay>> = {
     {
       field: 'user_id',
       type: FormTypeEnum.input,
-      label: '观众id',
-      placeholder: '请输入观众id',
+      label: '主播id',
+      placeholder: '请输入主播id',
     },
     {
       field: 'keyWord',
       type: FormTypeEnum.input,
       label: '关键字',
-      placeholder: 'srs_client_id/srs_stream/srs_stream_url',
+      placeholder: 'client_id',
     },
     ...useOrder(columnsConfig),
   ],

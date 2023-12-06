@@ -4,14 +4,13 @@ import {
   PersonOutline,
   ShieldOutline,
 } from '@vicons/ionicons5';
+import { RouteRecordRaw } from 'vue-router';
 
 import { DEFAULT_ROLE_INFO, ROUTE_ROLES, ROUTE_SORT } from '@/constant';
 import Layout from '@/layout/index.vue';
 
 import { notFoundRoutes } from './notFound';
 import { renderIcon } from './utils';
-
-import type { RouteRecordRaw } from 'vue-router';
 
 // 默认路由
 export const asyncRoutes: RouteRecordRaw[] = [
@@ -28,6 +27,14 @@ export const asyncRoutes: RouteRecordRaw[] = [
       ],
     },
     children: [
+      {
+        name: 'liveRecord',
+        path: '/live/record',
+        component: () => import('@/views/live/record/list/index.vue'),
+        meta: {
+          title: '直播记录',
+        },
+      },
       {
         name: 'liveRoom',
         path: '/live/room',

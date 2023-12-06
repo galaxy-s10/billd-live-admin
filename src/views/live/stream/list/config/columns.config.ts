@@ -20,8 +20,12 @@ export const columnsConfig: TableColumns<IApiV1Streams['streams'][0]> = [
     key: 'kbps.recv_30s',
     align: 'center',
     width: 200,
-    sorter: (row1, row2) => {
-      return row2.kbps.recv_30s - row1.kbps.recv_30s;
+    // sorter: (row1, row2) => {
+    //   return row2.kbps.recv_30s - row1.kbps.recv_30s;
+    // },
+    sorter: {
+      compare: (row1, row2) => row2.kbps.recv_30s - row1.kbps.recv_30s,
+      multiple: 2,
     },
     render(row) {
       // kbps, kbit/s, kb/s都是同一个意思
@@ -36,8 +40,12 @@ export const columnsConfig: TableColumns<IApiV1Streams['streams'][0]> = [
     key: 'kbps.send_30s',
     align: 'center',
     width: 200,
-    sorter: (row1, row2) => {
-      return row2.kbps.send_30s - row1.kbps.send_30s;
+    // sorter: (row1, row2) => {
+    //   return row2.kbps.send_30s - row1.kbps.send_30s;
+    // },
+    sorter: {
+      compare: (row1, row2) => row2.kbps.send_30s - row1.kbps.send_30s,
+      multiple: 3,
     },
     render(row) {
       // kbps, kbit/s, kb/s都是同一个意思
@@ -128,5 +136,13 @@ export const columnsConfig: TableColumns<IApiV1Streams['streams'][0]> = [
     align: 'center',
     width: 150,
     fixed: 'right',
+    // sorter: (row1, row2) => {
+    //   return row1.clients - row2.clients;
+    // },
+    sorter: {
+      compare: (row1, row2) => row2.clients - row1.clients,
+      multiple: 5,
+    },
+    defaultSortOrder: 'ascend',
   },
 ];

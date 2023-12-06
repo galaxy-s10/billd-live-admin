@@ -1,11 +1,6 @@
 import request from '@/utils/request';
 
-export function fetchLivePlayList(params: {
-  orderName: string;
-  orderBy: string;
-  nowPage?: number;
-  pageSize?: number;
-}) {
+export function fetchLivePlayList(params) {
   return request.get('/live_play/list', {
     params,
   });

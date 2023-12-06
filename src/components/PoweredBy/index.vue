@@ -22,6 +22,7 @@ import { GITHUB_REPO } from '@/constant';
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 10;
   width: 100%;
   height: 40px;
   background-color: rgba($color: $theme-color-gold, $alpha: 0.1);

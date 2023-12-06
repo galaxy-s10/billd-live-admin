@@ -1,8 +1,9 @@
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 
-import { ILive } from '@/interface';
+import { ILiveRecord } from '@/interface';
+import { formatTime } from '@/router/utils';
 
-export const columnsConfig: TableColumns<ILive> = [
+export const columnsConfig: TableColumns<ILiveRecord> = [
   {
     title: 'id',
     key: 'id',
@@ -25,47 +26,32 @@ export const columnsConfig: TableColumns<ILive> = [
     fixed: 'left',
   },
   {
-    title: 'srs_ip',
-    key: 'srs_ip',
+    title: 'client_id',
+    key: 'client_id',
     align: 'center',
-    width: 200,
+    width: 100,
+    fixed: 'left',
   },
   {
-    title: 'srs_stream',
-    key: 'srs_stream',
+    title: '直播时长',
+    key: 'duration',
     align: 'center',
-    width: 200,
+    width: 100,
   },
   {
-    title: 'srs_param',
-    key: 'srs_param',
+    title: '弹幕数',
+    key: 'danmu',
     align: 'center',
-    width: 200,
+    width: 100,
   },
   {
-    title: 'srs_stream_url',
-    key: 'srs_stream_url',
+    title: '直播结束时间',
+    key: 'end_time',
     align: 'center',
-    width: 200,
-  },
-  {
-    title: 'srs_stream_id',
-    key: 'srs_stream_id',
-    align: 'center',
-    width: 200,
-  },
-  {
-    title: 'srs_action',
-    key: 'srs_action',
-    align: 'center',
-    width: 120,
-    fixed: 'right',
-  },
-  {
-    title: 'srs_client_id',
-    key: 'srs_client_id',
-    align: 'center',
-    width: 120,
+    width: 180,
+    render(row) {
+      return row.end_time ? formatTime(+row.end_time) : '-';
+    },
     fixed: 'right',
   },
   {

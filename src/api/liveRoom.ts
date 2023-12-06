@@ -1,10 +1,7 @@
 import { ILiveRoom, IPaging } from '@/interface';
 import request from '@/utils/request';
 
-export function fetchLiveRoomList(params: {
-  orderName: string;
-  orderBy: string;
-}) {
+export function fetchLiveRoomList(params) {
   return request.get<IPaging<ILiveRoom>>('/live_room/list', {
     params,
   });

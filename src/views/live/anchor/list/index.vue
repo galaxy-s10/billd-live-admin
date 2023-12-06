@@ -52,7 +52,7 @@ const createColumns = () => {
     {
       title: '操作',
       key: 'actions',
-      width: 200,
+      width: 100,
       align: 'center',
       fixed: 'right',
       render(row) {
@@ -91,7 +91,7 @@ const createColumns = () => {
                       size: 'small',
                       type: 'error',
                     },
-                    () => '踢掉主播' // 用箭头函数返回性能更好。
+                    () => '踢掉' // 用箭头函数返回性能更好。
                   ),
                 default: () => '确定踢掉吗?',
               }

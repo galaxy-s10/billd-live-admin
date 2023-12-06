@@ -69,7 +69,7 @@
     </div>
     <n-data-table
       :loading="starListLoading"
-      :columns="columns()"
+      :columns="columns"
       :data="tableList"
       :bordered="false"
     />
@@ -127,12 +127,12 @@ const reqParams = ref({
   count: 20, // 返回的总数目，默认为10。
 });
 
-const columns = () => {
+const createColumns = () => {
   const action: TableColumns<IApiV1Streams['streams'][0]> = [
     {
       title: '操作',
       key: 'actions',
-      width: 200,
+      width: 100,
       align: 'center',
       fixed: 'right',
       render(row) {
@@ -184,6 +184,8 @@ const columns = () => {
   ];
   return [...columnsConfig, ...action];
 };
+
+const columns = createColumns();
 
 watch(
   () => tableList.value,

@@ -117,7 +117,7 @@ export const columnsConfig: TableColumns<IApiV1Clients['clients'][0]> = [
     title: 'type',
     key: 'type',
     align: 'center',
-    width: 200,
+    width: 150,
     fixed: 'right',
   },
 ];
