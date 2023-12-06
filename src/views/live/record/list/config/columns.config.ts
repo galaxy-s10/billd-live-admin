@@ -33,14 +33,20 @@ export const columnsConfig: TableColumns<ILiveRecord> = [
     fixed: 'left',
   },
   {
-    title: '直播时长',
-    key: 'duration',
+    title: '观看数',
+    key: 'view',
     align: 'center',
     width: 100,
   },
   {
     title: '弹幕数',
     key: 'danmu',
+    align: 'center',
+    width: 100,
+  },
+  {
+    title: '直播时长',
+    key: 'duration',
     align: 'center',
     width: 100,
   },
