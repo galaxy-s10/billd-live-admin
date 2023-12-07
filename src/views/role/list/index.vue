@@ -41,7 +41,7 @@
 <script lang="ts" setup>
 import { DataTableColumns, NButton, NSpace } from 'naive-ui';
 import { TableColumn } from 'naive-ui/es/data-table/src/interface';
-import { h, onMounted, ref } from 'vue';
+import { h, onMounted, ref, watch } from 'vue';
 
 import {
   fetchRoleAuth,
@@ -135,7 +135,24 @@ const createColumns = (): DataTableColumns<IRole> => {
 
 const columns = createColumns();
 
-const ajaxFetchList = async (args) => {
+onMounted(async () => {
+  await ajaxFetchList(params.value);
+});
+
+watch(
+  () => pagination,
+  (newval) => {
+    params.value.nowPage = newval.page;
+    params.value.pageSize = newval.pageSize;
+    handlePageChange(newval.page);
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+async function ajaxFetchList(args) {
   try {
     tableListLoading.value = true;
     const res: any = await fetchRoleList(args);
@@ -152,16 +169,12 @@ const ajaxFetchList = async (args) => {
   } catch (err) {
     Promise.reject(err);
   }
-};
+}
 
-onMounted(async () => {
-  await ajaxFetchList(params.value);
-});
-
-const handlePageChange = async (currentPage) => {
+async function handlePageChange(currentPage) {
   params.value.nowPage = currentPage;
   await ajaxFetchList({ ...params.value, nowPage: currentPage });
-};
+}
 
 const handleSearch = (v) => {
   params.value = {

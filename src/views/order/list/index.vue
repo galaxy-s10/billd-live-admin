@@ -1,5 +1,5 @@
 <template>
-  <div class="live-record-wrap">
+  <div>
     <HSearch
       :search-form-config="searchFormConfig"
       :init-value="params"
@@ -18,34 +18,31 @@
 </template>
 
 <script lang="ts" setup>
+import { DataTableColumns } from 'naive-ui';
 import { onMounted, ref, watch } from 'vue';
 
-import { fetchLiveRecordList } from '@/api/liveRecord';
+import { fetchOrderList } from '@/api/order';
 import HSearch from '@/components/Base/Search';
 import { usePage } from '@/hooks/use-page';
-import { ILive } from '@/interface';
+import { IList, IOrder } from '@/interface';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
-const tableListData = ref<ILive[]>([]);
+interface ISearch extends IOrder, IList {}
+
+const tableListData = ref([]);
 const total = ref(0);
 const pagination = usePage();
 const tableListLoading = ref(false);
-const params = ref<{
-  orderName: string;
-  orderBy: string;
-  nowPage?: number;
-  pageSize?: number;
-}>({
+const params = ref<ISearch>({
   nowPage: 1,
-  pageSize: 20,
+  pageSize: 10,
+  orderName: 'id',
   orderBy: 'desc',
-  orderName: 'created_at',
 });
-
-const createColumns = () => {
-  return [...columnsConfig];
+const createColumns = (): DataTableColumns<IOrder> => {
+  return [...columnsConfig()];
 };
 
 const columns = createColumns();
@@ -67,6 +64,25 @@ watch(
   }
 );
 
+async function ajaxFetchList(args) {
+  try {
+    tableListLoading.value = true;
+    const res: any = await fetchOrderList(args);
+    if (res.code === 200) {
+      tableListLoading.value = false;
+      tableListData.value = res.data.rows;
+      total.value = res.data.total;
+      pagination.page = args.nowPage;
+      pagination.itemCount = res.data.total;
+      pagination.pageSize = args.pageSize;
+    } else {
+      Promise.reject(res);
+    }
+  } catch (err) {
+    Promise.reject(err);
+  }
+}
+
 async function handlePageChange(currentPage) {
   params.value.nowPage = currentPage;
   await ajaxFetchList({ ...params.value, nowPage: currentPage });
@@ -84,28 +100,6 @@ const handleSearch = (v) => {
   };
   handlePageChange(1);
 };
-
-async function ajaxFetchList(args) {
-  try {
-    tableListLoading.value = true;
-    const res = await fetchLiveRecordList(args);
-    if (res.code === 200) {
-      tableListLoading.value = false;
-      tableListData.value = res.data.rows;
-      total.value = res.data.total;
-      pagination.page = args.nowPage;
-      pagination.itemCount = res.data.total;
-      pagination.pageSize = args.pageSize;
-    } else {
-      Promise.reject(res);
-    }
-  } catch (err) {
-    Promise.reject(err);
-  }
-}
 </script>
 
-<style lang="scss" scoped>
-.live-record-wrap {
-}
-</style>
+<style lang="scss" scoped></style>

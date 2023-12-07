@@ -7,7 +7,6 @@
     ></HSearch>
     <n-data-table
       remote
-      :scroll-x="1800"
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
@@ -75,7 +74,7 @@
 <script lang="ts" setup>
 import { DataTableColumns, NButton, NSpace } from 'naive-ui';
 import { TableColumn } from 'naive-ui/es/data-table/src/interface';
-import { h, onMounted, ref } from 'vue';
+import { h, onMounted, ref, watch } from 'vue';
 
 import { fetchTreeRole, fetchUserRole } from '@/api/role';
 import {
@@ -129,10 +128,7 @@ const params = ref<ISearch>({
 });
 const defaultCheckedKeys = ref([]);
 const formRef = ref<any>(null);
-const updateCheckedKeys = (keys) => {
-  defaultCheckedKeys.value = keys;
-  formValue.value.user_roles = keys;
-};
+
 const createColumns = (): DataTableColumns<IUser> => {
   const action: TableColumn<IUser> = {
     title: '操作',
@@ -156,10 +152,6 @@ const createColumns = (): DataTableColumns<IUser> => {
               currRow.value = { ...data };
               modalType.value = modalUserTypeEnum.EDIT;
               modalVisiable.value = !modalVisiable.value;
-              // formValue.value = { ...userInfo.data };
-              // modalTitle.value = '编辑用户';
-              // modalType.value = modalUserTypeEnum.EDIT;
-              // modalVisiable.value = !modalVisiable.value;
             },
           },
           () => '编辑' // 用箭头函数返回性能更好。
@@ -193,7 +185,29 @@ const createColumns = (): DataTableColumns<IUser> => {
 
 const columns = createColumns();
 
-const ajaxFetchList = async (args) => {
+onMounted(async () => {
+  await ajaxFetchList(params.value);
+});
+
+watch(
+  () => pagination,
+  (newval) => {
+    params.value.nowPage = newval.page;
+    params.value.pageSize = newval.pageSize;
+    handlePageChange(newval.page);
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+const updateCheckedKeys = (keys) => {
+  defaultCheckedKeys.value = keys;
+  formValue.value.user_roles = keys;
+};
+
+async function ajaxFetchList(args) {
   try {
     tableListLoading.value = true;
     const res: any = await fetchUserList(args);
@@ -210,19 +224,15 @@ const ajaxFetchList = async (args) => {
   } catch (err) {
     Promise.reject(err);
   }
-};
+}
 
-onMounted(async () => {
-  await ajaxFetchList(params.value);
-});
-
-const handlePageChange = async (currentPage) => {
+async function handlePageChange(currentPage) {
   params.value.nowPage = currentPage;
   await ajaxFetchList({ ...params.value, nowPage: currentPage });
-};
-const modalUpdateShow = (newVal) => {
+}
+function modalUpdateShow(newVal) {
   modalVisiable.value = newVal;
-};
+}
 
 const updateUser = async () => {
   try {

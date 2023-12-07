@@ -1,6 +1,7 @@
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 
 import { ILivePlay } from '@/interface';
+import { formatTime } from '@/router/utils';
 
 export const columnsConfig: TableColumns<ILivePlay> = [
   {
@@ -73,6 +74,16 @@ export const columnsConfig: TableColumns<ILivePlay> = [
     key: 'srs_client_id',
     align: 'center',
     width: 120,
+    fixed: 'right',
+  },
+  {
+    title: '观看结束时间',
+    key: 'end_time',
+    align: 'center',
+    width: 180,
+    render(row) {
+      return row.end_time ? formatTime(+row.end_time) : '-';
+    },
     fixed: 'right',
   },
   {

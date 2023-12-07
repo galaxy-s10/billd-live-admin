@@ -2,13 +2,23 @@ import { PaginationProps } from 'naive-ui';
 import { reactive } from 'vue';
 
 export const usePage = () => {
-  return reactive<PaginationProps>({
-    page: 0, // 当前页
+  const paginationReactive = reactive<PaginationProps>({
+    page: 1, // 当前页
     itemCount: 0, // 总条数
-    pageSize: 0, // 分页大小
+    pageSize: 10, // 分页大小
+    pageSizes: [10, 20, 30, 50, 100],
+    showSizePicker: true,
+    onUpdatePageSize: (pageSize: number) => {
+      paginationReactive.pageSize = pageSize;
+      paginationReactive.page = 1;
+    },
+    onUpdatePage: (page: number) => {
+      paginationReactive.page = page;
+    },
     prefix: ({ itemCount }) => {
       // eslint-disable-next-line
       return `一共${itemCount}条数据`;
     },
   });
+  return paginationReactive;
 };

@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import { NButton, NPopconfirm, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
-import { h, onMounted, ref } from 'vue';
+import { h, onMounted, ref, watch } from 'vue';
 
 import { fetchLiveList } from '@/api/live';
 import { fetchDeleteApiV1Clients } from '@/api/srs';
@@ -110,10 +110,23 @@ onMounted(async () => {
   await ajaxFetchList(params.value);
 });
 
-const handlePageChange = async (currentPage) => {
+watch(
+  () => pagination,
+  (newval) => {
+    params.value.nowPage = newval.page;
+    params.value.pageSize = newval.pageSize;
+    handlePageChange(newval.page);
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+async function handlePageChange(currentPage) {
   params.value.nowPage = currentPage;
   await ajaxFetchList({ ...params.value, nowPage: currentPage });
-};
+}
 
 const handleSearch = (v) => {
   params.value = {
@@ -128,7 +141,7 @@ const handleSearch = (v) => {
   handlePageChange(1);
 };
 
-const ajaxFetchList = async (args) => {
+async function ajaxFetchList(args) {
   try {
     tableListLoading.value = true;
     const res = await fetchLiveList(args);
@@ -145,7 +158,7 @@ const ajaxFetchList = async (args) => {
   } catch (err) {
     Promise.reject(err);
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

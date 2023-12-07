@@ -3,6 +3,7 @@ import {
   LockClosedOutline,
   PersonOutline,
   ShieldOutline,
+  WalletOutline,
 } from '@vicons/ionicons5';
 import { RouteRecordRaw } from 'vue-router';
 
@@ -178,6 +179,27 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/auth/add/index.vue'),
         meta: {
           title: '添加权限',
+        },
+      },
+    ],
+  },
+  {
+    name: 'order',
+    path: '/order',
+    component: Layout,
+    meta: {
+      title: '订单管理',
+      sort: ROUTE_SORT.order,
+      roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
+    },
+    children: [
+      {
+        name: 'orderList',
+        path: '/order/list',
+        component: () => import('@/views/order/list/index.vue'),
+        meta: {
+          icon: renderIcon(WalletOutline),
+          title: '订单列表',
         },
       },
     ],
