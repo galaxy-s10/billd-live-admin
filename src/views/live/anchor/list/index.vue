@@ -106,34 +106,30 @@ const createColumns = () => {
 
 const columns = createColumns();
 
-onMounted(async () => {
-  await ajaxFetchList(params.value);
+onMounted(() => {
+  handlePageChange(1);
 });
 
 watch(
-  () => pagination,
-  (newval) => {
-    params.value.nowPage = newval.page;
-    params.value.pageSize = newval.pageSize;
-    handlePageChange(newval.page);
-  },
-  {
-    immediate: true,
-    deep: true,
+  () => pagination.pageSize,
+  () => {
+    handlePageChange(1);
   }
 );
 
 async function handlePageChange(currentPage) {
-  params.value.nowPage = currentPage;
-  await ajaxFetchList({ ...params.value, nowPage: currentPage });
+  await ajaxFetchList({
+    ...params.value,
+    pageSize: pagination.pageSize,
+    nowPage: currentPage,
+  });
 }
-
 const handleSearch = (v) => {
   params.value = {
     ...params.value,
     ...v,
     nowPage: 1,
-    pageSize: params.value.pageSize,
+    pageSize: pagination.pageSize,
     rangTimeType: v.rangTimeType ? 'created_at' : undefined,
     rangTimeStart: v.rangTimeType ? v.rangTimeType[0] : undefined,
     rangTimeEnd: v.rangTimeType ? v.rangTimeType[1] : undefined,

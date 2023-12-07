@@ -38,16 +38,22 @@ export const columnsConfig = (): DataTableColumns<IOrder> => {
       width: 200,
     },
     {
+      title: '实付金额',
+      key: 'buyer_pay_amount',
+      align: 'center',
+      width: 150,
+    },
+    {
       title: '交易状态',
       key: 'trade_status',
       align: 'center',
       width: 150,
     },
     {
-      title: '实付金额',
-      key: 'buyer_pay_amount',
+      title: '客户端ip',
+      key: 'client_ip',
       align: 'center',
-      width: 150,
+      width: 200,
     },
     {
       title: '买家支付宝',

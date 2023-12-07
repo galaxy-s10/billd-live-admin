@@ -324,7 +324,8 @@ export interface IWallet {
 }
 
 export enum PayStatusEnum {
-  error = 'error',
+  wait = 'billd_status_wait',
+  timeout = 'billd_status_timeout',
   /** （交易创建，等待买家付款） */
   WAIT_BUYER_PAY = 'WAIT_BUYER_PAY',
   /** （交易支付成功） */
@@ -366,12 +367,17 @@ export interface IOrder {
   user?: IUser;
   /** 商品信息 */
   goods?: IGoods;
+  /** 直播间信息 */
+  live_room?: IGoods;
+
   billd_live_user_id?: number;
   billd_live_goods_id?: number;
   billd_live_live_room_id?: number;
+  billd_live_order_subject?: string;
   /** 判断幂等 */
   billd_live_order_version?: number;
-  billd_live_order_subject?: string;
+  client_ip?: string;
+
   product_code?: string;
   qr_code?: string;
   /** 买家支付宝账号 */
@@ -393,14 +399,13 @@ export interface IOrder {
   /** 商家订单号 */
   out_trade_no?: string;
   /** 交易状态：WAIT_BUYER_PAY（交易创建，等待买家付款）、TRADE_CLOSED（未付款交易超时关闭，或支付完成后全额退款）、TRADE_SUCCESS（交易支付成功）、TRADE_FINISHED（交易结束，不可退款） */
-  trade_status?: string;
+  trade_status?: PayStatusEnum;
   /** 本次交易打款给卖家的时间 */
   send_pay_date?: string;
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
 }
-
 export interface IUser {
   id?: number;
   username?: string;

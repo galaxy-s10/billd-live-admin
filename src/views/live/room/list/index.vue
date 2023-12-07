@@ -107,8 +107,8 @@ const createColumns = () => {
 
 const columns = createColumns();
 
-onMounted(async () => {
-  await ajaxFetchList(params.value);
+onMounted(() => {
+  handlePageChange(1);
 });
 
 const handlePageChange = async (currentPage) => {
@@ -121,7 +121,7 @@ const handleSearch = (v) => {
     ...params.value,
     ...v,
     nowPage: 1,
-    pageSize: params.value.pageSize,
+    pageSize: pagination.pageSize,
     rangTimeType: v.rangTimeType ? 'created_at' : undefined,
     rangTimeStart: v.rangTimeType ? v.rangTimeType[0] : undefined,
     rangTimeEnd: v.rangTimeType ? v.rangTimeType[1] : undefined,
