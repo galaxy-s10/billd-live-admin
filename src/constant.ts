@@ -18,6 +18,13 @@ export const POSTMESSAGE_TYPE = ['qq_login', 'github_login', 'login_expired'];
 
 export const QINIU_BUCKET = 'hssblog'; // 七牛云bucket
 
+export const AXIOS_BASEURL = 'https://live-api.hsslive.cn';
+
+// .hsslive.cn
+// .hfgmupw.cn
+export const COOKIE_DOMAIN =
+  process.env.NODE_ENV === 'development' ? undefined : '.hsslive.cn';
+
 export const QINIU_BLOG = {
   domain: 'resource.hsslive.cn',
   url: 'https://resource.hsslive.cn/',

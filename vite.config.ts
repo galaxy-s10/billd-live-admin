@@ -67,7 +67,7 @@ export default defineConfig(({ command, mode }) => {
     server: {
       host: '0.0.0.0',
       proxy: {
-        '/devapi': {
+        '/api': {
           target: 'http://localhost:4300',
           secure: false, // 默认情况下（secure: true），不接受在HTTPS上运行的带有无效证书的后端服务器。设置secure: false后，后端服务器的HTTPS有无效证书也可运行
           /**
@@ -76,7 +76,7 @@ export default defineConfig(({ command, mode }) => {
            * 设置changeOrigin: true，就会修改发起请求的源，将原本的localhost:port修改为target，这样就可以通过后端服务器对源的校验
            */
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/devapi/, '/'),
+          rewrite: (path) => path.replace(/^\/api/, '/'),
         },
         '/betaapi': {
           target: 'http://localhost:4300',

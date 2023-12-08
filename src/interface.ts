@@ -51,6 +51,18 @@ export interface IApiV1Streams {
     };
   }[];
 }
+
+export interface ILiveConfig {
+  id?: number;
+  key?: string;
+  value?: string;
+  desc?: string;
+  type?: FormTypeEnum;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
 export interface IApiV1Clients {
   code: number;
   server: string;

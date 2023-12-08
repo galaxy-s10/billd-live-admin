@@ -89,8 +89,8 @@ const handleUploadChange = (data: { fileList: UploadFileInfo[] }) => {
   emits('update:value', list.value);
 };
 
-const mergeAndUpload = async ({ hash, ext, id }) => {
-  await fetchUploadMergeChunk({ hash, ext });
+const mergeAndUpload = async ({ hash, ext, prefix, id }) => {
+  await fetchUploadMergeChunk({ hash, ext, prefix });
   const { data } = await fetchUpload({
     hash,
     ext,
@@ -143,9 +143,11 @@ const upload = async (file: UploadFileInfo) => {
               val.percentage = res.data.percentage;
               if (res.data.percentage === 50) {
                 if (!isMerge) {
-                  mergeAndUpload({ hash, ext, id }).then((uploadRes) => {
-                    resolve(uploadRes);
-                  });
+                  mergeAndUpload({ hash, ext, prefix, id }).then(
+                    (uploadRes) => {
+                      resolve(uploadRes);
+                    }
+                  );
                   isMerge = true;
                 }
               }

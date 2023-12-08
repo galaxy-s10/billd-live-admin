@@ -307,11 +307,14 @@ async function validateAndUpload() {
 const handleConfirm = async () => {
   try {
     loading.value = true;
+    console.log(11);
     const res: any = await handleValidate();
+    console.log(333);
     const uploadQueue: any = [];
-    const delQueue: any = [];
+    // const delQueue: any = [];
     const del: string[] = [];
     hUploadRef.value.forEach((item) => {
+      console.log(item, 'ddddd');
       uploadQueue.push(item.startUpload());
     });
     const result = await Promise.all(uploadQueue);
@@ -319,12 +322,12 @@ const handleConfirm = async () => {
       res[item.field] = item.result;
       del.push(...item.del);
     });
-    del.forEach((url) => {
-      // eslint-disable-next-line
-      const qiniu_key = url.replace(QINIU_CDN_URL, '');
-      delQueue.push(fetchDeleteQiniuDataByQiniuKey(qiniu_key));
-    });
-    await Promise.all(delQueue);
+    // del.forEach((url) => {
+    //   // eslint-disable-next-line
+    //   const qiniu_key = url.replace(QINIU_CDN_URL, '');
+    //   delQueue.push(fetchDeleteQiniuDataByQiniuKey(qiniu_key));
+    // });
+    // await Promise.all(delQueue);
     loading.value = false;
     emits('click:confirm', res);
   } catch (error) {

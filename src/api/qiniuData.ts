@@ -23,7 +23,7 @@ export function fetchDiff(params) {
 }
 
 // 上传图片
-export function fetchUpload(data: IQiniuKey) {
+export function fetchUpload(data: { hash; ext; prefix }) {
   // data:new FormData {prefix,uploadFiles}
   return request.post<{
     flag: boolean;
@@ -38,7 +38,6 @@ export function fetchUpload(data: IQiniuKey) {
 
 // 上传chunk
 export function fetchUploadChunk(data) {
-  // data:new FormData {prefix,uploadFiles}
   return request.post<{ percentage: number }>(
     '/qiniu_data/upload_chunk',
     data,
@@ -50,8 +49,7 @@ export function fetchUploadChunk(data) {
 }
 
 // 合并chunk
-export function fetchUploadMergeChunk(data) {
-  // data:new FormData {prefix,uploadFiles}
+export function fetchUploadMergeChunk(data: { hash; ext; prefix }) {
   return request.post('/qiniu_data/merge_chunk', data, {
     timeout: 1000 * 60,
   });

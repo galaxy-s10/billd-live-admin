@@ -1,5 +1,6 @@
 import {
   BulbOutline,
+  CogOutline,
   LockClosedOutline,
   PersonOutline,
   ShieldOutline,
@@ -179,6 +180,34 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/auth/add/index.vue'),
         meta: {
           title: '添加权限',
+        },
+      },
+    ],
+  },
+  {
+    name: 'liveConfig',
+    path: '/liveConfig',
+    component: Layout,
+    meta: {
+      title: '直播配置',
+      icon: renderIcon(CogOutline),
+    },
+    children: [
+      {
+        name: 'liveConfigList',
+        path: '/liveConfig/list',
+        component: () => import('@/views/liveConfig/list/index.vue'),
+        meta: {
+          title: '配置列表',
+        },
+      },
+      {
+        name: 'liveConfigEdit',
+        path: '/liveConfig/edit',
+        component: () => import('@/views/liveConfig/edit/index.vue'),
+        meta: {
+          title: '编辑',
+          hidden: true,
         },
       },
     ],

@@ -1,5 +1,6 @@
 import axios, { Axios, AxiosRequestConfig } from 'axios';
 
+import { AXIOS_BASEURL } from '@/constant';
 import { useUserStore } from '@/stores/user';
 import { getCurrEnv, getToken } from '@/utils/localStorage';
 
@@ -30,17 +31,16 @@ class MyAxios {
       (cfg) => {
         switch (getCurrEnv()) {
           case 'prod':
-            cfg.baseURL = 'https://live-api.hsslive.cn/';
+            cfg.baseURL = AXIOS_BASEURL;
             break;
           case 'beta':
-            cfg.baseURL = 'https://live-api.hsslive.cn/';
+            cfg.baseURL = AXIOS_BASEURL;
             break;
           case 'development':
-            cfg.baseURL = '/devapi/';
-            // cfg.baseURL = 'https://live-api.hsslive.cn/';
+            cfg.baseURL = '/api/';
             break;
           default:
-            cfg.baseURL = '/devapi/';
+            cfg.baseURL = '/api/';
             break;
         }
         const token = getToken();

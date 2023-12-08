@@ -16,8 +16,8 @@ export const useUpload = async ({
   let timer;
   let isMerge = false;
 
-  const mergeAndUpload = async ({ hash, ext }) => {
-    await fetchUploadMergeChunk({ hash, ext });
+  const mergeAndUpload = async ({ hash, ext, prefix }) => {
+    await fetchUploadMergeChunk({ hash, ext, prefix });
     const { data } = await fetchUpload({
       hash,
       ext,
@@ -50,7 +50,7 @@ export const useUpload = async ({
         fetchUploadChunk(form).then((res) => {
           if (res.data.percentage === 50) {
             if (!isMerge) {
-              mergeAndUpload({ hash, ext }).then((uploadRes) => {
+              mergeAndUpload({ hash, ext, prefix }).then((uploadRes) => {
                 resolve(uploadRes);
               });
               isMerge = true;
