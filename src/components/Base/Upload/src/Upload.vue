@@ -31,7 +31,7 @@ import {
   fetchUploadMergeChunk,
   fetchUploadProgress,
 } from '@/api/qiniuData';
-import { QINIU_BLOG } from '@/constant';
+import { QINIU_LIVE } from '@/constant';
 import { getHash, splitFile } from '@/utils';
 
 const props = withDefaults(
@@ -47,7 +47,7 @@ const props = withDefaults(
     field: '',
     placeholder: '点击或者拖动文件到该区域来上传',
     max: 10,
-    prefix: QINIU_BLOG.prefix['image/'],
+    prefix: QINIU_LIVE.prefix['live/image/'],
   }
 );
 const emits = defineEmits(['update:value']);
@@ -68,7 +68,7 @@ const list = ref<UploadFileInfo[]>(
   })
 );
 const oldList = [...list.value];
-const prefixOptions = Object.keys(QINIU_BLOG.prefix).map((v) => {
+const prefixOptions = Object.keys(QINIU_LIVE.prefix).map((v) => {
   return { label: v, value: v };
 });
 const prefixValue = ref(props.prefix);

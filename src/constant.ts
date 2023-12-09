@@ -25,16 +25,13 @@ export const AXIOS_BASEURL = 'https://live-api.hsslive.cn';
 export const COOKIE_DOMAIN =
   process.env.NODE_ENV === 'development' ? undefined : '.hsslive.cn';
 
-export const QINIU_BLOG = {
+export const QINIU_LIVE = {
   domain: 'resource.hsslive.cn',
   url: 'https://resource.hsslive.cn/',
   bucket: 'hssblog',
   prefix: {
-    'image/': 'image/',
-    'backupsDatabase/': 'backupsDatabase/',
-    'media/': 'media/',
-    'nuxt-blog-client/': 'nuxt-blog-client/',
-    'billd-live/image/': 'billd-live/image/',
+    'live/msg/image/': 'live/msg/image/',
+    'live/image/': 'live/msg/image/',
   },
 };
 
