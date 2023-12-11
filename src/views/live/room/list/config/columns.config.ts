@@ -34,6 +34,43 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     },
   },
   {
+    title: 'bg_img',
+    key: 'bg_img',
+    align: 'center',
+    width: 200,
+    render(row) {
+      if (row.bg_img) {
+        const reg = /.+\.mp4$/g;
+        const url = row.bg_img;
+        if (reg.exec(url)) {
+          return h('div', [
+            h(
+              'video',
+              {
+                width: '120',
+                autoplay: true,
+                muted: true,
+              },
+              [
+                h('source', {
+                  src: row.bg_img,
+                  type: 'video/mp4',
+                }),
+                'Your browser does not support HTML5 video.',
+              ]
+            ),
+          ]);
+        } else {
+          return h('img', {
+            src: row.cover_img,
+            width: 120,
+          });
+        }
+      }
+      return h('span', {}, '-');
+    },
+  },
+  {
     title: 'type',
     key: 'type',
     align: 'center',

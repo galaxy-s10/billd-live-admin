@@ -26,7 +26,7 @@ import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import { ref, watch } from 'vue';
 
-import { QINIU_BLOG } from '@/constant';
+import { QINIU_LIVE } from '@/constant';
 import { useUpload } from '@/hooks/use-upload';
 
 hljs.registerLanguage('typescript', typescript);
@@ -66,7 +66,7 @@ const handleChange = (str) => {
 const handleUploadImage = async (_event, insertImage, files) => {
   try {
     const res: any = await useUpload({
-      prefix: QINIU_BLOG.prefix['image/'],
+      prefix: QINIU_LIVE.prefix['billd-live/image/'],
       file: files[0],
     });
     const img = {

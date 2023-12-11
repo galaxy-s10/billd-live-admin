@@ -20,8 +20,6 @@ export const QINIU_BUCKET = 'hssblog'; // 七牛云bucket
 
 export const AXIOS_BASEURL = 'https://live-api.hsslive.cn';
 
-// .hsslive.cn
-// .hfgmupw.cn
 export const COOKIE_DOMAIN =
   process.env.NODE_ENV === 'development' ? undefined : '.hsslive.cn';
 
@@ -30,8 +28,8 @@ export const QINIU_LIVE = {
   url: 'https://resource.hsslive.cn/',
   bucket: 'hssblog',
   prefix: {
-    'live/msg/image/': 'live/msg/image/',
-    'live/image/': 'live/msg/image/',
+    'billd-live/image/': 'billd-live/image/',
+    'billd-live/msg-image/': 'billd-live/msg-image/',
   },
 };
 

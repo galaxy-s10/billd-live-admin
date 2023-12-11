@@ -47,7 +47,7 @@ const props = withDefaults(
     field: '',
     placeholder: '点击或者拖动文件到该区域来上传',
     max: 10,
-    prefix: QINIU_LIVE.prefix['live/image/'],
+    prefix: QINIU_LIVE.prefix['billd-live/image/'],
   }
 );
 const emits = defineEmits(['update:value']);
