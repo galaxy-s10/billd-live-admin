@@ -29,35 +29,30 @@ export const columnsConfig: TableColumns<ILiveRecord> = [
     title: 'client_id',
     key: 'client_id',
     align: 'center',
-    width: 100,
-    fixed: 'left',
   },
   {
     title: '观看数',
     key: 'view',
     align: 'center',
-    width: 100,
   },
   {
     title: '弹幕数',
     key: 'danmu',
     align: 'center',
-    width: 100,
   },
   {
     title: '直播时长',
     key: 'duration',
     align: 'center',
-    width: 100,
   },
   {
     title: '直播结束时间',
     key: 'end_time',
     align: 'center',
-    width: 180,
     render(row) {
       return row.end_time ? formatTime(+row.end_time) : '-';
     },
+    width: 180,
     fixed: 'right',
   },
   {
@@ -71,6 +66,5 @@ export const columnsConfig: TableColumns<ILiveRecord> = [
     title: '最后更新',
     key: 'updated_at',
     align: 'center',
-    width: 180,
   },
 ];

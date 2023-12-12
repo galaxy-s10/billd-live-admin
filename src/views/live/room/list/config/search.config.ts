@@ -6,6 +6,7 @@ import {
   ILiveRoom,
   ISearch,
   LiveRoomPullIsShouldAuthEnum,
+  LiveRoomUseCDNEnum,
 } from '@/interface';
 
 import { columnsConfig } from './columns.config';
@@ -36,15 +37,15 @@ export const searchFormConfig: IForm<ISearch<ILiveRoom>> = {
       field: 'keyWord',
       type: FormTypeEnum.input,
       label: '关键字',
-      placeholder: '房间名',
+      placeholder: '直播间名称/简介',
     },
     {
       field: 'cdn',
       type: FormTypeEnum.radio,
       label: 'cdn',
       options: [
-        { label: '使用', value: 1 },
-        { label: '不使用', value: 2 },
+        { label: '使用', value: LiveRoomUseCDNEnum.yes },
+        { label: '不使用', value: LiveRoomUseCDNEnum.no },
       ],
     },
     {

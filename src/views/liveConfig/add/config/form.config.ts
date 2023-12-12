@@ -2,7 +2,6 @@ import { IForm } from '@/components/Base/Form';
 import { FormTypeEnum, ILiveConfig } from '@/interface';
 
 export const formConfig = (type: FormTypeEnum): IForm<ILiveConfig> => {
-  console.log(type, 'kkkk');
   return {
     gridSpan: 16,
     formStyle: {

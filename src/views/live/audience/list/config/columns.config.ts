@@ -15,14 +15,14 @@ export const columnsConfig: TableColumns<ILivePlay> = [
     title: '直播间id',
     key: 'live_room_id',
     align: 'center',
-    width: 120,
+    width: 100,
     fixed: 'left',
   },
   {
     title: '观众id',
     key: 'user_id',
     align: 'center',
-    width: 120,
+    width: 100,
     fixed: 'left',
   },
   {
@@ -80,10 +80,10 @@ export const columnsConfig: TableColumns<ILivePlay> = [
     title: '观看结束时间',
     key: 'end_time',
     align: 'center',
-    width: 180,
     render(row) {
       return row.end_time ? formatTime(+row.end_time) : '-';
     },
+    width: 180,
     fixed: 'right',
   },
   {

@@ -175,10 +175,8 @@ import { Shortcuts } from 'naive-ui/es/date-picker/src/interface';
 import { LabelPlacement } from 'naive-ui/es/form/src/interface';
 import { StyleValue, ref } from 'vue';
 
-import { fetchDeleteQiniuDataByQiniuKey } from '@/api/qiniuData';
 import UploadCpt from '@/components/Base/Upload';
 import MarkdownEditor from '@/components/MarkdownEditor';
-import { QINIU_CDN_URL } from '@/constant';
 import { FormTypeEnum } from '@/interface';
 
 import { IFormItemFieldString } from '../types';
@@ -224,6 +222,7 @@ function handleValidate() {
       if (!error) {
         resolve(props.modelValue);
       } else {
+        console.log('字段校验错误', props.modelValue);
         reject(error);
       }
     });
@@ -280,7 +279,7 @@ async function validateAndUpload() {
     loading.value = true;
     const res: any = await handleValidate();
     const uploadQueue: any = [];
-    const delQueue: any = [];
+    // const delQueue: any = [];
     const del: string[] = [];
     hUploadRef.value.forEach((item) => {
       uploadQueue.push(item.startUpload());
@@ -290,12 +289,12 @@ async function validateAndUpload() {
       res[item.field] = item.result;
       del.push(...item.del);
     });
-    del.forEach((url) => {
-      // eslint-disable-next-line
-      const qiniu_key = url.replace(QINIU_CDN_URL, '');
-      delQueue.push(fetchDeleteQiniuDataByQiniuKey(qiniu_key));
-    });
-    await Promise.all(delQueue);
+    // del.forEach((url) => {
+    //   // eslint-disable-next-line
+    //   const qiniu_key = url.replace(QINIU_CDN_URL, '');
+    //   delQueue.push(fetchDeleteQiniuDataByQiniuKey(qiniu_key));
+    // });
+    // await Promise.all(delQueue);
     loading.value = false;
     return res;
   } catch (error) {
@@ -307,14 +306,11 @@ async function validateAndUpload() {
 const handleConfirm = async () => {
   try {
     loading.value = true;
-    console.log(11);
     const res: any = await handleValidate();
-    console.log(333);
     const uploadQueue: any = [];
     // const delQueue: any = [];
     const del: string[] = [];
     hUploadRef.value.forEach((item) => {
-      console.log(item, 'ddddd');
       uploadQueue.push(item.startUpload());
     });
     const result = await Promise.all(uploadQueue);

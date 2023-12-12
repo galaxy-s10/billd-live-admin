@@ -55,7 +55,7 @@ export interface IApiV1Streams {
 export interface ILiveConfig {
   id?: number;
   key?: string;
-  value?: string;
+  value?: string | any[] | null;
   desc?: string;
   type?: FormTypeEnum;
   created_at?: string;
@@ -609,8 +609,8 @@ export interface ILiveRoom {
   type?: LiveRoomTypeEnum;
   /** 拉流是否需要鉴权 */
   pull_is_should_auth?: LiveRoomPullIsShouldAuthEnum;
-  cover_img?: string;
-  bg_img?: string;
+  cover_img?: string | any[] | null;
+  bg_img?: string | any[] | null;
   rtmp_url?: string;
   flv_url?: string;
   hls_url?: string;

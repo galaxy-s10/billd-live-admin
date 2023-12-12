@@ -7,6 +7,7 @@
     ></HSearch>
     <n-data-table
       remote
+      scroll-x="2400"
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
@@ -32,16 +33,15 @@
 </template>
 
 <script lang="ts" setup>
-import { NButton, NSpace } from 'naive-ui';
+import { NButton, NSpace, UploadFileInfo } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref } from 'vue';
 
-import { fetchUpdateAuth } from '@/api/auth';
-import { fetchLiveRoomList } from '@/api/liveRoom';
+import { fetchLiveRoomList, fetchUpdateLiveRoom } from '@/api/liveRoom';
 import HModal from '@/components/Base/Modal';
 import HSearch from '@/components/Base/Search';
 import { usePage } from '@/hooks/use-page';
-import { IApiV1Streams, ILive } from '@/interface';
+import { ILive, ILiveRoom } from '@/interface';
 
 import AddLiveRoomCpt from '../add/index.vue';
 
@@ -55,7 +55,7 @@ const modalConfirmLoading = ref(false);
 const modalVisiable = ref(false);
 const modalTitle = ref('编辑直播间');
 const tableListLoading = ref(false);
-const currRow = ref({});
+const currRow = ref<ILiveRoom>({});
 const addLiveRoomRef = ref<any>(null);
 
 const params = ref<{
@@ -71,7 +71,7 @@ const params = ref<{
 });
 
 const createColumns = () => {
-  const action: TableColumns<IApiV1Streams['streams'][0]> = [
+  const action: TableColumns<ILiveRoom> = [
     {
       title: '操作',
       key: 'actions',
@@ -92,7 +92,19 @@ const createColumns = () => {
                 type: 'primary',
                 onClick: () => {
                   modalVisiable.value = true;
-                  currRow.value = { ...row };
+                  let bgImg: UploadFileInfo[] = [];
+                  if (row.bg_img) {
+                    bgImg = [
+                      {
+                        id: row.bg_img as string,
+                        name: row.bg_img as string,
+                        url: row.bg_img as string,
+                        status: 'finished',
+                        percentage: 100,
+                      },
+                    ];
+                  }
+                  currRow.value = { ...row, bg_img: bgImg };
                 },
               },
               () => '编辑' // 用箭头函数返回性能更好。
@@ -155,9 +167,10 @@ const modalCancel = () => {
 const modalConfirm = async () => {
   try {
     modalConfirmLoading.value = true;
-    const res = await addLiveRoomRef.value.validateForm();
-    await fetchUpdateAuth({
+    const res: ILiveRoom = await addLiveRoomRef.value.validateAndUpload();
+    await fetchUpdateLiveRoom({
       ...res,
+      bg_img: res.bg_img?.[0]?.resultUrl,
       created_at: undefined,
       updated_at: undefined,
       deleted_at: undefined,

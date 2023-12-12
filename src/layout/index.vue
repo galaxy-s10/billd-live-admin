@@ -157,7 +157,7 @@ function expandIcon() {
   }
   .main-wrap {
     margin-top: 90px;
-    padding: 10px 10px 50px 10px;
+    padding: 10px 10px 50px 15px;
   }
 }
 </style>

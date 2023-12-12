@@ -13,7 +13,7 @@
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { fetchCreateFrontend } from '@/api/liveConfig';
+import { fetchCreateFrontend, fetchUpdateFrontend } from '@/api/liveConfig';
 import HForm, { IForm } from '@/components/Base/Form';
 import { FormTypeEnum, ILiveConfig } from '@/interface';
 
@@ -50,8 +50,12 @@ onMounted(() => {
         item.uploadConfig = {
           max: 1,
         };
-        item.placeholder = '请选择文件';
-        item.rule = { required: true, trigger: 'blur', type: 'array' };
+        item.placeholder = '点击或者拖动文件到该区域来上传';
+        item.rule = {
+          // required: true,
+          trigger: 'blur',
+          type: 'array',
+        };
       }
     });
     formData.value.value = [
@@ -66,12 +70,17 @@ onMounted(() => {
   }
 });
 
-const handleConfirm = async (v) => {
+const handleConfirm = async (v: ILiveConfig) => {
   try {
     confirmLoading.value = true;
     if (route.query.id) {
-      console.log(v);
-      window.$message.success('更新成功');
+      const { message }: any = await fetchUpdateFrontend({
+        id: v.id,
+        type: v.type,
+        value: v.value?.[0]?.resultUrl,
+        desc: v.desc,
+      });
+      window.$message.success(message);
     } else {
       const { message }: any = await fetchCreateFrontend(v);
       window.$message.success(message);

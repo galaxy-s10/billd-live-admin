@@ -2,27 +2,41 @@ import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h } from 'vue';
 
 import { liveRoomTypeMap } from '@/constant';
-import { ILiveRoom, LiveRoomPullIsShouldAuthEnum } from '@/interface';
+import {
+  ILiveRoom,
+  LiveRoomPullIsShouldAuthEnum,
+  LiveRoomUseCDNEnum,
+} from '@/interface';
 
 export const columnsConfig: TableColumns<ILiveRoom> = [
   {
     title: 'id',
     key: 'id',
     align: 'center',
-    width: 150,
+    width: 100,
     fixed: 'left',
   },
   {
-    title: 'name',
+    title: '直播间名称',
     key: 'name',
     align: 'center',
-    width: 200,
+    width: 150,
+  },
+  {
+    title: '直播间简介',
+    key: 'desc',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'weight',
+    key: 'weight',
+    align: 'center',
   },
   {
     title: 'cover_img',
     key: 'cover_img',
     align: 'center',
-    width: 200,
     render(row) {
       if (row.cover_img) {
         return h('img', {
@@ -32,16 +46,16 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
       }
       return h('span', {}, '-');
     },
+    width: 200,
   },
   {
     title: 'bg_img',
     key: 'bg_img',
     align: 'center',
-    width: 200,
     render(row) {
       if (row.bg_img) {
         const reg = /.+\.mp4$/g;
-        const url = row.bg_img;
+        const url = row.bg_img as string;
         if (reg.exec(url)) {
           return h('div', [
             h(
@@ -69,73 +83,67 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
       }
       return h('span', {}, '-');
     },
+    width: 200,
   },
   {
     title: 'type',
     key: 'type',
     align: 'center',
-    width: 80,
     render(row) {
       return liveRoomTypeMap[row.type!];
     },
+    width: 80,
   },
   {
     title: '拉流鉴权',
     key: 'pull_is_should_auth',
     align: 'center',
-    width: 200,
     render(row) {
       return row.pull_is_should_auth === LiveRoomPullIsShouldAuthEnum.yes
         ? '开启'
         : '关闭';
     },
+    width: 200,
   },
   {
     title: 'cdn',
     key: 'cdn',
     align: 'center',
-    width: 100,
     render(row) {
-      return row.cdn === 1 ? '使用cdn' : '不使用cdn';
+      return row.cdn === LiveRoomUseCDNEnum.yes ? '使用cdn' : '不使用cdn';
     },
+    width: 100,
   },
-  {
-    title: 'weight',
-    key: 'weight',
-    align: 'center',
-    width: 80,
-  },
-
   {
     title: 'rtmp_url',
     key: 'rtmp_url',
     align: 'center',
-    width: 200,
+    width: 150,
   },
   {
     title: 'flv_url',
     key: 'flv_url',
     align: 'center',
-    width: 200,
+    width: 150,
   },
   {
     title: 'hls_url',
     key: 'hls_url',
     align: 'center',
-    width: 200,
+    width: 150,
   },
   {
     title: '创建时间',
     key: 'created_at',
     align: 'center',
-    width: 200,
+    width: 180,
     fixed: 'right',
   },
   {
     title: '最后更新',
     key: 'updated_at',
     align: 'center',
-    width: 200,
+    width: 180,
     fixed: 'right',
   },
 ];
