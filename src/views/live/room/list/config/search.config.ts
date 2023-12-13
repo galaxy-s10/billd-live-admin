@@ -5,7 +5,9 @@ import {
   FormTypeEnum,
   ILiveRoom,
   ISearch,
+  LiveRoomIsShowEnum,
   LiveRoomPullIsShouldAuthEnum,
+  LiveRoomStatusEnum,
   LiveRoomUseCDNEnum,
 } from '@/interface';
 
@@ -37,7 +39,7 @@ export const searchFormConfig: IForm<ISearch<ILiveRoom>> = {
       field: 'keyWord',
       type: FormTypeEnum.input,
       label: '关键字',
-      placeholder: '直播间名称/简介',
+      placeholder: '直播间名称/简介/备注',
     },
     {
       field: 'cdn',
@@ -57,6 +59,28 @@ export const searchFormConfig: IForm<ISearch<ILiveRoom>> = {
         unCheckedValue: LiveRoomPullIsShouldAuthEnum.no,
         checkedText: '开启',
         unCheckedText: '关闭',
+      },
+    },
+    {
+      field: 'is_show',
+      type: FormTypeEnum.switch,
+      label: '是否显示',
+      switchConfig: {
+        checkedValue: LiveRoomIsShowEnum.yes,
+        unCheckedValue: LiveRoomIsShowEnum.no,
+        checkedText: '显示',
+        unCheckedText: '隐藏',
+      },
+    },
+    {
+      field: 'status',
+      type: FormTypeEnum.switch,
+      label: '状态',
+      switchConfig: {
+        checkedValue: LiveRoomStatusEnum.normal,
+        unCheckedValue: LiveRoomStatusEnum.disable,
+        checkedText: '正常',
+        unCheckedText: '禁用',
       },
     },
     ...useOrder(columnsConfig),

@@ -7,6 +7,7 @@
     ></HSearch>
     <n-data-table
       remote
+      :scroll-x="1000"
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
@@ -72,7 +73,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DataTableColumns, NButton, NSpace } from 'naive-ui';
+import { DataTableColumns, NButton, NSpace, UploadFileInfo } from 'naive-ui';
 import { TableColumn } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
 
@@ -126,6 +127,7 @@ const params = ref<ISearch>({
 });
 const defaultCheckedKeys = ref([]);
 const formRef = ref<any>(null);
+const addUserRef = ref<InstanceType<typeof AddUser>>();
 
 const createColumns = (): DataTableColumns<IUser> => {
   const action: TableColumn<IUser> = {
@@ -147,7 +149,19 @@ const createColumns = (): DataTableColumns<IUser> => {
               data.github_users = data.github_users?.length ? 1 : 2;
               // @ts-ignore
               data.email_users = data.email_users?.length ? 1 : 2;
-              currRow.value = { ...data };
+              let avatar: UploadFileInfo[] = [];
+              if (row.avatar) {
+                avatar = [
+                  {
+                    id: row.avatar as string,
+                    name: row.avatar as string,
+                    url: row.avatar as string,
+                    status: 'finished',
+                    percentage: 100,
+                  },
+                ];
+              }
+              currRow.value = { ...data, avatar };
               modalType.value = modalUserTypeEnum.EDIT;
               modalVisiable.value = !modalVisiable.value;
             },
@@ -230,14 +244,15 @@ function modalUpdateShow(newVal) {
   modalVisiable.value = newVal;
 }
 
-const updateUser = async () => {
+const updateUser = async (val) => {
   try {
     modalConfirmLoading.value = true;
-    await fetchUpdateUser({
-      ...formValue.value,
+    const { message } = await fetchUpdateUser({
+      ...val,
+      avatar: val.avatar?.[0]?.resultUrl,
     });
     modalVisiable.value = false;
-    window.$message.success('修改成功!');
+    window.$message.success(message);
     handlePageChange(params.value.nowPage);
   } catch (error) {
     console.log(error);
@@ -262,22 +277,21 @@ const updateUserRole = async () => {
   }
 };
 
-const modalConfirm = () => {
-  formRef.value?.validate((errors) => {
-    if (!errors) {
-      switch (modalType.value) {
-        case modalUserTypeEnum.EDIT:
-          updateUser();
-          break;
-        case modalUserTypeEnum.EDIT_ROLE:
-          updateUserRole();
-          break;
-        default:
-          window.$message.warning('错误的操作!');
-          break;
-      }
+const modalConfirm = async () => {
+  if (modalType.value === modalUserTypeEnum.EDIT) {
+    const res = await addUserRef.value?.validateAndUpload();
+    if (res) {
+      updateUser(res);
     }
-  });
+  } else if (modalType.value === modalUserTypeEnum.EDIT_ROLE) {
+    formRef.value?.validate((errors) => {
+      if (!errors) {
+        updateUserRole();
+      } else {
+        window.$message.error(errors);
+      }
+    });
+  }
 };
 
 const modalCancel = () => {

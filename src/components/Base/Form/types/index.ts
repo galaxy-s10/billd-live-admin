@@ -25,10 +25,17 @@ export interface IFormItemBase {
     unCheckedText?: string;
     checkedValue?: any;
     unCheckedValue?: any;
+    defaultValue?: any;
   };
   path?: string;
   placeholder?: any;
-  options?: any[];
+  options?: {
+    label?: string;
+    value?: any;
+    name?: string;
+    disabled?: boolean;
+  }[];
+  optionsDefaultChecked?: any;
   isHidden?: boolean;
   style?: StyleValue;
 }

@@ -80,6 +80,7 @@
           <template v-else-if="item.type === FormTypeEnum.radio">
             <n-radio-group
               :value="modelValue[`${item.field}`]"
+              :default-value="item.optionsDefaultChecked"
               @update:value="handleValueChange($event, item.field)"
             >
               <n-radio
@@ -109,6 +110,7 @@
           <template v-else-if="item.type === FormTypeEnum.switch">
             <n-switch
               :value="modelValue[`${item.field}`]"
+              :default-value="item.switchConfig?.defaultValue"
               :checked-value="item.switchConfig?.checkedValue"
               :unchecked-value="item.switchConfig?.unCheckedValue"
               @update:value="handleValueChange($event, item.field)"

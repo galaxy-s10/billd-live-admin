@@ -27,7 +27,7 @@ import { fetchLiveList } from '@/api/live';
 import { fetchDeleteApiV1Clients } from '@/api/srs';
 import HSearch from '@/components/Base/Search';
 import { usePage } from '@/hooks/use-page';
-import { ILive } from '@/interface';
+import { ILive, LiveRoomIsShowEnum, LiveRoomStatusEnum } from '@/interface';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
@@ -37,11 +37,15 @@ const total = ref(0);
 const pagination = usePage();
 const tableListLoading = ref(false);
 const params = ref<{
+  live_room_is_show: LiveRoomIsShowEnum;
+  live_room_status: LiveRoomStatusEnum;
   orderName: string;
   orderBy: string;
   nowPage?: number;
   pageSize?: number;
 }>({
+  live_room_is_show: LiveRoomIsShowEnum.yes,
+  live_room_status: LiveRoomStatusEnum.normal,
   nowPage: 1,
   pageSize: 20,
   orderBy: 'desc',

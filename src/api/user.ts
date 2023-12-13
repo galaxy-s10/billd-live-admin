@@ -33,16 +33,11 @@ export function fetchUserPwd() {
   });
 }
 
-export function fetchUpdateUser({ id, username, status, avatar, desc }: IUser) {
+export function fetchUpdateUser(data: IUser) {
   return request.instance({
-    url: `/user/update/${id!}`,
+    url: `/user/update/${data.id!}`,
     method: 'put',
-    data: {
-      username,
-      status,
-      avatar,
-      desc,
-    },
+    data,
   });
 }
 

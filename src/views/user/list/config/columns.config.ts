@@ -9,11 +9,14 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       title: 'id',
       key: 'id',
       align: 'center',
+      width: 100,
+      fixed: 'left',
     },
     {
       title: '用户名',
       key: 'username',
       align: 'center',
+      width: 120,
     },
     {
       title: '头像',
@@ -25,6 +28,7 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
           width: 100,
         });
       },
+      width: 100,
     },
     {
       title: '简介',
@@ -46,13 +50,13 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       title: '创建时间',
       key: 'created_at',
       align: 'center',
-      width: 200,
+      width: 180,
     },
     {
       title: '最后更新',
       key: 'updated_at',
       align: 'center',
-      width: 200,
+      width: 180,
     },
   ];
 };

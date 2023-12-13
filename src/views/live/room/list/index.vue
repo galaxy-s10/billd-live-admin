@@ -7,7 +7,7 @@
     ></HSearch>
     <n-data-table
       remote
-      scroll-x="2400"
+      scroll-x="2800"
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
@@ -41,7 +41,13 @@ import { fetchLiveRoomList, fetchUpdateLiveRoom } from '@/api/liveRoom';
 import HModal from '@/components/Base/Modal';
 import HSearch from '@/components/Base/Search';
 import { usePage } from '@/hooks/use-page';
-import { ILive, ILiveRoom } from '@/interface';
+import {
+  ILive,
+  ILiveRoom,
+  LiveRoomIsShowEnum,
+  LiveRoomStatusEnum,
+  LiveRoomUseCDNEnum,
+} from '@/interface';
 
 import AddLiveRoomCpt from '../add/index.vue';
 
@@ -59,11 +65,17 @@ const currRow = ref<ILiveRoom>({});
 const addLiveRoomRef = ref<any>(null);
 
 const params = ref<{
+  is_show: LiveRoomIsShowEnum;
+  status: LiveRoomStatusEnum;
+  cdn: LiveRoomUseCDNEnum;
   orderName: string;
   orderBy: string;
   nowPage?: number;
   pageSize?: number;
 }>({
+  is_show: LiveRoomIsShowEnum.yes,
+  status: LiveRoomStatusEnum.normal,
+  cdn: LiveRoomUseCDNEnum.no,
   nowPage: 1,
   pageSize: 20,
   orderBy: 'desc',
@@ -93,6 +105,7 @@ const createColumns = () => {
                 onClick: () => {
                   modalVisiable.value = true;
                   let bgImg: UploadFileInfo[] = [];
+                  let coverImg: UploadFileInfo[] = [];
                   if (row.bg_img) {
                     bgImg = [
                       {
@@ -104,7 +117,25 @@ const createColumns = () => {
                       },
                     ];
                   }
-                  currRow.value = { ...row, bg_img: bgImg };
+                  if (row.cover_img) {
+                    coverImg = [
+                      {
+                        id: row.cover_img as string,
+                        // name: row.cover_img as string,
+                        name: 'base64',
+                        url: row.cover_img as string,
+                        status: 'finished',
+                        percentage: 100,
+                      },
+                    ];
+                  }
+                  currRow.value = {
+                    ...row,
+                    // @ts-ignore
+                    bg_img: bgImg,
+                    // @ts-ignore
+                    cover_img: coverImg,
+                  };
                 },
               },
               () => '编辑' // 用箭头函数返回性能更好。
@@ -168,14 +199,17 @@ const modalConfirm = async () => {
   try {
     modalConfirmLoading.value = true;
     const res: ILiveRoom = await addLiveRoomRef.value.validateAndUpload();
-    await fetchUpdateLiveRoom({
+    const { message } = await fetchUpdateLiveRoom({
       ...res,
+      // @ts-ignore
       bg_img: res.bg_img?.[0]?.resultUrl,
+      // @ts-ignore
+      cover_img: res.cover_img?.[0]?.resultUrl,
       created_at: undefined,
       updated_at: undefined,
       deleted_at: undefined,
     });
-    window.$message.success('更新成功!');
+    window.$message.success(message);
     modalVisiable.value = false;
     handlePageChange(params.value.nowPage);
   } catch (error) {

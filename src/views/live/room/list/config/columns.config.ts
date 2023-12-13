@@ -4,7 +4,9 @@ import { h } from 'vue';
 import { liveRoomTypeMap } from '@/constant';
 import {
   ILiveRoom,
+  LiveRoomIsShowEnum,
   LiveRoomPullIsShouldAuthEnum,
+  LiveRoomStatusEnum,
   LiveRoomUseCDNEnum,
 } from '@/interface';
 
@@ -29,12 +31,30 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 150,
   },
   {
-    title: 'weight',
+    title: '权重',
     key: 'weight',
     align: 'center',
   },
   {
-    title: 'cover_img',
+    title: '状态',
+    key: 'status',
+    align: 'center',
+    render(row) {
+      return row.status === LiveRoomStatusEnum.normal ? '正常' : '禁用';
+    },
+    width: 100,
+  },
+  {
+    title: '是否显示',
+    key: 'status',
+    align: 'center',
+    render(row) {
+      return row.is_show === LiveRoomIsShowEnum.yes ? '显示' : '隐藏';
+    },
+    width: 100,
+  },
+  {
+    title: '开播预览图',
     key: 'cover_img',
     align: 'center',
     render(row) {
@@ -49,7 +69,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 200,
   },
   {
-    title: 'bg_img',
+    title: '直播间背景',
     key: 'bg_img',
     align: 'center',
     render(row) {
@@ -76,7 +96,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
           ]);
         } else {
           return h('img', {
-            src: row.cover_img,
+            src: row.bg_img,
             width: 120,
           });
         }
@@ -129,6 +149,12 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
   {
     title: 'hls_url',
     key: 'hls_url',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: '备注',
+    key: 'remark',
     align: 'center',
     width: 150,
   },

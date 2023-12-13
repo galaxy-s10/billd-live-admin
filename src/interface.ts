@@ -461,10 +461,13 @@ export interface IAreaLiveRoom {
 export interface IArea {
   id?: number;
   name?: string;
+  /** 备注 */
   remark?: string;
   /** 权重 */
   weight?: number;
   area_live_rooms?: IAreaLiveRoom[];
+  live_room_is_show?: LiveRoomIsShowEnum;
+  live_room_status?: LiveRoomStatusEnum;
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
@@ -496,6 +499,8 @@ export interface ILive extends ISrsPublishStream {
   socket_id?: string;
   user_id?: number;
   live_room_id?: number;
+  live_room_is_show?: LiveRoomIsShowEnum;
+  live_room_status?: LiveRoomStatusEnum;
   /** 1开启;2关闭 */
   track_video?: number;
   /** 1开启;2关闭 */
@@ -580,13 +585,54 @@ export enum LiveRoomPullIsShouldAuthEnum {
 /** 是否使用cdn */
 export enum LiveRoomUseCDNEnum {
   /** 使用cdn */
-  yes = 1,
+  yes,
   /** 不使用cdn */
-  no = 2,
+  no,
+}
+
+/** 直播间状态 */
+export enum LiveRoomStatusEnum {
+  /** 正常 */
+  normal,
+  /** 禁用 */
+  disable,
+}
+
+/** 直播间是否显示 */
+export enum LiveRoomIsShowEnum {
+  /** 显示 */
+  yes,
+  /** 不显示 */
+  no,
 }
 
 export interface ILiveRoom {
   id?: number;
+  /** 直播间名称 */
+  name?: string;
+  /** 直播间简介 */
+  desc?: string;
+  /** 直播间备注 */
+  remark?: string;
+  /** 是否使用cdn */
+  cdn?: LiveRoomUseCDNEnum;
+  /** 拉流是否需要鉴权 */
+  pull_is_should_auth?: LiveRoomPullIsShouldAuthEnum;
+  /** 权重 */
+  weight?: number;
+  /** 推流秘钥 */
+  key?: string;
+  /** 直播间类型 */
+  type?: LiveRoomTypeEnum;
+  /** 开播预览图 */
+  cover_img?: string;
+  /** 直播间背景图 */
+  bg_img?: string;
+  /** 直播间状态 */
+  status?: LiveRoomStatusEnum;
+  /** 直播间是否显示 */
+  is_show?: LiveRoomIsShowEnum;
+
   /** 用户信息 */
   user?: IUser;
   /** 用户信息 */
@@ -598,27 +644,15 @@ export interface ILiveRoom {
   /** 直播信息 */
   live?: ILive;
   user_live_room?: IUserLiveRoom & { user: IUser };
-  name?: string;
-  desc?: string;
-  cdn?: LiveRoomUseCDNEnum;
-  /** 权重 */
-  weight?: number;
-  /** 推流秘钥 */
-  key?: string;
-  /** 直播间类型 */
-  type?: LiveRoomTypeEnum;
-  /** 拉流是否需要鉴权 */
-  pull_is_should_auth?: LiveRoomPullIsShouldAuthEnum;
-  cover_img?: string | any[] | null;
-  bg_img?: string | any[] | null;
+
   rtmp_url?: string;
   flv_url?: string;
   hls_url?: string;
+
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
 }
-
 export interface IQqUser {
   id?: number;
   client_id?: number;

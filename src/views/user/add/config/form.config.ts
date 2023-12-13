@@ -13,12 +13,15 @@ export const formConfig: IForm<IUser> = {
       type: FormTypeEnum.input,
       label: '用户名',
       placeholder: '请输入用户名',
+      rule: { required: true, trigger: 'blur' },
     },
     {
       field: 'avatar',
-      type: FormTypeEnum.input,
+      type: FormTypeEnum.upload,
+      uploadConfig: {
+        max: 1,
+      },
       label: '头像',
-      placeholder: '请输入头像',
     },
     {
       field: 'desc',
@@ -35,6 +38,7 @@ export const formConfig: IForm<IUser> = {
         { label: '正常', value: 1 },
         { label: '禁用', value: 2 },
       ],
+      rule: { required: true, trigger: 'blur', type: 'number' },
     },
     {
       field: 'email_users',
