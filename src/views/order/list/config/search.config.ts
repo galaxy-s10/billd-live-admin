@@ -26,8 +26,8 @@ export const searchFormConfig: IForm<ISearch<IOrder>> = {
     {
       field: 'billd_live_user_id',
       type: FormTypeEnum.input,
-      label: '主播id',
-      placeholder: '请输入主播id',
+      label: '用户id',
+      placeholder: '请输入用户id',
     },
     {
       field: 'billd_live_goods_id',

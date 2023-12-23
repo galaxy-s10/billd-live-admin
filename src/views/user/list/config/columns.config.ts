@@ -1,7 +1,7 @@
 import { DataTableColumns } from 'naive-ui';
 import { h } from 'vue';
 
-import { IUser } from '@/interface';
+import { IUser, UserStatusEnum } from '@/interface';
 
 export const columnsConfig = (): DataTableColumns<IUser> => {
   return [
@@ -43,7 +43,7 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       key: 'status',
       align: 'center',
       render(row) {
-        return row.status === 1 ? '正常' : '禁用';
+        return row.status === UserStatusEnum.normal ? '正常' : '禁用';
       },
     },
     {

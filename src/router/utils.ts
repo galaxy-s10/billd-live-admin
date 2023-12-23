@@ -6,6 +6,9 @@ export function renderIcon(icon: Component) {
 }
 
 export const formatTime = (timestamp: number) => {
+  function addZero(num: number) {
+    return num < 10 ? `0${num}` : num;
+  }
   const date = new Date(timestamp);
 
   // 获取年份
@@ -27,5 +30,7 @@ export const formatTime = (timestamp: number) => {
   const seconds = date.getSeconds();
 
   // 打印结果
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  return `${year}-${addZero(month)}-${addZero(day)} ${addZero(hours)}:${addZero(
+    minutes
+  )}:${addZero(seconds)}`;
 };
