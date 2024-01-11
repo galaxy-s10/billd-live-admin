@@ -21,8 +21,8 @@ dependencies:
     specifier: ^0.0.8
     version: 0.0.8
   billd-utils:
-    specifier: ^0.0.19
-    version: 0.0.19(typescript@5.1.6)
+    specifier: ^0.0.22
+    version: 0.0.22(typescript@5.1.6)
   highlight.js:
     specifier: ^11.8.0
     version: 11.8.0
@@ -2722,8 +2722,8 @@ packages:
     requiresBuild: true
     dev: false
 
-  /billd-utils@0.0.19(typescript@5.1.6):
-    resolution: {integrity: sha512-sap3/whp9sAnFqgpCormuPA911hexCzCzuMNMrQCVarEgTXkTQ7vOW4saZxLw5/HauajsXHEBGd4ZNmvQ0hZGw==}
+  /billd-utils@0.0.22(typescript@5.1.6):
+    resolution: {integrity: sha512-koOfFzbzSkw6gMYyOKNMzAJHYMhUWHr3swPW48rT7PwZMvBkAtH93bHEVuDCwariWrSwxCGIqozOzp5YaeePqQ==}
     requiresBuild: true
     dependencies:
       '@babel/core': 7.22.8
