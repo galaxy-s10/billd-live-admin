@@ -5,11 +5,12 @@ export const useOrder = (columnsConfig) => {
   const orderName: IFormItem<ISearchBase> = {
     field: 'orderName',
     type: FormTypeEnum.select,
-    label: '排序字段',
-    placeholder: '请选择排序字段',
+    label: 'common.sortName',
+    placeholder: 'common.placeholderSortName',
     options: columnsConfig.map((v: any) => {
       return {
-        label: v.title,
+        label: v.key,
+        // label: v.title(),
         value: v.key,
       };
     }),
@@ -18,15 +19,15 @@ export const useOrder = (columnsConfig) => {
   const orderBy: IFormItem<ISearchBase> = {
     field: 'orderBy',
     type: FormTypeEnum.select,
-    label: '排序规则',
-    placeholder: '请选择排序规则',
+    label: 'common.sortBy',
+    placeholder: 'common.placeholderSortBy',
     options: [
       {
-        label: '升序',
+        label: 'common.asc',
         value: 'asc',
       },
       {
-        label: '降序',
+        label: 'common.desc',
         value: 'desc',
       },
     ],

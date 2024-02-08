@@ -21,7 +21,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
         path: '/dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         meta: {
-          title: '控制台',
+          title: 'router.dashboard',
           icon: renderIcon(SpeedometerOutline),
         },
       },
@@ -31,7 +31,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
     name: 'login',
     path: '/login',
     meta: {
-      title: '登录',
+      title: 'router.login',
       hidden: true,
     },
     component: () => import('@/views/login/index.vue'),
@@ -46,7 +46,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
         path: '/setting/account',
         component: () => import('@/views/setting/account/index.vue'),
         meta: {
-          title: '账号设置',
+          title: 'router.settingAccount',
           icon: renderIcon(KeyOutline),
         },
       },
@@ -57,7 +57,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
     path: '/error/401',
     component: () => import('@/views/errorPage/401/index.vue'),
     meta: {
-      title: '401页面',
+      title: 'router.401',
       hidden: true,
     },
   },
@@ -66,7 +66,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
     path: '/error/404',
     component: () => import('@/views/errorPage/404/index.vue'),
     meta: {
-      title: '404页面',
+      title: 'router.404',
       hidden: true,
     },
   },

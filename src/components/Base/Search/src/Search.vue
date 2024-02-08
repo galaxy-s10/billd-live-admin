@@ -10,13 +10,13 @@
         type="info"
         @click="handleReset"
       >
-        重置
+        {{ t('common.reset') }}
       </n-button>
       <n-button
         type="success"
         @click="handleSearch"
       >
-        搜索
+        {{ t('common.search') }}
       </n-button>
     </n-space>
   </div>
@@ -24,6 +24,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import HForm from '@/components/Base/Form';
 
@@ -42,6 +43,7 @@ const emits = defineEmits(['clickReset', 'clickSearch']);
 const formData = ref({ ...props.initValue });
 const hFormRef = ref<InstanceType<typeof HForm>>();
 
+const { t } = useI18n();
 const handleReset = () => {
   hFormRef.value?.handleReset();
   emits('clickReset');

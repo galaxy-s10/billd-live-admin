@@ -4,17 +4,19 @@
       v-for="item in currentRouteArr"
       :key="item.path"
     >
-      {{ item.meta.title }}
+      {{ t(item.meta.title) }}
     </n-breadcrumb-item>
   </n-breadcrumb>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref, toRefs, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
 import { useAppStore } from '@/stores/app';
 
+const { t } = useI18n();
 const appStore = useAppStore();
 const route = useRoute();
 const path = ref(route.path);

@@ -20,7 +20,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     path: '/live',
     component: Layout,
     meta: {
-      title: '直播管理',
+      title: 'router.live',
       icon: renderIcon(BulbOutline),
       sort: ROUTE_SORT.live,
       roles: [
@@ -34,7 +34,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/live/record',
         component: () => import('@/views/live/record/list/index.vue'),
         meta: {
-          title: '直播记录',
+          title: 'router.liveRecord',
         },
       },
       {
@@ -42,7 +42,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/live/room',
         component: () => import('@/views/live/room/list/index.vue'),
         meta: {
-          title: '直播间列表',
+          title: 'router.liveRoom',
         },
       },
       {
@@ -50,7 +50,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/live/anchor',
         component: () => import('@/views/live/anchor/list/index.vue'),
         meta: {
-          title: '在线主播',
+          title: 'router.liveAnchor',
         },
       },
       {
@@ -58,7 +58,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/live/audience',
         component: () => import('@/views/live/audience/list/index.vue'),
         meta: {
-          title: '在线观众',
+          title: 'router.liveAudience',
         },
       },
       {
@@ -66,7 +66,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/live/stream',
         component: () => import('@/views/live/stream/list/index.vue'),
         meta: {
-          title: '在线stream',
+          title: 'router.liveStream',
           roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
         },
       },
@@ -75,7 +75,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/live/client',
         component: () => import('@/views/live/client/list/index.vue'),
         meta: {
-          title: '在线client',
+          title: 'router.liveClient',
           roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
         },
       },
@@ -86,7 +86,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     path: '/user',
     component: Layout,
     meta: {
-      title: '用户管理',
+      title: 'router.user',
       icon: renderIcon(PersonOutline),
       sort: ROUTE_SORT.user,
       roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
@@ -97,7 +97,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/user/list',
         component: () => import('@/views/user/list/index.vue'),
         meta: {
-          title: '用户列表',
+          title: 'router.userList',
         },
       },
       {
@@ -105,7 +105,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/user/add',
         component: () => import('@/views/user/add/index.vue'),
         meta: {
-          title: '新增用户',
+          title: 'router.userAdd',
           roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
         },
       },
@@ -115,7 +115,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     path: '/role',
     component: Layout,
     meta: {
-      title: '角色管理',
+      title: 'router.role',
       icon: renderIcon(LockClosedOutline),
       sort: ROUTE_SORT.role,
       roles: [ROUTE_ROLES.SUPER_ADMIN],
@@ -126,7 +126,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/role/list',
         component: () => import('@/views/role/list/index.vue'),
         meta: {
-          title: '角色列表',
+          title: 'router.roleList',
         },
       },
       {
@@ -134,7 +134,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/role/tree',
         component: () => import('@/views/role/tree/index.vue'),
         meta: {
-          title: '角色树',
+          title: 'router.roleTree',
         },
       },
       {
@@ -142,7 +142,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/role/add',
         component: () => import('@/views/role/add/index.vue'),
         meta: {
-          title: '添加角色',
+          title: 'router.addRole',
         },
       },
     ],
@@ -152,7 +152,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     path: '/auth',
     component: Layout,
     meta: {
-      title: '权限管理',
+      title: 'router.auth',
       icon: renderIcon(ShieldOutline),
       sort: ROUTE_SORT.auth,
       roles: [ROUTE_ROLES.SUPER_ADMIN],
@@ -163,7 +163,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/auth/list',
         component: () => import('@/views/auth/list/index.vue'),
         meta: {
-          title: '权限列表',
+          title: 'router.authList',
         },
       },
       {
@@ -171,7 +171,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/auth/tree',
         component: () => import('@/views/auth/tree/index.vue'),
         meta: {
-          title: '权限树',
+          title: 'router.authTree',
         },
       },
       {
@@ -179,7 +179,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/auth/add',
         component: () => import('@/views/auth/add/index.vue'),
         meta: {
-          title: '添加权限',
+          title: 'router.authTree',
         },
       },
     ],
@@ -189,7 +189,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     path: '/liveConfig',
     component: Layout,
     meta: {
-      title: '直播配置',
+      title: 'router.liveConfig',
       icon: renderIcon(CogOutline),
     },
     children: [
@@ -198,7 +198,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/liveConfig/list',
         component: () => import('@/views/liveConfig/list/index.vue'),
         meta: {
-          title: '配置列表',
+          title: 'router.liveConfigList',
         },
       },
       {
@@ -206,7 +206,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/liveConfig/edit',
         component: () => import('@/views/liveConfig/edit/index.vue'),
         meta: {
-          title: '编辑',
+          title: 'router.liveConfigEdit',
           hidden: true,
         },
       },
@@ -217,7 +217,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     path: '/order',
     component: Layout,
     meta: {
-      title: '订单管理',
+      title: 'router.order',
       sort: ROUTE_SORT.order,
       roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
     },
@@ -228,7 +228,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/order/list/index.vue'),
         meta: {
           icon: renderIcon(WalletOutline),
-          title: '订单列表',
+          title: 'router.orderList',
         },
       },
     ],

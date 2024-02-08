@@ -4,14 +4,6 @@
       <BreadcrumbCpt></BreadcrumbCpt>
     </div>
     <div class="action">
-      <div
-        class="lang"
-        @click="handleClick"
-      >
-        <n-icon size="20">
-          <language></language>
-        </n-icon>
-      </div>
       <n-dropdown
         trigger="hover"
         :options="options"
@@ -20,28 +12,32 @@
         <div class="user">
           <img
             class="avatar"
-            :src="userInfo?.avatar"
+            :src="userStore.userInfo?.avatar"
             alt=""
           />
-          <span class="name">{{ userInfo?.username }}</span>
+          <span class="name">{{ userStore.userInfo?.username }}</span>
         </div>
       </n-dropdown>
-      <div
-        class="setting"
-        @click="handleClick"
+      <n-dropdown
+        trigger="hover"
+        :options="langOptions"
+        @select="handleSelectLang"
       >
-        <n-icon size="20">
-          <SettingsOutline></SettingsOutline>
-        </n-icon>
-      </div>
+        <div class="lang">
+          <n-icon size="20">
+            <language></language>
+          </n-icon>
+        </div>
+      </n-dropdown>
     </div>
   </header>
 </template>
 
 <script lang="ts" setup>
-import { Language, SettingsOutline } from '@vicons/ionicons5';
+import { Language } from '@vicons/ionicons5';
 import { windowReload } from 'billd-utils';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
 import BreadcrumbCpt from '@/components/Breadcrumb/index.vue';
@@ -52,6 +48,7 @@ import { useUserStore } from '@/stores/user';
 const userStore = useUserStore();
 const appStore = useAppStore();
 const router = useRouter();
+const { locale } = useI18n();
 
 const options = ref([
   {
@@ -67,6 +64,26 @@ const options = ref([
     key: '3',
   },
 ]);
+
+const localeMap = {
+  zh: '中文',
+  en: 'English',
+};
+
+const langOptions = ref([
+  {
+    label: localeMap.zh,
+    key: 'zh',
+  },
+  {
+    label: localeMap.en,
+    key: 'en',
+  },
+]);
+
+function handleSelectLang(key) {
+  locale.value = key;
+}
 
 const handleSelect = (v) => {
   if (v === '1') {
@@ -89,11 +106,6 @@ const handleSelect = (v) => {
     );
   }
 };
-
-function handleClick() {
-  window.$message.info('敬请期待！');
-}
-const userInfo = userStore.userInfo;
 </script>
 
 <style lang="scss" scoped>
@@ -109,7 +121,6 @@ const userInfo = userStore.userInfo;
   .action {
     display: flex;
     align-items: center;
-    min-width: 150px;
     > div:hover {
       cursor: pointer;
       background-color: #f6f6f6;
@@ -129,8 +140,7 @@ const userInfo = userStore.userInfo;
         font-size: 14px;
       }
     }
-    .lang,
-    .setting {
+    .lang {
       display: inline-flex;
       height: 48px;
       align-items: center;

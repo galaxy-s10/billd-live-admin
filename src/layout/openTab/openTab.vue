@@ -14,7 +14,7 @@
           class="dot"
           :class="{ curr: item.key === path ? true : false }"
         ></i>
-        <span> {{ item.value }} </span>
+        <span> {{ t(item.value) }} </span>
         <n-icon
           size="18"
           @click.stop="close(item)"
@@ -43,11 +43,13 @@
 <script lang="ts" setup>
 import { ChevronDownOutline, CloseOutline } from '@vicons/ionicons5';
 import { nextTick, ref, toRefs, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
 import router from '@/router';
 import { useAppStore } from '@/stores/app';
 
+const { t } = useI18n();
 const appStore = useAppStore();
 const route = useRoute();
 const { tabList, path } = toRefs(appStore);

@@ -1,7 +1,7 @@
 <template>
   <div class="live-record-wrap">
     <HSearch
-      :search-form-config="searchFormConfig"
+      :search-form-config="searchForm"
       :init-value="params"
       @click-search="handleSearch"
     ></HSearch>
@@ -20,6 +20,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { fetchLiveRecordList } from '@/api/liveRecord';
 import HSearch from '@/components/Base/Search';
@@ -29,6 +30,7 @@ import { ILive } from '@/interface';
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
+const { t, locale } = useI18n();
 const tableListData = ref<ILive[]>([]);
 const total = ref(0);
 const pagination = usePage();
@@ -45,11 +47,8 @@ const params = ref<{
   orderName: 'created_at',
 });
 
-const createColumns = () => {
-  return [...columnsConfig];
-};
-
-const columns = createColumns();
+const columns = columnsConfig(t);
+const searchForm = ref(searchFormConfig(t));
 
 onMounted(() => {
   handlePageChange(1);
@@ -59,6 +58,13 @@ watch(
   () => pagination.pageSize,
   () => {
     handlePageChange(1);
+  }
+);
+watch(
+  () => locale.value,
+  () => {
+    // @ts-ignore
+    searchForm.value = searchFormConfig(t);
   }
 );
 

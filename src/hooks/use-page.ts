@@ -1,7 +1,9 @@
 import { PaginationProps } from 'naive-ui';
 import { reactive } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 export const usePage = () => {
+  const { t } = useI18n();
   const paginationReactive = reactive<PaginationProps>({
     page: 1, // 当前页
     itemCount: 0, // 总条数
@@ -17,8 +19,9 @@ export const usePage = () => {
     },
     prefix: ({ itemCount }) => {
       // eslint-disable-next-line
-      return `一共${itemCount}条数据`;
+      return t('common.pageTotal', { total: itemCount });
+      // return `一共${itemCount}条数据`;
     },
   });
-  return paginationReactive;
+  return paginationReactive as any;
 };

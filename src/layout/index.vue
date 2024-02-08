@@ -52,6 +52,7 @@ import { CaretDownOutline } from '@vicons/ionicons5';
 import { NIcon } from 'naive-ui';
 import { MenuMixedOption } from 'naive-ui/es/menu/src/interface';
 import { h, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router';
 
 import { defaultRoutes } from '@/router/index';
@@ -65,6 +66,7 @@ import openTabCpt from './openTab/openTab.vue';
 const router = useRouter();
 const route = useRoute();
 const appStore = useAppStore();
+const { t } = useI18n();
 // const copyOriginDefaultRoutes = deepCloneExclude(
 //   defaultRoutes,
 //   'component'
@@ -135,7 +137,7 @@ appStore.setRoutes(menuOptions);
 appStore.setPath(route.path);
 appStore.setTabList({ [route.path]: route.meta.title });
 function renderMenuLabel(option) {
-  return option.label;
+  return t(option.label);
 }
 function renderMenuIcon(option) {
   const vn = option.meta && option.meta.icon;

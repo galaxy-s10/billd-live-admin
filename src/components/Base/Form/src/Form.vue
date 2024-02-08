@@ -18,7 +18,7 @@
         <n-form-item-gi
           v-if="!item.isHidden"
           :span="item.gridSpan || gridSpan"
-          :label="item.label"
+          :label="t(item.label)"
           :label-width="item.labelWidth"
           :path="item.field"
           :rule="item.rule"
@@ -28,7 +28,7 @@
             <n-input
               clearable
               :value="modelValue[`${item.field}`]"
-              :placeholder="item.placeholder"
+              :placeholder="t(item.placeholder)"
               :disabled="item.disabled"
               type="text"
               @update:value="handleValueChange($event, item.field)"
@@ -38,7 +38,7 @@
             <n-input-number
               clearable
               :value="modelValue[`${item.field}`]"
-              :placeholder="item.placeholder"
+              :placeholder="t(item.placeholder)"
               :disabled="item.disabled"
               @update:value="handleValueChange($event, item.field)"
             />
@@ -47,7 +47,7 @@
             <n-input
               clearable
               :value="modelValue[`${item.field}`]"
-              :placeholder="item.placeholder"
+              :placeholder="t(item.placeholder)"
               :disabled="item.disabled"
               type="password"
               @update:value="handleValueChange($event, item.field)"
@@ -58,7 +58,7 @@
               multiple
               cascade
               checkable
-              :placeholder="item.placeholder"
+              :placeholder="t(item.placeholder)"
               :key-field="item.treeSelectConfig?.key"
               :label-field="item.treeSelectConfig?.label"
               :disabled-field="item.treeSelectConfig?.disabled"
@@ -72,7 +72,8 @@
               :value="modelValue[`${item.field}`]"
               :options="item.options"
               :disabled="item.disabled"
-              :placeholder="item.placeholder"
+              :placeholder="t(item.placeholder)"
+              :render-label="renderSelectLabel"
               clearable
               @update:value="handleValueChange($event, item.field)"
             />
@@ -127,7 +128,7 @@
             <UploadCpt
               ref="hUploadRef"
               :field="item.field"
-              :placeholder="item.placeholder"
+              :placeholder="t(item.placeholder)"
               :max="item.uploadConfig?.max"
               :prefix="item.uploadConfig?.prefix"
               :model-value="modelValue[`${item.field}`]"
@@ -173,9 +174,11 @@
 </template>
 
 <script lang="ts" setup>
+import { SelectOption } from 'naive-ui';
 import { Shortcuts } from 'naive-ui/es/date-picker/src/interface';
 import { LabelPlacement } from 'naive-ui/es/form/src/interface';
 import { StyleValue, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import UploadCpt from '@/components/Base/Upload';
 import MarkdownEditor from '@/components/MarkdownEditor';
@@ -183,6 +186,7 @@ import { FormTypeEnum } from '@/interface';
 
 import { IFormItemFieldString } from '../types';
 
+const { t } = useI18n();
 const props = withDefaults(
   defineProps<{
     modelValue: any;
@@ -257,6 +261,10 @@ const rangeShortcuts: Shortcuts = {
     return [cur - 24 * 60 * 60 * 1000, cur];
   },
 };
+
+function renderSelectLabel(option: SelectOption) {
+  return t((option.label as string) || '');
+}
 
 const handleValueChange = (value: any, field: string) => {
   emits('update:modelValue', { ...props.modelValue, [field]: value });
