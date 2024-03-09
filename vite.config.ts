@@ -13,6 +13,9 @@ const path = require('path');
 export default defineConfig(({ command, mode }) => {
   const isProduction = mode === 'production';
   return {
+    base: isProduction
+      ? 'https://resource.hsslive.cn/billd-live/admin/dist/'
+      : '/',
     css: {
       preprocessorOptions: {
         scss: {

@@ -2,3 +2,4 @@ node_modules
 dist
 components.d.ts
 .DS_Store
+deploy/index.js
