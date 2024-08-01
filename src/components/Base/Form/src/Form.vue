@@ -28,7 +28,7 @@
             <n-input
               clearable
               :value="modelValue[`${item.field}`]"
-              :placeholder="t(item.placeholder)"
+              :placeholder="t(item.placeholder || '')"
               :disabled="item.disabled"
               type="text"
               @update:value="handleValueChange($event, item.field)"
@@ -38,7 +38,7 @@
             <n-input-number
               clearable
               :value="modelValue[`${item.field}`]"
-              :placeholder="t(item.placeholder)"
+              :placeholder="t(item.placeholder || '')"
               :disabled="item.disabled"
               @update:value="handleValueChange($event, item.field)"
             />
@@ -47,7 +47,7 @@
             <n-input
               clearable
               :value="modelValue[`${item.field}`]"
-              :placeholder="t(item.placeholder)"
+              :placeholder="t(item.placeholder || '')"
               :disabled="item.disabled"
               type="password"
               @update:value="handleValueChange($event, item.field)"
@@ -58,7 +58,7 @@
               multiple
               cascade
               checkable
-              :placeholder="t(item.placeholder)"
+              :placeholder="t(item.placeholder || '')"
               :key-field="item.treeSelectConfig?.key"
               :label-field="item.treeSelectConfig?.label"
               :disabled-field="item.treeSelectConfig?.disabled"
@@ -72,7 +72,7 @@
               :value="modelValue[`${item.field}`]"
               :options="item.options"
               :disabled="item.disabled"
-              :placeholder="t(item.placeholder)"
+              :placeholder="t(item.placeholder || '')"
               :render-label="renderSelectLabel"
               clearable
               @update:value="handleValueChange($event, item.field)"
@@ -128,7 +128,7 @@
             <UploadCpt
               ref="hUploadRef"
               :field="item.field"
-              :placeholder="t(item.placeholder)"
+              :placeholder="t(item.placeholder || '')"
               :max="item.uploadConfig?.max"
               :prefix="item.uploadConfig?.prefix"
               :model-value="modelValue[`${item.field}`]"

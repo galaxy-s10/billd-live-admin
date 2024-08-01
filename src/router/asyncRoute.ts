@@ -17,10 +17,10 @@ import { renderIcon } from './utils';
 // 默认路由
 export const asyncRoutes: RouteRecordRaw[] = [
   {
-    path: '/live',
+    path: '/liveManage',
     component: Layout,
     meta: {
-      title: 'router.live',
+      title: 'router.liveManage',
       icon: renderIcon(BulbOutline),
       sort: ROUTE_SORT.live,
       roles: [
@@ -31,23 +31,15 @@ export const asyncRoutes: RouteRecordRaw[] = [
     children: [
       {
         name: 'liveRecord',
-        path: '/live/record',
+        path: '/liveManage/record',
         component: () => import('@/views/live/record/list/index.vue'),
         meta: {
           title: 'router.liveRecord',
         },
       },
       {
-        name: 'liveRoom',
-        path: '/live/room',
-        component: () => import('@/views/live/room/list/index.vue'),
-        meta: {
-          title: 'router.liveRoom',
-        },
-      },
-      {
         name: 'liveAnchor',
-        path: '/live/anchor',
+        path: '/liveManage/anchor',
         component: () => import('@/views/live/anchor/list/index.vue'),
         meta: {
           title: 'router.liveAnchor',
@@ -55,7 +47,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
       },
       {
         name: 'liveAudience',
-        path: '/live/audience',
+        path: '/liveManage/audience',
         component: () => import('@/views/live/audience/list/index.vue'),
         meta: {
           title: 'router.liveAudience',
@@ -63,7 +55,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
       },
       {
         name: 'liveStream',
-        path: '/live/stream',
+        path: '/liveManage/stream',
         component: () => import('@/views/live/stream/list/index.vue'),
         meta: {
           title: 'router.liveStream',
@@ -72,11 +64,51 @@ export const asyncRoutes: RouteRecordRaw[] = [
       },
       {
         name: 'liveClient',
-        path: '/live/client',
+        path: '/liveManage/client',
         component: () => import('@/views/live/client/list/index.vue'),
         meta: {
           title: 'router.liveClient',
           roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
+        },
+      },
+      {
+        name: 'liveForwardList',
+        path: '/liveManage/forwardList',
+        component: () => import('@/views/live/forwardList/index.vue'),
+        meta: {
+          title: 'router.liveForwardList',
+          roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
+        },
+      },
+    ],
+  },
+  {
+    path: '/liveRoomManage',
+    component: Layout,
+    meta: {
+      title: 'router.liveRoomManage',
+      icon: renderIcon(BulbOutline),
+      sort: ROUTE_SORT.live,
+      roles: [
+        DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value,
+        DEFAULT_ROLE_INFO.LIVE_ADMIN.role_value,
+      ],
+    },
+    children: [
+      {
+        name: 'liveRoomList',
+        path: '/liveRoomManage/liveRoomList',
+        component: () => import('@/views/liveRoom/list/index.vue'),
+        meta: {
+          title: 'router.liveRoomList',
+        },
+      },
+      {
+        name: 'liveRoomUpdate',
+        path: '/liveRoomManage/liveRoomUpdate',
+        component: () => import('@/views/liveRoom/add/index.vue'),
+        meta: {
+          title: 'router.liveRoomUpdate',
         },
       },
     ],
@@ -210,6 +242,15 @@ export const asyncRoutes: RouteRecordRaw[] = [
           hidden: true,
         },
       },
+      {
+        name: 'forwardConfig',
+        path: '/liveConfig/forwardList',
+        component: () => import('@/views/liveConfig/forwardConfig/index.vue'),
+        meta: {
+          title: 'router.forwardConfig',
+          roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
+        },
+      },
     ],
   },
   {
@@ -217,6 +258,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     path: '/order',
     component: Layout,
     meta: {
+      icon: renderIcon(WalletOutline),
       title: 'router.order',
       sort: ROUTE_SORT.order,
       roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
@@ -227,7 +269,6 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/order/list',
         component: () => import('@/views/order/list/index.vue'),
         meta: {
-          icon: renderIcon(WalletOutline),
           title: 'router.orderList',
         },
       },

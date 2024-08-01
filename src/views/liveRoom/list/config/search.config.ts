@@ -1,5 +1,5 @@
 import { IForm } from '@/components/Base/Form';
-import { liveRoomTypeMap } from '@/constant';
+import { liveRoomTypeEnumMap } from '@/constant';
 import { useOrder } from '@/hooks/use-order';
 import {
   FormTypeEnum,
@@ -31,8 +31,8 @@ export const searchFormConfig: IForm<ISearch<ILiveRoom>> = {
       type: FormTypeEnum.select,
       label: '直播间类型',
       placeholder: '请选择直播间类型',
-      options: Object.keys(liveRoomTypeMap).map((v) => {
-        return { label: liveRoomTypeMap[v], value: v };
+      options: Object.keys(liveRoomTypeEnumMap).map((v) => {
+        return { label: liveRoomTypeEnumMap[v], value: v };
       }),
     },
     {

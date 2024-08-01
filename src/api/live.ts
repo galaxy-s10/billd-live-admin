@@ -6,3 +6,11 @@ export function fetchLiveList(params) {
     params,
   });
 }
+
+export function fetchForwardList() {
+  return request.get('/live/forward_list');
+}
+
+export function fetchKillForward(pid: string) {
+  return request.post(`/live/kill_forward/${pid}`);
+}

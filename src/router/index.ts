@@ -13,7 +13,10 @@ export const defaultRoutes: RouteRecordRaw[] = [
     redirect: '/dashboard',
     component: Layout,
     meta: {
+      title: 'router.dashboard',
+      name: 'dashboardManage',
       sort: ROUTE_SORT.dashboard,
+      icon: renderIcon(SpeedometerOutline),
     },
     children: [
       {
@@ -22,7 +25,6 @@ export const defaultRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/dashboard/index.vue'),
         meta: {
           title: 'router.dashboard',
-          icon: renderIcon(SpeedometerOutline),
         },
       },
     ],
@@ -37,9 +39,13 @@ export const defaultRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/login/index.vue'),
   },
   {
-    name: 'settingAccountRoot',
-    path: '/setting/accountRoot',
+    name: 'setting',
+    path: '/setting',
     component: Layout,
+    meta: {
+      title: 'router.setting',
+      oneChildren: true,
+    },
     children: [
       {
         name: 'settingAccount',

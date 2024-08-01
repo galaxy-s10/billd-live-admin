@@ -14,6 +14,8 @@ export default nameSpaceWrap('router', {
   liveAudience: 'liveAudience',
   liveStream: 'liveStream',
   liveClient: 'liveClient',
+  liveForwardList: 'liveForwardList',
+  forwardConfig: 'forwardConfig',
 
   user: 'user',
   userList: 'userList',

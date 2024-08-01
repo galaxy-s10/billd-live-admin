@@ -6,7 +6,7 @@
 # Email: 2274751790@qq.com
 # FilePath: /billd-live-admin/deploy/static-build.sh
 # Github: https://github.com/galaxy-s10
-# LastEditTime: 2024-02-20 16:42:48
+# LastEditTime: 2024-05-06 14:58:28
 # LastEditors: shuisheng
 ###
 
@@ -34,7 +34,7 @@ echo 查看npm版本:
 npm -v
 
 echo 设置npm淘宝镜像:
-npm config set registry https://registry.npm.taobao.org/
+npm config set registry https://registry.npmmirror.com/
 
 echo 查看当前npm镜像:
 npm get registry
@@ -50,8 +50,8 @@ echo 查看pnpm版本:
 pnpm -v
 
 echo 设置pnpm淘宝镜像:
-pnpm config set registry https://registry.npm.taobao.org/
-pnpm config set @billd:registry http://registry.hsslive.cn/
+pnpm config set registry https://registry.npmmirror.com/
+pnpm config set @billd:registry https://registry.hsslive.cn/
 
 echo 查看当前pnpm镜像:
 pnpm config get registry

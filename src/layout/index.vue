@@ -73,7 +73,7 @@ const { t } = useI18n();
 // );
 const handleRoutes = (routes: RouteRecordRaw[]) => {
   routes.forEach((v) => {
-    if (v.children && v.children.length === 1) {
+    if (v.meta?.oneChildren && v.children) {
       v.meta = {
         title: v.children[0].meta?.title,
         icon: v.children[0].meta?.icon,
@@ -81,26 +81,21 @@ const handleRoutes = (routes: RouteRecordRaw[]) => {
         sort: v.meta?.sort,
       };
       // @ts-ignore
-      v.label = v.meta.title;
+      v.label = v.meta.title || '';
       // @ts-ignore
-      v.key = v.children[0].path;
+      v.key = v.children[0].path || '';
       // @ts-ignore
       v.show = !v.meta.hidden;
       delete v.children;
-    } else if (v.children && v.children.length > 1) {
+    } else {
       // @ts-ignore
-      v.label = v.meta && v.meta.title;
+      v.label = v.meta?.title || '';
       // @ts-ignore
-      v.key = v.path;
-      handleRoutes(v.children);
-    } else if (!v.children) {
-      if (v.meta) {
-        // @ts-ignore
-        v.label = v.meta && v.meta.title;
-        // @ts-ignore
-        v.key = v.path;
-        // @ts-ignore
-        v.show = !v.meta.hidden;
+      v.key = v.path || '';
+      // @ts-ignore
+      v.show = !v.meta?.hidden;
+      if (v.children) {
+        handleRoutes(v.children);
       }
     }
   });

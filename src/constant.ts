@@ -18,7 +18,10 @@ export const POSTMESSAGE_TYPE = ['qq_login', 'github_login', 'login_expired'];
 
 export const QINIU_BUCKET = 'hssblog'; // 七牛云bucket
 
-export const AXIOS_BASEURL = 'https://live-api.hsslive.cn';
+export const AXIOS_BASEURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://127.0.0.1:4300'
+    : 'https://live-api.hsslive.cn';
 
 export const COOKIE_DOMAIN =
   process.env.NODE_ENV === 'development' ? undefined : '.hsslive.cn';
@@ -42,11 +45,17 @@ export const QINIU_BACKUP = {
   },
 };
 
-export const liveRoomTypeMap = {
-  [LiveRoomTypeEnum.system]: '系统直播',
-  [LiveRoomTypeEnum.user_obs]: 'obs直播',
-  [LiveRoomTypeEnum.user_srs]: 'srs直播',
-  [LiveRoomTypeEnum.user_wertc]: 'webrtc会议',
+export const liveRoomTypeEnumMap = {
+  [LiveRoomTypeEnum.msr]: 'msr推流',
+  [LiveRoomTypeEnum.obs]: 'obs推流',
+  [LiveRoomTypeEnum.pk]: '打pk',
+  [LiveRoomTypeEnum.srs]: 'srs推流',
+  [LiveRoomTypeEnum.system]: '系统推流',
+  [LiveRoomTypeEnum.tencent_css]: '腾讯云css推流',
+  [LiveRoomTypeEnum.tencent_css_pk]: '腾讯云css打pk',
+  [LiveRoomTypeEnum.wertc_live]: 'webrtc直播',
+  [LiveRoomTypeEnum.wertc_meeting_one]: 'webrtc会议一',
+  [LiveRoomTypeEnum.wertc_meeting_two]: 'webrtc会议二',
 };
 
 // 全局的localStorage的key

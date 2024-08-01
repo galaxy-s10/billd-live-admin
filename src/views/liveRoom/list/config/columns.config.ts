@@ -1,7 +1,7 @@
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h } from 'vue';
 
-import { liveRoomTypeMap } from '@/constant';
+import { liveRoomTypeEnumMap } from '@/constant';
 import {
   ILiveRoom,
   LiveRoomIsShowEnum,
@@ -110,7 +110,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     key: 'type',
     align: 'center',
     render(row) {
-      return liveRoomTypeMap[row.type!];
+      return liveRoomTypeEnumMap[row.type!];
     },
     width: 80,
   },
