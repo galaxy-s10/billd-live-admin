@@ -106,7 +106,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
       {
         name: 'liveRoomUpdate',
         path: '/liveRoomManage/liveRoomUpdate',
-        component: () => import('@/views/liveRoom/add/index.vue'),
+        component: () => import('@/views/liveRoom/update/index.vue'),
         meta: {
           title: 'router.liveRoomUpdate',
         },
@@ -223,6 +223,8 @@ export const asyncRoutes: RouteRecordRaw[] = [
     meta: {
       title: 'router.liveConfig',
       icon: renderIcon(CogOutline),
+      sort: ROUTE_SORT.liveConfig,
+      roles: [ROUTE_ROLES.SUPER_ADMIN],
     },
     children: [
       {

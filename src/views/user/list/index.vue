@@ -7,7 +7,7 @@
     ></HSearch>
     <n-data-table
       remote
-      :scroll-x="1000"
+      :scroll-x="scrollX"
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
@@ -133,6 +133,7 @@ const createColumns = (): DataTableColumns<IUser> => {
   const action: TableColumn<IUser> = {
     title: '操作',
     key: 'actions',
+    width: 200,
     fixed: 'right',
     align: 'center',
     render(row) {
@@ -196,6 +197,12 @@ const createColumns = (): DataTableColumns<IUser> => {
 };
 
 const columns = createColumns();
+const scrollX = ref(0);
+columns.forEach((item) => {
+  if (item.width) {
+    scrollX.value += Number(item.width);
+  }
+});
 
 onMounted(() => {
   handlePageChange(1);

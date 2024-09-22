@@ -129,7 +129,6 @@ export const ROUTE_SORT = {
   comment: 199,
   star: 199,
 
-  setting: 180,
   schedule: 180,
   live: 180,
 
@@ -139,8 +138,9 @@ export const ROUTE_SORT = {
   order: 110,
   thirdUser: 100,
 
-  // comment: 80,
-  // star: 80,
+  setting: 90,
+  liveConfig: 90,
+  github: 10,
 
   qiniu: 70,
 

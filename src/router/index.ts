@@ -1,4 +1,8 @@
-import { KeyOutline, SpeedometerOutline } from '@vicons/ionicons5';
+import {
+  LogoGithub,
+  SettingsOutline,
+  SpeedometerOutline,
+} from '@vicons/ionicons5';
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 
 import { ROUTE_SORT } from '@/constant';
@@ -44,7 +48,9 @@ export const defaultRoutes: RouteRecordRaw[] = [
     component: Layout,
     meta: {
       title: 'router.setting',
-      oneChildren: true,
+      // oneChildren: true,
+      icon: renderIcon(SettingsOutline),
+      sort: ROUTE_SORT.setting,
     },
     children: [
       {
@@ -53,7 +59,27 @@ export const defaultRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/setting/account/index.vue'),
         meta: {
           title: 'router.settingAccount',
-          icon: renderIcon(KeyOutline),
+        },
+      },
+    ],
+  },
+  {
+    name: 'github',
+    path: '/github',
+    component: Layout,
+    meta: {
+      title: 'router.github',
+      oneChildren: true,
+      sort: ROUTE_SORT.github,
+    },
+    children: [
+      {
+        name: 'githubInfo',
+        path: '/github/info',
+        component: () => import('@/views/github/index.vue'),
+        meta: {
+          title: 'router.github',
+          icon: renderIcon(LogoGithub),
         },
       },
     ],

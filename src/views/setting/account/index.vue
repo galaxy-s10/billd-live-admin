@@ -4,14 +4,14 @@
       <div class="item">
         <div class="label">密码</div>
         <div class="content">
-          <n-button
+          <!-- <n-button
             text
             type="info"
             @click="getPwd()"
           >
             点击获取
           </n-button>
-          {{ password }}
+          {{ password }} -->
         </div>
         <n-button
           text
@@ -34,15 +34,12 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-import { fetchUserPwd } from '@/api/user';
-
 import ResetPwdCpt from './resetPwd/index.vue';
 
-const password = ref('');
 const currCpt = ref();
 
 const cptList = {
-  [ResetPwdCpt.name]: ResetPwdCpt,
+  [ResetPwdCpt.name as string]: ResetPwdCpt,
 };
 
 const changeCpt = () => {
@@ -51,12 +48,6 @@ const changeCpt = () => {
 
 const negativeClick = () => {
   currCpt.value = undefined;
-};
-
-const getPwd = async () => {
-  const res = await fetchUserPwd();
-  password.value = res.data.password;
-  window.$message.success('获取密码成功！');
 };
 </script>
 

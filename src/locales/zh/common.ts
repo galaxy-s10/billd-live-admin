@@ -11,5 +11,6 @@ export default nameSpaceWrap('common', {
   desc: '降序',
   placeholderSortName: '请选择排序字段',
   placeholderSortBy: '请选择排序规则',
+  placeholderImage: '请选择图片',
   pageTotal: '一共{total}条数据',
 });

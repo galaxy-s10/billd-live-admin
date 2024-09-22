@@ -45,7 +45,6 @@ onMounted(() => {
 
 const handleConfirm = async (v: ILiveRoom) => {
   try {
-    console.log(v, '--');
     const res = await fetchUpdateLiveRoom(v);
     if (res.code === 200) {
       window.$message.success('设置成功！');

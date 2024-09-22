@@ -9,6 +9,13 @@ export function fetchLogin({ id, password }) {
     data: { id, password },
   });
 }
+export function fetchUserNameLogin({ username, password }) {
+  return request.instance({
+    url: '/user/username_login',
+    method: 'post',
+    data: { username, password },
+  });
+}
 
 export function fetchUserInfo() {
   return request.get('/user/get_user_info');

@@ -72,13 +72,14 @@ export const columnsConfig: TableColumns<ILive> = [
     title: '创建时间',
     key: 'created_at',
     align: 'center',
-    width: 180,
+    width: 200,
     fixed: 'right',
   },
   {
     title: '最后更新',
     key: 'updated_at',
     align: 'center',
-    width: 180,
+    width: 200,
+    fixed: 'right',
   },
 ];

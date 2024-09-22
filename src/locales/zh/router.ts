@@ -43,4 +43,6 @@ export default nameSpaceWrap('router', {
 
   order: '订单管理',
   orderList: '订单列表',
+
+  github: 'github',
 });

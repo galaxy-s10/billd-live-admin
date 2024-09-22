@@ -36,14 +36,14 @@ const tableList = ref<IApiV1Clients['clients']>([]);
 const starListLoading = ref(false);
 
 const createColumns = () => {
-  const action: TableColumns<IApiV1Clients['clients'][0]> = [
+  const action: TableColumns = [
     {
       title: '操作',
       key: 'actions',
       width: 100,
       align: 'center',
       fixed: 'right',
-      render(row) {
+      render(row: any) {
         return h(
           NSpace,
           {
@@ -56,14 +56,15 @@ const createColumns = () => {
                 'positive-text': '确定',
                 'negative-text': '取消',
                 'on-positive-click': async () => {
-                  const res = await fetchKillForward(row.id);
-                  if (res.data.code === 0) {
-                    window.$message.success('踢掉成功！');
+                  const cmd: string = row.cmd || '';
+                  console.log(cmd);
+                  const cmdarr = cmd.match(/\s+(\d+)\s+/);
+                  console.log(cmdarr, 'cmdarr');
+                  const pid = Number(cmdarr?.[1]);
+                  if (pid) {
+                    await fetchKillForward(pid);
+                    window.$message.success('已下发指令');
                     ajaxFetchList();
-                  } else {
-                    window.$message.error(
-                      `踢掉失败,${JSON.stringify(res.data)}`
-                    );
                   }
                 },
                 'on-negative-click': () => {

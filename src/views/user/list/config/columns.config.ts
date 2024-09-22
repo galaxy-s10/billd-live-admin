@@ -25,10 +25,10 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       render(row) {
         return h('img', {
           src: row.avatar,
-          width: 100,
+          width: 150,
         });
       },
-      width: 100,
+      width: 150,
     },
     {
       title: '简介',
@@ -37,6 +37,7 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       ellipsis: {
         tooltip: true,
       },
+      width: 150,
     },
     {
       title: '状态',
@@ -45,18 +46,21 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       render(row) {
         return row.status === UserStatusEnum.normal ? '正常' : '禁用';
       },
+      width: 100,
     },
     {
       title: '创建时间',
       key: 'created_at',
       align: 'center',
-      width: 180,
+      width: 200,
+      fixed: 'right',
     },
     {
       title: '最后更新',
       key: 'updated_at',
       align: 'center',
-      width: 180,
+      width: 200,
+      fixed: 'right',
     },
   ];
 };

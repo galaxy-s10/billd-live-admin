@@ -61,12 +61,12 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
       if (row.cover_img) {
         return h('img', {
           src: row.cover_img,
-          width: 120,
+          width: 150,
         });
       }
       return h('span', {}, '-');
     },
-    width: 200,
+    width: 150,
   },
   {
     title: '直播间背景',
@@ -81,7 +81,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
             h(
               'video',
               {
-                width: '120',
+                width: '150',
                 autoplay: true,
                 muted: true,
               },
@@ -97,13 +97,13 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
         } else {
           return h('img', {
             src: row.bg_img,
-            width: 120,
+            width: 150,
           });
         }
       }
       return h('span', {}, '-');
     },
-    width: 200,
+    width: 150,
   },
   {
     title: 'type',
@@ -123,7 +123,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
         ? '开启'
         : '关闭';
     },
-    width: 200,
+    width: 100,
   },
   {
     title: 'cdn',
@@ -162,14 +162,14 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     title: '创建时间',
     key: 'created_at',
     align: 'center',
-    width: 180,
+    width: 200,
     fixed: 'right',
   },
   {
     title: '最后更新',
     key: 'updated_at',
     align: 'center',
-    width: 180,
+    width: 200,
     fixed: 'right',
   },
 ];

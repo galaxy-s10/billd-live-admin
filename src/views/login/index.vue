@@ -14,8 +14,8 @@
           :on-update:value="tabChange"
         >
           <n-tab-pane
-            name="pwdlogin"
-            tab="账密登录"
+            name="idLogin"
+            tab="id登录"
           >
             <n-form
               ref="loginFormRef"
@@ -29,6 +29,64 @@
                   v-model:value="loginForm.id"
                   type="text"
                   placeholder="请输入账号"
+                >
+                  <template #prefix>
+                    <n-icon
+                      size="20"
+                      class="lang"
+                    >
+                      <PersonOutline></PersonOutline>
+                    </n-icon>
+                  </template>
+                </n-input>
+              </n-form-item>
+              <n-form-item path="password">
+                <n-input
+                  v-model:value="loginForm.password"
+                  type="password"
+                  show-password-on="mousedown"
+                  placeholder="请输入密码"
+                  @focus="onFocus"
+                  @blur="onBlur"
+                  @keyup.enter="handleLoginSubmit"
+                >
+                  <template #prefix>
+                    <n-icon
+                      size="20"
+                      class="lang"
+                    >
+                      <LockClosedOutline></LockClosedOutline>
+                    </n-icon>
+                  </template>
+                </n-input>
+              </n-form-item>
+            </n-form>
+            <n-button
+              type="primary"
+              block
+              secondary
+              strong
+              @click="handleLoginSubmit"
+            >
+              登录
+            </n-button>
+          </n-tab-pane>
+          <n-tab-pane
+            name="usernameLogin"
+            tab="用户名登录"
+          >
+            <n-form
+              ref="loginFormRef"
+              label-placement="left"
+              size="large"
+              :model="loginForm"
+              :rules="loginRules"
+            >
+              <n-form-item path="id">
+                <n-input
+                  v-model:value="loginForm.id"
+                  type="text"
+                  placeholder="请输入用户名"
                 >
                   <template #prefix>
                     <n-icon
@@ -97,19 +155,16 @@ const loginForm = ref({
   id: '',
   password: '',
 });
-const registerForm = ref({
-  email: '',
-  code: '',
-});
+
 const loginFormRef = ref(null);
-const currentTab = ref('pwdlogin');
+const currentTab = ref<'idLogin' | 'usernameLogin'>('idLogin');
 
 const handleLogin = async () => {
   let token = null;
-  if (currentTab.value === 'codelogin') {
-    token = await userStore.codeLogin({
-      email: registerForm.value.email,
-      code: registerForm.value.code,
+  if (currentTab.value === 'usernameLogin') {
+    token = await userStore.fetchUserNameLogin({
+      username: loginForm.value.id,
+      password: loginForm.value.password,
     });
   } else {
     token = await userStore.pwdLogin({

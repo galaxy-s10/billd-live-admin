@@ -7,7 +7,7 @@
     ></HSearch>
     <n-data-table
       remote
-      scroll-x="1200"
+      :scroll-x="scrollX"
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
@@ -48,6 +48,13 @@ const params = ref<{
 });
 
 const columns = columnsConfig(t);
+
+const scrollX = ref(0);
+columns.forEach((item) => {
+  if (item.width) {
+    scrollX.value += Number(item.width);
+  }
+});
 const searchForm = ref(searchFormConfig(t));
 
 onMounted(() => {

@@ -22,7 +22,7 @@ export function fetchUpdateLiveRoom(data: ILiveRoom) {
   });
 }
 
-export function fetchFindLiveRoom(roomId: string) {
+export function fetchFindLiveRoom(roomId: number) {
   return request.instance({
     url: `/live_room/find/${roomId}`,
     method: 'get',

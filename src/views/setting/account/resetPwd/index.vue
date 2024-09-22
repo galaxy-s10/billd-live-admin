@@ -76,6 +76,7 @@ export default {
 
 <script lang="ts" setup>
 import { LockClosedOutline } from '@vicons/ionicons5';
+import { windowReload } from 'billd-utils';
 import { FormItemRule, FormRules } from 'naive-ui';
 import { ref } from 'vue';
 
@@ -124,6 +125,9 @@ const submitCallback = () => {
         });
         window.$message.success(res.message);
         emits('negativeClick', false);
+        setTimeout(() => {
+          windowReload();
+        }, 500);
       } catch (error) {
         console.log(error);
       }

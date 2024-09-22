@@ -11,5 +11,6 @@ export default nameSpaceWrap('common', {
   desc: 'desc',
   placeholderSortName: 'please select sortName',
   placeholderSortBy: 'please select sortBy',
+  placeholderImage: 'please select image',
   pageTotal: 'total: {total}',
 });

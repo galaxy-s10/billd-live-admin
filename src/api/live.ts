@@ -11,6 +11,6 @@ export function fetchForwardList() {
   return request.get('/live/forward_list');
 }
 
-export function fetchKillForward(pid: string) {
+export function fetchKillForward(pid: number) {
   return request.post(`/live/kill_forward/${pid}`);
 }

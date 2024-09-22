@@ -37,6 +37,7 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     },
     key: 'client_id',
     align: 'center',
+    width: 100,
   },
   {
     title() {
@@ -44,6 +45,7 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     },
     key: 'view',
     align: 'center',
+    width: 100,
   },
   {
     title() {
@@ -51,6 +53,7 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     },
     key: 'danmu',
     align: 'center',
+    width: 100,
   },
   {
     title() {
@@ -58,6 +61,7 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     },
     key: 'duration',
     align: 'center',
+    width: 100,
   },
   {
     title() {
@@ -68,7 +72,7 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     render(row) {
       return row.end_time ? formatTime(+row.end_time) : '-';
     },
-    width: 180,
+    width: 200,
     fixed: 'right',
   },
   {
@@ -77,7 +81,7 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     },
     key: 'created_at',
     align: 'center',
-    width: 180,
+    width: 200,
     fixed: 'right',
   },
   {
@@ -86,5 +90,7 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     },
     key: 'updated_at',
     align: 'center',
+    width: 200,
+    fixed: 'right',
   },
 ];

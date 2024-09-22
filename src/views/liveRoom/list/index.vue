@@ -7,7 +7,7 @@
     ></HSearch>
     <n-data-table
       remote
-      scroll-x="2800"
+      :scroll-x="scrollX"
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import { NButton, NSpace, UploadFileInfo } from 'naive-ui';
+import { NButton, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref } from 'vue';
 
@@ -48,8 +48,9 @@ import {
   LiveRoomStatusEnum,
   LiveRoomUseCDNEnum,
 } from '@/interface';
+import router from '@/router';
 
-import AddLiveRoomCpt from '../add/index.vue';
+import AddLiveRoomCpt from '../update/index.vue';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
@@ -103,39 +104,43 @@ const createColumns = () => {
                 size: 'small',
                 type: 'primary',
                 onClick: () => {
-                  modalVisiable.value = true;
-                  let bgImg: UploadFileInfo[] = [];
-                  let coverImg: UploadFileInfo[] = [];
-                  if (row.bg_img) {
-                    bgImg = [
-                      {
-                        id: row.bg_img as string,
-                        name: row.bg_img as string,
-                        url: row.bg_img as string,
-                        status: 'finished',
-                        percentage: 100,
-                      },
-                    ];
-                  }
-                  if (row.cover_img) {
-                    coverImg = [
-                      {
-                        id: row.cover_img as string,
-                        // name: row.cover_img as string,
-                        name: 'base64',
-                        url: row.cover_img as string,
-                        status: 'finished',
-                        percentage: 100,
-                      },
-                    ];
-                  }
-                  currRow.value = {
-                    ...row,
-                    // @ts-ignore
-                    bg_img: bgImg,
-                    // @ts-ignore
-                    cover_img: coverImg,
-                  };
+                  router.push({
+                    name: 'liveRoomUpdate',
+                    query: { id: row.id },
+                  });
+                  // modalVisiable.value = true;
+                  // let bgImg: UploadFileInfo[] = [];
+                  // let coverImg: UploadFileInfo[] = [];
+                  // if (row.bg_img) {
+                  //   bgImg = [
+                  //     {
+                  //       id: row.bg_img as string,
+                  //       name: row.bg_img as string,
+                  //       url: row.bg_img as string,
+                  //       status: 'finished',
+                  //       percentage: 100,
+                  //     },
+                  //   ];
+                  // }
+                  // if (row.cover_img) {
+                  //   coverImg = [
+                  //     {
+                  //       id: row.cover_img as string,
+                  //       // name: row.cover_img as string,
+                  //       name: 'base64',
+                  //       url: row.cover_img as string,
+                  //       status: 'finished',
+                  //       percentage: 100,
+                  //     },
+                  //   ];
+                  // }
+                  // currRow.value = {
+                  //   ...row,
+                  //   // @ts-ignore
+                  //   bg_img: bgImg,
+                  //   // @ts-ignore
+                  //   cover_img: coverImg,
+                  // };
                 },
               },
               () => '编辑' // 用箭头函数返回性能更好。
@@ -149,7 +154,12 @@ const createColumns = () => {
 };
 
 const columns = createColumns();
-
+const scrollX = ref(0);
+columns.forEach((item) => {
+  if (item.width) {
+    scrollX.value += Number(item.width);
+  }
+});
 onMounted(() => {
   handlePageChange(1);
 });

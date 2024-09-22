@@ -37,4 +37,6 @@ export default nameSpaceWrap('router', {
 
   order: 'order',
   orderList: 'orderList',
+
+  github: 'github',
 });

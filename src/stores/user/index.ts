@@ -1,8 +1,8 @@
 import { arrayUnique, windowReload } from 'billd-utils';
 import { defineStore } from 'pinia';
 
-import { fetchEmailCodeLogin, fetchRegister } from '@/api/emailUser';
-import { fetchLogin, fetchUserInfo } from '@/api/user';
+import { fetchRegister } from '@/api/emailUser';
+import { fetchLogin, fetchUserInfo, fetchUserNameLogin } from '@/api/user';
 import { IRole, IUser } from '@/interface';
 import router from '@/router';
 import { asyncRoutes } from '@/router/asyncRoute';
@@ -57,11 +57,11 @@ export const useUserStore = defineStore('user', {
         return null;
       }
     },
-    async codeLogin({ email, code }) {
+    async fetchUserNameLogin({ username, password }) {
       try {
-        const { data: token } = await fetchEmailCodeLogin({
-          email,
-          code,
+        const { data: token } = await fetchUserNameLogin({
+          username,
+          password,
         });
         this.setToken(token);
         return token;
