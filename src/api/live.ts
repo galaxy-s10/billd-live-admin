@@ -14,3 +14,7 @@ export function fetchForwardList() {
 export function fetchKillForward(pid: number) {
   return request.post(`/live/kill_forward/${pid}`);
 }
+
+export function fetchCloseLiveByLiveRoomId(liveRoomId: number) {
+  return request.post(`/live/close_live_by_live_room_id/${liveRoomId}`);
+}

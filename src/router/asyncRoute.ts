@@ -104,6 +104,14 @@ export const asyncRoutes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'wsMessageList',
+        path: '/liveRoomManage/wsMessageList',
+        component: () => import('@/views/wsMessage/list/index.vue'),
+        meta: {
+          title: 'router.wsMessageList',
+        },
+      },
+      {
         name: 'liveRoomUpdate',
         path: '/liveRoomManage/liveRoomUpdate',
         component: () => import('@/views/liveRoom/update/index.vue'),

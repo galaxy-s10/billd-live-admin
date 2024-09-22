@@ -60,7 +60,7 @@ import EditRoleAuthCpt from '../editRoleAuth/index.vue';
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
-interface ISearch extends IRole, IList {}
+interface ISearch extends IRole, IList<any> {}
 
 const tableListData = ref([]);
 const total = ref(0);

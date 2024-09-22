@@ -267,6 +267,76 @@ export interface ILiveRoom {
   deleted_at?: string;
 }
 
+export interface IRedbagSend {
+  id?: number;
+
+  user_id?: number;
+  live_room_id?: number;
+
+  total_amount?: string;
+  remaining_amount?: string;
+  total_nums?: number;
+  remaining_nums?: number;
+  remark?: string;
+
+  /** 用户信息 */
+  user?: IUser;
+  /** 直播间信息 */
+  live_room?: IGoods;
+
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export enum DanmuMsgTypeEnum {
+  danmu,
+  otherJoin,
+  userLeaved,
+  system,
+  redbag,
+}
+
+export enum WsMessageMsgIsFileEnum {
+  yes,
+  no,
+}
+
+export enum WsMessageMsgIsShowEnum {
+  yes,
+  no,
+}
+
+export enum WsMessageMsgIsVerifyEnum {
+  yes,
+  no,
+}
+
+export interface IWsMessage {
+  id?: number;
+  username?: string;
+  origin_username?: string;
+  content?: string;
+  origin_content?: string;
+  redbag_send_id?: number;
+  live_room_id?: number;
+  user_id?: number;
+  ip?: string;
+  msg_is_file?: WsMessageMsgIsFileEnum;
+  msg_type?: DanmuMsgTypeEnum;
+  user_agent?: string;
+  send_msg_time?: number;
+  is_show?: WsMessageMsgIsShowEnum;
+  is_verify?: WsMessageMsgIsVerifyEnum;
+
+  user?: IUser;
+  redbag_send?: IRedbagSend;
+
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 直播间类型 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 用户类型 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -929,13 +999,24 @@ export interface IPaging<T> {
   rows: T[];
 }
 
-export interface IList {
+// export interface IList {
+//   nowPage?: number;
+//   pageSize?: number;
+//   orderBy?: string;
+//   orderName?: string;
+//   keyWord?: string;
+// }
+
+export type IList<T> = {
   nowPage?: number;
   pageSize?: number;
   orderBy?: string;
   orderName?: string;
   keyWord?: string;
-}
+  rangTimeType?: 'created_at' | 'updated_at' | 'deleted_at';
+  rangTimeStart?: string;
+  rangTimeEnd?: string;
+} & T;
 export interface IWorks {
   id?: number;
   name?: string;

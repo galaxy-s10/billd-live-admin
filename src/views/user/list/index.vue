@@ -94,7 +94,7 @@ import AddUser from '../add/index.vue';
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
-interface ISearch extends IUser, IList {}
+interface ISearch extends IUser, IList<any> {}
 
 const rules = {
   username: {

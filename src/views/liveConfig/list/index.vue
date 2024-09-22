@@ -31,7 +31,7 @@ import { IFrontend, IList } from '@/interface';
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
-interface ISearch extends IFrontend, IList {}
+interface ISearch extends IFrontend, IList<any> {}
 
 const starListData = ref([]);
 const total = ref(0);

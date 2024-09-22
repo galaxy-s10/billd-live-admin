@@ -47,7 +47,7 @@ import AddAuth from '../add/index.vue';
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
-interface ISearch extends IAuth, IList {}
+interface ISearch extends IAuth, IList<any> {}
 
 const tableListData = ref([]);
 const total = ref(0);

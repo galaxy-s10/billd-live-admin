@@ -18,6 +18,7 @@ export default nameSpaceWrap('router', {
 
   liveRoomManage: '直播间管理',
   liveRoomList: '直播间列表',
+  wsMessageList: '直播间消息列表',
   liveRoomUpdate: '修改直播间',
 
   liveForwardList: '转推列表',

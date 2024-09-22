@@ -17,6 +17,8 @@ export default nameSpaceWrap('router', {
   liveForwardList: 'liveForwardList',
   forwardConfig: 'forwardConfig',
 
+  wsMessageList: 'wsMessageList',
+
   user: 'user',
   userList: 'userList',
   userAdd: 'userAdd',

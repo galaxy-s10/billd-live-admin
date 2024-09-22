@@ -29,7 +29,7 @@ import { IList, IOrder } from '@/interface';
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
-interface ISearch extends IOrder, IList {}
+interface ISearch extends IOrder, IList<any> {}
 
 const tableListData = ref([]);
 const total = ref(0);
