@@ -1,7 +1,6 @@
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 
 import { IWsMessage } from '@/interface';
-import { formatTime } from '@/router/utils';
 
 export const columnsConfig: TableColumns<IWsMessage> = [
   {
@@ -46,9 +45,6 @@ export const columnsConfig: TableColumns<IWsMessage> = [
     key: 'send_msg_time',
     align: 'center',
     width: 200,
-    render(row) {
-      return formatTime(+row.send_msg_time!);
-    },
     fixed: 'right',
   },
 ];

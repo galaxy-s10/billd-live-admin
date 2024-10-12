@@ -1,7 +1,11 @@
 import {
   BulbOutline,
+  ChatbubblesOutline,
   CogOutline,
+  FootstepsOutline,
+  HomeOutline,
   LockClosedOutline,
+  PaperPlaneOutline,
   PersonOutline,
   ShieldOutline,
   WalletOutline,
@@ -29,6 +33,14 @@ export const asyncRoutes: RouteRecordRaw[] = [
       ],
     },
     children: [
+      {
+        name: 'liveOnline',
+        path: '/liveManage/liveOnline',
+        component: () => import('@/views/live/liveOnline/list/index.vue'),
+        meta: {
+          title: 'router.liveOnline',
+        },
+      },
       {
         name: 'liveRecord',
         path: '/liveManage/record',
@@ -87,7 +99,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     component: Layout,
     meta: {
       title: 'router.liveRoomManage',
-      icon: renderIcon(BulbOutline),
+      icon: renderIcon(HomeOutline),
       sort: ROUTE_SORT.live,
       roles: [
         DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value,
@@ -104,19 +116,42 @@ export const asyncRoutes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'liveRoomUpdate',
+        path: '/liveRoomManage/liveRoomUpdate',
+        component: () => import('@/views/liveRoom/update/index.vue'),
+        meta: {
+          title: 'router.liveRoomUpdate',
+        },
+      },
+    ],
+  },
+  {
+    path: '/wsMessageManage',
+    component: Layout,
+    meta: {
+      title: 'router.wsMessageManage',
+      icon: renderIcon(PaperPlaneOutline),
+      sort: ROUTE_SORT.live,
+      roles: [
+        DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value,
+        DEFAULT_ROLE_INFO.LIVE_ADMIN.role_value,
+      ],
+    },
+    children: [
+      {
         name: 'wsMessageList',
-        path: '/liveRoomManage/wsMessageList',
+        path: '/wsMessageManage/wsMessageList',
         component: () => import('@/views/wsMessage/list/index.vue'),
         meta: {
           title: 'router.wsMessageList',
         },
       },
       {
-        name: 'liveRoomUpdate',
-        path: '/liveRoomManage/liveRoomUpdate',
-        component: () => import('@/views/liveRoom/update/index.vue'),
+        name: 'wsMessageUpdate',
+        path: '/wsMessageManage/wsMessageUpdate',
+        component: () => import('@/views/wsMessage/update/index.vue'),
         meta: {
-          title: 'router.liveRoomUpdate',
+          title: 'router.wsMessageUpdate',
         },
       },
     ],
@@ -219,7 +254,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: '/auth/add',
         component: () => import('@/views/auth/add/index.vue'),
         meta: {
-          title: 'router.authTree',
+          title: 'router.addAuth',
         },
       },
     ],
@@ -280,6 +315,64 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/order/list/index.vue'),
         meta: {
           title: 'router.orderList',
+        },
+      },
+    ],
+  },
+  {
+    name: 'loginRecord',
+    path: '/loginRecord',
+    component: Layout,
+    meta: {
+      icon: renderIcon(FootstepsOutline),
+      title: 'router.loginRecord',
+      sort: ROUTE_SORT.loginRecord,
+      roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
+    },
+    children: [
+      {
+        name: 'loginRecordList',
+        path: '/loginRecord/list',
+        component: () => import('@/views/loginRecord/list/index.vue'),
+        meta: {
+          title: 'router.loginRecordList',
+        },
+      },
+    ],
+  },
+  {
+    name: 'globalMsg',
+    path: '/globalMsg',
+    component: Layout,
+    meta: {
+      icon: renderIcon(ChatbubblesOutline),
+      title: 'router.globalMsg',
+      sort: ROUTE_SORT.globalMsg,
+      roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
+    },
+    children: [
+      {
+        name: 'globalMsgList',
+        path: '/globalMsg/list',
+        component: () => import('@/views/globalMsg/list/index.vue'),
+        meta: {
+          title: 'router.globalMsgList',
+        },
+      },
+      {
+        name: 'globalMsgCreate',
+        path: '/globalMsg/create',
+        component: () => import('@/views/globalMsg/create/index.vue'),
+        meta: {
+          title: 'router.globalMsgCreate',
+        },
+      },
+      {
+        name: 'globalMsgUpdate',
+        path: '/globalMsg/update',
+        component: () => import('@/views/globalMsg/update/index.vue'),
+        meta: {
+          title: 'router.globalMsgUpdate',
         },
       },
     ],

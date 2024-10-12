@@ -35,7 +35,7 @@ export const searchFormConfig: IForm<ISearch<IUser>> = {
     },
     {
       field: 'rangTimeType',
-      type: FormTypeEnum.datePicker,
+      type: FormTypeEnum.datePickerRange,
       label: '时间范围',
       placeholder: '请选择时间范围',
     },

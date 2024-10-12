@@ -10,23 +10,27 @@
 </template>
 
 <script lang="ts" setup>
-import { UploadFileInfo } from 'naive-ui';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { fetchFindLiveRoom, fetchUpdateLiveRoom } from '@/api/liveRoom';
+import {
+  fetchGetWsMessageFind,
+  fetchGetWsMessageUpdate,
+} from '@/api/wsMessage';
 import HForm from '@/components/Base/Form';
+import { IWsMessage } from '@/interface';
 
 import { formConfig } from './config/form.config';
 
 const route = useRoute();
 const props = withDefaults(
   defineProps<{
-    modelValue?: any;
+    modelValue?: IWsMessage;
     showAction?: boolean;
   }>(),
   {
-    modelValue: {},
+    // @ts-ignore
+    modelValue: () => {},
     showAction: true,
   }
 );
@@ -50,39 +54,40 @@ onMounted(async () => {
 
 async function find() {
   if (id.value) {
-    const res = await fetchFindLiveRoom(id.value);
+    const res = await fetchGetWsMessageFind(id.value);
     if (res.code !== 200) return;
     const row = res.data;
-    let bgImg: UploadFileInfo[] = [];
-    let coverImg: UploadFileInfo[] = [];
-    if (row.bg_img) {
-      bgImg = [
-        {
-          id: row.bg_img as string,
-          name: row.bg_img as string,
-          url: row.bg_img as string,
-          status: 'finished',
-          percentage: 100,
-        },
-      ];
-    }
-    if (row.cover_img) {
-      coverImg = [
-        {
-          id: row.cover_img as string,
-          name: row.cover_img as string,
-          url: row.cover_img as string,
-          status: 'finished',
-          percentage: 100,
-        },
-      ];
-    }
+    // let bgImg: UploadFileInfo[] = [];
+    // let coverImg: UploadFileInfo[] = [];
+    // if (row.bg_img) {
+    //   bgImg = [
+    //     {
+    //       id: row.bg_img as string,
+    //       name: row.bg_img as string,
+    //       url: row.bg_img as string,
+    //       status: 'finished',
+    //       percentage: 100,
+    //     },
+    //   ];
+    // }
+    // if (row.cover_img) {
+    //   coverImg = [
+    //     {
+    //       id: row.cover_img as string,
+    //       name: row.cover_img as string,
+    //       url: row.cover_img as string,
+    //       status: 'finished',
+    //       percentage: 100,
+    //     },
+    //   ];
+    // }
     formData.value = {
       ...row,
+      send_msg_time: +new Date(row.send_msg_time!),
       // @ts-ignore
-      bg_img: bgImg,
+      // bg_img: bgImg,
       // @ts-ignore
-      cover_img: coverImg,
+      // cover_img: coverImg,
     };
   }
 }
@@ -90,8 +95,10 @@ async function find() {
 const handleConfirm = async (v) => {
   try {
     confirmLoading.value = true;
-    const { message }: any = await fetchUpdateLiveRoom(v);
-    window.$message.success(message);
+    const res = await fetchGetWsMessageUpdate(v);
+    if (res.code === 200) {
+      window.$message.success('修改成功！');
+    }
   } catch (error) {
     console.log(error);
   } finally {

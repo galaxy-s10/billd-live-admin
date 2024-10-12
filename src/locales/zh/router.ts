@@ -10,19 +10,20 @@ export default nameSpaceWrap('router', {
 
   liveManage: '直播管理',
   liveRecord: '直播记录',
-
+  liveOnline: '在线直播',
   liveAnchor: '在线主播',
   liveAudience: '在线观众',
   liveStream: '在线stream',
   liveClient: '在线client',
+  liveForwardList: '转推列表',
 
   liveRoomManage: '直播间管理',
   liveRoomList: '直播间列表',
-  wsMessageList: '直播间消息列表',
   liveRoomUpdate: '修改直播间',
 
-  liveForwardList: '转推列表',
-  forwardConfig: '转推配置',
+  wsMessageManage: '直播间消息管理',
+  wsMessageList: '直播间消息列表',
+  wsMessageUpdate: '修改直播间消息',
 
   user: '用户管理',
   userList: '用户列表',
@@ -40,10 +41,19 @@ export default nameSpaceWrap('router', {
 
   liveConfig: '直播配置',
   liveConfigList: '配置列表',
-  liveConfigEdit: '编辑',
+  liveConfigEdit: '编辑直播配置',
+  forwardConfig: '转推配置',
 
   order: '订单管理',
   orderList: '订单列表',
+
+  loginRecord: '登录记录',
+  loginRecordList: '登录记录列表',
+
+  globalMsg: '全局消息',
+  globalMsgList: '全局消息列表',
+  globalMsgCreate: '新建全局消息',
+  globalMsgUpdate: '修改全局消息',
 
   github: 'github',
 });

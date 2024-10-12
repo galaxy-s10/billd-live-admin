@@ -7,17 +7,22 @@ export default nameSpaceWrap('router', {
   401: '401 Page',
   404: '404 Page',
 
-  live: 'live',
+  liveManage: 'liveManage',
   liveRecord: 'liveRecord',
-  liveRoom: 'liveRoom',
+  liveOnline: 'liveOnline',
   liveAnchor: 'liveAnchor',
   liveAudience: 'liveAudience',
   liveStream: 'liveStream',
   liveClient: 'liveClient',
   liveForwardList: 'liveForwardList',
-  forwardConfig: 'forwardConfig',
 
+  liveRoomManage: 'liveRoomManage',
+  liveRoomList: 'liveRoomList',
+  liveRoomUpdate: 'liveRoomUpdate',
+
+  wsMessageManage: 'wsMessageManage',
   wsMessageList: 'wsMessageList',
+  wsMessageUpdate: 'wsMessageUpdate',
 
   user: 'user',
   userList: 'userList',
@@ -36,9 +41,18 @@ export default nameSpaceWrap('router', {
   liveConfig: 'liveConfig',
   liveConfigList: 'liveConfigList',
   liveConfigEdit: 'liveConfigEdit',
+  forwardConfig: 'forwardConfig',
 
   order: 'order',
   orderList: 'orderList',
+
+  loginRecord: 'loginRecord',
+  loginRecordList: 'loginRecordList',
+
+  globalMsg: 'globalMsg',
+  globalMsgList: 'globalMsgList',
+  globalMsgCreate: 'globalMsgCreate',
+  globalMsgUpdate: 'globalMsgUpdate',
 
   github: 'github',
 });

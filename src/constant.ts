@@ -1,4 +1,8 @@
-import { LiveRoomTypeEnum } from './interface';
+import {
+  GlobalMsgTypeEnum,
+  LiveRoomTypeEnum,
+  LoginRecordEnum,
+} from './interface';
 
 export const GITHUB_REPO = 'https://github.com/galaxy-s10/billd-live-admin';
 export const REDIRECT_URI = 'https://admin.hsslive.cn/oauth/';
@@ -43,6 +47,19 @@ export const QINIU_BACKUP = {
   prefix: {
     'mysql/': 'mysql/',
   },
+};
+
+export const GlobalMsgTypeEnumMap = {
+  [GlobalMsgTypeEnum.system]: '系统消息',
+};
+
+export const LoginRecordEnumMap = {
+  [LoginRecordEnum.loginId]: '账号密码登录',
+  [LoginRecordEnum.loginUsername]: '用户名密码登录',
+  [LoginRecordEnum.loginQq]: 'qq登录',
+  [LoginRecordEnum.registerId]: '账号密码注册',
+  [LoginRecordEnum.registerUsername]: '用户名密码注册',
+  [LoginRecordEnum.registerQq]: 'qq注册',
 };
 
 export const liveRoomTypeEnumMap = {
@@ -136,6 +153,8 @@ export const ROUTE_SORT = {
   auth: 110,
   role: 110,
   order: 110,
+  loginRecord: 110,
+  globalMsg: 110,
   thirdUser: 100,
 
   setting: 90,

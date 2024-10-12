@@ -1,4 +1,26 @@
 import sparkMD5 from 'spark-md5';
+import UAParser from 'ua-parser-js';
+
+// 解析user-agent
+export function parseUa(v) {
+  try {
+    const parser = new UAParser();
+    const uaParser = parser.setUA(v);
+    const uaResult = uaParser.getResult();
+    const osName = uaResult.os.name;
+    const res = String(osName).toLocaleLowerCase();
+    let res1 = res;
+    if ('android' === res) {
+      res1 = 'android';
+    } else if ('ios' === res) {
+      res1 = 'iphone';
+    }
+    return res1;
+  } catch (error) {
+    console.log(error);
+    return '';
+  }
+}
 
 /**
  * 根据文件内容获取hash，同一个文件不管重命名还是改文件名后缀，hash都一样

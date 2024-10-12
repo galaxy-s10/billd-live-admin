@@ -83,7 +83,7 @@ const createColumns = () => {
                 type: 'primary',
                 onClick: () => {
                   router.push({
-                    name: 'liveRoomUpdate',
+                    name: 'wsMessageUpdate',
                     query: { id: row.id },
                   });
                   // modalVisiable.value = true;

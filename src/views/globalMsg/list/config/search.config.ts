@@ -1,10 +1,10 @@
 import { IForm } from '@/components/Base/Form';
 import { useOrder } from '@/hooks/use-order';
-import { FormTypeEnum, IRole, ISearch } from '@/interface';
+import { FormTypeEnum, ILoginRecord, ISearch } from '@/interface';
 
 import { columnsConfig } from './columns.config';
 
-export const searchFormConfig: IForm<ISearch<IRole>> = {
+export const searchFormConfig: IForm<ISearch<ILoginRecord>> = {
   gridSpan: 8,
   labelPlacement: 'left',
   formStyle: {
@@ -18,20 +18,22 @@ export const searchFormConfig: IForm<ISearch<IRole>> = {
       placeholder: '请输入id',
     },
     {
-      field: 'keyWord',
-      type: FormTypeEnum.input,
-      label: '关键字',
-      placeholder: '名称/标识',
+      field: 'user_id',
+      type: FormTypeEnum.number,
+      label: '用户id',
+      placeholder: '请输入用户id',
     },
     {
       field: 'type',
-      type: FormTypeEnum.radio,
+      type: FormTypeEnum.number,
       label: '类型',
-      placeholder: '请选择类型',
-      options: [
-        { label: '默认角色', value: 1 },
-        { label: '自定义', value: 2 },
-      ],
+      placeholder: '请输入类型',
+    },
+    {
+      field: 'keyWord',
+      type: FormTypeEnum.input,
+      label: '关键字',
+      placeholder: 'ip/user_agent',
     },
     {
       field: 'rangTimeType',

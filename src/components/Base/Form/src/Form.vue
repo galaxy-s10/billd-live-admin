@@ -141,11 +141,19 @@
               @update:value="handleValueChange($event, item.field)"
             ></MarkdownEditor>
           </template>
-          <template v-else-if="item.type === FormTypeEnum.datePicker">
+          <template v-else-if="item.type === FormTypeEnum.datePickerRange">
             <n-date-picker
               :value="modelValue[`${item.field}`]"
               type="datetimerange"
               :shortcuts="rangeShortcuts"
+              clearable
+              @update:value="handleValueChange($event, item.field)"
+            ></n-date-picker>
+          </template>
+          <template v-else-if="item.type === FormTypeEnum.datePickerDatetime">
+            <n-date-picker
+              :value="modelValue[`${item.field}`]"
+              type="datetime"
               clearable
               @update:value="handleValueChange($event, item.field)"
             ></n-date-picker>

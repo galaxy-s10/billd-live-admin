@@ -6,3 +6,11 @@ export function fetchGetWsMessageList(params: IList<IWsMessage>) {
     params,
   });
 }
+
+export function fetchGetWsMessageFind(id: number) {
+  return request.get<IWsMessage>(`/ws_message/find/${id}`);
+}
+
+export function fetchGetWsMessageUpdate(data: IWsMessage) {
+  return request.post(`/ws_message/update`, data);
+}

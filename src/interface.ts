@@ -302,6 +302,12 @@ export enum WsMessageMsgIsFileEnum {
   no,
 }
 
+export enum WsMessageContentTypeEnum {
+  txt,
+  img,
+  video,
+}
+
 export enum WsMessageMsgIsShowEnum {
   yes,
   no,
@@ -316,18 +322,19 @@ export interface IWsMessage {
   id?: number;
   username?: string;
   origin_username?: string;
+  content_type?: WsMessageContentTypeEnum;
   content?: string;
   origin_content?: string;
   redbag_send_id?: number;
   live_room_id?: number;
   user_id?: number;
   ip?: string;
-  msg_is_file?: WsMessageMsgIsFileEnum;
   msg_type?: DanmuMsgTypeEnum;
   user_agent?: string;
   send_msg_time?: number;
   is_show?: WsMessageMsgIsShowEnum;
   is_verify?: WsMessageMsgIsVerifyEnum;
+  remark?: string;
 
   user?: IUser;
   redbag_send?: IRedbagSend;
@@ -596,7 +603,8 @@ export enum FormTypeEnum {
   'switch' = 'switch',
   'upload' = 'upload',
   'treeSelect' = 'treeSelect',
-  'datePicker' = 'datePicker',
+  'datePickerRange' = 'datePickerRange',
+  'datePickerDatetime' = 'datePickerDatetime',
 }
 
 export interface IFrontend {
@@ -795,6 +803,48 @@ export interface IGoods {
   badge?: string;
   badge_bg?: string;
   remark?: string;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export enum LoginRecordEnum {
+  registerUsername,
+  registerId,
+  registerQq,
+  loginUsername,
+  loginId,
+  loginQq,
+}
+
+export interface ILoginRecord {
+  id?: number;
+  user_id?: number;
+  user_agent?: string;
+  type?: LoginRecordEnum;
+  ip?: string;
+  remark?: string;
+
+  user?: IUser;
+
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export enum GlobalMsgTypeEnum {
+  system,
+}
+
+export interface IGlobalMsg {
+  id?: number;
+  user_id?: number;
+  type?: GlobalMsgTypeEnum;
+  content?: string;
+  remark?: string;
+
+  user?: IUser;
+
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
