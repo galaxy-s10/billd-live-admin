@@ -32,7 +32,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
   },
   {
     title: '权重',
-    key: 'weight',
+    key: 'priority',
     align: 'center',
   },
   {

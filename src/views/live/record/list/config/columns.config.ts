@@ -11,7 +11,6 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     key: 'id',
     align: 'center',
     width: 100,
-    fixed: 'left',
   },
   {
     title() {
@@ -20,22 +19,12 @@ export const columnsConfig = (t): TableColumns<ILiveRecord> => [
     key: 'live_room_id',
     align: 'center',
     width: 100,
-    fixed: 'left',
   },
   {
     title() {
       return t('live.table.anchorId');
     },
     key: 'user_id',
-    align: 'center',
-    width: 100,
-    fixed: 'left',
-  },
-  {
-    title() {
-      return t('live.table.client_id');
-    },
-    key: 'client_id',
     align: 'center',
     width: 100,
   },

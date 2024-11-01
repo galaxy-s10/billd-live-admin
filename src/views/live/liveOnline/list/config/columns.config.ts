@@ -26,6 +26,9 @@ export const columnsConfig = (t): TableColumns<ILive> => [
     key: 'user_id',
     align: 'center',
     width: 100,
+    render(row) {
+      return row.live_room?.users?.[0].id;
+    },
   },
   {
     title() {

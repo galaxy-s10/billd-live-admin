@@ -13,11 +13,17 @@
     "build:beta": "vite build",
     "build:prod": "vite build",
     "copy": "ts-node ./deploy/handleGiteeJenkins.mjs",
+    "cz": "cz",
     "deploy:beta": "node ./deploy/index.js --beta",
     "deploy:prod": "node ./deploy/index.js --prod",
     "dev": "vite",
     "preview": "vite preview",
     "release": ""
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.17",
@@ -44,6 +50,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
+    "commitizen": "^4.3.1",
     "eslint": "^8.47.0",
     "eslint-import-resolver-typescript": "^3.6.0",
     "eslint-plugin-import": "^2.28.0",

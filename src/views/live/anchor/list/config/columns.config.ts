@@ -8,21 +8,21 @@ export const columnsConfig: TableColumns<ILive> = [
     key: 'id',
     align: 'center',
     width: 100,
-    fixed: 'left',
   },
   {
     title: '直播间id',
     key: 'live_room_id',
     align: 'center',
     width: 100,
-    fixed: 'left',
   },
   {
     title: '主播id',
     key: 'user_id',
     align: 'center',
     width: 100,
-    fixed: 'left',
+    render(row) {
+      return row.live_room?.users?.[0].id;
+    },
   },
   {
     title: 'srs_ip',

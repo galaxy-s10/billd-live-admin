@@ -99,7 +99,11 @@ const handleSearch = (v) => {
 async function ajaxFetchList(args) {
   try {
     tableListLoading.value = true;
-    const res = await fetchLiveRecordList(args);
+    const res = await fetchLiveRecordList({
+      ...args,
+      childOrderName: 'priority',
+      childOrderBy: 'desc',
+    });
     if (res.code === 200) {
       tableListLoading.value = false;
       tableListData.value = res.data.rows;

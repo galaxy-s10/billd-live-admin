@@ -36,7 +36,7 @@ export const searchFormConfig: IForm<ISearch<ILive>> = {
       placeholder: '请输入主播id',
     },
     {
-      field: 'live_room_is_show',
+      field: 'is_show',
       type: FormTypeEnum.switch,
       label: '直播间是否显示',
       switchConfig: {
@@ -47,7 +47,7 @@ export const searchFormConfig: IForm<ISearch<ILive>> = {
       },
     },
     {
-      field: 'live_room_status',
+      field: 'status',
       type: FormTypeEnum.switch,
       label: '直播间状态',
       switchConfig: {

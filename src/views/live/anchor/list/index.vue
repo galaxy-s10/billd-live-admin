@@ -36,15 +36,15 @@ const total = ref(0);
 const pagination = usePage();
 const tableListLoading = ref(false);
 const params = ref<{
-  live_room_is_show: LiveRoomIsShowEnum;
-  live_room_status: LiveRoomStatusEnum;
+  is_show: LiveRoomIsShowEnum;
+  status: LiveRoomStatusEnum;
   orderName: string;
   orderBy: string;
   nowPage?: number;
   pageSize?: number;
 }>({
-  live_room_is_show: LiveRoomIsShowEnum.yes,
-  live_room_status: LiveRoomStatusEnum.normal,
+  is_show: LiveRoomIsShowEnum.yes,
+  status: LiveRoomStatusEnum.normal,
   nowPage: 1,
   pageSize: 20,
   orderBy: 'desc',

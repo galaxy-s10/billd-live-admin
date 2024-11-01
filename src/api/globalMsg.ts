@@ -1,3 +1,4 @@
+import { IGlobalMsg } from '@/interface';
 import request from '@/utils/request';
 
 export function fetchGlobalMsgList(params) {
@@ -20,6 +21,6 @@ export function fetchGlobalMsgFind(id: number) {
   return request.get(`/global_msg/find/${id}`);
 }
 
-export function fetchGlobalMsgUpdate(data) {
-  return request.post('/global_msg/update', data);
+export function fetchGlobalMsgUpdate(data: IGlobalMsg) {
+  return request.post(`/global_msg/update/${data.id!}`, data);
 }

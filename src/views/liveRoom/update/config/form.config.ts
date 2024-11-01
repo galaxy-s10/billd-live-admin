@@ -52,7 +52,7 @@ export const formConfig = (): IForm<ILiveRoom> => {
         },
       },
       {
-        field: 'weight',
+        field: 'priority',
         type: FormTypeEnum.number,
         label: '直播间权重',
         placeholder: '请输入直播间权重',
