@@ -26,12 +26,6 @@ export const searchFormConfig = (t): IForm<ISearch<ILive>> => {
         placeholder: 'live.placeholderLiveRoomId',
       },
       {
-        field: 'user_id',
-        type: FormTypeEnum.input,
-        label: 'live.anchorId',
-        placeholder: 'live.placeholderAnchorId',
-      },
-      {
         field: 'keyWord',
         type: FormTypeEnum.input,
         label: 'common.keyword',
