@@ -29,9 +29,6 @@ importers:
       billd-utils:
         specifier: ^0.0.22
         version: 0.0.22(tslib@2.6.2)(typescript@5.1.6)
-      commitizen:
-        specifier: ^4.3.1
-        version: 4.3.1(@types/node@20.4.1)(typescript@5.1.6)
       highlight.js:
         specifier: ^11.8.0
         version: 11.8.0
@@ -78,6 +75,9 @@ importers:
       '@vue/eslint-config-typescript':
         specifier: ^11.0.3
         version: 11.0.3(eslint-plugin-vue@9.15.1(eslint@8.47.0))(eslint@8.47.0)(typescript@5.1.6)
+      commitizen:
+        specifier: ^4.3.1
+        version: 4.3.1(@types/node@20.4.1)(typescript@5.1.6)
       eslint:
         specifier: ^8.47.0
         version: 8.47.0
