@@ -2,25 +2,17 @@ import {
   GlobalMsgTypeEnum,
   LiveRoomTypeEnum,
   LoginRecordEnum,
-} from './interface';
+} from '@/interface';
+
+import { prodDomain } from './spec-config';
 
 export const GITHUB_REPO = 'https://github.com/galaxy-s10/billd-live-admin';
+
 export const REDIRECT_URI = 'https://admin.hsslive.cn/oauth/';
-
-export const QQ_CLIENT_ID = '101934585';
-export const QQ_OAUTH_URL =
-  'https://graph.qq.com/oauth2.0/authorize?response_type=code&';
-
-export const GITHUB_CLIENT_ID = '8c2c07b574ae70ecfa9d';
-export const GITHUB_OAUTH_URL = 'https://github.com/login/oauth/authorize?';
-
-export const QINIU_CDN_URL = 'https://resource.hsslive.cn/';
 
 export const LIVE_CLIENT_URL = 'https://live.hsslive.cn';
 
 export const POSTMESSAGE_TYPE = ['qq_login', 'github_login', 'login_expired'];
-
-export const QINIU_BUCKET = 'hssblog'; // 七牛云bucket
 
 export const AXIOS_BASEURL =
   process.env.NODE_ENV === 'development'
@@ -28,26 +20,7 @@ export const AXIOS_BASEURL =
     : 'https://live-api.hsslive.cn';
 
 export const COOKIE_DOMAIN =
-  process.env.NODE_ENV === 'development' ? undefined : '.hsslive.cn';
-
-export const QINIU_LIVE = {
-  domain: 'resource.hsslive.cn',
-  url: 'https://resource.hsslive.cn/',
-  bucket: 'hssblog',
-  prefix: {
-    'billd-live/image/': 'billd-live/image/',
-    'billd-live/msg-image/': 'billd-live/msg-image/',
-  },
-};
-
-export const QINIU_BACKUP = {
-  domain: 'backup.hsslive.cn',
-  url: 'http://backup.hsslive.cn/',
-  bucket: 'hss-backup',
-  prefix: {
-    'mysql/': 'mysql/',
-  },
-};
+  process.env.NODE_ENV === 'development' ? undefined : `.${prodDomain}`;
 
 export const GlobalMsgTypeEnumMap = {
   [GlobalMsgTypeEnum.system]: '系统消息',

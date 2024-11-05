@@ -26,8 +26,8 @@ import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import { ref, watch } from 'vue';
 
-import { QINIU_LIVE } from '@/constant';
 import { useUpload } from '@/hooks/use-upload';
+import { QINIU_KODO } from '@/spec-config';
 
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('scss', scss);
@@ -66,7 +66,7 @@ const handleChange = (str) => {
 const handleUploadImage = async (_event, insertImage, files) => {
   try {
     const res: any = await useUpload({
-      prefix: QINIU_LIVE.prefix['billd-live/image/'],
+      prefix: QINIU_KODO.hssblog.prefix['billd-live/image/'],
       file: files[0],
     });
     const img = {

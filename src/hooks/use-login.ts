@@ -2,15 +2,14 @@ import { getUrlParams, hrefToTarget, isMobile } from 'billd-utils';
 
 import { fetchBindGithub, fetchGithubLogin } from '@/api/githubUser';
 import { fetchBindQQ, fetchQQLogin } from '@/api/qqUser';
+import { POSTMESSAGE_TYPE, REDIRECT_URI } from '@/constant';
+import router from '@/router';
 import {
   GITHUB_CLIENT_ID,
   GITHUB_OAUTH_URL,
-  POSTMESSAGE_TYPE,
   QQ_CLIENT_ID,
   QQ_OAUTH_URL,
-  REDIRECT_URI,
-} from '@/constant';
-import router from '@/router';
+} from '@/spec-config';
 import { useAppStore } from '@/stores/app';
 import { useUserStore } from '@/stores/user';
 import { clearLoginEnv, setLoginEnv } from '@/utils/cookie';

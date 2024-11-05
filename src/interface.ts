@@ -1094,3 +1094,15 @@ export enum modalUserTypeEnum {
   EDIT = 1,
   EDIT_ROLE = 2,
 }
+
+export interface ICredential {
+  expiredTime: number;
+  expiration: string;
+  credentials: {
+    sessionToken: string;
+    tmpSecretId: string;
+    tmpSecretKey: string;
+  };
+  requestId: string;
+  startTime: number;
+}

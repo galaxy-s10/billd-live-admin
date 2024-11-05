@@ -33,6 +33,7 @@
     "billd-html-webpack-plugin": "^1.0.6",
     "billd-scss": "^0.0.8",
     "billd-utils": "^0.0.22",
+    "cos-js-sdk-v5": "^1.8.6",
     "highlight.js": "^11.8.0",
     "js-cookie": "^3.0.5",
     "naive-ui": "^2.34.4",

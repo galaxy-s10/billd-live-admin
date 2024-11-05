@@ -29,6 +29,9 @@ importers:
       billd-utils:
         specifier: ^0.0.22
         version: 0.0.22(tslib@2.6.2)(typescript@5.1.6)
+      cos-js-sdk-v5:
+        specifier: ^1.8.6
+        version: 1.8.6
       highlight.js:
         specifier: ^11.8.0
         version: 11.8.0
@@ -1841,6 +1844,9 @@ packages:
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
+  cos-js-sdk-v5@1.8.6:
+    resolution: {integrity: sha512-FCygXb5cNQhlwmsGf5B5WnqFsx+cQiPW+I4SWjVg08IaSA+1Uu8VqpP+FI7+LIA9PoC3GpX6ehgV0olsfEnoHg==}
+
   cos-nodejs-sdk-v5@2.13.1:
     resolution: {integrity: sha512-lvmAAUGisiWeiilVkpFQ2Eh9Bl/0aiQuUF4V8GvE0ioSmKQFdb3Z8lrjJNY1CeMtPCtPq9WWZqyevgPwndyEnA==}
     engines: {node: '>= 6'}
@@ -2684,6 +2690,10 @@ packages:
 
   fast-xml-parser@4.3.4:
     resolution: {integrity: sha512-utnwm92SyozgA3hhH2I8qldf2lBqm6qHOICawRNRFu1qMe3+oqr+GcXjGqTmXTMGE5T4eC03kr/rlh5C1IRdZA==}
+    hasBin: true
+
+  fast-xml-parser@4.5.0:
+    resolution: {integrity: sha512-/PlTQCI96+fZMAOLMZK4CWG1ItCbfZ/0jx7UIJFChPNrx7tcEgerUgWbeieCM9MfHInUDyK8DWYZ+YrywDJuTg==}
     hasBin: true
 
   fastq@1.16.0:
@@ -6976,6 +6986,10 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
+  cos-js-sdk-v5@1.8.6:
+    dependencies:
+      fast-xml-parser: 4.5.0
+
   cos-nodejs-sdk-v5@2.13.1:
     dependencies:
       conf: 9.0.2
@@ -7971,6 +7985,10 @@ snapshots:
       strnum: 1.0.5
 
   fast-xml-parser@4.3.4:
+    dependencies:
+      strnum: 1.0.5
+
+  fast-xml-parser@4.5.0:
     dependencies:
       strnum: 1.0.5
 
