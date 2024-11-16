@@ -14,18 +14,25 @@ import { UploadFileInfo } from 'naive-ui';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { fetchFindLiveRoom, fetchUpdateLiveRoom } from '@/api/liveRoom';
+import {
+  fetchGoodsCreate,
+  fetchGoodsFind,
+  fetchGoodsUpdate,
+} from '@/api/googds';
 import HForm from '@/components/Base/Form';
+import { IGoods } from '@/interface';
 
 import { formConfig } from './config/form.config';
 
 const route = useRoute();
 const props = withDefaults(
   defineProps<{
+    edit?: boolean;
     modelValue?: any;
     showAction?: boolean;
   }>(),
   {
+    edit: false,
     modelValue: {},
     showAction: true,
   }
@@ -50,52 +57,64 @@ onMounted(async () => {
 
 async function find() {
   if (id.value) {
-    const res = await fetchFindLiveRoom(id.value);
+    const res = await fetchGoodsFind(id.value);
     if (res.code !== 200) return;
     const row = res.data;
-    let bgImg: UploadFileInfo[] = [];
     let coverImg: UploadFileInfo[] = [];
-    if (row.bg_img) {
-      bgImg = [
-        {
-          id: row.bg_img as string,
-          name: row.bg_img as string,
-          url: row.bg_img as string,
-          status: 'finished',
-          percentage: 100,
-        },
-      ];
-    }
-    if (row.cover_img) {
+    if (row.cover) {
       coverImg = [
         {
-          id: row.cover_img as string,
-          name: row.cover_img as string,
-          url: row.cover_img as string,
+          id: row.cover as string,
+          name: row.cover as string,
+          url: row.cover as string,
           status: 'finished',
           percentage: 100,
         },
       ];
     }
+
     formData.value = {
       ...row,
       // @ts-ignore
-      bg_img: bgImg,
-      // @ts-ignore
-      cover_img: coverImg,
+      cover: coverImg,
     };
   }
 }
 
-const handleConfirm = async (v) => {
+async function handleCreate(v: IGoods) {
   try {
     confirmLoading.value = true;
-    const { message }: any = await fetchUpdateLiveRoom(v);
+    const { message }: any = await fetchGoodsCreate({
+      ...v,
+      // @ts-ignore
+      cover: v.cover?.resultUrl,
+    });
     window.$message.success(message);
   } catch (error) {
     console.log(error);
-  } finally {
-    confirmLoading.value = false;
+  }
+  confirmLoading.value = false;
+}
+async function handleUpdate(v: IGoods) {
+  try {
+    confirmLoading.value = true;
+    const { message }: any = await fetchGoodsUpdate({
+      ...v,
+      // @ts-ignore
+      cover: v.cover?.resultUrl,
+    });
+    window.$message.success(message);
+  } catch (error) {
+    console.log(error);
+  }
+  confirmLoading.value = false;
+}
+
+const handleConfirm = async (v: IGoods) => {
+  if (props.edit) {
+    await handleUpdate(v);
+  } else {
+    await handleCreate(v);
   }
 };
 

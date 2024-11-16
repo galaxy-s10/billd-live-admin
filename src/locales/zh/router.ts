@@ -50,6 +50,7 @@ export default nameSpaceWrap('router', {
   goods: '商品管理',
   goodsList: '商品列表',
   goodsCreate: '添加商品',
+  goodsUpdate: '编辑商品',
 
   loginRecord: '登录记录',
   loginRecordList: '登录记录列表',

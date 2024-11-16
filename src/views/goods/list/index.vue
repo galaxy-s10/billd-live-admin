@@ -7,6 +7,7 @@
     ></HSearch>
     <n-data-table
       remote
+      :scroll-x="scrollX"
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
@@ -64,7 +65,7 @@ const createColumns = () => {
                 type: 'primary',
                 onClick: () => {
                   router.push({
-                    name: 'goodsCreate',
+                    name: 'goodsUpdate',
                     query: { id: row.id },
                   });
                   // modalVisiable.value = true;
@@ -113,6 +114,13 @@ const createColumns = () => {
 };
 
 const columns = createColumns();
+
+const scrollX = ref(0);
+columns.forEach((item) => {
+  if (item.width) {
+    scrollX.value += Number(item.width);
+  }
+});
 onMounted(() => {
   handlePageChange(1);
 });

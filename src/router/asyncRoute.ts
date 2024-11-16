@@ -347,6 +347,15 @@ export const asyncRoutes: RouteRecordRaw[] = [
           title: 'router.goodsCreate',
         },
       },
+      {
+        name: 'goodsUpdate',
+        path: '/goods/update',
+        component: () => import('@/views/goods/update/index.vue'),
+        meta: {
+          title: 'router.goodsUpdate',
+          hidden: true,
+        },
+      },
     ],
   },
   {

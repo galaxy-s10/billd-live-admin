@@ -29,6 +29,7 @@ export const columnsConfig = (): DataTableColumns<IGoods> => {
       title: '介绍',
       key: 'desc',
       width: 100,
+      ellipsis: true,
     },
     {
       title: '短介绍',
