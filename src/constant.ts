@@ -1,5 +1,6 @@
 import {
   GlobalMsgTypeEnum,
+  GoodsTypeEnum,
   LiveRoomTypeEnum,
   LoginRecordEnum,
 } from '@/interface';
@@ -126,6 +127,7 @@ export const ROUTE_SORT = {
   auth: 110,
   role: 110,
   order: 110,
+  goods: 110,
   loginRecord: 110,
   globalMsg: 110,
   thirdUser: 100,
@@ -145,4 +147,12 @@ export const ROUTE_SORT = {
   theme: 60,
 
   error: 10,
+};
+
+export const goodsTypeEnumMap = {
+  [GoodsTypeEnum.recharge]: '充值',
+  [GoodsTypeEnum.gift]: '礼物',
+  [GoodsTypeEnum.sponsors]: '赞助',
+  [GoodsTypeEnum.support]: '服务',
+  [GoodsTypeEnum.qypShop]: '逸鹏的商品',
 };

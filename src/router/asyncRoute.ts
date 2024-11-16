@@ -1,4 +1,5 @@
 import {
+  BagHandleOutline,
   BulbOutline,
   ChatbubblesOutline,
   CogOutline,
@@ -315,6 +316,35 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/order/list/index.vue'),
         meta: {
           title: 'router.orderList',
+        },
+      },
+    ],
+  },
+  {
+    name: 'goods',
+    path: '/goods',
+    component: Layout,
+    meta: {
+      icon: renderIcon(BagHandleOutline),
+      title: 'router.goods',
+      sort: ROUTE_SORT.goods,
+      roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
+    },
+    children: [
+      {
+        name: 'goodsList',
+        path: '/goods/list',
+        component: () => import('@/views/goods/list/index.vue'),
+        meta: {
+          title: 'router.goodsList',
+        },
+      },
+      {
+        name: 'goodsCreate',
+        path: '/goods/create',
+        component: () => import('@/views/goods/create/index.vue'),
+        meta: {
+          title: 'router.goodsCreate',
         },
       },
     ],

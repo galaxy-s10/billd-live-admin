@@ -788,6 +788,7 @@ export enum GoodsTypeEnum {
   sponsors = 'sponsors',
   gift = 'gift',
   recharge = 'recharge',
+  qypShop = 'qypShop',
 }
 
 export interface IGoods {
@@ -797,12 +798,15 @@ export interface IGoods {
   desc?: string;
   short_desc?: string;
   cover?: string;
-  price?: string;
-  original_price?: string;
+  price?: number;
+  original_price?: number;
   nums?: number;
+  pay_nums?: number;
+  inventory?: number;
   badge?: string;
   badge_bg?: string;
   remark?: string;
+
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;

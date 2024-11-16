@@ -46,6 +46,10 @@ export default nameSpaceWrap('router', {
   order: 'order',
   orderList: 'orderList',
 
+  goods: 'goods',
+  goodsList: 'goodsList',
+  goodsCreate: 'goodsCreate',
+
   loginRecord: 'loginRecord',
   loginRecordList: 'loginRecordList',
 

@@ -1,6 +1,13 @@
 import sparkMD5 from 'spark-md5';
 import UAParser from 'ua-parser-js';
 
+export function formatMoney(money?: number) {
+  if (!money) {
+    return '0.00';
+  }
+  return (money / 100).toFixed(2);
+}
+
 // 解析user-agent
 export function parseUa(v) {
   try {

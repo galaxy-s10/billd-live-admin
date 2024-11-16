@@ -47,6 +47,10 @@ export default nameSpaceWrap('router', {
   order: '订单管理',
   orderList: '订单列表',
 
+  goods: '商品管理',
+  goodsList: '商品列表',
+  goodsCreate: '添加商品',
+
   loginRecord: '登录记录',
   loginRecordList: '登录记录列表',
 
