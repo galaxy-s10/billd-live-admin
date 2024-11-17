@@ -7,23 +7,24 @@ export interface IQiniuKey {
   ext: string;
 }
 
+export function fetchQiniuUploadToken(params: IQiniuKey) {
+  return request.get('/qiniu_data/get_token', { params });
+}
+
 export function fetchQiniuDataList(params) {
-  return request.instance({
-    url: '/qiniu_data/list',
-    method: 'get',
+  return request.get('/qiniu_data/list', {
     params,
   });
 }
+
 export function fetchDiff(params) {
-  return request.instance({
-    url: '/qiniu_data/diff',
-    method: 'get',
+  return request.get('/qiniu_data/diff', {
     params,
   });
 }
 
 // 上传图片
-export function fetchUpload(data: { hash; ext; prefix }) {
+export function fetchUpload(data: IQiniuKey) {
   // data:new FormData {prefix,uploadFiles}
   return request.post<{
     flag: boolean;
@@ -38,6 +39,7 @@ export function fetchUpload(data: { hash; ext; prefix }) {
 
 // 上传chunk
 export function fetchUploadChunk(data) {
+  // data:new FormData {prefix,uploadFiles}
   return request.post<{ percentage: number }>(
     '/qiniu_data/upload_chunk',
     data,
@@ -49,7 +51,8 @@ export function fetchUploadChunk(data) {
 }
 
 // 合并chunk
-export function fetchUploadMergeChunk(data: { hash; ext; prefix }) {
+export function fetchUploadMergeChunk(data) {
+  // data:new FormData {prefix,uploadFiles}
   return request.post('/qiniu_data/merge_chunk', data, {
     timeout: 1000 * 60,
   });
@@ -64,11 +67,7 @@ export function fetchUploadProgress(params: IQiniuKey) {
 }
 
 export function fetchCreateLink(data: IQiniuData) {
-  return request.instance({
-    url: '/qiniu_data/create',
-    method: 'post',
-    data,
-  });
+  return request.post('/qiniu_data/create', data);
 }
 export function fetchUpdateQiniuData(data: IQiniuData) {
   return request.instance({
@@ -84,6 +83,7 @@ export function fetchDeleteQiniuData(id: number) {
     method: 'delete',
   });
 }
+
 // eslint-disable-next-line camelcase
 export function fetchDeleteQiniuDataByQiniuKey(qiniu_key: string) {
   return request.instance({

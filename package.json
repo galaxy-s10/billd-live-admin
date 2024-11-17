@@ -38,6 +38,7 @@
     "js-cookie": "^3.0.5",
     "naive-ui": "^2.34.4",
     "pinia": "^2.1.6",
+    "qiniu-js": "^3.4.2",
     "spark-md5": "^3.0.2",
     "ua-parser-js": "^1.0.39",
     "vconsole": "^3.15.1",

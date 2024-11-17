@@ -40,6 +40,9 @@ export function fetchUserPwd() {
   });
 }
 
+export function fetchUserCreate(data: IUser) {
+  return request.post(`/user/create`, data);
+}
 export function fetchUpdateUser(data: IUser) {
   return request.instance({
     url: `/user/update/${data.id!}`,

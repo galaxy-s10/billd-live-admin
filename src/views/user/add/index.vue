@@ -12,7 +12,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+import { fetchUserCreate } from '@/api/user';
 import HForm from '@/components/Base/Form';
+import { IUser } from '@/interface';
 
 import { formConfig } from './config/form.config';
 
@@ -38,8 +40,12 @@ defineExpose({
 
 const handleConfirm = async () => {};
 
-async function validateForm() {
+async function validateForm(v: IUser) {
   const res = await hFormRef.value?.handleValidate();
+  const res2 = await fetchUserCreate(v);
+  if (res2.code === 200) {
+    window.$message.success('新增成功');
+  }
   return res;
 }
 async function validateAndUpload() {
