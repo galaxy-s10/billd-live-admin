@@ -47,7 +47,7 @@ const params = ref<{
   orderName: 'created_at',
 });
 
-const columns = columnsConfig(t);
+const columns = columnsConfig();
 
 const scrollX = ref(0);
 columns.forEach((item) => {

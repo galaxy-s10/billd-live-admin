@@ -43,45 +43,19 @@ export const asyncRoutes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'liveUser',
+        path: '/liveManage/liveUser',
+        component: () => import('@/views/live/liveUser/list/index.vue'),
+        meta: {
+          title: '在线用户',
+        },
+      },
+      {
         name: 'liveRecord',
         path: '/liveManage/record',
         component: () => import('@/views/live/record/list/index.vue'),
         meta: {
           title: 'router.liveRecord',
-        },
-      },
-      {
-        name: 'liveAnchor',
-        path: '/liveManage/anchor',
-        component: () => import('@/views/live/anchor/list/index.vue'),
-        meta: {
-          title: 'router.liveAnchor',
-        },
-      },
-      {
-        name: 'liveAudience',
-        path: '/liveManage/audience',
-        component: () => import('@/views/live/audience/list/index.vue'),
-        meta: {
-          title: 'router.liveAudience',
-        },
-      },
-      {
-        name: 'liveStream',
-        path: '/liveManage/stream',
-        component: () => import('@/views/live/stream/list/index.vue'),
-        meta: {
-          title: 'router.liveStream',
-          roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
-        },
-      },
-      {
-        name: 'liveClient',
-        path: '/liveManage/client',
-        component: () => import('@/views/live/client/list/index.vue'),
-        meta: {
-          title: 'router.liveClient',
-          roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
         },
       },
       {

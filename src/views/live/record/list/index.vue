@@ -44,7 +44,7 @@ const params = ref<{
   nowPage: 1,
   pageSize: 20,
   orderBy: 'desc',
-  orderName: 'created_at',
+  orderName: 'start_time',
 });
 
 const columns = columnsConfig(t);

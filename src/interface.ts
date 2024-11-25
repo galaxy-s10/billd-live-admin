@@ -491,6 +491,11 @@ export interface ISearchBase {
   pageSize?: string;
   orderBy?: string;
   orderName?: string;
+  childNowPage?: number | string;
+  childPageSize?: number | string;
+  childOrderBy?: string;
+  childOrderName?: string;
+  childKeyWord?: string;
   rangTimeType?: 'created_at' | 'updated_at' | 'deleted_at';
   rangTimeStart?: string;
   rangTimeEnd?: string;
@@ -946,58 +951,64 @@ export interface ISrsPublishStream {
 
 export type ILive = {
   id?: number;
-
-  socket_id?: string;
+  /** 直播平台 */
+  platform?: LivePlatformEnum;
+  /** 直播流名称 */
+  stream_name?: string;
+  /** 直播流id */
+  stream_id?: string;
+  /** 用户id */
+  user_id?: number;
+  /** 直播间id */
   live_room_id?: number;
-  /** 1开启;2关闭 */
-  track_video?: number;
-  /** 1开启;2关闭 */
-  track_audio?: number;
+  /** 备注 */
+  remark?: string;
 
-  created_at?: string;
-  updated_at?: string;
-  deleted_at?: string;
-} & ISrsPublishStream & {
-    /** 直播间信息 */
-    live_room?: ILiveRoom;
-  };
-
-export interface ILivePlay extends ISrsPublishStream {
-  id?: number;
-  /** 用户信息 */
-  user?: IUser;
   /** 直播间信息 */
   live_room?: ILiveRoom;
-
-  random_id?: string;
-  user_id?: number;
-  live_room_id?: number;
-  end_time?: string;
+  /** 用户信息 */
+  user?: IUser;
 
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
+};
+
+/** 直播平台 */
+export enum LivePlatformEnum {
+  srs,
+  tencentcloud_css,
 }
 
 export interface ILiveRecord {
   id?: number;
-
-  /** 用户信息 */
-  user?: IUser;
-  /** 直播间信息 */
-  live_room?: ILiveRoom;
-
-  client_id?: string;
+  /** 直播平台 */
+  platform?: LivePlatformEnum;
+  /** 直播流名称 */
+  stream_name?: string;
+  /** 直播流id */
+  stream_id?: string;
+  /** 用户id */
   user_id?: number;
+  /** 直播间id */
   live_room_id?: number;
-  /** 直播时长 */
+  /** 直播时长（单位：秒） */
   duration?: number;
   /** 弹幕数 */
   danmu?: number;
   /** 观看数 */
   view?: number;
+  /** 直播开始时间 */
+  start_time?: string;
   /** 直播结束时间 */
   end_time?: string;
+  /** 备注 */
+  remark?: string;
+
+  /** 直播间信息 */
+  live_room?: ILiveRoom;
+  /** 用户信息 */
+  user?: IUser;
 
   created_at?: string;
   updated_at?: string;
@@ -1109,4 +1120,42 @@ export interface ICredential {
   };
   requestId: string;
   startTime: number;
+}
+
+export enum ClientEnvEnum {
+  android,
+  ios,
+  ipad,
+  web,
+  web_mobile,
+  web_pc,
+  windows,
+  macos,
+}
+
+export interface ILiveView {
+  id?: number;
+  /** 直播记录id */
+  live_record_id?: number;
+  /** 直播间id */
+  live_room_id?: number;
+  /** 用户id */
+  user_id?: number;
+  /** 时长（单位：秒） */
+  duration?: number;
+  user_agent?: string;
+  client_env?: ClientEnvEnum;
+  /** 备注 */
+  remark?: string;
+
+  /** 用户信息 */
+  user?: IUser;
+  /** 直播间信息 */
+  live_room?: ILiveRoom;
+  /** 直播记录信息 */
+  live_record?: ILiveRecord;
+
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
 }

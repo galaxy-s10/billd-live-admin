@@ -236,25 +236,25 @@ const handlePageChange = async () => {
 const createColumns = (): DataTableColumns<IRole> => {
   return [
     {
-      title: 'id',
+      title: () => 'id',
       key: 'id',
       width: 100,
       align: 'center',
     },
     {
-      title: '角色名称',
+      title: () => '角色名称',
       key: 'role_name',
       width: 150,
       align: 'center',
     },
     {
-      title: '角色标识',
+      title: () => '角色标识',
       key: 'role_value',
       width: 150,
       align: 'center',
     },
     {
-      title: '角色类型',
+      title: () => '角色类型',
       key: 'type',
       align: 'center',
       width: 150,
@@ -263,19 +263,19 @@ const createColumns = (): DataTableColumns<IRole> => {
       },
     },
     {
-      title: '角色权重',
+      title: () => '角色权重',
       key: 'priority',
       width: 100,
       align: 'center',
     },
     {
-      title: 'p_id',
+      title: () => 'p_id',
       key: 'p_id',
       width: 100,
       align: 'center',
     },
     {
-      title: '操作',
+      title: () => '操作',
       key: 'actions',
       width: 300,
       align: 'center',

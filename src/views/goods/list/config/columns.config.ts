@@ -8,12 +8,12 @@ import { formatMoney } from '@/utils';
 export const columnsConfig = (): DataTableColumns<IGoods> => {
   return [
     {
-      title: 'id',
+      title: () => 'id',
       key: 'id',
       width: 100,
     },
     {
-      title: '类型',
+      title: () => '类型',
       key: 'type',
       width: 100,
       render(row) {
@@ -21,23 +21,23 @@ export const columnsConfig = (): DataTableColumns<IGoods> => {
       },
     },
     {
-      title: '名称',
+      title: () => '名称',
       key: 'name',
       width: 150,
     },
     {
-      title: '介绍',
+      title: () => '介绍',
       key: 'desc',
       width: 100,
       ellipsis: true,
     },
     {
-      title: '短介绍',
+      title: () => '短介绍',
       key: 'short_desk',
       width: 150,
     },
     {
-      title: '商品图',
+      title: () => '商品图',
       key: 'cover',
       width: 200,
       render(row) {
@@ -48,7 +48,7 @@ export const columnsConfig = (): DataTableColumns<IGoods> => {
       },
     },
     {
-      title: '现价',
+      title: () => '现价',
       key: 'price',
       width: 150,
       render(row) {
@@ -56,7 +56,7 @@ export const columnsConfig = (): DataTableColumns<IGoods> => {
       },
     },
     {
-      title: '原价',
+      title: () => '原价',
       key: 'original_price',
       width: 150,
       render(row) {
@@ -64,43 +64,43 @@ export const columnsConfig = (): DataTableColumns<IGoods> => {
       },
     },
     {
-      title: '数量',
+      title: () => '数量',
       key: 'nums',
       width: 200,
     },
     {
-      title: '付款人数',
+      title: () => '付款人数',
       key: 'pay_nums',
       width: 200,
     },
     {
-      title: '库存',
+      title: () => '库存',
       key: 'inventory',
       width: 200,
     },
     {
-      title: '标记',
+      title: () => '标记',
       key: 'badge',
       width: 200,
     },
     {
-      title: '标记背景色',
+      title: () => '标记背景色',
       key: 'badge_bg',
       width: 150,
     },
     {
-      title: '备注',
+      title: () => '备注',
       key: 'remark',
       width: 150,
     },
     {
-      title: '创建时间',
+      title: () => '创建时间',
       key: 'created_at',
       width: 180,
       fixed: 'right',
     },
     {
-      title: '最后更新',
+      title: () => '最后更新',
       key: 'updated_at',
       width: 180,
       fixed: 'right',

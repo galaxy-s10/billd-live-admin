@@ -6,25 +6,25 @@ import { IFrontend } from '@/interface';
 export const columnsConfig = (): DataTableColumns<IFrontend> => {
   return [
     {
-      title: 'id',
+      title: () => 'id',
       key: 'id',
       align: 'center',
       width: 100,
     },
     {
-      title: 'type',
+      title: () => 'type',
       key: 'type',
       align: 'center',
       width: 100,
     },
     {
-      title: 'key',
+      title: () => 'key',
       key: 'key',
       align: 'center',
       width: 100,
     },
     {
-      title: 'value',
+      title: () => 'value',
       key: 'value',
       align: 'center',
       width: 100,
@@ -42,7 +42,7 @@ export const columnsConfig = (): DataTableColumns<IFrontend> => {
       },
     },
     {
-      title: 'desc',
+      title: () => 'desc',
       key: 'desc',
       align: 'center',
       width: 200,

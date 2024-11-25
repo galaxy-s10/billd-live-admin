@@ -38,7 +38,7 @@ const starListLoading = ref(false);
 const createColumns = () => {
   const action: TableColumns = [
     {
-      title: '操作',
+      title: () => '操作',
       key: 'actions',
       width: 100,
       align: 'center',

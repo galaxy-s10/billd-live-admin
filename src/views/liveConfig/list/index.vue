@@ -1,7 +1,7 @@
 <template>
   <div>
     <HSearch
-      :search-form-config="searchFormConfig"
+      :search-form-config="searchForm"
       :init-value="params"
       @click-search="handleSearch"
     ></HSearch>
@@ -21,6 +21,7 @@
 import { DataTableColumns, NButton, NPopconfirm, NSpace } from 'naive-ui';
 import { TableColumn } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
 import { fetchDeleteFrontend, fetchFrontendList } from '@/api/liveConfig';
@@ -31,6 +32,8 @@ import { IFrontend, IList } from '@/interface';
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
+const { t } = useI18n();
+
 interface ISearch extends IFrontend, IList<any> {}
 
 const starListData = ref([]);
@@ -39,6 +42,7 @@ const pagination = usePage();
 const router = useRouter();
 
 const starListLoading = ref(false);
+const searchForm = ref(searchFormConfig(t));
 
 const params = ref<ISearch>({
   nowPage: 1,
@@ -48,7 +52,7 @@ const params = ref<ISearch>({
 });
 const createColumns = (): DataTableColumns<IFrontend> => {
   const action: TableColumn<IFrontend> = {
-    title: '操作',
+    title: () => '操作',
     key: 'actions',
     width: 200,
     align: 'center',

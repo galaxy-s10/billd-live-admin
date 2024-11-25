@@ -1,7 +1,7 @@
 <template>
   <div class="live-stream-wrap">
     <HSearch
-      :search-form-config="searchFormConfig"
+      :search-form-config="searchForm"
       :init-value="params"
       @click-search="handleSearch"
     ></HSearch>
@@ -36,6 +36,7 @@
 import { NButton, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { fetchLiveRoomList, fetchUpdateLiveRoom } from '@/api/liveRoom';
 import HModal from '@/components/Base/Modal';
@@ -54,6 +55,8 @@ import AddLiveRoomCpt from '../update/index.vue';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
+
+const { t } = useI18n();
 
 const tableListData = ref<ILive[]>([]);
 const total = ref(0);
@@ -82,11 +85,12 @@ const params = ref<{
   orderBy: 'desc',
   orderName: 'created_at',
 });
+const searchForm = ref(searchFormConfig(t));
 
 const createColumns = () => {
   const action: TableColumns<ILiveRoom> = [
     {
-      title: '操作',
+      title: () => '操作',
       key: 'actions',
       width: 200,
       align: 'center',

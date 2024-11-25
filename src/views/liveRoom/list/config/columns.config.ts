@@ -12,31 +12,31 @@ import {
 
 export const columnsConfig: TableColumns<ILiveRoom> = [
   {
-    title: 'id',
+    title: () => 'id',
     key: 'id',
     align: 'center',
     width: 100,
     fixed: 'left',
   },
   {
-    title: '直播间名称',
+    title: () => '直播间名称',
     key: 'name',
     align: 'center',
     width: 150,
   },
   {
-    title: '直播间简介',
+    title: () => '直播间简介',
     key: 'desc',
     align: 'center',
     width: 150,
   },
   {
-    title: '权重',
+    title: () => '权重',
     key: 'priority',
     align: 'center',
   },
   {
-    title: '状态',
+    title: () => '状态',
     key: 'status',
     align: 'center',
     render(row) {
@@ -45,7 +45,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 100,
   },
   {
-    title: '是否显示',
+    title: () => '是否显示',
     key: 'status',
     align: 'center',
     render(row) {
@@ -54,7 +54,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 100,
   },
   {
-    title: '开播预览图',
+    title: () => '开播预览图',
     key: 'cover_img',
     align: 'center',
     render(row) {
@@ -69,7 +69,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 150,
   },
   {
-    title: '直播间背景',
+    title: () => '直播间背景',
     key: 'bg_img',
     align: 'center',
     render(row) {
@@ -106,7 +106,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 150,
   },
   {
-    title: 'type',
+    title: () => 'type',
     key: 'type',
     align: 'center',
     render(row) {
@@ -115,7 +115,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 80,
   },
   {
-    title: '拉流鉴权',
+    title: () => '拉流鉴权',
     key: 'pull_is_should_auth',
     align: 'center',
     render(row) {
@@ -126,7 +126,7 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 100,
   },
   {
-    title: 'cdn',
+    title: () => 'cdn',
     key: 'cdn',
     align: 'center',
     render(row) {
@@ -135,38 +135,38 @@ export const columnsConfig: TableColumns<ILiveRoom> = [
     width: 100,
   },
   {
-    title: 'rtmp_url',
+    title: () => 'rtmp_url',
     key: 'rtmp_url',
     align: 'center',
     width: 150,
   },
   {
-    title: 'flv_url',
+    title: () => 'flv_url',
     key: 'flv_url',
     align: 'center',
     width: 150,
   },
   {
-    title: 'hls_url',
+    title: () => 'hls_url',
     key: 'hls_url',
     align: 'center',
     width: 150,
   },
   {
-    title: '备注',
+    title: () => '备注',
     key: 'remark',
     align: 'center',
     width: 150,
   },
   {
-    title: '创建时间',
+    title: () => '创建时间',
     key: 'created_at',
     align: 'center',
     width: 200,
     fixed: 'right',
   },
   {
-    title: '最后更新',
+    title: () => '最后更新',
     key: 'updated_at',
     align: 'center',
     width: 200,

@@ -1,7 +1,7 @@
 <template>
   <div>
     <HSearch
-      :search-form-config="searchFormConfig"
+      :search-form-config="searchForm"
       :init-value="params"
       @click-search="handleSearch"
     ></HSearch>
@@ -21,6 +21,7 @@
 import { DataTableColumns, NButton, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { fetchGlobalMsgList } from '@/api/globalMsg';
 import HSearch from '@/components/Base/Search';
@@ -30,6 +31,8 @@ import router from '@/router';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
+
+const { t } = useI18n();
 
 interface ISearch extends IGlobalMsg, IList<any> {}
 
@@ -41,10 +44,13 @@ const params = ref<ISearch>({
   orderName: 'id',
   orderBy: 'desc',
 });
+
+const searchForm = ref(searchFormConfig(t));
+
 const createColumns = (): DataTableColumns<IGlobalMsg> => {
   const action: TableColumns<IGlobalMsg> = [
     {
-      title: '操作',
+      title: () => '操作',
       key: 'actions',
       width: 200,
       align: 'center',

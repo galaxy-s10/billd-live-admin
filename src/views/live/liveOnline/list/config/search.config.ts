@@ -4,34 +4,37 @@ import { FormTypeEnum, ILive, ISearch } from '@/interface';
 
 import { columnsConfig } from './columns.config';
 
+// eslint-disable-next-line
 export const searchFormConfig = (t): IForm<ISearch<ILive>> => {
-  return {
-    gridSpan: 8,
-    labelPlacement: 'left',
-    formStyle: {
-      justifyContent: 'center',
-    },
-    formItems: [
-      {
-        field: 'id',
-        type: FormTypeEnum.input,
-        label: 'live.id',
-        placeholder: 'live.placeholderId',
+  {
+    return {
+      gridSpan: 8,
+      labelPlacement: 'left',
+      formStyle: {
+        justifyContent: 'center',
       },
-      {
-        field: 'live_room_id',
-        type: FormTypeEnum.input,
-        label: 'live.liveRoomId',
-        labelWidth: 80,
-        placeholder: 'live.placeholderLiveRoomId',
-      },
-      {
-        field: 'keyWord',
-        type: FormTypeEnum.input,
-        label: 'common.keyword',
-        placeholder: 'live.placeholderClient_id',
-      },
-      ...useOrder(columnsConfig(t)),
-    ],
-  };
+      formItems: [
+        {
+          field: 'id',
+          type: FormTypeEnum.input,
+          label: t('live.id'),
+          placeholder: '',
+        },
+        {
+          field: 'live_room_id',
+          type: FormTypeEnum.input,
+          label: t('live.liveRoomId'),
+          labelWidth: 80,
+          placeholder: '',
+        },
+        {
+          field: 'keyWord',
+          type: FormTypeEnum.input,
+          label: t('common.keyword'),
+          placeholder: '',
+        },
+        ...useOrder({ columnsConfig, t }),
+      ],
+    };
+  }
 };

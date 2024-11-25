@@ -1,7 +1,7 @@
 <template>
   <div>
     <HSearch
-      :search-form-config="searchFormConfig"
+      :search-form-config="searchForm"
       :init-value="params"
       @click-search="handleSearch"
     ></HSearch>
@@ -20,6 +20,7 @@
 <script lang="ts" setup>
 import { DataTableColumns } from 'naive-ui';
 import { onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { fetchloginRecordList } from '@/api/loginRecord';
 import HSearch from '@/components/Base/Search';
@@ -28,6 +29,8 @@ import { IList, ILoginRecord } from '@/interface';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
+
+const { t } = useI18n();
 
 interface ISearch extends ILoginRecord, IList<any> {}
 
@@ -42,6 +45,7 @@ const params = ref<ISearch>({
 const createColumns = (): DataTableColumns<ILoginRecord> => {
   return [...columnsConfig()];
 };
+const searchForm = ref(searchFormConfig(t));
 
 const columns = createColumns();
 

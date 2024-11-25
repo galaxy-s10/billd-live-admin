@@ -1,7 +1,7 @@
 <template>
   <div>
     <HSearch
-      :search-form-config="searchFormConfig"
+      :search-form-config="searchForm"
       :init-value="params"
       @click-search="handleSearch"
     ></HSearch>
@@ -22,6 +22,7 @@
 import { NButton, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { fetchGoodsList } from '@/api/googds';
 import HSearch from '@/components/Base/Search';
@@ -31,6 +32,8 @@ import router from '@/router';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
+
+const { t } = useI18n();
 
 interface ISearch extends IGoods, IList<any> {}
 
@@ -46,7 +49,7 @@ const params = ref<ISearch>({
 const createColumns = () => {
   const action: TableColumns<IGoods> = [
     {
-      title: '操作',
+      title: () => '操作',
       key: 'actions',
       width: 200,
       align: 'center',
@@ -114,6 +117,7 @@ const createColumns = () => {
 };
 
 const columns = createColumns();
+const searchForm = ref(searchFormConfig(t));
 
 const scrollX = ref(0);
 columns.forEach((item) => {

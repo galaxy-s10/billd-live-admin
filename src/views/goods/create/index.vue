@@ -87,7 +87,7 @@ async function handleCreate(v: IGoods) {
     const { message }: any = await fetchGoodsCreate({
       ...v,
       // @ts-ignore
-      cover: v.cover?.resultUrl,
+      cover: v.cover?.[0]?.resultUrl,
     });
     window.$message.success(message);
   } catch (error) {
@@ -101,7 +101,7 @@ async function handleUpdate(v: IGoods) {
     const { message }: any = await fetchGoodsUpdate({
       ...v,
       // @ts-ignore
-      cover: v.cover?.resultUrl,
+      cover: v.cover?.[0]?.resultUrl,
     });
     window.$message.success(message);
   } catch (error) {

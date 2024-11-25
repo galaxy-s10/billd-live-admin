@@ -1,11 +1,11 @@
 import { IForm } from '@/components/Base/Form';
 import { useOrder } from '@/hooks/use-order';
-import { FormTypeEnum, ILoginRecord, ISearch } from '@/interface';
+import { FormTypeEnum, ILiveView, ISearch } from '@/interface';
 
 import { columnsConfig } from './columns.config';
 
 // eslint-disable-next-line
-export const searchFormConfig = (t): IForm<ISearch<ILoginRecord>> => {
+export const searchFormConfig = (t): IForm<ISearch<ILiveView>> => {
   return {
     gridSpan: 8,
     labelPlacement: 'left',
@@ -14,10 +14,10 @@ export const searchFormConfig = (t): IForm<ISearch<ILoginRecord>> => {
     },
     formItems: [
       {
-        field: 'id',
-        type: FormTypeEnum.input,
-        label: 'id',
-        placeholder: '请输入id',
+        field: 'live_room_id',
+        type: FormTypeEnum.number,
+        label: '直播间id',
+        placeholder: '请输入直播间id',
       },
       {
         field: 'user_id',
@@ -26,22 +26,16 @@ export const searchFormConfig = (t): IForm<ISearch<ILoginRecord>> => {
         placeholder: '请输入用户id',
       },
       {
-        field: 'type',
-        type: FormTypeEnum.number,
-        label: '类型',
-        placeholder: '请输入类型',
-      },
-      {
         field: 'keyWord',
         type: FormTypeEnum.input,
-        label: '关键字',
-        placeholder: 'ip/user_agent',
+        label: 'ip/备注',
+        placeholder: '请输入ip/备注',
       },
       {
-        field: 'rangTimeType',
-        type: FormTypeEnum.datePickerRange,
-        label: '时间范围',
-        placeholder: '请选择时间范围',
+        field: 'childKeyWord',
+        type: FormTypeEnum.input,
+        label: '用户名',
+        placeholder: '请输入用户名',
       },
       ...useOrder({ columnsConfig, t }),
     ],

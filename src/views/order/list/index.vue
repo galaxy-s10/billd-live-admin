@@ -1,7 +1,7 @@
 <template>
   <div>
     <HSearch
-      :search-form-config="searchFormConfig"
+      :search-form-config="searchForm"
       :init-value="params"
       @click-search="handleSearch"
     ></HSearch>
@@ -20,6 +20,7 @@
 <script lang="ts" setup>
 import { DataTableColumns } from 'naive-ui';
 import { onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { fetchOrderList } from '@/api/order';
 import HSearch from '@/components/Base/Search';
@@ -29,21 +30,21 @@ import { IList, IOrder } from '@/interface';
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
+const { t } = useI18n();
+
 interface ISearch extends IOrder, IList<any> {}
 
 const tableListData = ref([]);
 const total = ref(0);
 const pagination = usePage();
 const tableListLoading = ref(false);
-const params = ref<ISearch>({
-  orderName: 'id',
-  orderBy: 'desc',
-});
+const params = ref<ISearch>({});
 const createColumns = (): DataTableColumns<IOrder> => {
   return [...columnsConfig()];
 };
 
 const columns = createColumns();
+const searchForm = ref(searchFormConfig(t));
 
 onMounted(() => {
   handlePageChange(1);

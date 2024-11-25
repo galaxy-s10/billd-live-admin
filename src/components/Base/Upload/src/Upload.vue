@@ -25,14 +25,8 @@
 import { UploadFileInfo } from 'naive-ui';
 import { ref, watch } from 'vue';
 
-import {
-  fetchUpload,
-  fetchUploadChunk,
-  fetchUploadMergeChunk,
-  fetchUploadProgress,
-} from '@/api/qiniuData';
+import { useUpload } from '@/hooks/use-upload';
 import { QINIU_KODO } from '@/spec-config';
-import { getHash, splitFile } from '@/utils';
 
 const props = withDefaults(
   defineProps<{
@@ -89,111 +83,17 @@ const handleUploadChange = (data: { fileList: UploadFileInfo[] }) => {
   emits('update:value', list.value);
 };
 
-const mergeAndUpload = async ({ hash, ext, prefix, id }) => {
-  await fetchUploadMergeChunk({ hash, ext, prefix });
-  const { data } = await fetchUpload({
-    hash,
-    ext,
-    prefix: prefixValue.value,
-  });
-  list.value.forEach((val) => {
-    if (val.id === id) {
-      val.status = 'finished';
-      val.percentage = 100;
-      val.url = data.resultUrl;
-    }
-  });
-  clearInterval(timerObj.value[id]);
-  return data;
-};
-
 const upload = async (file: UploadFileInfo) => {
   const id = file.id;
   try {
-    const { hash, ext } = await getHash(file.file!);
-    const prefix = prefixValue.value;
-    const { code } = await fetchUploadProgress({ prefix, hash, ext });
-    if (code === 3) {
-      const { data } = await fetchUpload({ prefix, hash, ext });
-      list.value.forEach((val) => {
-        if (val.id === id) {
-          val.status = 'finished';
-          val.percentage = 100;
-          val.url = data.resultUrl;
-        }
-      });
-      return data;
-    }
-    const chunkList = splitFile(file.file!);
-    let isMerge = false;
-    return new Promise((resolve) => {
-      for (let i = 0; i < chunkList.length; i += 1) {
-        const v = chunkList[i];
-        const form = new FormData();
-        form.append('prefix', prefix);
-        form.append('hash', hash);
-        form.append('ext', ext);
-        form.append('chunkName', v.chunkName);
-        form.append('chunkTotal', `${chunkList.length}`);
-        form.append('uploadFiles', v.chunk);
-        fetchUploadChunk(form).then((res) => {
-          list.value.forEach((val) => {
-            if (val.id === id) {
-              val.status = 'uploading';
-              val.percentage = res.data.percentage;
-              if (res.data.percentage === 50) {
-                if (!isMerge) {
-                  mergeAndUpload({ hash, ext, prefix, id }).then(
-                    (uploadRes) => {
-                      resolve(uploadRes);
-                    }
-                  );
-                  isMerge = true;
-                }
-              }
-            }
-          });
-        });
-      }
-      let flag = false;
-      timerObj.value[id] = setInterval(async () => {
-        try {
-          const { code, data, message } = await fetchUploadProgress({
-            hash,
-            prefix,
-            ext,
-          });
-          if (flag) {
-            clearInterval(timerObj.value[id]);
-            return;
-          }
-          if (code === 1) {
-            const percentage = data.percentage!;
-            list.value.forEach((v) => {
-              if (v.id === file.id) {
-                v.status = percentage < 100 ? 'uploading' : 'finished';
-                v.percentage = percentage;
-              }
-            });
-            if (percentage === 100) {
-              flag = true;
-            }
-          } else if (code === 2) {
-            list.value.forEach((v) => {
-              if (v.id === file.id) {
-                v.status = 'uploading';
-                v.percentage = 0;
-              }
-            });
-          } else {
-            console.log(code, message);
-          }
-        } catch (error) {
-          console.log(error);
-          clearInterval(timerObj.value[id]);
-        }
-      }, 1000);
+    const res = await useUpload({
+      prefix: QINIU_KODO.hssblog.prefix['billd-live/image/'],
+      file: file.file!,
     });
+    return {
+      flag: res.flag,
+      resultUrl: res.resultUrl,
+    };
   } catch (error) {
     console.log(error);
     clearInterval(timerObj.value[id]);

@@ -1,7 +1,7 @@
 <template>
   <div>
     <HSearch
-      :search-form-config="searchFormConfig"
+      :search-form-config="searchForm"
       :init-value="params"
       @click-search="handleSearch"
     ></HSearch>
@@ -76,6 +76,7 @@
 import { DataTableColumns, NButton, NSpace, UploadFileInfo } from 'naive-ui';
 import { TableColumn } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { fetchTreeRole, fetchUserRole } from '@/api/role';
 import {
@@ -93,6 +94,8 @@ import AddUser from '../add/index.vue';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
+
+const { t } = useI18n();
 
 interface ISearch extends IUser, IList<any> {}
 
@@ -131,7 +134,7 @@ const addUserRef = ref<InstanceType<typeof AddUser>>();
 
 const createColumns = (): DataTableColumns<IUser> => {
   const action: TableColumn<IUser> = {
-    title: '操作',
+    title: () => '操作',
     key: 'actions',
     width: 200,
     fixed: 'right',
@@ -195,6 +198,7 @@ const createColumns = (): DataTableColumns<IUser> => {
   };
   return [...columnsConfig(), action];
 };
+const searchForm = ref(searchFormConfig(t));
 
 const columns = createColumns();
 const scrollX = ref(0);

@@ -31,7 +31,7 @@ export const searchFormConfig = (t): IForm<ISearch<ILive>> => {
         label: 'common.keyword',
         placeholder: 'live.placeholderClient_id',
       },
-      ...useOrder(columnsConfig(t)),
+      ...useOrder({ columnsConfig, t }),
     ],
   };
 };

@@ -1,6 +1,28 @@
 import sparkMD5 from 'spark-md5';
 import UAParser from 'ua-parser-js';
 
+/**
+ * 给一个秒数，返回x时x分x秒
+ * @param num
+ */
+export function convertToTime(num: number) {
+  // 计算天数、小时、分钟和秒数
+  const days = Math.floor(num / (24 * 3600));
+  const hours = Math.floor((num % (24 * 3600)) / 3600);
+  const minutes = Math.floor((num % 3600) / 60);
+  const seconds = Math.floor(num % 60);
+
+  if (days) {
+    return `${days}天${hours}时${minutes}分${seconds}秒`;
+  } else if (hours) {
+    return `${hours}时${minutes}分${seconds}秒`;
+  } else if (minutes) {
+    return `${minutes}分${seconds}秒`;
+  } else {
+    return `${seconds}秒`;
+  }
+}
+
 export function formatMoney(money?: number) {
   if (!money) {
     return '0.00';
