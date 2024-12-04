@@ -73,8 +73,8 @@
 </template>
 
 <script lang="ts" setup>
-import { DataTableColumns, NButton, NSpace, UploadFileInfo } from 'naive-ui';
-import { TableColumn } from 'naive-ui/es/data-table/src/interface';
+import { NButton, NSpace, UploadFileInfo } from 'naive-ui';
+import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -132,71 +132,73 @@ const defaultCheckedKeys = ref([]);
 const formRef = ref<any>(null);
 const addUserRef = ref<InstanceType<typeof AddUser>>();
 
-const createColumns = (): DataTableColumns<IUser> => {
-  const action: TableColumn<IUser> = {
-    title: () => '操作',
-    key: 'actions',
-    width: 200,
-    fixed: 'right',
-    align: 'center',
-    render(row) {
-      return h(NSpace, { justify: 'center' }, () => [
-        h(
-          NButton,
-          {
-            size: 'small',
-            onClick: async () => {
-              const { data } = await fetchUserDetail(row.id!);
-              // @ts-ignore
-              data.qq_users = data.qq_users?.length ? 1 : 2;
-              // @ts-ignore
-              data.github_users = data.github_users?.length ? 1 : 2;
-              // @ts-ignore
-              data.email_users = data.email_users?.length ? 1 : 2;
-              let avatar: UploadFileInfo[] = [];
-              if (row.avatar) {
-                avatar = [
-                  {
-                    id: row.avatar as string,
-                    name: row.avatar as string,
-                    url: row.avatar as string,
-                    status: 'finished',
-                    percentage: 100,
-                  },
-                ];
-              }
-              currRow.value = { ...data, avatar };
-              modalType.value = modalUserTypeEnum.EDIT;
-              modalVisiable.value = !modalVisiable.value;
+const createColumns = (): TableColumns<IUser> => {
+  const action: TableColumns<IUser> = [
+    {
+      title: '操作',
+      key: 'actions',
+      width: 200,
+      fixed: 'right',
+      align: 'center',
+      render(row) {
+        return h(NSpace, { justify: 'center' }, () => [
+          h(
+            NButton,
+            {
+              size: 'small',
+              onClick: async () => {
+                const { data } = await fetchUserDetail(row.id!);
+                // @ts-ignore
+                data.qq_users = data.qq_users?.length ? 1 : 2;
+                // @ts-ignore
+                data.github_users = data.github_users?.length ? 1 : 2;
+                // @ts-ignore
+                data.email_users = data.email_users?.length ? 1 : 2;
+                let avatar: UploadFileInfo[] = [];
+                if (row.avatar) {
+                  avatar = [
+                    {
+                      id: row.avatar as string,
+                      name: row.avatar as string,
+                      url: row.avatar as string,
+                      status: 'finished',
+                      percentage: 100,
+                    },
+                  ];
+                }
+                currRow.value = { ...data, avatar };
+                modalType.value = modalUserTypeEnum.EDIT;
+                modalVisiable.value = !modalVisiable.value;
+              },
             },
-          },
-          () => '编辑' // 用箭头函数返回性能更好。
-        ),
-        h(
-          NButton,
-          {
-            size: 'small',
-            type: 'primary',
-            onClick: async () => {
-              const userInfo = await fetchUserDetail(row.id!);
-              const userRole = await fetchUserRole(row.id!);
-              await ajaxFetchTreeRole();
+            () => '编辑' // 用箭头函数返回性能更好。
+          ),
+          h(
+            NButton,
+            {
+              size: 'small',
+              type: 'primary',
+              onClick: async () => {
+                const userInfo = await fetchUserDetail(row.id!);
+                const userRole = await fetchUserRole(row.id!);
+                await ajaxFetchTreeRole();
 
-              formValue.value = {
-                ...userInfo.data,
-                user_roles: userRole.data.result.map((v) => v.id),
-              };
-              modalTitle.value = '编辑角色';
-              modalType.value = modalUserTypeEnum.EDIT_ROLE;
-              modalVisiable.value = !modalVisiable.value;
+                formValue.value = {
+                  ...userInfo.data,
+                  user_roles: userRole.data.result.map((v) => v.id),
+                };
+                modalTitle.value = '编辑角色';
+                modalType.value = modalUserTypeEnum.EDIT_ROLE;
+                modalVisiable.value = !modalVisiable.value;
+              },
             },
-          },
-          () => '编辑角色' // 用箭头函数返回性能更好。
-        ),
-      ]);
+            () => '编辑角色' // 用箭头函数返回性能更好。
+          ),
+        ]);
+      },
     },
-  };
-  return [...columnsConfig(), action];
+  ];
+  return [...columnsConfig(t), ...action];
 };
 const searchForm = ref(searchFormConfig(t));
 

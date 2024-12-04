@@ -1,6 +1,7 @@
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 
-export const columnsConfig: TableColumns<any> = [
+// eslint-disable-next-line
+export const columnsConfig = (_t): TableColumns<any> => [
   {
     title: 'cmd',
     key: 'cmd',

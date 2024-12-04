@@ -128,7 +128,7 @@
             <UploadCpt
               ref="hUploadRef"
               :field="item.field"
-              :placeholder="item.placeholder || ''"
+              :placeholder="item.placeholder"
               :max="item.uploadConfig?.max"
               :prefix="item.uploadConfig?.prefix"
               :model-value="modelValue[`${item.field}`]"
@@ -146,6 +146,8 @@
               :value="modelValue[`${item.field}`]"
               type="datetimerange"
               :shortcuts="rangeShortcuts"
+              start-placeholder="开始时间"
+              end-placeholder="结束时间"
               clearable
               @update:value="handleValueChange($event, item.field)"
             ></n-date-picker>
@@ -186,15 +188,14 @@ import { SelectOption } from 'naive-ui';
 import { Shortcuts } from 'naive-ui/es/date-picker/src/interface';
 import { LabelPlacement } from 'naive-ui/es/form/src/interface';
 import { StyleValue, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import UploadCpt from '@/components/Base/Upload';
 import MarkdownEditor from '@/components/MarkdownEditor';
 import { FormTypeEnum } from '@/interface';
+import { dateStartAndEnd } from '@/utils';
 
 import { IFormItemFieldString } from '../types';
 
-const { t } = useI18n();
 const props = withDefaults(
   defineProps<{
     modelValue: any;
@@ -244,17 +245,9 @@ function handleValidate() {
 }
 
 const rangeShortcuts: Shortcuts = {
-  近1小时: () => {
-    const cur = new Date().getTime();
-    return [cur - 1 * 60 * 60 * 1000, cur];
-  },
   近2小时: () => {
     const cur = new Date().getTime();
     return [cur - 2 * 60 * 60 * 1000, cur];
-  },
-  近4小时: () => {
-    const cur = new Date().getTime();
-    return [cur - 4 * 60 * 60 * 1000, cur];
   },
   近6小时: () => {
     const cur = new Date().getTime();
@@ -267,6 +260,76 @@ const rangeShortcuts: Shortcuts = {
   近24小时: () => {
     const cur = new Date().getTime();
     return [cur - 24 * 60 * 60 * 1000, cur];
+  },
+  近2天: () => {
+    const cur = new Date().getTime();
+    return [cur - 2 * 24 * 60 * 60 * 1000, cur];
+  },
+  近3天: () => {
+    const cur = new Date().getTime();
+    return [cur - 3 * 24 * 60 * 60 * 1000, cur];
+  },
+  近1周: () => {
+    const cur = new Date().getTime();
+    return [cur - 7 * 24 * 60 * 60 * 1000, cur];
+  },
+  近1个月: () => {
+    const cur = new Date().getTime();
+    return [cur - 30 * 24 * 60 * 60 * 1000, cur];
+  },
+  近3个月: () => {
+    const cur = new Date().getTime();
+    return [cur - 30 * 3 * 24 * 60 * 60 * 1000, cur];
+  },
+  近半年: () => {
+    const cur = new Date().getTime();
+    return [cur - 30 * 6 * 24 * 60 * 60 * 1000, cur];
+  },
+  近一年: () => {
+    const cur = new Date().getTime();
+    return [cur - 30 * 12 * 24 * 60 * 60 * 1000, cur];
+  },
+  今天: () => {
+    const res = dateStartAndEnd(new Date());
+    return [+new Date(res.startTime), +new Date(res.endTime)];
+  },
+  昨天: () => {
+    // 获取今天的日期
+    const today = new Date();
+    // 创建一个新的日期对象，设置为昨天
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    const res = dateStartAndEnd(yesterday);
+    return [+new Date(res.startTime), +new Date(res.endTime)];
+  },
+  当月: () => {
+    // 获取当前日期
+    const today = new Date();
+
+    // 获取当前年份和月份
+    const year = today.getFullYear();
+    const month = today.getMonth(); // 注意：月份从0开始，0代表1月，11代表12月
+
+    // 获取当前月份的第一天和最后一天
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0); // 下个月的第一天减去一天
+    const { endTime } = dateStartAndEnd(lastDay);
+    return [+new Date(firstDay), +new Date(endTime)];
+  },
+  上月: () => {
+    // 获取当前日期
+    const today = new Date();
+
+    // 获取当前年份和月份
+    const year = today.getFullYear();
+    const month = today.getMonth(); // 注意：月份从0开始，0代表1月，11代表12月
+
+    // 获取上个月的第一天和最后一天
+    const firstDayLastMonth = new Date(year, month - 1, 1);
+    const lastDayLastMonth = new Date(year, month, 0); // 当前月的第一天减去一天
+
+    const { endTime } = dateStartAndEnd(lastDayLastMonth);
+    return [+new Date(firstDayLastMonth), +new Date(endTime)];
   },
 };
 

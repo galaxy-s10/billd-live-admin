@@ -2,7 +2,6 @@ import {
   BagHandleOutline,
   BulbOutline,
   ChatbubblesOutline,
-  CogOutline,
   FootstepsOutline,
   HomeOutline,
   LockClosedOutline,
@@ -230,45 +229,6 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/auth/add/index.vue'),
         meta: {
           title: 'router.addAuth',
-        },
-      },
-    ],
-  },
-  {
-    name: 'liveConfig',
-    path: '/liveConfig',
-    component: Layout,
-    meta: {
-      title: 'router.liveConfig',
-      icon: renderIcon(CogOutline),
-      sort: ROUTE_SORT.liveConfig,
-      roles: [ROUTE_ROLES.SUPER_ADMIN],
-    },
-    children: [
-      {
-        name: 'liveConfigList',
-        path: '/liveConfig/list',
-        component: () => import('@/views/liveConfig/list/index.vue'),
-        meta: {
-          title: 'router.liveConfigList',
-        },
-      },
-      {
-        name: 'liveConfigEdit',
-        path: '/liveConfig/edit',
-        component: () => import('@/views/liveConfig/edit/index.vue'),
-        meta: {
-          title: 'router.liveConfigEdit',
-          hidden: true,
-        },
-      },
-      {
-        name: 'forwardConfig',
-        path: '/liveConfig/forwardList',
-        component: () => import('@/views/liveConfig/forwardConfig/index.vue'),
-        meta: {
-          title: 'router.forwardConfig',
-          roles: [DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value],
         },
       },
     ],

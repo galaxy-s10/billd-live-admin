@@ -109,13 +109,8 @@
 
 <script lang="ts" setup>
 import { deepCloneByJson } from 'billd-utils';
-import {
-  DataTableColumns,
-  FormInst,
-  NButton,
-  NPopconfirm,
-  NSpace,
-} from 'naive-ui';
+import { FormInst, NButton, NPopconfirm, NSpace } from 'naive-ui';
+import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
 
 import {
@@ -233,28 +228,28 @@ const handlePageChange = async () => {
   await ajaxFetchRoleList();
 };
 
-const createColumns = (): DataTableColumns<IRole> => {
+const createColumns = (): TableColumns<IRole> => {
   return [
     {
-      title: () => 'id',
+      title: 'id',
       key: 'id',
       width: 100,
       align: 'center',
     },
     {
-      title: () => '角色名称',
+      title: '角色名称',
       key: 'role_name',
       width: 150,
       align: 'center',
     },
     {
-      title: () => '角色标识',
+      title: '角色标识',
       key: 'role_value',
       width: 150,
       align: 'center',
     },
     {
-      title: () => '角色类型',
+      title: '角色类型',
       key: 'type',
       align: 'center',
       width: 150,
@@ -263,19 +258,19 @@ const createColumns = (): DataTableColumns<IRole> => {
       },
     },
     {
-      title: () => '角色权重',
+      title: '角色权重',
       key: 'priority',
       width: 100,
       align: 'center',
     },
     {
-      title: () => 'p_id',
+      title: 'p_id',
       key: 'p_id',
       width: 100,
       align: 'center',
     },
     {
-      title: () => '操作',
+      title: '操作',
       key: 'actions',
       width: 300,
       align: 'center',

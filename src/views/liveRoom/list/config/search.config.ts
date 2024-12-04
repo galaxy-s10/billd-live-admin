@@ -24,24 +24,16 @@ export const searchFormConfig = (t): IForm<ISearch<ILiveRoom>> => {
     formItems: [
       {
         field: 'id',
-        type: FormTypeEnum.input,
+        type: FormTypeEnum.number,
         label: 'id',
-        placeholder: '请输入id',
       },
       {
         field: 'type',
         type: FormTypeEnum.select,
         label: '直播间类型',
-        placeholder: '请选择直播间类型',
         options: Object.keys(liveRoomTypeEnumMap).map((v) => {
           return { label: liveRoomTypeEnumMap[v], value: v };
         }),
-      },
-      {
-        field: 'keyWord',
-        type: FormTypeEnum.input,
-        label: '关键字',
-        placeholder: '直播间名称/简介/备注',
       },
       {
         field: 'cdn',
@@ -85,7 +77,13 @@ export const searchFormConfig = (t): IForm<ISearch<ILiveRoom>> => {
           unCheckedText: '禁用',
         },
       },
-      ...useOrder({ columnsConfig, t }),
+      {
+        field: 'keyWord',
+        type: FormTypeEnum.input,
+        label: '关键字',
+        placeholder: '直播间名称/简介/备注',
+      },
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

@@ -17,27 +17,30 @@ export const searchFormConfig = (t): IForm<ISearch<ILiveView>> => {
         field: 'live_room_id',
         type: FormTypeEnum.number,
         label: '直播间id',
-        placeholder: '请输入直播间id',
       },
       {
         field: 'user_id',
         type: FormTypeEnum.number,
         label: '用户id',
-        placeholder: '请输入用户id',
       },
       {
         field: 'keyWord',
         type: FormTypeEnum.input,
-        label: 'ip/备注',
+        label: '关键字',
         placeholder: '请输入ip/备注',
       },
       {
         field: 'childKeyWord',
         type: FormTypeEnum.input,
-        label: '用户名',
+        label: '关键字',
         placeholder: '请输入用户名',
       },
-      ...useOrder({ columnsConfig, t }),
+      {
+        field: 'rangTimeType',
+        type: FormTypeEnum.datePickerRange,
+        label: '时间范围',
+      },
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

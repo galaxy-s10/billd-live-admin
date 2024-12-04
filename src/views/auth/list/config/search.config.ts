@@ -15,9 +15,18 @@ export const searchFormConfig = (t): IForm<ISearch<IAuth>> => {
     formItems: [
       {
         field: 'id',
-        type: FormTypeEnum.input,
+        type: FormTypeEnum.number,
         label: 'id',
-        placeholder: '请输入id',
+      },
+
+      {
+        field: 'type',
+        type: FormTypeEnum.radio,
+        label: '类型',
+        options: [
+          { label: '默认权限', value: 1 },
+          { label: '自定义', value: 2 },
+        ],
       },
       {
         field: 'keyWord',
@@ -26,22 +35,11 @@ export const searchFormConfig = (t): IForm<ISearch<IAuth>> => {
         placeholder: '名称/标识',
       },
       {
-        field: 'type',
-        type: FormTypeEnum.radio,
-        label: '类型',
-        placeholder: '请选择类型',
-        options: [
-          { label: '默认权限', value: 1 },
-          { label: '自定义', value: 2 },
-        ],
-      },
-      {
         field: 'rangTimeType',
         type: FormTypeEnum.datePickerRange,
         label: '时间范围',
-        placeholder: '请选择时间范围',
       },
-      ...useOrder({ columnsConfig, t }),
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

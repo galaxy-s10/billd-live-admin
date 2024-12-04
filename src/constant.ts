@@ -133,7 +133,6 @@ export const ROUTE_SORT = {
   thirdUser: 100,
 
   setting: 90,
-  liveConfig: 90,
   github: 10,
 
   qiniu: 70,

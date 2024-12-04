@@ -6,11 +6,11 @@ export const useOrder = ({ columnsConfig, t }) => {
     field: 'orderName',
     type: FormTypeEnum.select,
     label: t('common.sortName'),
-    placeholder: '',
-    options: columnsConfig().map((v: any) => {
+    placeholder: '请选择排序字段',
+    options: columnsConfig.map((v: any) => {
       return {
         // label: v.key,
-        label: v.title(),
+        label: v.title,
         value: v.key,
       };
     }),
@@ -20,7 +20,7 @@ export const useOrder = ({ columnsConfig, t }) => {
     field: 'orderBy',
     type: FormTypeEnum.select,
     label: t('common.sortBy'),
-    placeholder: '',
+    placeholder: '请选择排序规则',
     options: [
       {
         label: t('common.asc'),

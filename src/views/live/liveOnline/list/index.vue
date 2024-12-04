@@ -47,7 +47,7 @@ const params = ref<{
   orderName: 'created_at',
 });
 
-const columns = columnsConfig();
+const columns = columnsConfig(t);
 
 const scrollX = ref(0);
 columns.forEach((item) => {
@@ -55,7 +55,7 @@ columns.forEach((item) => {
     scrollX.value += Number(item.width);
   }
 });
-const searchForm = ref(searchFormConfig(t));
+const searchForm = searchFormConfig(t);
 
 onMounted(() => {
   handlePageChange(1);

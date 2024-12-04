@@ -66,7 +66,7 @@ const handleConfirm = async (vv: IUser) => {
   v.avatar = avatar;
   // @ts-ignore
   v.user_roles = [v.user_roles];
-  console.log(v);
+
   const res = await fetchUserCreate(v);
   if (res.code === 200) {
     window.$message.success('新建成功！');

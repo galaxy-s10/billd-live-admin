@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DataTableColumns } from 'naive-ui';
+import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -42,8 +42,8 @@ const params = ref<ISearch>({
   orderName: 'id',
   orderBy: 'desc',
 });
-const createColumns = (): DataTableColumns<ILoginRecord> => {
-  return [...columnsConfig()];
+const createColumns = (): TableColumns<ILoginRecord> => {
+  return [...columnsConfig(t)];
 };
 const searchForm = ref(searchFormConfig(t));
 

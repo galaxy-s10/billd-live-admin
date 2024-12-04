@@ -32,8 +32,8 @@
 </template>
 
 <script lang="ts" setup>
-import { DataTableColumns, NButton, NSpace } from 'naive-ui';
-import { TableColumn } from 'naive-ui/es/data-table/src/interface';
+import { NButton, NSpace } from 'naive-ui';
+import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -69,37 +69,40 @@ const params = ref<ISearch>({
 
 const searchForm = ref(searchFormConfig(t));
 
-const createColumns = (): DataTableColumns<IAuth> => {
-  const action: TableColumn<IAuth> = {
-    title: () => '操作',
-    key: 'actions',
-    width: 200,
-    align: 'center',
-    fixed: 'right',
-    render(row) {
-      return h(
-        NSpace,
-        {
-          justify: 'center',
-        },
-        () => [
-          h(
-            NButton,
-            {
-              size: 'small',
-              type: 'primary',
-              onClick: () => {
-                modalVisiable.value = true;
-                currRow.value = { ...row };
+const createColumns = (): TableColumns<IAuth> => {
+  const action: TableColumns<IAuth> = [
+    {
+      title: '操作',
+      key: 'actions',
+      width: 200,
+      align: 'center',
+      fixed: 'right',
+      render(row) {
+        return h(
+          NSpace,
+          {
+            justify: 'center',
+          },
+          () => [
+            h(
+              NButton,
+              {
+                size: 'small',
+                type: 'primary',
+                onClick: () => {
+                  modalVisiable.value = true;
+                  currRow.value = { ...row };
+                },
               },
-            },
-            () => '编辑' // 用箭头函数返回性能更好。
-          ),
-        ]
-      );
+              () => '编辑' // 用箭头函数返回性能更好。
+            ),
+          ]
+        );
+      },
     },
-  };
-  return [...columnsConfig(), action];
+  ];
+
+  return [...columnsConfig(t), ...action];
 };
 
 watch(

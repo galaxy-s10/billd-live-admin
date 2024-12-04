@@ -6,35 +6,35 @@ import { columnsConfig } from './columns.config';
 
 // eslint-disable-next-line
 export const searchFormConfig = (t): IForm<ISearch<ILive>> => {
-  {
-    return {
-      gridSpan: 8,
-      labelPlacement: 'left',
-      formStyle: {
-        justifyContent: 'center',
+  return {
+    gridSpan: 8,
+    labelPlacement: 'left',
+    formStyle: {
+      justifyContent: 'center',
+    },
+    formItems: [
+      {
+        field: 'id',
+        type: FormTypeEnum.number,
+        label: t('live.id'),
       },
-      formItems: [
-        {
-          field: 'id',
-          type: FormTypeEnum.input,
-          label: t('live.id'),
-          placeholder: '',
-        },
-        {
-          field: 'live_room_id',
-          type: FormTypeEnum.input,
-          label: t('live.liveRoomId'),
-          labelWidth: 80,
-          placeholder: '',
-        },
-        {
-          field: 'keyWord',
-          type: FormTypeEnum.input,
-          label: t('common.keyword'),
-          placeholder: '',
-        },
-        ...useOrder({ columnsConfig, t }),
-      ],
-    };
-  }
+      {
+        field: 'live_room_id',
+        type: FormTypeEnum.number,
+        label: t('live.liveRoomId'),
+        labelWidth: 80,
+      },
+      {
+        field: 'keyWord',
+        type: FormTypeEnum.input,
+        label: t('common.keyword'),
+      },
+      {
+        field: 'rangTimeType',
+        type: FormTypeEnum.datePickerRange,
+        label: '时间范围',
+      },
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
+    ],
+  };
 };

@@ -45,10 +45,10 @@ const params = ref({
   pageSize: 20,
 });
 
-const createColumns = () => {
+const createColumns = (): TableColumns<ILiveView> => {
   const action: TableColumns<ILiveView> = [
     {
-      title: () => '操作',
+      title: '操作',
       key: 'actions',
       width: 100,
       align: 'center',
@@ -90,7 +90,7 @@ const createColumns = () => {
       },
     },
   ];
-  return [...columnsConfig, ...action];
+  return [...columnsConfig(t), ...action];
 };
 
 const columns = createColumns();

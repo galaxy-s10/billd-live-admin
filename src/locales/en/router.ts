@@ -38,9 +38,6 @@ export default nameSpaceWrap('router', {
   authTree: 'authTree',
   addAuth: 'addAuth',
 
-  liveConfig: 'liveConfig',
-  liveConfigList: 'liveConfigList',
-  liveConfigEdit: 'liveConfigEdit',
   forwardConfig: 'forwardConfig',
 
   order: 'order',

@@ -6,25 +6,19 @@ import { convertToTime } from '@/utils';
 // eslint-disable-next-line
 export const columnsConfig = (_t): TableColumns<ILiveRecord> => [
   {
-    title() {
-      return 'id';
-    },
+    title: 'id',
     key: 'id',
     align: 'center',
     width: 100,
   },
   {
-    title() {
-      return '直播间id';
-    },
+    title: '直播间id',
     key: 'live_room_id',
     align: 'center',
     width: 100,
   },
   {
-    title() {
-      return '直播间名';
-    },
+    title: '直播间名',
     key: 'live_room_name',
     align: 'center',
     width: 100,
@@ -33,17 +27,13 @@ export const columnsConfig = (_t): TableColumns<ILiveRecord> => [
     },
   },
   {
-    title() {
-      return '主播id';
-    },
+    title: '直播用户id',
     key: 'user_id',
     align: 'center',
     width: 100,
   },
   {
-    title() {
-      return '主播名';
-    },
+    title: '直播用户名',
     key: 'user_name',
     align: 'center',
     width: 100,
@@ -52,25 +42,19 @@ export const columnsConfig = (_t): TableColumns<ILiveRecord> => [
     },
   },
   {
-    title() {
-      return '观看数';
-    },
+    title: '观看数',
     key: 'view',
     align: 'center',
     width: 100,
   },
   {
-    title() {
-      return '弹幕数';
-    },
+    title: '弹幕数',
     key: 'danmu',
     align: 'center',
     width: 100,
   },
   {
-    title() {
-      return '观看时间';
-    },
+    title: '观看时间',
     key: 'duration',
     align: 'center',
     width: 100,
@@ -79,18 +63,14 @@ export const columnsConfig = (_t): TableColumns<ILiveRecord> => [
     },
   },
   {
-    title() {
-      return '直播开始时间';
-    },
+    title: '直播开始时间',
     key: 'start_time',
     align: 'center',
     width: 200,
     fixed: 'right',
   },
   {
-    title() {
-      return '直播结束时间';
-    },
+    title: '直播结束时间',
     key: 'end_time',
     align: 'center',
     width: 200,

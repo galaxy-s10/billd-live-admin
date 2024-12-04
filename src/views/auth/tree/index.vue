@@ -108,13 +108,8 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  DataTableColumns,
-  FormInst,
-  NButton,
-  NPopconfirm,
-  NSpace,
-} from 'naive-ui';
+import { FormInst, NButton, NPopconfirm, NSpace } from 'naive-ui';
+import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
 
 import {
@@ -225,28 +220,29 @@ onMounted(async () => {
 const handlePageChange = async () => {
   await ajaxFetchAuthList();
 };
-const createColumns = (): DataTableColumns<IAuth> => {
+
+const createColumns = (): TableColumns<IAuth> => {
   return [
     {
-      title: () => 'id',
+      title: 'id',
       key: 'id',
       width: 100,
       align: 'center',
     },
     {
-      title: () => '权限名称',
+      title: '权限名称',
       key: 'auth_name',
       width: 150,
       align: 'center',
     },
     {
-      title: () => '权限标识',
+      title: '权限标识',
       key: 'auth_value',
       width: 200,
       align: 'center',
     },
     {
-      title: () => '权限类型',
+      title: '权限类型',
       key: 'type',
       align: 'center',
       width: 200,
@@ -255,19 +251,19 @@ const createColumns = (): DataTableColumns<IAuth> => {
       },
     },
     {
-      title: () => '权限权重',
+      title: '权限权重',
       key: 'priority',
       width: 100,
       align: 'center',
     },
     {
-      title: () => 'p_id',
+      title: 'p_id',
       key: 'p_id',
       width: 100,
       align: 'center',
     },
     {
-      title: () => '操作',
+      title: '操作',
       key: 'actions',
       width: 300,
       align: 'center',

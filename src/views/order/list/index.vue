@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DataTableColumns } from 'naive-ui';
+import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -39,8 +39,9 @@ const total = ref(0);
 const pagination = usePage();
 const tableListLoading = ref(false);
 const params = ref<ISearch>({});
-const createColumns = (): DataTableColumns<IOrder> => {
-  return [...columnsConfig()];
+
+const createColumns = (): TableColumns<IOrder> => {
+  return [...columnsConfig(t)];
 };
 
 const columns = createColumns();

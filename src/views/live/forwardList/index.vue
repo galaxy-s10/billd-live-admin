@@ -25,20 +25,23 @@
 import { NButton, NPopconfirm, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { fetchForwardList, fetchKillForward } from '@/api/live';
 import { IApiV1Clients } from '@/interface';
 
 import { columnsConfig } from './config/columns.config';
 
+const { t } = useI18n();
+
 const tableList = ref<IApiV1Clients['clients']>([]);
 
 const starListLoading = ref(false);
 
-const createColumns = () => {
+const createColumns = (): TableColumns => {
   const action: TableColumns = [
     {
-      title: () => '操作',
+      title: '操作',
       key: 'actions',
       width: 100,
       align: 'center',
@@ -57,9 +60,7 @@ const createColumns = () => {
                 'negative-text': '取消',
                 'on-positive-click': async () => {
                   const cmd: string = row.cmd || '';
-                  console.log(cmd);
                   const cmdarr = cmd.match(/\s+(\d+)\s+/);
-                  console.log(cmdarr, 'cmdarr');
                   const pid = Number(cmdarr?.[1]);
                   if (pid) {
                     await fetchKillForward(pid);
@@ -89,7 +90,7 @@ const createColumns = () => {
       },
     },
   ];
-  return [...columnsConfig, ...action];
+  return [...columnsConfig(t), ...action];
 };
 
 const columns = createColumns();

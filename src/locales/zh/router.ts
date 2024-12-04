@@ -39,9 +39,6 @@ export default nameSpaceWrap('router', {
   authTree: '权限树',
   addAuth: '添加权限',
 
-  liveConfig: '直播配置',
-  liveConfigList: '配置列表',
-  liveConfigEdit: '编辑直播配置',
   forwardConfig: '转推配置',
 
   order: '订单管理',

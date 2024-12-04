@@ -46,10 +46,10 @@ const params = ref<ISearch>({
   orderBy: 'desc',
 });
 
-const createColumns = () => {
+const createColumns = (): TableColumns<IGoods> => {
   const action: TableColumns<IGoods> = [
     {
-      title: () => '操作',
+      title: '操作',
       key: 'actions',
       width: 200,
       align: 'center',
@@ -113,7 +113,7 @@ const createColumns = () => {
       },
     },
   ];
-  return [...columnsConfig(), ...action];
+  return [...columnsConfig(t), ...action];
 };
 
 const columns = createColumns();

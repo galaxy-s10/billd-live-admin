@@ -16,15 +16,13 @@ export const searchFormConfig = (t): IForm<ISearch<IGoods>> => {
     formItems: [
       {
         field: 'id',
-        type: FormTypeEnum.input,
+        type: FormTypeEnum.number,
         label: 'id',
-        placeholder: '请输入id',
       },
       {
         field: 'type',
         type: FormTypeEnum.select,
         label: '商品类型',
-        placeholder: '请选择商品类型',
         options: Object.keys(goodsTypeEnumMap).map((v) => {
           return { label: goodsTypeEnumMap[v], value: v };
         }),
@@ -39,9 +37,8 @@ export const searchFormConfig = (t): IForm<ISearch<IGoods>> => {
         field: 'rangTimeType',
         type: FormTypeEnum.datePickerRange,
         label: '时间范围',
-        placeholder: '请选择时间范围',
       },
-      ...useOrder({ columnsConfig, t }),
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

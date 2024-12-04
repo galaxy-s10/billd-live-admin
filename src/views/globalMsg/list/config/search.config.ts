@@ -15,21 +15,18 @@ export const searchFormConfig = (t): IForm<ISearch<ILoginRecord>> => {
     formItems: [
       {
         field: 'id',
-        type: FormTypeEnum.input,
+        type: FormTypeEnum.number,
         label: 'id',
-        placeholder: '请输入id',
       },
       {
         field: 'user_id',
         type: FormTypeEnum.number,
         label: '用户id',
-        placeholder: '请输入用户id',
       },
       {
         field: 'type',
         type: FormTypeEnum.number,
         label: '类型',
-        placeholder: '请输入类型',
       },
       {
         field: 'keyWord',
@@ -41,9 +38,8 @@ export const searchFormConfig = (t): IForm<ISearch<ILoginRecord>> => {
         field: 'rangTimeType',
         type: FormTypeEnum.datePickerRange,
         label: '时间范围',
-        placeholder: '请选择时间范围',
       },
-      ...useOrder({ columnsConfig, t }),
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

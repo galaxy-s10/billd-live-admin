@@ -87,10 +87,10 @@ const params = ref<{
 });
 const searchForm = ref(searchFormConfig(t));
 
-const createColumns = () => {
+const createColumns = (): TableColumns<ILiveRoom> => {
   const action: TableColumns<ILiveRoom> = [
     {
-      title: () => '操作',
+      title: '操作',
       key: 'actions',
       width: 200,
       align: 'center',
@@ -154,7 +154,7 @@ const createColumns = () => {
       },
     },
   ];
-  return [...columnsConfig, ...action];
+  return [...columnsConfig(t), ...action];
 };
 
 const columns = createColumns();

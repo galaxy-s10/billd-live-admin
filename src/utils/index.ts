@@ -2,6 +2,21 @@ import sparkMD5 from 'spark-md5';
 import UAParser from 'ua-parser-js';
 
 /**
+ * 获取日期当天的开始时间到结束时间
+ */
+export function dateStartAndEnd(date: Date) {
+  const y = date.getFullYear();
+  const m = date.getMonth() + 1;
+  const d = date.getDate();
+  const startTime = `${y}/${m}/${d} 00:00:00`;
+  const endTime = `${y}/${m}/${d} 23:59:59`;
+  return {
+    startTime,
+    endTime,
+  };
+}
+
+/**
  * 给一个秒数，返回x时x分x秒
  * @param num
  */

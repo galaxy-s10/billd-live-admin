@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DataTableColumns, NButton, NSpace } from 'naive-ui';
+import { NButton, NSpace } from 'naive-ui';
 import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -47,10 +47,10 @@ const params = ref<ISearch>({
 
 const searchForm = ref(searchFormConfig(t));
 
-const createColumns = (): DataTableColumns<IGlobalMsg> => {
+const createColumns = (): TableColumns<IGlobalMsg> => {
   const action: TableColumns<IGlobalMsg> = [
     {
-      title: () => '操作',
+      title: '操作',
       key: 'actions',
       width: 200,
       align: 'center',
@@ -81,7 +81,7 @@ const createColumns = (): DataTableColumns<IGlobalMsg> => {
       },
     },
   ];
-  return [...columnsConfig(), ...action];
+  return [...columnsConfig(t), ...action];
 };
 
 const columns = createColumns();

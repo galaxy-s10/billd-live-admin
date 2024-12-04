@@ -1,25 +1,26 @@
-import { DataTableColumns } from 'naive-ui';
+import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h } from 'vue';
 
 import { IUser, UserStatusEnum } from '@/interface';
 
-export const columnsConfig = (): DataTableColumns<IUser> => {
+// eslint-disable-next-line
+export const columnsConfig = (_t): TableColumns<IUser> => {
   return [
     {
-      title: () => 'id',
+      title: 'id',
       key: 'id',
       align: 'center',
       width: 100,
       fixed: 'left',
     },
     {
-      title: () => '用户名',
+      title: '用户名',
       key: 'username',
       align: 'center',
       width: 120,
     },
     {
-      title: () => '头像',
+      title: '头像',
       key: 'avatar',
       align: 'center',
       render(row) {
@@ -31,7 +32,7 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       width: 150,
     },
     {
-      title: () => '简介',
+      title: '简介',
       key: 'desc',
       align: 'center',
       ellipsis: {
@@ -40,7 +41,7 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       width: 150,
     },
     {
-      title: () => '状态',
+      title: '状态',
       key: 'status',
       align: 'center',
       render(row) {
@@ -49,14 +50,14 @@ export const columnsConfig = (): DataTableColumns<IUser> => {
       width: 100,
     },
     {
-      title: () => '创建时间',
+      title: '创建时间',
       key: 'created_at',
       align: 'center',
       width: 200,
       fixed: 'right',
     },
     {
-      title: () => '最后更新',
+      title: '最后更新',
       key: 'updated_at',
       align: 'center',
       width: 200,

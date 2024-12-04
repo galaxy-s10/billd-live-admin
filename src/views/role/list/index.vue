@@ -39,8 +39,8 @@
 </template>
 
 <script lang="ts" setup>
-import { DataTableColumns, NButton, NSpace } from 'naive-ui';
-import { TableColumn } from 'naive-ui/es/data-table/src/interface';
+import { NButton, NSpace } from 'naive-ui';
+import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -83,57 +83,59 @@ const params = ref<ISearch>({
 });
 const searchForm = ref(searchFormConfig(t));
 
-const createColumns = (): DataTableColumns<IRole> => {
-  const action: TableColumn<IRole> = {
-    title: () => '操作',
-    key: 'actions',
-    width: 200,
-    align: 'center',
-    fixed: 'right',
-    render(row) {
-      return h(
-        NSpace,
-        {
-          justify: 'center',
-        },
-        () => [
-          h(
-            NButton,
-            {
-              size: 'small',
-              type: 'info',
-              onClick: async () => {
-                const { data } = await fetchRoleAuth(row.id!);
-                isEditAuth.value = true;
-                modalTitle.value = '编辑角色权限';
-                modalVisiable.value = true;
-                currRow.value = {
-                  id: row.id,
-                  role_auths: data.result.map((v: IRole) => v.id),
-                };
+const createColumns = (): TableColumns<IRole> => {
+  const action: TableColumns<IRole> = [
+    {
+      title: '操作',
+      key: 'actions',
+      width: 200,
+      align: 'center',
+      fixed: 'right',
+      render(row) {
+        return h(
+          NSpace,
+          {
+            justify: 'center',
+          },
+          () => [
+            h(
+              NButton,
+              {
+                size: 'small',
+                type: 'info',
+                onClick: async () => {
+                  const { data } = await fetchRoleAuth(row.id!);
+                  isEditAuth.value = true;
+                  modalTitle.value = '编辑角色权限';
+                  modalVisiable.value = true;
+                  currRow.value = {
+                    id: row.id,
+                    role_auths: data.result.map((v: IRole) => v.id),
+                  };
+                },
               },
-            },
-            () => '编辑角色权限' // 用箭头函数返回性能更好。
-          ),
-          h(
-            NButton,
-            {
-              size: 'small',
-              type: 'primary',
-              onClick: () => {
-                isEditAuth.value = false;
-                modalTitle.value = '编辑角色';
-                modalVisiable.value = true;
-                currRow.value = { ...row };
+              () => '编辑角色权限' // 用箭头函数返回性能更好。
+            ),
+            h(
+              NButton,
+              {
+                size: 'small',
+                type: 'primary',
+                onClick: () => {
+                  isEditAuth.value = false;
+                  modalTitle.value = '编辑角色';
+                  modalVisiable.value = true;
+                  currRow.value = { ...row };
+                },
               },
-            },
-            () => '编辑' // 用箭头函数返回性能更好。
-          ),
-        ]
-      );
+              () => '编辑' // 用箭头函数返回性能更好。
+            ),
+          ]
+        );
+      },
     },
-  };
-  return [...columnsConfig(), action];
+  ];
+  return [...columnsConfig(t), ...action];
 };
 
 const columns = createColumns();

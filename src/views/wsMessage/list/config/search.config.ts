@@ -15,9 +15,8 @@ export const searchFormConfig = (t): IForm<ISearch<IWsMessage>> => {
     formItems: [
       {
         field: 'id',
-        type: FormTypeEnum.input,
+        type: FormTypeEnum.number,
         label: 'id',
-        placeholder: '请输入id',
       },
 
       {
@@ -26,7 +25,12 @@ export const searchFormConfig = (t): IForm<ISearch<IWsMessage>> => {
         label: '关键字',
         placeholder: '直播间名称/简介/备注',
       },
-      ...useOrder({ columnsConfig, t }),
+      {
+        field: 'rangTimeType',
+        type: FormTypeEnum.datePickerRange,
+        label: '时间范围',
+      },
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

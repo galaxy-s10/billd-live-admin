@@ -3,27 +3,28 @@ import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { ILiveView } from '@/interface';
 import { convertToTime } from '@/utils';
 
-export const columnsConfig: TableColumns<ILiveView> = [
+// eslint-disable-next-line
+export const columnsConfig = (_t): TableColumns<ILiveView> => [
   {
-    title: () => '直播记录id',
+    title: '直播记录id',
     key: 'live_record_id',
     align: 'center',
     width: 150,
   },
   {
-    title: () => '直播间id',
+    title: '直播间id',
     key: 'live_room_id',
     align: 'center',
     width: 150,
   },
   {
-    title: () => '用户id',
+    title: '用户id',
     key: 'user_id',
     align: 'center',
     width: 150,
   },
   {
-    title: () => '用户名',
+    title: '用户名',
     key: 'username',
     align: 'center',
     width: 150,
@@ -32,13 +33,13 @@ export const columnsConfig: TableColumns<ILiveView> = [
     },
   },
   {
-    title: () => 'ip',
+    title: 'ip',
     key: 'client_ip',
     align: 'center',
     width: 200,
   },
   {
-    title: () => '观看时间',
+    title: '观看时间',
     key: 'duration',
     align: 'center',
     width: 200,
@@ -47,20 +48,20 @@ export const columnsConfig: TableColumns<ILiveView> = [
     },
   },
   {
-    title: () => '备注',
+    title: '备注',
     key: 'remark',
     align: 'center',
     width: 200,
   },
   {
-    title: () => '创建时间',
+    title: '创建时间',
     key: 'created_at',
     align: 'center',
     width: 200,
     fixed: 'right',
   },
   {
-    title: () => '最后更新',
+    title: '最后更新',
     key: 'updated_at',
     align: 'center',
     width: 200,

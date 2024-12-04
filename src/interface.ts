@@ -544,17 +544,6 @@ export interface IApiV1Streams {
   }[];
 }
 
-export interface ILiveConfig {
-  id?: number;
-  key?: string;
-  value?: string | any[] | null;
-  desc?: string;
-  type?: FormTypeEnum;
-  created_at?: string;
-  updated_at?: string;
-  deleted_at?: string;
-}
-
 export interface IApiV1Clients {
   code: number;
   server: string;
@@ -610,17 +599,6 @@ export enum FormTypeEnum {
   'treeSelect' = 'treeSelect',
   'datePickerRange' = 'datePickerRange',
   'datePickerDatetime' = 'datePickerDatetime',
-}
-
-export interface IFrontend {
-  id?: number;
-  key?: string;
-  value?: string;
-  desc?: string;
-  type?: FormTypeEnum;
-  created_at?: string;
-  updated_at?: string;
-  deleted_at?: string;
 }
 
 export interface IBackend {
@@ -976,6 +954,7 @@ export type ILive = {
 
 /** 直播平台 */
 export enum LivePlatformEnum {
+  rtc,
   srs,
   tencentcloud_css,
 }

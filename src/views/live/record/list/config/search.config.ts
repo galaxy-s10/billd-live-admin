@@ -14,24 +14,26 @@ export const searchFormConfig = (t): IForm<ISearch<ILive>> => {
     formItems: [
       {
         field: 'id',
-        type: FormTypeEnum.input,
-        label: 'live.id',
-        placeholder: 'live.placeholderId',
+        type: FormTypeEnum.number,
+        label: 'id',
       },
       {
         field: 'live_room_id',
-        type: FormTypeEnum.input,
-        label: 'live.liveRoomId',
+        type: FormTypeEnum.number,
+        label: '直播间id',
         labelWidth: 80,
-        placeholder: 'live.placeholderLiveRoomId',
       },
       {
         field: 'keyWord',
         type: FormTypeEnum.input,
-        label: 'common.keyword',
-        placeholder: 'live.placeholderClient_id',
+        label: '关键字',
       },
-      ...useOrder({ columnsConfig, t }),
+      {
+        field: 'rangTimeType',
+        type: FormTypeEnum.datePickerRange,
+        label: '时间范围',
+      },
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

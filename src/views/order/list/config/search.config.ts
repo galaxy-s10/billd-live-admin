@@ -15,33 +15,28 @@ export const searchFormConfig = (t): IForm<ISearch<IOrder>> => {
     formItems: [
       {
         field: 'id',
-        type: FormTypeEnum.input,
+        type: FormTypeEnum.number,
         label: 'id',
-        placeholder: '请输入id',
       },
       {
         field: 'billd_live_live_room_id',
         type: FormTypeEnum.input,
         label: '直播间id',
-        placeholder: '请输入直播间id',
       },
       {
         field: 'billd_live_user_id',
         type: FormTypeEnum.input,
         label: '用户id',
-        placeholder: '请输入用户id',
       },
       {
         field: 'billd_live_goods_id',
         type: FormTypeEnum.input,
         label: '商品id',
-        placeholder: '请输入主播id',
       },
       {
         field: 'trade_status',
         type: FormTypeEnum.select,
         label: '交易状态',
-        placeholder: '请选择交易状态',
         options: Object.keys(PayStatusEnum).map((v) => {
           return { label: PayStatusEnum[v], value: v };
         }),
@@ -56,9 +51,8 @@ export const searchFormConfig = (t): IForm<ISearch<IOrder>> => {
         field: 'rangTimeType',
         type: FormTypeEnum.datePickerRange,
         label: '时间范围',
-        placeholder: '请选择时间范围',
       },
-      ...useOrder({ columnsConfig, t }),
+      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

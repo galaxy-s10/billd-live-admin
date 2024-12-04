@@ -14,13 +14,11 @@ export const formConfig = (): IForm<IGlobalMsg> => {
         field: 'user_id',
         type: FormTypeEnum.number,
         label: '用户id',
-        placeholder: '请输入用户id',
       },
       {
         field: 'type',
         type: FormTypeEnum.radio,
         label: '类型',
-        placeholder: '请选择类型',
         options: Object.keys(GlobalMsgTypeEnumMap).map((v) => {
           return { label: GlobalMsgTypeEnumMap[v], value: +v };
         }),
@@ -30,13 +28,11 @@ export const formConfig = (): IForm<IGlobalMsg> => {
         field: 'content',
         type: FormTypeEnum.input,
         label: '内容',
-        placeholder: '请输入内容',
       },
       {
         field: 'remark',
         type: FormTypeEnum.input,
         label: '备注',
-        placeholder: '请输入备注',
       },
     ],
   };
