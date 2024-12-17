@@ -47,7 +47,7 @@ import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
 import router from '@/router';
-import { useAppStore } from '@/stores/app';
+import { useAppStore } from '@/store/app';
 
 const { t } = useI18n();
 const appStore = useAppStore();

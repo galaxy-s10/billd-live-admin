@@ -56,7 +56,7 @@ import { useI18n } from 'vue-i18n';
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router';
 
 import { defaultRoutes } from '@/router/index';
-import { useAppStore } from '@/stores/app';
+import { useAppStore } from '@/store/app';
 
 import HeaderCpt from './header/header.vue';
 import openTabCpt from './openTab/openTab.vue';

@@ -48,8 +48,8 @@
 import { onMounted, ref } from 'vue';
 
 import HModal from '@/components/Base/Modal';
-import { useAppStore } from '@/stores/app';
-import { useUserStore } from '@/stores/user';
+import { useAppStore } from '@/store/app';
+import { useUserStore } from '@/store/user';
 import { getCurrEnv, setCurrEnv } from '@/utils/localStorage';
 
 const userStore = useUserStore();

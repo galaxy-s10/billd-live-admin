@@ -14,7 +14,7 @@ import { reactive, ref, toRefs, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
-import { useAppStore } from '@/stores/app';
+import { useAppStore } from '@/store/app';
 
 const { t } = useI18n();
 const appStore = useAppStore();

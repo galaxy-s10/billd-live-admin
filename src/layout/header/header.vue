@@ -42,8 +42,8 @@ import { useRouter } from 'vue-router';
 
 import BreadcrumbCpt from '@/components/Breadcrumb/index.vue';
 import { LIVE_CLIENT_URL } from '@/constant';
-import { useAppStore } from '@/stores/app';
-import { useUserStore } from '@/stores/user';
+import { useAppStore } from '@/store/app';
+import { useUserStore } from '@/store/user';
 
 const userStore = useUserStore();
 const appStore = useAppStore();

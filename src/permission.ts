@@ -1,7 +1,7 @@
 import { toRefs } from 'vue';
 
-import { useAppStore } from '@/stores/app';
-import { useUserStore } from '@/stores/user';
+import { useAppStore } from '@/store/app';
+import { useUserStore } from '@/store/user';
 
 import router from './router';
 import { getToken } from './utils/localStorage';
