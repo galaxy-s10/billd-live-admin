@@ -1,7 +1,7 @@
 {
   "name": "billd-live-admin",
   "version": "0.1.0",
-  "description": "基于Vue3 + WebRTC + Node + SRS搭建的直播间",
+  "description": "基于Vue3 + Vite6 + NaiveUI搭建的直播间后台",
   "keywords": [
     "billd",
     "bilibili",
@@ -10,7 +10,7 @@
     "flv",
     "hls"
   ],
-  "homepage": "https://live.hsslive.cn",
+  "homepage": "https://live-admin.hsslive.cn",
   "bugs": {
     "url": "https://github.com/galaxy-s10/billd-live-admin/issues"
   },
