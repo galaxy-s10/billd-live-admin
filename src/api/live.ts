@@ -1,5 +1,14 @@
-import { ILive, IPaging } from '@/interface';
+import { ILive, ILiveRoomLiveUser, IPaging } from '@/interface';
 import request from '@/utils/request';
+
+export function fetchLiveRoomOnlineUser(liveRoomId: number) {
+  return request.get<ILiveRoomLiveUser[]>(
+    `/live/live_room_online_user/${liveRoomId}`
+  );
+}
+export function fetchAllLiveRoomOnlineUser() {
+  return request.get<ILiveRoomLiveUser[]>(`/live/all_live_room_online_user`);
+}
 
 export function fetchLiveList(params) {
   return request.get<IPaging<ILive>>('/live/list', {

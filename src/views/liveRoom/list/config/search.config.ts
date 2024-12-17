@@ -6,7 +6,6 @@ import {
   ILiveRoom,
   ISearch,
   LiveRoomIsShowEnum,
-  LiveRoomPullIsShouldAuthEnum,
   LiveRoomStatusEnum,
   LiveRoomUseCDNEnum,
 } from '@/interface';
@@ -43,17 +42,6 @@ export const searchFormConfig = (t): IForm<ISearch<ILiveRoom>> => {
           { label: '使用', value: LiveRoomUseCDNEnum.yes },
           { label: '不使用', value: LiveRoomUseCDNEnum.no },
         ],
-      },
-      {
-        field: 'pull_is_should_auth',
-        type: FormTypeEnum.switch,
-        label: '拉流鉴权',
-        switchConfig: {
-          checkedValue: LiveRoomPullIsShouldAuthEnum.yes,
-          unCheckedValue: LiveRoomPullIsShouldAuthEnum.no,
-          checkedText: '开启',
-          unCheckedText: '关闭',
-        },
       },
       {
         field: 'is_show',

@@ -1,11 +1,8 @@
 import { IForm } from '@/components/Base/Form';
-import { useOrder } from '@/hooks/use-order';
-import { FormTypeEnum, ILiveView, ISearch } from '@/interface';
-
-import { columnsConfig } from './columns.config';
+import { FormTypeEnum, ILiveRoomLiveUser, ISearch } from '@/interface';
 
 // eslint-disable-next-line
-export const searchFormConfig = (t): IForm<ISearch<ILiveView>> => {
+export const searchFormConfig = (_t): IForm<ISearch<ILiveRoomLiveUser>> => {
   return {
     gridSpan: 8,
     labelPlacement: 'left',
@@ -27,20 +24,8 @@ export const searchFormConfig = (t): IForm<ISearch<ILiveView>> => {
         field: 'keyWord',
         type: FormTypeEnum.input,
         label: '关键字',
-        placeholder: '请输入ip/备注',
+        placeholder: '用户名/直播间名',
       },
-      {
-        field: 'childKeyWord',
-        type: FormTypeEnum.input,
-        label: '关键字',
-        placeholder: '请输入用户名',
-      },
-      {
-        field: 'rangTimeType',
-        type: FormTypeEnum.datePickerRange,
-        label: '时间范围',
-      },
-      ...useOrder({ columnsConfig: columnsConfig(t), t }),
     ],
   };
 };

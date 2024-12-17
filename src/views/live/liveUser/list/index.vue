@@ -11,9 +11,7 @@
       :loading="tableListLoading"
       :columns="columns"
       :data="tableListData"
-      :pagination="pagination"
       :bordered="false"
-      @update:page="handlePageChange"
     />
   </div>
 </template>
@@ -24,29 +22,24 @@ import { TableColumns } from 'naive-ui/es/data-table/src/interface';
 import { h, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { fetchLiveViewList } from '@/api/liveView';
+import {
+  fetchAllLiveRoomOnlineUser,
+  fetchLiveRoomOnlineUser,
+} from '@/api/live';
 import HSearch from '@/components/Base/Search';
-import { usePage } from '@/hooks/use-page';
-import { ILiveView } from '@/interface';
+import { ILiveRoomLiveUser } from '@/interface';
 
 import { columnsConfig } from './config/columns.config';
 import { searchFormConfig } from './config/search.config';
 
 const { t } = useI18n();
 
-const tableListData = ref<ILiveView[]>([]);
-const total = ref(0);
-const pagination = usePage();
+const tableListData = ref<ILiveRoomLiveUser[]>([]);
 const tableListLoading = ref(false);
-const params = ref({
-  live_room_id: undefined,
-  user_id: undefined,
-  nowPage: 1,
-  pageSize: 20,
-});
+const params = ref({});
 
-const createColumns = (): TableColumns<ILiveView> => {
-  const action: TableColumns<ILiveView> = [
+const createColumns = (): TableColumns<ILiveRoomLiveUser> => {
+  const action: TableColumns<ILiveRoomLiveUser> = [
     {
       title: '操作',
       key: 'actions',
@@ -115,11 +108,6 @@ const handleSearch = (v) => {
   params.value = {
     ...params.value,
     ...v,
-    nowPage: 1,
-    pageSize: pagination.pageSize,
-    rangTimeType: v.rangTimeType ? 'created_at' : undefined,
-    rangTimeStart: v.rangTimeType ? v.rangTimeType[0] : undefined,
-    rangTimeEnd: v.rangTimeType ? v.rangTimeType[1] : undefined,
   };
   handlePageChange();
 };
@@ -127,14 +115,38 @@ const handleSearch = (v) => {
 async function ajaxFetchList(args) {
   try {
     tableListLoading.value = true;
-    const res = await fetchLiveViewList({ ...args });
+    let res;
+    if (args.live_room_id) {
+      res = await fetchLiveRoomOnlineUser(args.live_room_id);
+    } else {
+      res = await fetchAllLiveRoomOnlineUser();
+    }
+    console.log(res);
     if (res.code === 200) {
       tableListLoading.value = false;
-      tableListData.value = res.data.rows;
-      total.value = res.data.total;
-      pagination.itemCount = res.data.total;
-      pagination.nowPage = args.nowPage;
-      pagination.pageSize = args.pageSize;
+      tableListData.value = res.data.filter((v) => {
+        if (args.keyWord?.length) {
+          if (v.live_room_name.indexOf(args.keyWord) !== -1) {
+            return true;
+          }
+          if (v.user_username.indexOf(args.keyWord) !== -1) {
+            return true;
+          }
+          return false;
+        } else {
+          return true;
+        }
+      });
+      if (args.live_room_id) {
+        tableListData.value = tableListData.value.filter(
+          (v) => v.live_room_id === args.live_room_id
+        );
+      }
+      if (args.user_id) {
+        tableListData.value = tableListData.value.filter(
+          (v) => v.user_id === args.user_id
+        );
+      }
     } else {
       Promise.reject(res);
     }

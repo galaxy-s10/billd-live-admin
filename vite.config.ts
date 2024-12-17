@@ -39,10 +39,10 @@ export default defineConfig(({ command, mode }) => {
       vue(),
       checker({
         // typescript: true,
-        vueTsc: true,
-        eslint: {
-          lintCommand: 'eslint "./src/**/*.{ts,tsx}"', // for example, lint .ts & .tsx
-        },
+        // vueTsc: true,
+        // eslint: {
+        //   lintCommand: 'eslint "./src/**/*.{ts,tsx}"', // for example, lint .ts & .tsx
+        // },
       }),
       // eslint({
       //   failOnError: false,

@@ -4,7 +4,6 @@ import {
   ILiveRoom,
   LiveRoomIsShowEnum,
   LiveRoomOpenChatEnum,
-  LiveRoomPullIsShouldAuthEnum,
   LiveRoomStatusEnum,
   LiveRoomUseCDNEnum,
 } from '@/interface';
@@ -37,17 +36,6 @@ export const formConfig = (): IForm<ILiveRoom> => {
           { label: '使用', value: LiveRoomUseCDNEnum.yes },
           { label: '不使用', value: LiveRoomUseCDNEnum.no },
         ],
-      },
-      {
-        field: 'pull_is_should_auth',
-        type: FormTypeEnum.switch,
-        label: '拉流鉴权',
-        switchConfig: {
-          checkedValue: LiveRoomPullIsShouldAuthEnum.yes,
-          unCheckedValue: LiveRoomPullIsShouldAuthEnum.no,
-          checkedText: '开启',
-          unCheckedText: '关闭',
-        },
       },
       {
         field: 'priority',
@@ -119,60 +107,6 @@ export const formConfig = (): IForm<ILiveRoom> => {
           defaultValue: LiveRoomOpenChatEnum.yes,
         },
         rule: { trigger: 'blur', type: 'number' },
-      },
-      {
-        field: 'rtmp_url',
-        type: FormTypeEnum.input,
-        label: 'rtmp拉流地址',
-        rule: { trigger: 'blur' },
-      },
-      {
-        field: 'flv_url',
-        type: FormTypeEnum.input,
-        label: 'flv拉流地址',
-        rule: { trigger: 'blur' },
-      },
-      {
-        field: 'hls_url',
-        type: FormTypeEnum.input,
-        label: 'hls拉流地址',
-        rule: { trigger: 'blur' },
-      },
-      {
-        field: 'webrtc_url',
-        type: FormTypeEnum.input,
-        label: 'webrtc拉流地址',
-        rule: { trigger: 'blur' },
-      },
-      {
-        field: 'push_rtmp_url',
-        type: FormTypeEnum.input,
-        label: 'rtmp直播推流地址',
-        rule: { trigger: 'blur' },
-      },
-      {
-        field: 'push_obs_server',
-        type: FormTypeEnum.input,
-        label: 'obs直播推流服务器',
-        rule: { trigger: 'blur' },
-      },
-      {
-        field: 'push_obs_stream_key',
-        type: FormTypeEnum.input,
-        label: 'obs直播推流秘钥',
-        rule: { trigger: 'blur' },
-      },
-      {
-        field: 'push_webrtc_url',
-        type: FormTypeEnum.input,
-        label: 'webrtc直播推流地址',
-        rule: { trigger: 'blur' },
-      },
-      {
-        field: 'push_srt_url',
-        type: FormTypeEnum.input,
-        label: 'srt直播推流地址',
-        rule: { trigger: 'blur' },
       },
       {
         field: 'forward_bilibili_url',
