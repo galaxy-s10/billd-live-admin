@@ -4,9 +4,9 @@
 # Date: 2022-04-26 01:54:48
 # Description: https://github.com/galaxy-s10/sh/blob/master/build.sh
 # Email: 2274751790@qq.com
-# FilePath: /billd-live-admin/deploy/static-build.sh
+# FilePath: /billd-live-admin-pro/deploy/static-build.sh
 # Github: https://github.com/galaxy-s10
-# LastEditTime: 2024-05-06 14:58:28
+# LastEditTime: 2024-12-17 13:24:54
 # LastEditors: shuisheng
 ###
 

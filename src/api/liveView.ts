@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { ILiveView, IPaging } from '@/interface';
 import request from '@/utils/request';
 

@@ -27,7 +27,7 @@ const handleTree = (source, target) => {
   const strArr = target.split('/');
   const originSource = JSON.parse(JSON.stringify(source));
   // WARN:待优化
-  // eslint-disable-next-line
+
   const find = (source, target) => {
     for (let i = 0; i < source.length; i += 1) {
       const item = source[i];

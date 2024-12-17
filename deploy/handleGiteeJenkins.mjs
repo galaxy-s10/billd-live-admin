@@ -8,7 +8,7 @@ import trash from 'trash';
 const allFile = [];
 const ignore = ['.DS_Store', '.git', 'node_modules', 'dist'];
 const localDir =
-  '/Users/huangshuisheng/Desktop/hss/galaxy-s10/billd-live-admin';
+  '/Users/huangshuisheng/Desktop/hss/billd-project/billd-live-admin-pro';
 const giteeDir = '/Users/huangshuisheng/Desktop/hss/jenkins/billd-live-admin';
 
 const dir = fs.readdirSync(localDir).filter((item) => {
@@ -49,7 +49,7 @@ function putFile() {
       // 数组的最后一个一定是文件，因此不需要判断它是不是目录
       if (index !== arr.length - 1) {
         const flag = fs.existsSync(item);
-        // eslint-disable-next-line
+
         !flag && fs.mkdirSync(item);
       }
     });
@@ -78,8 +78,10 @@ if (process.cwd().indexOf('jenkins') !== -1) {
   clearOld().then(() => {
     findFile(dir);
     putFile();
-    const gitignoreTxt = 'node_modules\ndist\ncomponents.d.ts\n.DS_Store\n';
+    const gitignoreTxt =
+      'node_modules\ndist\ncomponents.d.ts\n.eslintcache\n.DS_Store\n';
     fs.writeFileSync(path.resolve(giteeDir, './.gitignore'), gitignoreTxt);
+    execSync(`git rm -r --cached .`, { cwd: giteeDir });
     execSync(`pnpm i`, { cwd: giteeDir });
     execSync(`git add .`, { cwd: giteeDir });
     execSync(`git commit -m 'feat: ${new Date().toLocaleString()}'`, {
