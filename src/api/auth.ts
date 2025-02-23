@@ -35,14 +35,6 @@ export function fetchTreeAuth(id?: number) {
   });
 }
 
-/** 获取除了父级以外的所有权限（树型） */
-export function fetchTreeChildAuth() {
-  return request.instance({
-    url: `/auth/get_tree_child_auth`,
-    method: 'get',
-  });
-}
-
 /** 获取该权限的子权限（只找一层） */
 export function fetchGetChildAuth(id: number) {
   return request.instance({

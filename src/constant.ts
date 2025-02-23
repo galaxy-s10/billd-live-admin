@@ -25,6 +25,8 @@ export const COOKIE_DOMAIN =
 
 export const GlobalMsgTypeEnumMap = {
   [GlobalMsgTypeEnum.system]: '系统消息',
+  [GlobalMsgTypeEnum.user]: '用户消息',
+  [GlobalMsgTypeEnum.activity]: '活动消息',
 };
 
 export const LoginRecordEnumMap = {

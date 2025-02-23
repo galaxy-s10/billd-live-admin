@@ -1,3 +1,5 @@
+import { TableColumn } from 'naive-ui/es/data-table/src/interface';
+
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 直播间类型 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
 /** 是否使用cdn */
@@ -815,13 +817,18 @@ export interface ILoginRecord {
 }
 
 export enum GlobalMsgTypeEnum {
-  system,
+  user = 'user',
+  system = 'system',
+  activity = 'activity',
 }
 
 export interface IGlobalMsg {
   id?: number;
   user_id?: number;
+  client_ip?: string;
   type?: GlobalMsgTypeEnum;
+  show?: SwitchEnum;
+  priority?: number;
   content?: string;
   remark?: string;
 
@@ -1146,3 +1153,5 @@ export enum SwitchEnum {
   yes,
   no,
 }
+
+export type TableColumnsPlus<T> = Array<TableColumn<T> & { noOrder?: boolean }>;

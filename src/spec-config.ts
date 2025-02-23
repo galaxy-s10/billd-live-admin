@@ -12,7 +12,7 @@ export const TENCENTCLOUD_APPID = 1324073273; // 腾讯云APPID
 export const TENCENTCLOUD_COS_REGION = 'ap-mumbai';
 export const TENCENTCLOUD_COS = {
   [`res-${TENCENTCLOUD_APPID}`]: {
-    url: `https://res.${prodDomain}`,
+    url: `https://tencentcos-res.${prodDomain}`,
     Bucket: `res-${TENCENTCLOUD_APPID}`,
     Region: TENCENTCLOUD_COS_REGION,
     StorageClass: 'STANDARD',

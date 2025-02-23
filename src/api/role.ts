@@ -37,14 +37,6 @@ export function fetchTreeRole(id?: number) {
   });
 }
 
-/** 获取除了父级以外的所有角色（树型） */
-export function fetchTreeChildRole() {
-  return request.instance({
-    url: `/role/get_tree_child_role`,
-    method: 'get',
-  });
-}
-
 /** 获取该角色的子角色（只找一层） */
 export function fetchGetChildRole(id: number) {
   return request.instance({
