@@ -41,7 +41,7 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
 import BreadcrumbCpt from '@/components/Breadcrumb/index.vue';
-import { LIVE_CLIENT_URL } from '@/constant';
+import { LIVE_CLIENT_URL } from '@/spec-config';
 import { useAppStore } from '@/store/app';
 import { useUserStore } from '@/store/user';
 

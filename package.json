@@ -22,6 +22,7 @@
   "author": "shuisheng <2274751790@qq.com>",
   "type": "module",
   "scripts": {
+    "build": "vite build",
     "build:beta": "vite build",
     "build:prod": "vite build",
     "cz": "cz",

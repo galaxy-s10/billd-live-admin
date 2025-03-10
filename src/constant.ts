@@ -5,23 +5,9 @@ import {
   LoginRecordEnum,
 } from '@/interface';
 
-import { prodDomain } from './spec-config';
-
 export const GITHUB_REPO = 'https://github.com/galaxy-s10/billd-live-admin';
 
-export const REDIRECT_URI = 'https://admin.hsslive.cn/oauth/';
-
-export const LIVE_CLIENT_URL = 'https://live.hsslive.cn';
-
 export const POSTMESSAGE_TYPE = ['qq_login', 'github_login', 'login_expired'];
-
-export const AXIOS_BASEURL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://127.0.0.1:4300'
-    : 'https://live-api.hsslive.cn';
-
-export const COOKIE_DOMAIN =
-  process.env.NODE_ENV === 'development' ? undefined : `.${prodDomain}`;
 
 export const GlobalMsgTypeEnumMap = {
   [GlobalMsgTypeEnum.system]: '系统消息',
