@@ -1,8 +1,12 @@
 import {
+  ClientAppEnum,
+  ClientEnvEnum,
+  DanmuMsgTypeEnum,
   GlobalMsgTypeEnum,
   GoodsTypeEnum,
   LiveRoomTypeEnum,
   LoginRecordEnum,
+  WsMessageContentTypeEnum,
 } from '@/interface';
 
 export const GITHUB_REPO = 'https://github.com/galaxy-s10/billd-live-admin';
@@ -13,6 +17,7 @@ export const GlobalMsgTypeEnumMap = {
   [GlobalMsgTypeEnum.system]: '系统消息',
   [GlobalMsgTypeEnum.user]: '用户消息',
   [GlobalMsgTypeEnum.activity]: '活动消息',
+  [GlobalMsgTypeEnum.notification]: '通知消息',
 };
 
 export const LoginRecordEnumMap = {
@@ -30,11 +35,18 @@ export const liveRoomTypeEnumMap = {
   [LiveRoomTypeEnum.pk]: '打pk',
   [LiveRoomTypeEnum.srs]: 'srs推流',
   [LiveRoomTypeEnum.system]: '系统推流',
-  [LiveRoomTypeEnum.tencent_css]: '腾讯云css推流',
-  [LiveRoomTypeEnum.tencent_css_pk]: '腾讯云css打pk',
+  [LiveRoomTypeEnum.tencentcloud_css]: '腾讯云css推流',
+  [LiveRoomTypeEnum.tencentcloud_css_pk]: '腾讯云css打pk',
   [LiveRoomTypeEnum.wertc_live]: 'webrtc直播',
   [LiveRoomTypeEnum.wertc_meeting_one]: 'webrtc会议一',
   [LiveRoomTypeEnum.wertc_meeting_two]: 'webrtc会议二',
+  [LiveRoomTypeEnum.forward_all]: '转推所有',
+  [LiveRoomTypeEnum.forward_bilibili]: '转推b站',
+  [LiveRoomTypeEnum.forward_douyin]: '转推抖音',
+  [LiveRoomTypeEnum.forward_douyu]: '转推斗鱼',
+  [LiveRoomTypeEnum.forward_huya]: '转推虎牙',
+  [LiveRoomTypeEnum.forward_kuaishou]: '转推快手',
+  [LiveRoomTypeEnum.forward_xiaohongshu]: '转推小红书',
 };
 
 // 全局的localStorage的key
@@ -142,4 +154,37 @@ export const goodsTypeEnumMap = {
   [GoodsTypeEnum.sponsors]: '赞助',
   [GoodsTypeEnum.support]: '服务',
   [GoodsTypeEnum.qypShop]: '逸鹏的商品',
+};
+
+export const msgTypeMap = {
+  [DanmuMsgTypeEnum.danmu]: '弹幕',
+  [DanmuMsgTypeEnum.otherJoin]: '其他人加入房间',
+  [DanmuMsgTypeEnum.redbag]: '红包',
+  [DanmuMsgTypeEnum.reward]: '打赏',
+  [DanmuMsgTypeEnum.system]: '系统消息',
+  [DanmuMsgTypeEnum.userLeaved]: '用户离开房间',
+};
+
+export const wsMessageContentTypeMap = {
+  [WsMessageContentTypeEnum.img]: '图片',
+  [WsMessageContentTypeEnum.txt]: '文本',
+  [WsMessageContentTypeEnum.video]: '视频',
+};
+
+export const ClientEnvMap = {
+  [ClientEnvEnum.android]: '安卓端',
+  [ClientEnvEnum.ios]: '苹果端',
+  [ClientEnvEnum.ipad]: 'ipad端',
+  [ClientEnvEnum.macos]: 'mac端',
+  [ClientEnvEnum.web]: '网页端',
+  [ClientEnvEnum.web_mobile]: '移动网页端',
+  [ClientEnvEnum.web_pc]: '电脑网页端',
+  [ClientEnvEnum.windows]: 'win端',
+};
+
+export const ClientAppMap = {
+  [ClientAppEnum.billd_live_web]: 'billd直播前台',
+  [ClientAppEnum.billd_live_ios_app]: 'billd直播苹果app',
+  [ClientAppEnum.billd_live_android_app]: 'billd直播安卓app',
+  [ClientAppEnum.billd_live_admin]: 'billd直播后台',
 };

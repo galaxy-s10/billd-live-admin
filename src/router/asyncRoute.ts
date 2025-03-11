@@ -346,6 +346,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/globalMsg/update/index.vue'),
         meta: {
           title: 'router.globalMsgUpdate',
+          hidden: true,
         },
       },
     ],

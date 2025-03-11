@@ -1,6 +1,6 @@
 {
   "name": "billd-live-admin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "基于Vue3 + Vite6 + NaiveUI搭建的直播间后台",
   "keywords": [
     "billd",
@@ -33,6 +33,9 @@
     "lint:fix": "eslint . --config ./eslint.config.js --cache --fix",
     "preview": "vite preview",
     "release": "standard-version",
+    "release-major": "standard-version --release-as major",
+    "release-minor": "standard-version --release-as minor",
+    "release-patch": "standard-version --release-as patch",
     "sync-codeup": "ts-node ./deploy/handleSyncCodeup.mjs",
     "sync-gitee": "ts-node ./deploy/handleSyncGitee.mjs",
     "sync-public": "ts-node ./deploy/handleSyncPublic.mjs"

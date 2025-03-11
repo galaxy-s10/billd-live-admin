@@ -2,18 +2,10 @@ import { TableColumn } from 'naive-ui/es/data-table/src/interface';
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 直播间类型 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
-/** 是否使用cdn */
-export enum LiveRoomUseCDNEnum {
-  /** 使用cdn */
-  yes,
-  /** 不使用cdn */
-  no,
-}
-
 /** 直播间类型 */
 export enum LiveRoomTypeEnum {
   /** 系统推流 */
-  system,
+  system = 1,
   /** 主播使用srs推流 */
   srs,
   /** 主播使用obs/ffmpeg推流 */
@@ -29,23 +21,23 @@ export enum LiveRoomTypeEnum {
   /** 主播打pk */
   pk,
   /** 主播使用腾讯云css推流 */
-  tencent_css,
+  tencentcloud_css,
   /** 主播使用腾讯云css推流打pk */
-  tencent_css_pk,
+  tencentcloud_css_pk,
   /** 转推b站 */
   forward_bilibili,
-  /** 转推斗鱼 */
+  /** 转推虎牙 */
   forward_huya,
+  /** 转推斗鱼 */
+  forward_douyu,
+  /** 转推抖音 */
+  forward_douyin,
+  /** 转推抖音 */
+  forward_kuaishou,
+  /** 转推小红书 */
+  forward_xiaohongshu,
   /** 转推所有 */
   forward_all,
-}
-
-/** 拉流是否需要鉴权 */
-export enum LiveRoomPullIsShouldAuthEnum {
-  /** 需要鉴权 */
-  yes,
-  /** 不需要鉴权 */
-  no,
 }
 
 /** 直播间状态 */
@@ -148,12 +140,10 @@ export enum LiveRoomTipTouristLoginEnum {
 
 export interface ILiveRoom {
   id?: number;
-  /** 直播间名称 */
-  name?: string;
+  /** 直播间标题 */
+  title?: string;
   /** 直播间简介 */
   desc?: string;
-  /** 是否使用cdn */
-  cdn?: SwitchEnum;
   /** 权重 */
   priority?: number;
   /** 推流秘钥 */
@@ -292,6 +282,7 @@ export enum DanmuMsgTypeEnum {
   userLeaved,
   system,
   redbag,
+  reward,
 }
 
 export enum WsMessageMsgIsFileEnum {
@@ -317,24 +308,23 @@ export enum WsMessageMsgIsVerifyEnum {
 
 export interface IWsMessage {
   id?: number;
+  live_record_id?: number;
   username?: string;
   origin_username?: string;
   content_type?: WsMessageContentTypeEnum;
   content?: string;
   origin_content?: string;
-  redbag_send_id?: number;
   live_room_id?: number;
   user_id?: number;
-  ip?: string;
+  client_ip?: string;
   msg_type?: DanmuMsgTypeEnum;
   user_agent?: string;
   send_msg_time?: number;
-  is_show?: WsMessageMsgIsShowEnum;
-  is_verify?: WsMessageMsgIsVerifyEnum;
+  is_show?: SwitchEnum;
+  is_bilibili?: SwitchEnum;
   remark?: string;
 
   user?: IUser;
-  redbag_send?: IRedbagSend;
 
   created_at?: string;
   updated_at?: string;
@@ -806,7 +796,10 @@ export interface ILoginRecord {
   user_id?: number;
   user_agent?: string;
   type?: LoginRecordEnum;
-  ip?: string;
+  client_ip?: string;
+  client_env?: ClientEnvEnum;
+  client_app?: ClientAppEnum;
+  client_app_version?: string;
   remark?: string;
 
   user?: IUser;
@@ -820,6 +813,7 @@ export enum GlobalMsgTypeEnum {
   user = 'user',
   system = 'system',
   activity = 'activity',
+  notification = 'notification',
 }
 
 export interface IGlobalMsg {
@@ -829,6 +823,7 @@ export interface IGlobalMsg {
   type?: GlobalMsgTypeEnum;
   show?: SwitchEnum;
   priority?: number;
+  title?: string;
   content?: string;
   remark?: string;
 
@@ -1114,6 +1109,13 @@ export enum ClientEnvEnum {
   macos,
 }
 
+export enum ClientAppEnum {
+  billd_live_android_app,
+  billd_live_ios_app,
+  billd_live_web,
+  billd_live_admin,
+}
+
 export interface ILiveView {
   id?: number;
   /** 直播记录id */
@@ -1143,7 +1145,7 @@ export interface ILiveView {
 
 export interface ILiveRoomLiveUser {
   live_room_id: number;
-  live_room_name: string;
+  live_room_title: string;
   user_id: number;
   user_username: string;
   user_avatar: string;
