@@ -1,4 +1,5 @@
 import {
+  BlacklistTypeEnum,
   ClientAppEnum,
   ClientEnvEnum,
   DanmuMsgTypeEnum,
@@ -69,6 +70,81 @@ export const MONIT_TYPE_MAP = {
   6: '清除buff/cache',
   7: '备份数据库成功',
   8: '备份数据库失败',
+};
+
+export const DEFAULT_AUTH_INFO = {
+  ALL_AUTH: {
+    id: 1,
+    auth_value: 'ALL_AUTH',
+  },
+  USER_MANAGE: {
+    id: 2,
+    auth_value: 'USER_MANAGE',
+  },
+  ROLE_MANAGE: {
+    id: 3,
+    auth_value: 'ROLE_MANAGE',
+  },
+  AUTH_MANAGE: {
+    id: 4,
+    auth_value: 'AUTH_MANAGE',
+  },
+  MESSAGE_MANAGE: {
+    id: 5,
+    auth_value: 'MESSAGE_MANAGE',
+  },
+  MESSAGE_SEND: {
+    id: 6,
+    auth_value: 'MESSAGE_SEND',
+  },
+  MESSAGE_DISABLE: {
+    id: 7,
+    auth_value: 'MESSAGE_DISABLE',
+  },
+  LOG_MANAGE: {
+    id: 8,
+    auth_value: 'LOG_MANAGE',
+  },
+  LIVE_MANAGE: {
+    id: 9,
+    auth_value: 'LIVE_MANAGE',
+  },
+  LIVE_PUSH: {
+    id: 10,
+    auth_value: 'LIVE_PUSH',
+  },
+  LIVE_PUSH_CDN: {
+    id: 11,
+    auth_value: 'LIVE_PUSH_CDN',
+  },
+  LIVE_PULL: {
+    id: 12,
+    auth_value: 'LIVE_PULL',
+  },
+  LIVE_PUSH_FORWARD_BILIBILI: {
+    id: 13,
+    auth_value: 'LIVE_PUSH_FORWARD_BILIBILI',
+  },
+  LIVE_PUSH_FORWARD_HUYA: {
+    id: 14,
+    auth_value: 'LIVE_PUSH_FORWARD_HUYA',
+  },
+  LIVE_PUSH_FORWARD_DOUYU: {
+    id: 15,
+    auth_value: 'LIVE_PUSH_FORWARD_DOUYU',
+  },
+  LIVE_PUSH_FORWARD_DOUYIN: {
+    id: 16,
+    auth_value: 'LIVE_PUSH_FORWARD_DOUYIN',
+  },
+  LIVE_PUSH_FORWARD_KUAISHOU: {
+    id: 17,
+    auth_value: 'LIVE_PUSH_FORWARD_KUAISHOU',
+  },
+  LIVE_PUSH_FORWARD_XIAOHONGSHU: {
+    id: 18,
+    auth_value: 'LIVE_PUSH_FORWARD_XIAOHONGSHU',
+  },
 };
 
 export const DEFAULT_ROLE_INFO = {
@@ -148,6 +224,12 @@ export const ROUTE_SORT = {
   error: 10,
 };
 
+export const blacklistTypeEnumMap = {
+  [BlacklistTypeEnum.admin_disable]: '管理员禁用',
+  [BlacklistTypeEnum.disable_msg]: '禁言',
+  [BlacklistTypeEnum.frequent]: '请求频繁',
+};
+
 export const goodsTypeEnumMap = {
   [GoodsTypeEnum.recharge]: '充值',
   [GoodsTypeEnum.gift]: '礼物',
@@ -183,8 +265,8 @@ export const ClientEnvMap = {
 };
 
 export const ClientAppMap = {
-  [ClientAppEnum.billd_live_web]: 'billd直播前台',
-  [ClientAppEnum.billd_live_ios_app]: 'billd直播苹果app',
-  [ClientAppEnum.billd_live_android_app]: 'billd直播安卓app',
+  [ClientAppEnum.billd_live]: 'billd直播前台',
   [ClientAppEnum.billd_live_admin]: 'billd直播后台',
+  [ClientAppEnum.billd_desk]: 'billd远程前台',
+  [ClientAppEnum.billd_desk_admin]: 'billd远程后台',
 };

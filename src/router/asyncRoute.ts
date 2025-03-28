@@ -69,6 +69,46 @@ export const asyncRoutes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/blacklist',
+    component: Layout,
+    meta: {
+      title: '黑名单管理',
+      icon: renderIcon(LockClosedOutline),
+      sort: ROUTE_SORT.blacklist,
+      roles: [
+        DEFAULT_ROLE_INFO.SUPER_ADMIN.role_value,
+        DEFAULT_ROLE_INFO.LIVE_ADMIN.role_value,
+      ],
+    },
+    children: [
+      {
+        name: 'blacklistList',
+        path: '/blacklist/list',
+        component: () => import('@/views/blacklist/list/index.vue'),
+        meta: {
+          title: '黑名单列表',
+        },
+      },
+      {
+        name: 'blacklistCreate',
+        path: '/blacklist/create',
+        component: () => import('@/views/blacklist/create/index.vue'),
+        meta: {
+          title: '新增黑名单',
+        },
+      },
+      {
+        name: 'blacklistUpdate',
+        path: '/blacklist/update',
+        component: () => import('@/views/blacklist/update/index.vue'),
+        meta: {
+          title: '修改黑名单',
+          hidden: true,
+        },
+      },
+    ],
+  },
+  {
     path: '/liveRoomManage',
     component: Layout,
     meta: {

@@ -27,7 +27,7 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import { ref, watch } from 'vue';
 
 import { useUpload } from '@/hooks/use-upload';
-import { QINIU_KODO } from '@/spec-config';
+import { TENCENTCLOUD_COS } from '@/spec-config';
 
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('scss', scss);
@@ -66,7 +66,8 @@ const handleChange = (str) => {
 const handleUploadImage = async (_event, insertImage, files) => {
   try {
     const res: any = await useUpload({
-      prefix: QINIU_KODO.hssblog.prefix['billd-live/image/'],
+      prefix:
+        TENCENTCLOUD_COS['res-1305322458'].prefix['billd-live/client/img/'],
       file: files[0],
     });
     const img = {

@@ -25,8 +25,8 @@
 import { UploadFileInfo } from 'naive-ui';
 import { ref, watch } from 'vue';
 
-import { useUpload } from '@/hooks/use-upload';
-import { QINIU_KODO } from '@/spec-config';
+import { useUpload } from '@/hooks/use-upload-tencentcloud';
+import { TENCENTCLOUD_COS } from '@/spec-config';
 
 const props = withDefaults(
   defineProps<{
@@ -41,7 +41,7 @@ const props = withDefaults(
     field: '',
     placeholder: '点击或者拖动文件到该区域来上传',
     max: 10,
-    prefix: QINIU_KODO.hssblog.prefix['billd-live/image/'],
+    prefix: TENCENTCLOUD_COS['res-1305322458'].prefix['billd-live/client/img/'],
   }
 );
 const emits = defineEmits(['update:value']);
@@ -62,7 +62,9 @@ const list = ref<UploadFileInfo[]>(
   })
 );
 const oldList = [...list.value];
-const prefixOptions = Object.keys(QINIU_KODO.hssblog.prefix).map((v) => {
+const prefixOptions = Object.keys(
+  TENCENTCLOUD_COS['res-1305322458'].prefix
+).map((v) => {
   return { label: v, value: v };
 });
 const prefixValue = ref(props.prefix);
@@ -87,7 +89,8 @@ const upload = async (file: UploadFileInfo) => {
   const id = file.id;
   try {
     const res = await useUpload({
-      prefix: QINIU_KODO.hssblog.prefix['billd-live/image/'],
+      prefix:
+        TENCENTCLOUD_COS['res-1305322458'].prefix['billd-live/client/img/'],
       file: file.file!,
     });
     return {

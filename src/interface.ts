@@ -317,6 +317,9 @@ export interface IWsMessage {
   live_room_id?: number;
   user_id?: number;
   client_ip?: string;
+  client_env?: ClientEnvEnum;
+  client_app?: ClientAppEnum;
+  client_app_version?: string;
   msg_type?: DanmuMsgTypeEnum;
   user_agent?: string;
   send_msg_time?: number;
@@ -717,13 +720,29 @@ export interface IVisitorLog {
 
 export interface IBlacklist {
   id?: number;
-  ip?: string;
+  client_ip?: string;
+  live_room_id?: number;
   user_id?: number;
-  type?: number;
+  type?: BlacklistTypeEnum;
+  start_date?: number;
+  end_date?: number;
   msg?: string;
+  remark?: string;
+
+  user?: IUser;
+
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
+}
+
+export enum BlacklistTypeEnum {
+  /** 频繁请求 */
+  frequent,
+  /** 管理员禁用 */
+  admin_disable,
+  /** 禁言 */
+  disable_msg,
 }
 export interface IMonit {
   id?: number;
@@ -978,6 +997,10 @@ export interface ILiveRecord {
   start_time?: string;
   /** 直播结束时间 */
   end_time?: string;
+  client_ip?: string;
+  client_env?: ClientEnvEnum;
+  client_app?: ClientAppEnum;
+  client_app_version?: string;
   /** 备注 */
   remark?: string;
 
@@ -1099,21 +1122,22 @@ export interface ICredential {
 }
 
 export enum ClientEnvEnum {
-  android,
-  ios,
-  ipad,
-  web,
-  web_mobile,
-  web_pc,
-  windows,
-  macos,
+  android = 'android',
+  ios = 'ios',
+  ipad = 'ipad',
+  web = 'web',
+  web_mobile = 'web_mobile',
+  web_pc = 'web_pc',
+  windows = 'windows',
+  macos = 'macos',
+  linux = 'linux',
 }
 
 export enum ClientAppEnum {
-  billd_live_android_app,
-  billd_live_ios_app,
-  billd_live_web,
-  billd_live_admin,
+  billd_live = 'billd_live',
+  billd_live_admin = 'billd_live_admin',
+  billd_desk = 'billd_desk',
+  billd_desk_admin = 'billd_desk_admin',
 }
 
 export interface ILiveView {
