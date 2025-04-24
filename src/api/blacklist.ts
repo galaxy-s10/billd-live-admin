@@ -23,7 +23,7 @@ export function fetchBlacklistList(params) {
   });
 }
 export function fetchBlacklistFind(id: number) {
-  return request.get(`/blacklist/find/${id}`);
+  return request.get<IBlacklist>(`/blacklist/find/${id}`);
 }
 
 export function fetchCreateBlacklist(data: IBlacklist) {

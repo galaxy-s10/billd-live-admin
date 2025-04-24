@@ -140,25 +140,27 @@ export enum LiveRoomTipTouristLoginEnum {
 
 export interface ILiveRoom {
   id?: number;
-  /** 直播间标题 */
+  /** 标题 */
   title?: string;
-  /** 直播间简介 */
+  /** 简介 */
   desc?: string;
   /** 权重 */
   priority?: number;
   /** 推流秘钥 */
   key?: string;
-  /** 直播间类型 */
+  /** 类型 */
   type?: LiveRoomTypeEnum;
-  /** 开播预览图 */
+  /** 封面图 */
   cover_img?: string;
-  /** 直播间背景图 */
+  /** 关键帧图 */
+  keyframe_img?: string;
+  /** 背景图 */
   bg_img?: string;
-  /** 直播间状态 */
+  /** 状态 */
   status?: LiveRoomStatusEnum;
-  /** 直播间是否显示 */
+  /** 是否显示 */
   is_show?: SwitchEnum;
-  /** 直播间是否开启聊天 */
+  /** 是否开启聊天 */
   open_chat?: SwitchEnum;
   /** 提醒游客登录 */
   tip_tourist_login?: LiveRoomTipTouristLoginEnum;
@@ -186,22 +188,21 @@ export interface ILiveRoom {
   is_show_signin?: SwitchEnum;
   /** 是否开启手机看直播 */
   is_show_phone_live?: SwitchEnum;
-  /** 公告 */
-  announcement_msg?: string;
-  /** 通知 */
+  /** 公告通知 */
   notice_msg?: string;
   /** 系统消息 */
   system_msg?: string;
-  /** 显示直播间在线人数 */
+  /** 显示在线人数 */
   is_show_live_user_nums?: SwitchEnum;
-  /** 设置直播间最低在线人数 */
+  /** 设置最低在线人数 */
   mock_live_user_nums_min?: number;
-  /** 设置直播间最高在线人数 */
+  /** 设置最高在线人数 */
   mock_live_user_nums_max?: number;
-  /** 直播间最在线人数刷新间隔 */
+  /** 最在线人数刷新间隔 */
   mock_live_user_nums_refresh_delay?: number;
   /** 聊天消息审核 */
   msg_verify?: SwitchEnum;
+  is_fake?: SwitchEnum;
 
   pull_rtmp_url?: string;
   pull_flv_url?: string;
@@ -235,6 +236,8 @@ export interface ILiveRoom {
   /** 直播间备注 */
   remark?: string;
 
+  areaId?: number;
+
   /** 用户信息 */
   user?: IUser;
   /** 用户信息 */
@@ -246,8 +249,6 @@ export interface ILiveRoom {
   /** 直播信息 */
   live?: ILive;
   user_live_room?: IUserLiveRoom & { user: IUser };
-
-  is_fake?: SwitchEnum;
 
   created_at?: string;
   updated_at?: string;
@@ -285,33 +286,33 @@ export enum DanmuMsgTypeEnum {
   reward,
 }
 
-export enum WsMessageMsgIsFileEnum {
+export enum MsgIsFileEnum {
   yes,
   no,
 }
 
-export enum WsMessageContentTypeEnum {
+export enum MsgContentTypeEnum {
   txt,
   img,
   video,
 }
 
-export enum WsMessageMsgIsShowEnum {
+export enum MsgIsShowEnum {
   yes,
   no,
 }
 
-export enum WsMessageMsgIsVerifyEnum {
+export enum MsgIsVerifyEnum {
   yes,
   no,
 }
 
-export interface IWsMessage {
+export interface IMsg {
   id?: number;
   live_record_id?: number;
   username?: string;
   origin_username?: string;
-  content_type?: WsMessageContentTypeEnum;
+  content_type?: MsgContentTypeEnum;
   content?: string;
   origin_content?: string;
   live_room_id?: number;
@@ -777,7 +778,6 @@ export enum GoodsTypeEnum {
   sponsors = 'sponsors',
   gift = 'gift',
   recharge = 'recharge',
-  qypShop = 'qypShop',
 }
 
 export interface IGoods {

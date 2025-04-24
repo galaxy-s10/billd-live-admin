@@ -140,10 +140,10 @@ export const asyncRoutes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: '/wsMessageManage',
+    path: '/msgManage',
     component: Layout,
     meta: {
-      title: 'router.wsMessageManage',
+      title: 'router.msgManage',
       icon: renderIcon(PaperPlaneOutline),
       sort: ROUTE_SORT.live,
       roles: [
@@ -153,19 +153,19 @@ export const asyncRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        name: 'wsMessageList',
-        path: '/wsMessageManage/wsMessageList',
-        component: () => import('@/views/wsMessage/list/index.vue'),
+        name: 'msgList',
+        path: '/msgManage/msgList',
+        component: () => import('@/views/msg/list/index.vue'),
         meta: {
-          title: 'router.wsMessageList',
+          title: 'router.msgList',
         },
       },
       {
-        name: 'wsMessageUpdate',
-        path: '/wsMessageManage/wsMessageUpdate',
-        component: () => import('@/views/wsMessage/update/index.vue'),
+        name: 'msgUpdate',
+        path: '/msgManage/msgUpdate',
+        component: () => import('@/views/msg/update/index.vue'),
         meta: {
-          title: 'router.wsMessageUpdate',
+          title: 'router.msgUpdate',
         },
       },
     ],

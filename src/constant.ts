@@ -7,7 +7,7 @@ import {
   GoodsTypeEnum,
   LiveRoomTypeEnum,
   LoginRecordEnum,
-  WsMessageContentTypeEnum,
+  MsgContentTypeEnum,
 } from '@/interface';
 
 export const GITHUB_REPO = 'https://github.com/galaxy-s10/billd-live-admin';
@@ -235,7 +235,6 @@ export const goodsTypeEnumMap = {
   [GoodsTypeEnum.gift]: '礼物',
   [GoodsTypeEnum.sponsors]: '赞助',
   [GoodsTypeEnum.support]: '服务',
-  [GoodsTypeEnum.qypShop]: '逸鹏的商品',
 };
 
 export const msgTypeMap = {
@@ -247,10 +246,10 @@ export const msgTypeMap = {
   [DanmuMsgTypeEnum.userLeaved]: '用户离开房间',
 };
 
-export const wsMessageContentTypeMap = {
-  [WsMessageContentTypeEnum.img]: '图片',
-  [WsMessageContentTypeEnum.txt]: '文本',
-  [WsMessageContentTypeEnum.video]: '视频',
+export const msgContentTypeMap = {
+  [MsgContentTypeEnum.img]: '图片',
+  [MsgContentTypeEnum.txt]: '文本',
+  [MsgContentTypeEnum.video]: '视频',
 };
 
 export const ClientEnvMap = {

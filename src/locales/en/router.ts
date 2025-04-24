@@ -20,9 +20,9 @@ export default nameSpaceWrap('router', {
   liveRoomList: 'liveRoomList',
   liveRoomUpdate: 'liveRoomUpdate',
 
-  wsMessageManage: 'wsMessageManage',
-  wsMessageList: 'wsMessageList',
-  wsMessageUpdate: 'wsMessageUpdate',
+  msgManage: 'msgManage',
+  msgList: 'msgList',
+  msgUpdate: 'msgUpdate',
 
   user: 'user',
   userList: 'userList',
