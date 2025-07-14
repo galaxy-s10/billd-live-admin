@@ -1,10 +1,9 @@
-/* eslint-disable camelcase */
 import { IRole } from '@/interface';
 import request from '@/utils/request';
 
 /** 角色列表(分页) */
 export function fetchRoleList(params) {
-  return request.instance({
+  return request({
     url: '/role/list',
     method: 'get',
     params,
@@ -13,7 +12,7 @@ export function fetchRoleList(params) {
 
 /** 角色列表(不分页) */
 export function fetchAllList(params?: IRole) {
-  return request.instance({
+  return request({
     url: '/role/all_list',
     method: 'get',
     params,
@@ -22,7 +21,7 @@ export function fetchAllList(params?: IRole) {
 
 /** 获取树型角色 */
 export function fetchUserRole(id: number) {
-  return request.instance({
+  return request({
     url: `/role/get_user_role/${id}`,
     method: 'get',
   });
@@ -30,16 +29,24 @@ export function fetchUserRole(id: number) {
 
 /** 获取树型角色 */
 export function fetchTreeRole(id?: number) {
-  return request.instance({
+  return request({
     url: `/role/get_tree_role`,
     method: 'get',
     params: { id },
   });
 }
 
+/** 获取除了父级以外的所有角色（树型） */
+export function fetchTreeChildRole() {
+  return request({
+    url: `/role/get_tree_child_role`,
+    method: 'get',
+  });
+}
+
 /** 获取该角色的子角色（只找一层） */
 export function fetchGetChildRole(id: number) {
-  return request.instance({
+  return request({
     url: `/role/get_child_role/${id}`,
     method: 'get',
   });
@@ -47,7 +54,7 @@ export function fetchGetChildRole(id: number) {
 
 /** 获取该角色的子角色（递归查找所有） */
 export function fetchAllChildRole(id: number) {
-  return request.instance({
+  return request({
     url: `/role/get_all_child_role/${id}`,
     method: 'get',
   });
@@ -55,7 +62,7 @@ export function fetchAllChildRole(id: number) {
 
 /** 获取某个角色的权限 */
 export function fetchRoleAuth(id: number) {
-  return request.instance({
+  return request({
     url: `/role/get_role_auth/${id}`,
     method: 'get',
   });
@@ -63,8 +70,8 @@ export function fetchRoleAuth(id: number) {
 
 /** 修改角色权限 */
 export function fetchUpdateRoleAuth({ id, role_auths }: IRole) {
-  return request.instance({
-    url: `/role/update_role_auth/${id!}`,
+  return request({
+    url: `/role/update_role_auth/${id}`,
     method: 'put',
     data: {
       role_auths,
@@ -80,7 +87,7 @@ export function fetchCreateRole({
   type,
   priority,
 }: IRole) {
-  return request.instance({
+  return request({
     url: `/role/create`,
     method: 'post',
     data: {
@@ -102,8 +109,8 @@ export function fetchUpdateRole({
   type,
   priority,
 }: IRole) {
-  return request.instance({
-    url: `/role/update/${id!}`,
+  return request({
+    url: `/role/update/${id}`,
     method: 'put',
     data: {
       p_id,
@@ -117,7 +124,7 @@ export function fetchUpdateRole({
 
 /** 批量删除子角色 */
 export function fetchBatchDeleteChildRoles({ id, c_roles }: IRole) {
-  return request.instance({
+  return request({
     url: `/role/batch_delete_child_roles`,
     method: 'post',
     data: {
@@ -129,7 +136,7 @@ export function fetchBatchDeleteChildRoles({ id, c_roles }: IRole) {
 
 /** 批量新增子角色 */
 export function fetchBatchAddChildRoles({ id, c_roles }: IRole) {
-  return request.instance({
+  return request({
     url: `/role/batch_add_child_roles`,
     method: 'put',
     data: {
@@ -141,7 +148,7 @@ export function fetchBatchAddChildRoles({ id, c_roles }: IRole) {
 
 /** 删除角色 */
 export function fetchDeleteRole(id: number) {
-  return request.instance({
+  return request({
     url: `/role/delete/${id}`,
     method: 'delete',
   });

@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';
 import '@kangc/v-md-editor/lib/plugins/todo-list/todo-list.css';
 import '@kangc/v-md-editor/lib/style/base-editor.css';
@@ -24,10 +24,10 @@ import hljs from 'highlight.js/lib/core';
 import bash from 'highlight.js/lib/languages/bash';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
-import { ref, watch } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 
+import { QINIU_BLOG } from '@/constant';
 import { useUpload } from '@/hooks/use-upload';
-import { TENCENTCLOUD_COS } from '@/spec-config';
 
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('scss', scss);
@@ -40,49 +40,51 @@ VMdEditor.use(githubTheme, {
 VMdEditor.use(createTodoListPlugin()); // 任务列表
 VMdEditor.use(createCopyCodePlugin()); // 快捷复制代码
 
-const props = withDefaults(
-  defineProps<{
-    modelValue: string;
-  }>(),
-  {
-    modelValue: '',
-  }
-);
-const emits = defineEmits(['update:value']);
-
-const text = ref(props.modelValue);
-const allImg = ref<string[]>([]);
-watch(
-  () => props.modelValue,
-  (val) => {
-    if (val === null) text.value = '';
-  }
-);
-const handleChange = (str) => {
-  text.value = str;
-  emits('update:value', str);
-};
-
-const handleUploadImage = async (_event, insertImage, files) => {
-  try {
-    const res: any = await useUpload({
-      prefix:
-        TENCENTCLOUD_COS['res-1305322458'].prefix['billd-live/client/img/'],
-      file: files[0],
-    });
-    const img = {
-      url: res.resultUrl,
-      desc: res.resultUrl,
-      // width: 'auto',
-      // height: 'auto',
+export default defineComponent({
+  components: { VMdEditor },
+  props: {
+    modelValue: {
+      type: String,
+      default: '',
+    },
+  },
+  emits: ['update:value'],
+  setup(props, { emit }) {
+    const text = ref(props.modelValue);
+    const allImg = ref<string[]>([]);
+    watch(
+      () => props.modelValue,
+      (val) => {
+        if (val === null) text.value = '';
+      }
+    );
+    const handleChange = (str) => {
+      text.value = str;
+      emit('update:value', str);
     };
-    insertImage(img);
-    allImg.value.push(img.url);
-  } catch (error: any) {
-    console.log(error);
-    window.$message.error(error?.message);
-  }
-};
+
+    const handleUploadImage = async (event, insertImage, files) => {
+      try {
+        const res: any = await useUpload({
+          prefix: QINIU_BLOG.prefix['image/'],
+          file: files[0],
+        });
+        const img = {
+          url: res.resultUrl,
+          desc: res.resultUrl,
+          // width: 'auto',
+          // height: 'auto',
+        };
+        insertImage(img);
+        allImg.value.push(img.url);
+      } catch (error: any) {
+        console.log(error);
+        window.$message.error(error?.message);
+      }
+    };
+    return { text, handleChange, handleUploadImage };
+  },
+});
 </script>
 
 <style lang="scss" scoped>

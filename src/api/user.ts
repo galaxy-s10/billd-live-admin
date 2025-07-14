@@ -1,58 +1,55 @@
-/* eslint-disable camelcase */
 import { IUser } from '@/interface';
-import request from '@/utils/request';
+import request, { IResponse } from '@/utils/request';
 
 export function fetchLogin({ id, password }) {
-  return request.instance({
+  return request({
     url: '/user/login',
     method: 'post',
     data: { id, password },
   });
 }
-export function fetchUserNameLogin({ username, password }) {
-  return request.instance({
-    url: '/user/username_login',
-    method: 'post',
-    data: { username, password },
+
+export function fetchUserInfo() {
+  return request({
+    url: '/user/get_user_info',
+    method: 'get',
   });
 }
 
-export function fetchUserInfo() {
-  return request.get('/user/get_user_info');
-}
-
 export function fetchUserList(params) {
-  return request.instance({
+  return request({
     url: '/user/list',
     method: 'get',
     params,
   });
 }
 
-export function fetchUserDetail(id: number) {
-  return request.get<IUser>(`/user/find/${id}`);
+export function fetchUserDetail(id: number): Promise<IResponse<IUser>> {
+  return request.get(`/user/find/${id}`);
 }
 
 export function fetchUserPwd() {
-  return request.instance({
+  return request({
     url: `/user/get_pwd`,
     method: 'get',
   });
 }
 
-export function fetchUserCreate(data: IUser) {
-  return request.post(`/user/create`, data);
-}
-export function fetchUpdateUser(data: IUser) {
-  return request.instance({
-    url: `/user/update/${data.id!}`,
+export function fetchUpdateUser({ id, username, status, avatar, desc }: IUser) {
+  return request({
+    url: `/user/update/${id!}`,
     method: 'put',
-    data,
+    data: {
+      username,
+      status,
+      avatar,
+      desc,
+    },
   });
 }
 
 export function fetchUpdatePwd({ oldpwd, newpwd }) {
-  return request.instance({
+  return request({
     url: `/user/update_pwd`,
     method: 'put',
     data: {
@@ -62,11 +59,13 @@ export function fetchUpdatePwd({ oldpwd, newpwd }) {
   });
 }
 
+// eslint-disable-next-line
 export function fetchUpdateUserRole({ id, user_roles }: IUser) {
-  return request.instance({
+  return request({
     url: `/user/update_user_role/${id!}`,
     method: 'put',
     data: {
+      // eslint-disable-next-line
       user_roles,
     },
   });

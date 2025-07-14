@@ -1,10 +1,10 @@
-import { FormItemRule } from 'naive-ui';
-import { LabelPlacement } from 'naive-ui/es/form/src/interface';
-import { StyleValue } from 'vue';
-
 import { FormTypeEnum } from '@/interface';
 
-export interface IFormItemBase {
+import type { FormItemRule } from 'naive-ui';
+import type { StyleValue } from 'vue';
+
+export interface IFormItem<T> {
+  field: T extends String ? string : keyof T;
   type: FormTypeEnum;
   label: string;
   gridSpan?: number;
@@ -25,34 +25,19 @@ export interface IFormItemBase {
     unCheckedText?: string;
     checkedValue?: any;
     unCheckedValue?: any;
-    defaultValue?: any;
   };
   path?: string;
   placeholder?: any;
-  options?: {
-    label?: string;
-    value?: any;
-    name?: string;
-    disabled?: boolean;
-  }[];
-  optionsDefaultChecked?: any;
+  options?: any[];
   isHidden?: boolean;
   style?: StyleValue;
 }
 
-export interface IFormItem<T> extends IFormItemBase {
-  field: keyof T;
-}
-
-export interface IFormItemFieldString extends IFormItemBase {
-  field: string;
-}
-
 export interface IForm<T> {
-  formItems: Array<IFormItemBase & { field: keyof T }>;
-  gridSpan?: number;
+  formItems: IFormItem<T>[];
+  gridSpan?: Number;
   formStyle?: StyleValue;
-  showAction?: boolean;
-  confirmLoading?: boolean;
-  labelPlacement?: LabelPlacement;
+  showAction?: Boolean;
+  confirmLoading?: Boolean;
+  labelPlacement?: 'top' | 'left';
 }

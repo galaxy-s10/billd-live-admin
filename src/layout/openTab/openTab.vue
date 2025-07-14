@@ -6,7 +6,7 @@
     >
       <div
         v-for="item in list"
-        :key="item.key"
+        :key="item.path"
         class="tag"
         @click="pushPath(item)"
       >
@@ -14,7 +14,7 @@
           class="dot"
           :class="{ curr: item.key === path ? true : false }"
         ></i>
-        <span> {{ t(item.value) }} </span>
+        <span> {{ item.value }} </span>
         <n-icon
           size="18"
           @click.stop="close(item)"
@@ -42,23 +42,18 @@
 
 <script lang="ts" setup>
 import { ChevronDownOutline, CloseOutline } from '@vicons/ionicons5';
-import { nextTick, ref, toRefs, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { onMounted, ref, toRefs, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import router from '@/router';
 import { useAppStore } from '@/store/app';
 
-const { t } = useI18n();
 const appStore = useAppStore();
 const route = useRoute();
 const { tabList, path } = toRefs(appStore);
-const list = ref<{ key: string; value: string }[]>([]);
+const list: any = ref([]);
 const listRef = ref<HTMLElement>();
-const res: { key: string; value: string }[] = [];
-Object.keys(tabList.value).forEach((v) => {
-  res.push({ key: v, value: tabList.value[v] });
-});
+
 const options = [
   {
     label: '关闭左侧标签',
@@ -73,7 +68,12 @@ const options = [
     key: '3',
   },
 ];
-list.value = res;
+
+onMounted(() => {
+  Object.keys(tabList.value).forEach((v) => {
+    list.value.push({ key: v, value: tabList.value[v] });
+  });
+});
 
 watch(
   () => tabList.value,
@@ -89,38 +89,30 @@ watch(
 watch(
   () => route.path,
   () => {
-    if (!list.value.find((v) => v.key === route.path)) {
-      list.value.push({
-        key: route.path,
-        value: (route.meta?.title as string) || '',
-      });
-    }
-    nextTick(() => {
-      const dom = listRef.value!;
-      const halfOfWindowWidth = Math.ceil(dom.clientWidth / 2); // 父容器宽度的一半（即父容器的居中位置）
-      list.value.forEach((v, i) => {
-        if (v.key === route.path) {
-          const parentEle = dom;
-          const currentEle = dom.children[i];
-          // @ts-ignore
-          const currentEleOffsetLeft = dom.children[i].offsetLeft;
-          parentEle.scrollTo({
-            left:
-              currentEleOffsetLeft -
-              halfOfWindowWidth +
-              // @ts-ignore
-              currentEle.offsetWidth / 2,
-            behavior: 'smooth',
-          });
-        }
-      });
+    const dom = listRef.value!;
+    const halfOfWindowWidth = Math.ceil(dom.clientWidth / 2); // 父容器宽度的一半（即父容器的居中位置）
+    list.value.forEach((v, i) => {
+      if (v.key === route.path) {
+        const parentEle = dom;
+        const currentEle = dom.children[i];
+        // @ts-ignore
+        const currentEleOffsetLeft = dom.children[i].offsetLeft;
+        parentEle.scrollTo({
+          left:
+            currentEleOffsetLeft -
+            halfOfWindowWidth +
+            // @ts-ignore
+            currentEle.offsetWidth / 2,
+          behavior: 'smooth',
+        });
+      }
     });
   }
 );
 
 const close = (item) => {
-  const oldTab: any = { ...tabList.value };
-  if (Object.keys(oldTab).length <= 1) {
+  const tmpTabList = { ...tabList.value };
+  if (Object.keys(tmpTabList).length <= 1) {
     window.$message.warning('不能删了');
     return;
   }
@@ -137,21 +129,19 @@ const close = (item) => {
       ].key,
     });
   }
-  delete oldTab[item.key];
-  appStore.setTabList(oldTab);
+
+  delete tmpTabList[item.key];
+  appStore.setTabList(tmpTabList);
 };
 
 const pushPath = (item) => {
   router.push(item.key);
 };
 
-const closeTag = () => {
-  window.$message.info('敬请期待！');
-};
+const closeTag = () => {};
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/css/constant.scss';
 .tagbar-wrap {
   padding: 6px;
   border-bottom: 1px solid #eee;
@@ -159,7 +149,6 @@ const closeTag = () => {
   display: flex;
   justify-content: space-between;
   .list-wrap {
-    /* width: 300px; */
     flex: 1;
     display: flex;
     overflow-x: scroll;

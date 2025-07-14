@@ -1,7 +1,7 @@
 <template>
   <div class="search-wrap">
     <HForm
-      ref="hFormRef"
+      ref="formRef"
       v-bind="searchFormConfig"
       v-model="formData"
     ></HForm>
@@ -10,53 +10,64 @@
         type="info"
         @click="handleReset"
       >
-        {{ t('common.reset') }}
+        重置
       </n-button>
       <n-button
         type="success"
         @click="handleSearch"
       >
-        {{ t('common.search') }}
+        搜索
       </n-button>
     </n-space>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
 import HForm from '@/components/Base/Form';
 
-const props = withDefaults(
-  defineProps<{
-    searchFormConfig?: any;
-    initValue?: any;
-  }>(),
-  {
-    searchFormConfig: {},
-    initValue: {},
-  }
-);
-const emits = defineEmits(['clickReset', 'clickSearch']);
+export default defineComponent({
+  components: { HForm },
+  props: {
+    searchFormConfig: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    initValue: {
+      type: Object,
+      default: () => {
+        return {}; // 不能写成普通函数，不然会报类型错误。
+      },
+    },
+  },
+  emits: ['clickReset', 'clickSearch'],
+  setup(props, { emit }) {
+    const formData = ref({ ...props.initValue });
+    const formRef = ref<any>(null);
+    const handleReset = () => {
+      formRef.value.handleReset();
+      emit('clickReset');
+    };
 
-const formData = ref({ ...props.initValue });
-const hFormRef = ref<InstanceType<typeof HForm>>();
-
-const { t } = useI18n();
-const handleReset = () => {
-  hFormRef.value?.handleReset();
-  emits('clickReset');
-};
-
-const handleSearch = async () => {
-  try {
-    const res = await hFormRef.value?.handleValidate();
-    emits('clickSearch', res);
-  } catch (error) {
-    console.log(error);
-  }
-};
+    const handleSearch = async () => {
+      try {
+        const res = await formRef.value.handleValidate();
+        emit('clickSearch', res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    return {
+      formData,
+      formRef,
+      handleReset,
+      handleSearch,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>

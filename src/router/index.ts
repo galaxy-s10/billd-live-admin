@@ -1,14 +1,12 @@
-import {
-  LogoGithub,
-  SettingsOutline,
-  SpeedometerOutline,
-} from '@vicons/ionicons5';
-import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
+import { BulbOutline, SpeedometerOutline } from '@vicons/ionicons5';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import { ROUTE_SORT } from '@/constant';
 import Layout from '@/layout/index.vue';
 
 import { renderIcon } from './utils';
+
+import type { RouteRecordRaw } from 'vue-router';
 
 // 默认路由
 export const defaultRoutes: RouteRecordRaw[] = [
@@ -17,10 +15,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
     redirect: '/dashboard',
     component: Layout,
     meta: {
-      title: 'router.dashboard',
-      name: 'dashboardManage',
       sort: ROUTE_SORT.dashboard,
-      icon: renderIcon(SpeedometerOutline),
     },
     children: [
       {
@@ -28,7 +23,35 @@ export const defaultRoutes: RouteRecordRaw[] = [
         path: '/dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         meta: {
-          title: 'router.dashboard',
+          title: '控制台',
+          icon: renderIcon(SpeedometerOutline),
+        },
+      },
+    ],
+  },
+  {
+    path: '/live',
+    component: Layout,
+    meta: {
+      sort: ROUTE_SORT.live,
+      title: '直播管理',
+      icon: renderIcon(BulbOutline),
+    },
+    children: [
+      {
+        name: 'stream',
+        path: '/live/stream',
+        component: () => import('@/views/live/stream/list/index.vue'),
+        meta: {
+          title: '在线stream',
+        },
+      },
+      {
+        name: 'client',
+        path: '/live/client',
+        component: () => import('@/views/live/client/list/index.vue'),
+        meta: {
+          title: '在线client',
         },
       },
     ],
@@ -37,73 +60,12 @@ export const defaultRoutes: RouteRecordRaw[] = [
     name: 'login',
     path: '/login',
     meta: {
-      title: 'router.login',
+      title: '登录',
       hidden: true,
     },
     component: () => import('@/views/login/index.vue'),
   },
-  {
-    name: 'setting',
-    path: '/setting',
-    component: Layout,
-    meta: {
-      title: 'router.setting',
-      // oneChildren: true,
-      icon: renderIcon(SettingsOutline),
-      sort: ROUTE_SORT.setting,
-    },
-    children: [
-      {
-        name: 'settingAccount',
-        path: '/setting/account',
-        component: () => import('@/views/setting/account/index.vue'),
-        meta: {
-          title: 'router.settingAccount',
-        },
-      },
-    ],
-  },
-  {
-    name: 'github',
-    path: '/github',
-    component: Layout,
-    meta: {
-      title: 'router.github',
-      oneChildren: true,
-      sort: ROUTE_SORT.github,
-    },
-    children: [
-      {
-        name: 'githubInfo',
-        path: '/github/info',
-        component: () => import('@/views/github/index.vue'),
-        meta: {
-          title: 'router.github',
-          icon: renderIcon(LogoGithub),
-        },
-      },
-    ],
-  },
-  {
-    name: 'authError',
-    path: '/error/401',
-    component: () => import('@/views/errorPage/401/index.vue'),
-    meta: {
-      title: 'router.401',
-      hidden: true,
-    },
-  },
-  {
-    name: 'notFound',
-    path: '/error/404',
-    component: () => import('@/views/errorPage/404/index.vue'),
-    meta: {
-      title: 'router.404',
-      hidden: true,
-    },
-  },
 ];
-
 const router = createRouter({
   routes: defaultRoutes,
   history: createWebHistory(),

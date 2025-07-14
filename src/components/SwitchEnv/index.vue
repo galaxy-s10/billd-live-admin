@@ -17,13 +17,13 @@
       v-model:show="modalVisiable"
       :title="modalTitle"
       @confirm="modalConfirm"
-      @cancel="modalVisiable = false"
+      @cancel="modalCancel"
     >
       选择当前环境：
       <n-radio-group v-model:value="currEnv">
         <n-space>
           <n-radio
-            v-for="env in envList"
+            v-for="env in envlist2"
             :key="env.value"
             :value="env.value"
           >
@@ -36,7 +36,7 @@
       <n-button
         type="info"
         size="tiny"
-        @click="modalVisiable = !modalVisiable"
+        @click="showModal"
       >
         切换环境
       </n-button>
@@ -45,84 +45,95 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { windowReload } from 'billd-utils';
+import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 
 import HModal from '@/components/Base/Modal';
+import { envList } from '@/constant';
 import { useAppStore } from '@/store/app';
 import { useUserStore } from '@/store/user';
 import { getCurrEnv, setCurrEnv } from '@/utils/localStorage';
 
+const router = useRouter();
 const userStore = useUserStore();
 const appStore = useAppStore();
-const currEnv = ref(getCurrEnv() || 'prod');
+const currEnv = ref(appStore.env);
+const hasEnv = getCurrEnv();
 const isDev = process.env.NODE_ENV === 'development';
 const modalVisiable = ref(false);
 const modalTitle = ref('切换环境');
-const envList = [
-  {
-    value: 'beta',
-    label: '测试环境',
-  },
-  {
-    value: 'prod',
-    label: '正式环境',
-  },
-  {
-    value: 'development',
-    label: '本地开发环境',
-  },
-].filter((v) => {
+
+const envlist2 = envList.filter((v) => {
   if (!isDev && v.value === 'development') {
     return false;
   }
   return true;
 });
 
-onMounted(() => {
-  setCurrEnv(currEnv.value);
-  appStore.setEnv(currEnv.value);
-  handleVConsole();
-});
+watch(
+  () => appStore.env,
+  () => {
+    currEnv.value = appStore.env;
+    handleVConsole();
+  }
+);
 
 function handleVConsole() {
-  // if (['development', 'beta'].includes(currEnv.value)) {
-  //   // eslint-disable-next-line
-  //   import('vconsole').then((vConsole) => {
-  //     // eslint-disable-next-line
-  //     new vConsole.default();
-  //   });
-  // }
+  if (['development', 'beta'].includes(currEnv.value)) {
+    // eslint-disable-next-line
+    import('vconsole').then((vConsole) => {
+      // eslint-disable-next-line
+      new vConsole.default();
+    });
+  }
 }
 
+if (hasEnv) {
+  appStore.setEnv(hasEnv);
+} else {
+  appStore.setEnv('prod');
+  setCurrEnv('prod');
+}
+handleVConsole();
+
 const modalConfirm = () => {
-  setCurrEnv(currEnv.value);
   appStore.setEnv(currEnv.value);
+  setCurrEnv(currEnv.value);
+  window.$message.success(`切换${parseEnv(currEnv.value)}环境成功！`);
   modalVisiable.value = false;
-  window.$message.success(`切换${parseEnv(appStore.env)}环境成功！`);
   userStore.logout();
+  // eslint-disable-next-line
+  router.push('/login').then(() => windowReload());
+};
+
+const modalCancel = () => {
+  modalVisiable.value = false;
 };
 
 const parseEnv = (env) => {
   switch (env) {
-    case 'prod':
-      return '正式环境';
     case 'beta':
       return '测试环境';
-    case 'development':
-      return '本地开发环境';
-    default:
+    case 'prod':
       return '正式环境';
+    default:
+      return '本地开发环境';
   }
+};
+
+const showModal = () => {
+  modalVisiable.value = !modalVisiable.value;
 };
 </script>
 
 <style lang="scss" scoped>
 .switch-env {
   position: fixed;
-  right: 0;
   bottom: 0;
-  z-index: 999;
+  right: 0;
   color: red;
+  z-index: 9999;
   cursor: pointer;
 }
 </style>

@@ -29,6 +29,20 @@
 
 </div>
 
+## ⭐️ BilldLive
+
+> [!CAUTION]
+> BilldLive 目前仍未发布稳定版，不建议开发者用于生产环境！
+
+## ⚡️ BilldLivePro
+
+`BilldLivePro` 稳定性更高、性能更强、代码可读性更好、更新更频繁！
+
+> [!WARNING]
+> BilldLivePro 对普通用户不影响，一直免费。
+>
+> BilldLivePro 主要针对开发者。源码并不开源，需付费订阅：[https://live.hsslive.cn/#/price](https://live.hsslive.cn/price)
+
 ## 简介
 
 billd 直播间，目前实现了类似 [bilibili 的 Web 在线直播](https://live.bilibili.com)功能，即你（房主）可以发布直播，别人进入你的直播间后能看到你的直播内容；而你也可以作为观众，进入别人的直播间看别人的直播内容。
@@ -178,15 +192,14 @@ billd 直播间，目前实现了类似 [bilibili 的 Web 在线直播](https://
 - 流媒体服务器相关：[SRS](https://ossrs.net)、 [FFmpeg](https://ffmpeg.org)、[Coturn](https://github.com/coturn/coturn)
 - Docker 相关：[Docker](https://www.docker.com)
 
-## 本地启动
+## 直播性能
 
-- [x] billd-live(pro) 查看 [start-client.md](docs/start-client.md)
+### 延迟
 
-- [x] billd-live-server(pro) 查看 [start-server.md](docs/start-server.md)
+- webrtc 直播：最低 300ms 左右
+- 其他直播：最低 3000ms 左右
 
-- [x] billd-live-flutter(pro) 查看 [start-app.md](docs/start-app.md)
-
-## 性能测试
+## 接口性能
 
 查看 [benchmarking.md](docs/benchmarking.md)
 
@@ -222,7 +235,7 @@ billd 直播间，目前实现了类似 [bilibili 的 Web 在线直播](https://
 
 ## 私有化部署
 
-billd-live完全开源（可商用），欢迎部署！
+billd-live 完全开源（可商用），欢迎部署！
 
 ## 兼容性
 
